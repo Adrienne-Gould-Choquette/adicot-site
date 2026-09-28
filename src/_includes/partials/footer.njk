@@ -2,7 +2,8 @@
   {#- One row: heading, one line, field and button. The earlier version of this
       carried a picture and two paragraphs and stood about 250px tall on every
       page, which was too much. This is the same prominence at a third of the
-      height. -#}
+      height. Left off /calculator-updates, which has the full-width form. -#}
+  {%- if page.url != "/calculator-updates.html" %}
   <div class="nlband">
     <div class="nlband-inner">
       <div class="nlband-copy">
@@ -13,6 +14,7 @@
       {% include "partials/updates-signup.njk" %}
     </div>
   </div>
+  {%- endif %}
   <div class="cols">
     <div>
       <h2>Calculators</h2>
