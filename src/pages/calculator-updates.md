@@ -20,7 +20,7 @@ either one.</p>
   a number you already relied on. These matter more than the new ones.
 - Nothing else. No third-party offers, and the list is never sold or shared.
 
-Only sending when there's an update. Every email has an unsubscribe link.
+Only sending when there's an update. To come off the list, reply to any of them or email [{{ site.contact.email }}](mailto:{{ site.contact.email }}).
 
 If you would rather ask a question than join the list, [contact us](/contact)
 instead.

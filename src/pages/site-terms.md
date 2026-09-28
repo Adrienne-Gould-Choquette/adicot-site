@@ -13,9 +13,11 @@ Adicot, Inc.'s calculators are intended for professionals. Adicot, Inc. makes no
 
 ## Privacy Policy
 
-- Information you send through the Contact page is delivered to Adicot, Inc. by our form service, Formspree, and used only to answer you.
+- Information you send through the Contact page is sent to Adicot, Inc. and stored in our Google Workspace (Google Sheets and Gmail). It is used only to reply to you.
 
-- If you sign up for Calculator Updates, your email address is kept by our mailing list service, Buttondown, and used only to send those updates. Every email has an unsubscribe link.
+- If you sign up for Calculator Updates, your email address is stored the same way and used only to send those updates.
+
+- To have your message or email address removed, email [{{ site.contact.email }}](mailto:{{ site.contact.email }}).
 
 - The technical calculators run entirely in your browser; nothing you enter in them is sent to Adicot, Inc. or anyone else. To save retyping, each calculator remembers the values you last entered, in your own browser's local storage on your device. The Reset button on a calculator clears them, as does clearing your browser's site data. The site also keeps your starred favorites on the Calculators page and your light or dark theme choice there, and nowhere else.
 

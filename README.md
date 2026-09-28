@@ -365,7 +365,7 @@ Markdown file in `src/services/`.
 references follow. Its options come from `src/_data/quote.json`, regenerated
 from the Flask repo with `scripts/export_quote_options.py`. The fee is priced
 server-side: the page posts to `/api/quote/*` on this domain, and
-`functions/api/quote/[[path]].js` forwards that to the Flask app.
+`functions/api/[[path]].js` forwards that to the Flask app.
 
 **Copy note:** the old site said "nine states" in its prose but listed eleven and
 claimed 11 active licenses. The rebuild uses **11** throughout, matching the
@@ -406,38 +406,23 @@ you are on, not to `/`.
 
 ## Contact form
 
-`/contact` posts to **Formspree**. The site is static, so mail delivery needs a
-third-party endpoint; Formspree works on any host, which keeps the hosting choice
-open.
-
-**To switch it on** (about two minutes, and only you can do it — it needs an account):
-
-1. Sign up at formspree.io and create a form that delivers to `admin@adicot.com`
-2. Copy the 8-character form ID from its endpoint URL
-3. Put it in `src/_data/site.json`:
-
-   ```json
-   "contact": { "email": "admin@adicot.com", "formspreeId": "xxxxxxxx" }
-   ```
-
-That is the only change. Until the ID is set the form still renders but carries
-`data-unconfigured`, and the page shows a notice pointing at the mailto address
-instead — so the page is never silently broken.
+`/contact` posts to `/api/contact` on this domain. `functions/api/[[path]].js`, a
+Cloudflare Pages Function, forwards every `/api/*` request to the Flask app
+(`API_ORIGIN`), adding the visitor's IP and a shared `PROXY_TOKEN`. Flask appends
+a row to the `Calculator Contact` tab of the Projects spreadsheet, emails
+admin@adicot.com, and answers 303 to `/contact/thanks` or, on failure,
+`/form-error`. Both are real pages, `noindex`.
 
 Details worth knowing:
 
 - **Honeypot** is a field named `_gotcha`, positioned off-screen rather than
-  `display:none` (some bots skip hidden fields). Formspree discards anything that
-  arrives with it filled in.
-- **`_next`** redirects to `/contact/thanks` on success — a real page, `noindex`.
+  `display:none` (some bots skip hidden fields). Flask sends a filled one to the
+  thanks page and stores nothing.
 - **Validation** uses `:user-invalid`, not `:invalid`. An untouched required field
   is invalid the moment it renders, so `:invalid` painted the form red before
   anyone typed a character.
 - The form asks for **project location**, since licensure and energy code vary by
   state and that is the first thing a services inquiry needs.
-
-Note that submissions pass through Formspree. For client inquiries that is worth
-being aware of; their free tier is 50/month.
 
 ## Calculator Updates
 
@@ -456,42 +441,36 @@ something needs to explain what the list is.
 | `src/pages/calculator-updates.md` | What the list is, and the wide form. |
 | `src/pages/calculator-updates-thanks.md` | Post-signup page, `noindex`. |
 
-**The list host is not baked into the markup.** Every provider names its inputs
-differently, so the action URL and the field names live in `site.updates` in
-`src/_data/site.json`:
+**The endpoint is not baked into the markup.** The action URL and field names
+live in `site.updates` in `src/_data/site.json`, so moving to a mailing service
+later is a data change, not a template edit:
 
 ```json
 "updates": {
   "listName": "Calculator Updates",
-  "action": "https://buttondown.com/api/emails/embed-subscribe/YOUR-BUTTONDOWN-USERNAME",
+  "action": "/api/updates/subscribe",
   "emailField": "email",
-  "nameField": "",         // see below - off until the real parameter is known
-  "redirectField": "",     // hidden field for the post-signup URL, if supported
-  "honeypotField": ""      // spam-trap field name, if supported
+  "nameField": "",         // off: the endpoint takes email only
+  "redirectField": "",     // not needed: Flask redirects itself
+  "honeypotField": "website"
 }
 ```
 
-The provider is **Buttondown**, chosen for an announcement list sent a few times
-a year. Read the field names off the account's own embed code rather than
-trusting anything written here.
-
-`nameField` is empty on purpose, so the rendered form is email-only. The Wix box
-asked for a name and can again, but Buttondown carries extra fields as metadata
-and the exact parameter has to be read off the embed code — a guessed name is
-accepted by the POST and then silently dropped. Set it and the name input
-appears; the template renders that field only when the config names it.
+The form posts through the same Pages Function as `/contact`. Flask appends a row
+to the `Subscribers` tab, emails admin@adicot.com, and answers 303 to
+`/calculator-updates/thanks` or `/form-error`. There is no mailing service yet:
+announcements go out by hand until one is chosen, and the `Subscribers` tab then
+imports into it (Buttondown or similar).
 
 **An unfinished form is caught by the build.** `verify-urls.mjs` scans every
-rendered `<form>` and reports any whose action is empty, still holds a
-placeholder, or is missing a provider id — because the failure mode is invisible
-otherwise: the visitor types an address, submits, and gets an error page. Two
-actions are waiting on accounts only Adrienne can open, so they are listed in
-`FORMS_PENDING` and reported rather than fatal; anything not on that list fails
-the run. Delete an entry as soon as its provider is wired up, or the check stops
-having teeth. See `HANDOFF.md`.
+rendered `<form>` and fails on any whose action is empty, still holds a
+placeholder, or is missing a provider id, because otherwise the failure is
+invisible: the visitor types an address, submits, and gets an error page.
+`FORMS_PENDING` lists actions knowingly waiting on an account; it is empty, and
+should stay that way.
 
-About **450 existing subscribers** must be exported from Wix before cancellation
-and imported into Buttondown directly — they never live in this repo. `*.csv` is
+The existing Wix subscribers, minus the spam site-member signups Adrienne flags,
+are pasted into the `Subscribers` tab. They never live in this repo; `*.csv` is
 gitignored so a stray export cannot be committed.
 
 ## Domains
@@ -612,33 +591,12 @@ Open items, roughly in order. Nothing here is started unless it says so.
 
 **Calculator Updates list**
 
-- [ ] Filter the export before importing anywhere. Contacts Wix registered as
-      site members look like spam signups and never asked for calculator
-      updates; importing them is what gets a new sending domain flagged in its
-      first week, when it has no reputation to absorb complaints.
-- [ ] Create the list host and import the filtered file. **Buttondown** is the
-      pick (chosen Sep 2026, over EmailOctopus). Worth knowing what that costs:
-      at ~450 subscribers Buttondown is a paid tier, since its free tier stops
-      at 100, whereas EmailOctopus would have been free to 2,500. Buttondown is
-      the simpler tool for an announcement list sent a few times a year, and its
-      embed is a plain HTML form POST, which is what a static site can use.
-      (MailerLite is out: its free tier dropped to 250 subscribers in mid-2026.)
-- [ ] Set `updates.action` and the field names in `src/_data/site.json`, read off
-      Buttondown's own embed code. **Assigned to Miles — see `HANDOFF.md`.**
-      Until then the placeholder address keeps the form hidden and every page shows
-      an email-us note instead; `verify-urls.mjs` reports it under pending forms.
-      `/calculator-updates/thanks` is only reached if something sends people
-      there: fill `updates.redirectField` if Buttondown's embed accepts a redirect
-      field, or set the redirect in Buttondown's settings. Otherwise Buttondown
-      shows its own confirmation page and ours goes unused.
+- [ ] Filter the export: drop the contacts Wix registered as site members, which
+      Adrienne flags as spam signups that never asked for updates. Paste the rest
+      into the `Subscribers` tab. **Assigned to Miles, see `HANDOFF.md`.**
 
 **Still placeholder**
 
-- [ ] `contact.formspreeId` in `site.json` — `/contact` falls back to a mailto
-      notice until it is set. The form's `_next` field sends people to
-      `/contact/thanks`, but Formspree honours a custom redirect only on a paid
-      plan (confirm on its pricing page); on the free plan visitors see Formspree's
-      own thank-you page instead.
 - [x] The quote page, at `/quote` (160 links point there).
 - [ ] The 9 calculator icons marked `iconGuess` — see **Things to review**.
 
@@ -654,9 +612,10 @@ Open items, roughly in order. Nothing here is started unless it says so.
       build copies them into `_site`, which is the only place Pages reads them (build command `npm run build`,
       output `_site`). `_redirects` there holds the path redirects only.
 - [ ] In the Pages project's environment variables, set
-      `QUOTE_API_ORIGIN=https://adicot-load-calc-doc.onrender.com`. The quote
-      form's `/api/quote/*` calls go through the Pages Function in `functions/`,
-      which forwards them there. `eleventy serve` cannot run Functions, so test
+      `API_ORIGIN=https://adicot-load-calc-doc.onrender.com` and `PROXY_TOKEN`
+      (the same value as `PROXY_TOKEN` on Render). Every `/api/*` call, from the
+      quote, contact and sign-up forms, goes through the Pages Function in
+      `functions/`, which forwards it there. `eleventy serve` cannot run Functions, so test
       the form locally with `npx wrangler pages dev _site` after a build.
 - [ ] **Set up the domain redirects in the Cloudflare dashboard**, per
       `deploy/cloudflare/DOMAIN-REDIRECTS.md`: Always Use HTTPS, one Redirect

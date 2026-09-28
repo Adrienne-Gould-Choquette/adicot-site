@@ -9,16 +9,15 @@
   "quoteUrl": "/quote",
   "quoteLabel": "Get a Quote",
   "contact": {
-    "email": "admin@adicot.com",
-    "formspreeId": ""
+    "email": "admin@adicot.com"
   },
   "updates": {
     "listName": "Calculator Updates",
-    "action": "https://buttondown.com/api/emails/embed-subscribe/YOUR-BUTTONDOWN-USERNAME",
+    "action": "/api/updates/subscribe",
     "emailField": "email",
     "nameField": "",
     "redirectField": "",
-    "honeypotField": ""
+    "honeypotField": "website"
   },
   "employeePortalUrl": "https://adicot-load-calc-doc.onrender.com/app",
   "clientPortalUrl": "/client-portal"

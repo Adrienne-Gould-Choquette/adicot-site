@@ -7,11 +7,8 @@ permalink: /calculator-updates/thanks.html
 noindex: true
 ---
 
-You will hear from us when a new calculator goes up or a published one is
-corrected — only when there's an update, and nothing else.
-
-If a confirmation email is on its way, click the link in it to finish signing up.
-It may take a minute to arrive, and it sometimes lands in spam.
+You're on the list. Every so often, when a new calculator goes up or a published
+one is corrected, we will email you about it. Nothing else.
 
 In the meantime, [browse the calculator library](/calculators) or read about
 [what we do](/services).

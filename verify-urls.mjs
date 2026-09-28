@@ -125,15 +125,11 @@ if (!wixRefs.size) console.log('  none');
 for (const [h, n] of [...wixRefs].sort((a, b) => b[1] - a[1])) console.log('  ' + h.padEnd(34) + n);
 
 // A form whose action is unfinished posts nowhere useful: the visitor types an
-// address, submits, and lands on an error page. Two are known to be waiting on
-// accounts that only Adrienne can open, so they are listed here and reported
-// rather than fatal. Anything NOT on this list is a mistake and fails the run.
-// Clear an entry the moment its provider is wired up, so the check keeps its
-// teeth.
-const FORMS_PENDING = new Set([
-  'https://buttondown.com/api/emails/embed-subscribe/YOUR-BUTTONDOWN-USERNAME',
-  'https://formspree.io/f/',
-]);
+// address, submits, and lands on an error page. An action knowingly waiting on
+// an outside account can be listed here, which reports it rather than failing.
+// Anything NOT on this list fails the run, so keep it empty unless a form is
+// genuinely blocked, and clear the entry the moment it is wired up.
+const FORMS_PENDING = new Set([]);
 const PLACEHOLDER = /YOUR-[A-Z-]+|PLACEHOLDER|EXAMPLE-/i;
 
 const formIssues = new Map();                // action -> {why, pages:Set}

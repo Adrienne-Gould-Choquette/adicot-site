@@ -12,13 +12,8 @@ or an inquiry about engineering services. This form reaches us either way.</p>
 <div class="contact-layout">
 <div class="contact-main">
 
-<form class="contact-form" method="POST"
-      action="https://formspree.io/f/{{ site.contact.formspreeId }}"
-      {%- if not site.contact.formspreeId %} data-unconfigured="true"{% endif %}>
-  {# Where the provider should send people after a successful post. #}
-  <input type="hidden" name="_next" value="{{ site.url }}/contact/thanks">
-  <input type="hidden" name="_subject" value="adicot.com contact form">
-  {# Honeypot. Formspree discards anything with _gotcha filled in. #}
+<form class="contact-form" method="POST" action="/api/contact">
+  {# Honeypot. The server drops anything with _gotcha filled in. #}
   <p class="hp" aria-hidden="true">
     <label for="company-url">Leave this field empty</label>
     <input id="company-url" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
@@ -67,14 +62,6 @@ or an inquiry about engineering services. This form reaches us either way.</p>
     <button class="btn" type="submit">Send message</button>
   </p>
 </form>
-
-{% if not site.contact.formspreeId %}
-<p class="notice" role="status">
-  {#- Shown only while site.contact.formspreeId is empty in src/_data/site.json. #}
-  <strong>This form isn't taking messages right now.</strong> Please email
-  <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a> directly.
-</p>
-{% endif %}
 
 </div>
 

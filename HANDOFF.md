@@ -19,80 +19,44 @@ npm run verify    # every legacy Wix URL still resolves; forms post somewhere re
 Build from a folder on a local disk, not Google Drive: npm installs on a synced
 drive come out with empty `package.json` files and fail in confusing ways.
 
-Run `npm run verify` after any of the tasks below. While a form task is
-unfinished, verify prints it under **forms that would lose what people type** as
-`PENDING`. When you finish one, delete its entry from `FORMS_PENDING` in
-`verify-urls.mjs`, so the check goes back to failing on a genuinely broken form
-instead of ignoring a known one.
+Run `npm run verify` after any of the tasks below. It fails on any form whose
+action is empty or a placeholder, under **forms that would lose what people
+type**. `FORMS_PENDING` in `verify-urls.mjs` is empty, and should stay that way.
 
 ---
 
-## 1. Calculator Updates list — Buttondown (assigned: Miles)
+## 1. Calculator Updates list (assigned: Miles)
 
-Until this is done the sign-up form is hidden and every page shows "Sign-up by
-form isn't open yet. Email admin@adicot.com and we'll add you to the list." That
-is deliberate: a form posting to the placeholder address would only error.
+The footer form and `/calculator-updates` post to `/api/updates/subscribe`, which
+`functions/api/[[path]].js` forwards to the Flask app (see section 4 for its env
+vars). Flask appends a row to the `Subscribers` tab of the Projects spreadsheet,
+emails admin@adicot.com, and sends the visitor to `/calculator-updates/thanks`,
+or to `/form-error` if the write fails. The form's action, field names and the
+`website` honeypot all come from the `updates` block of `src/_data/site.json`.
+
+There is no mailing service yet. Calculator Updates is an occasional announcement
+(new calculators and corrections to published ones, a few times a year), so
+announcements go out by hand from Gmail until one is chosen. When it is, import
+the `Subscribers` tab into it (Buttondown or similar) and point `updates.action`
+at it.
 
 ### The subscribers
 
-**When you are ready to import, ask Adrienne to export the current list from
-Wix.** New people are still signing up, so an earlier export would miss them;
-take the list only when you are about to import it. It is people's email
-addresses, so it is never kept in this repo. Before importing:
+**Ask Adrienne to export the current list from Wix** just before the cutover, so
+nobody who signs up in the meantime is missed, and paste it into the
+`Subscribers` tab. It is people's email addresses, so it is never kept in this
+repo. Before pasting:
 
 - **Remove the contacts Wix registered as site members.** Adrienne flags those
-  as spam or scam signups that never asked for updates. Importing them risks
-  getting a new sending domain flagged on its first send.
+  as spam or scam signups that never asked for updates.
 - Ignore Wix's "subscriber status" column: it tracks Wix Email Marketing, which
   the site never used, so it reads NEVER SUBSCRIBED for everyone.
 
-Calculator Updates is an occasional announcement (new calculators and corrections
-to published ones, a few times a year), not a newsletter. At about 450
-subscribers Buttondown is a paid tier (its free tier stops at 100).
-
-### Wire up the form
-
-Everything lives in one place — `src/_data/site.json`, the `updates` block:
-
-```json
-"updates": {
-  "listName": "Calculator Updates",
-  "action": "https://buttondown.com/api/emails/embed-subscribe/YOUR-BUTTONDOWN-USERNAME",
-  "emailField": "email",
-  "nameField": "",
-  "redirectField": "",
-  "honeypotField": ""
-}
-```
-
-1. Replace the whole `action` URL with the one from Buttondown's own embed code
-   rather than typing the account name. As soon as it no longer contains
-   `YOUR-`, the form appears on every page.
-2. Leave `emailField` as `email` unless Buttondown's embed code disagrees.
-3. `nameField` is empty on purpose. Buttondown carries extra fields as metadata
-   and the parameter name has to be read off the embed code rather than guessed —
-   a guessed name is accepted by the POST and then silently dropped. Fill it in
-   and a name input appears; leave it empty and the form stays email-only.
-4. `/calculator-updates/thanks` is only reached if something sends people there.
-   Set `redirectField` if Buttondown's embed accepts a redirect field, or set the
-   redirect in Buttondown's settings; otherwise Buttondown shows its own
-   confirmation page and ours goes unused.
-
-Do not edit the templates. `src/_includes/partials/updates-signup.njk` reads all
-of the above from the data file.
-
-### Check it worked
-
-1. `npm run build && npm run verify` — the Buttondown line is gone from the
-   pending forms.
-2. Submit a real address through the footer form on the built site and confirm
-   it lands in Buttondown.
-3. Confirm the confirmation email has a working unsubscribe link.
-
 ### Done when
 
-The form posts to the real Buttondown account, the filtered subscribers are in
-it, and `FORMS_PENDING` in `verify-urls.mjs` no longer lists the Buttondown URL.
+A real address submitted through the footer form on the deployed site lands in
+the `Subscribers` tab, the notification reaches admin@adicot.com, and the
+filtered Wix list is in the tab.
 
 ---
 
@@ -109,25 +73,23 @@ That file is generated: rerun the Flask repo's
 changes, and rebuild.
 
 The form posts to `/api/quote/price`, `/upload` and `/submit` on this domain.
-`functions/api/quote/[[path]].js` is a Cloudflare Pages Function that forwards
-those to the Flask app. Set `QUOTE_API_ORIGIN=https://adicot-load-calc-doc.onrender.com`
-in the Pages project's environment variables, or every quote fails. `eleventy
+`functions/api/[[path]].js`, a Cloudflare Pages Function, forwards every `/api/*`
+request to the Flask app, so the quote, contact and sign-up forms all fail
+without its env vars (section 4). `eleventy
 serve` cannot run Functions, so to test the form locally build first and run
 `npx wrangler pages dev _site`.
 
 ---
 
-## 3. Contact form — Formspree (assigned: Adrienne)
+## 3. Contact form (assigned: Miles)
 
-`site.contact.formspreeId` is empty. Until it is set, `/contact` shows "This
-form isn't taking messages right now. Please email admin@adicot.com directly."
-Create the Formspree form (it should mail `admin@adicot.com`), put its ID in
-`src/_data/site.json`, then remove `https://formspree.io/f/` from
-`FORMS_PENDING`.
+`/contact` posts to `/api/contact` through the same Pages Function. Flask appends
+a row to the `Calculator Contact` tab, emails the message to admin@adicot.com,
+and sends the visitor to `/contact/thanks`, or to `/form-error` if it fails. The
+`_gotcha` field is a honeypot: a filled one gets the thanks page and no row.
 
-The form sends people to `/contact/thanks` through Formspree's `_next` field.
-Formspree honours a custom redirect only on a paid plan (confirm on its pricing
-page); on the free plan visitors see Formspree's own thank-you page instead.
+Done when a test message through the deployed form reaches both the tab and the
+inbox.
 
 ---
 
@@ -139,7 +101,10 @@ into `_site` where Pages reads them; connect Cloudflare Pages
 (build command `npm run build`, output `_site`); set up the domain redirects
 in the Cloudflare dashboard per `deploy/cloudflare/DOMAIN-REDIRECTS.md` (Pages'
 `_redirects` cannot redirect whole domains, so adicot.com without www and the
-old domains need a Redirect Rule and the Bulk Redirects list there); confirm `/duct-size-calculator`
+old domains need a Redirect Rule and the Bulk Redirects list there); set the Pages environment variables
+`API_ORIGIN=https://adicot-load-calc-doc.onrender.com` and `PROXY_TOKEN` (the same
+value as `PROXY_TOKEN` on the Render service, which rejects forwarded requests
+without it); confirm `/duct-size-calculator`
 returns 200, not a 301; set up the scheduled rebuild (a deploy hook called
 twice a month, so the years in business and the footer year stay current); then
 point DNS.
