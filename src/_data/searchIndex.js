@@ -93,8 +93,9 @@ export default function () {
     }
   }
 
-  // the two index pages, so "blog" and "calculators" are findable
+  // the two index pages and the quote page (not Markdown), so they are findable
   entries.push({ u: '/calculators', t: 'All Engineering Calculators', l: [], c: [], d: 'Every calculator, grouped by category.', k: '', b: taxonomy.flatMap(g => [g.name, ...g.items.map(i => i.label)]).join(' '), f: false });
+  entries.push({ u: '/quote', t: 'Get a Quote', l: [], c: [], d: 'A preliminary engineering fee for your project, priced on screen.', k: '', b: 'quote fee estimate price pricing load calculation energy code compliance', f: false });
   entries.push({ u: '/blog', t: 'Blog', l: [], c: [], d: 'Calculator walkthroughs and HVAC engineering notes.', k: 'Blog', b: '', f: false });
 
   entries.sort((a, b) => a.t.localeCompare(b.t));

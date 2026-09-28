@@ -1,0 +1,263 @@
+{
+  "project_types": {
+    "tileMultifamily": {
+      "title": "Multifamily / Townhomes",
+      "subtitle": "5+ units, attached or stacked",
+      "track": "instant"
+    },
+    "tileOfficeMedical": {
+      "title": "Office / Medical / Dental",
+      "subtitle": "Professional offices, clinics",
+      "track": "instant"
+    },
+    "tileRetail": {
+      "title": "Retail / Tenant Build-out",
+      "subtitle": "Vanilla box, retail spaces",
+      "track": "instant"
+    },
+    "tileRestaurant": {
+      "title": "Restaurant",
+      "subtitle": "Small fast food to large formal dining",
+      "track": "instant"
+    },
+    "tileSpecialty": {
+      "title": "Specialty / Utility",
+      "subtitle": "Substations, control enclosures",
+      "track": "custom"
+    },
+    "tileOther": {
+      "title": "Other / Not sure",
+      "subtitle": "Tell us about it",
+      "track": "custom"
+    }
+  },
+  "services": {
+    "serviceLoadCalc": {
+      "title": "Cooling Load Calculation",
+      "subtitle": "CLTD (Commercial), Man J (Residential)"
+    },
+    "serviceEnergyCompliance": {
+      "title": "Energy Code Compliance",
+      "subtitle": "EnergyGauge, COMcheck, or REScheck"
+    }
+  },
+  "jurisdictions": [
+    [
+      "FL",
+      "Florida"
+    ],
+    [
+      "TX",
+      "Texas"
+    ],
+    [
+      "MA",
+      "Massachusetts"
+    ],
+    [
+      "LA",
+      "Louisiana"
+    ],
+    [
+      "OK",
+      "Oklahoma"
+    ],
+    [
+      "AR",
+      "Arkansas"
+    ],
+    [
+      "WY",
+      "Wyoming"
+    ],
+    [
+      "WV",
+      "West Virginia"
+    ],
+    [
+      "PA",
+      "Pennsylvania"
+    ],
+    [
+      "IL",
+      "Illinois"
+    ],
+    [
+      "NE",
+      "Nebraska"
+    ],
+    [
+      "AL",
+      "Alabama"
+    ],
+    [
+      "AK",
+      "Alaska"
+    ],
+    [
+      "AZ",
+      "Arizona"
+    ],
+    [
+      "CA",
+      "California"
+    ],
+    [
+      "CO",
+      "Colorado"
+    ],
+    [
+      "CT",
+      "Connecticut"
+    ],
+    [
+      "DE",
+      "Delaware"
+    ],
+    [
+      "GA",
+      "Georgia"
+    ],
+    [
+      "HI",
+      "Hawaii"
+    ],
+    [
+      "ID",
+      "Idaho"
+    ],
+    [
+      "IN",
+      "Indiana"
+    ],
+    [
+      "IA",
+      "Iowa"
+    ],
+    [
+      "KS",
+      "Kansas"
+    ],
+    [
+      "KY",
+      "Kentucky"
+    ],
+    [
+      "ME",
+      "Maine"
+    ],
+    [
+      "MD",
+      "Maryland"
+    ],
+    [
+      "MI",
+      "Michigan"
+    ],
+    [
+      "MN",
+      "Minnesota"
+    ],
+    [
+      "MS",
+      "Mississippi"
+    ],
+    [
+      "MO",
+      "Missouri"
+    ],
+    [
+      "MT",
+      "Montana"
+    ],
+    [
+      "NV",
+      "Nevada"
+    ],
+    [
+      "NH",
+      "New Hampshire"
+    ],
+    [
+      "NJ",
+      "New Jersey"
+    ],
+    [
+      "NM",
+      "New Mexico"
+    ],
+    [
+      "NY",
+      "New York"
+    ],
+    [
+      "NC",
+      "North Carolina"
+    ],
+    [
+      "ND",
+      "North Dakota"
+    ],
+    [
+      "OH",
+      "Ohio"
+    ],
+    [
+      "OR",
+      "Oregon"
+    ],
+    [
+      "RI",
+      "Rhode Island"
+    ],
+    [
+      "SC",
+      "South Carolina"
+    ],
+    [
+      "SD",
+      "South Dakota"
+    ],
+    [
+      "TN",
+      "Tennessee"
+    ],
+    [
+      "UT",
+      "Utah"
+    ],
+    [
+      "VT",
+      "Vermont"
+    ],
+    [
+      "VA",
+      "Virginia"
+    ],
+    [
+      "WA",
+      "Washington"
+    ],
+    [
+      "WI",
+      "Wisconsin"
+    ],
+    [
+      "---",
+      "———————————"
+    ],
+    [
+      "CANADA",
+      "Canada"
+    ],
+    [
+      "MEXICO",
+      "Mexico"
+    ],
+    [
+      "OTHER",
+      "Other / International"
+    ]
+  ],
+  "rates_are_placeholder": false
+}

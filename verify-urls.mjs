@@ -59,11 +59,11 @@ const htmlFiles = [];
   }
 })(SITE);
 
-// Targets that are deliberately not built yet. The instant-quote tool was rebuilt
-// outside this repo; site.json holds a placeholder until its real URL is set, so
-// these are reported separately rather than failing the gate.
+// Targets that are deliberately not built yet: site.quoteUrl, if it points at a
+// local page that does not exist, is reported separately rather than failing
+// the gate. Once the page is built it is checked like any other link.
 const site = JSON.parse(fs.readFileSync('src/_data/site.json', 'utf8'));
-const PENDING = new Set([site.quoteUrl].filter(u => u && u.startsWith('/')));
+const PENDING = new Set([site.quoteUrl].filter(u => u && u.startsWith('/') && !exists(u)));
 
 const pending = new Map();
 const broken = new Map();

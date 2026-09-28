@@ -96,14 +96,24 @@ it, and `FORMS_PENDING` in `verify-urls.mjs` no longer lists the Buttondown URL.
 
 ---
 
-## 2. Quote page (assigned: Miles)
+## 2. Quote page (assigned: Miles, done)
 
-The instant-quote page you built goes into this repo at `/quote`.
-`site.quoteUrl` in `src/_data/site.json` is already `/quote`, and about 160
-links across the site point at it ("Get a Quote" in the header, the services
-pages and cards). Until the page exists, `verify-urls.mjs` reports `/quote` as
-PENDING rather than broken. If it ends up somewhere else, change `quoteUrl` and
-every link follows.
+The instant-quote page is in at `/quote` (`src/pages/quote.njk`, script
+`src/assets/js/quote.js`, styles in the quote section at the end of `site.css`).
+`site.quoteUrl` in `src/_data/site.json` is `/quote`, and about 160 links across
+the site point at it. If it moves, change `quoteUrl` and every link follows.
+
+Its project types, services and jurisdictions come from `src/_data/quote.json`.
+That file is generated: rerun the Flask repo's
+`scripts/export_quote_options.py src/_data/quote.json` whenever `pricing.py`
+changes, and rebuild.
+
+The form posts to `/api/quote/price`, `/upload` and `/submit` on this domain.
+`functions/api/quote/[[path]].js` is a Cloudflare Pages Function that forwards
+those to the Flask app. Set `QUOTE_API_ORIGIN=https://adicot-load-calc-doc.onrender.com`
+in the Pages project's environment variables, or every quote fails. `eleventy
+serve` cannot run Functions, so to test the form locally build first and run
+`npx wrangler pages dev _site`.
 
 ---
 

@@ -22,3 +22,4 @@ qa-review.html
 
 # Reference PDFs (e.g. manufacturer catalogs) dropped in the project root are not site content.
 /*.pdf
+.wrangler/

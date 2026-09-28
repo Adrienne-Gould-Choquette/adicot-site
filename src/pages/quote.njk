@@ -1,0 +1,250 @@
+---
+layout: layouts/base.njk
+title: "Get a Quote"
+seoTitle: "Get a Quote | adicot.com"
+description: "Get a preliminary HVAC engineering fee in a minute. Most projects receive an instant estimate; larger or specialty work is scoped within 1-2 business days."
+permalink: /quote.html
+pageScript: quote.js
+---
+{#- base.njk rather than page.njk: page.njk prints one fixed h1 above the
+    content, and this page's heading belongs to step 1 and is replaced on the
+    result step. Options come from _data/quote.json, which is exported from the
+    Flask repo by scripts/export_quote_options.py. -#}
+<article class="quote">
+<div class="quote-progress" aria-hidden="true">
+  <div class="quote-progress__fill" data-progress></div>
+</div>
+
+{% if quote.rates_are_placeholder %}
+<p class="notice">
+  <strong>Instant quoting is not live yet.</strong> The form works end to end, but any figure
+  it shows is a placeholder, not a real fee. For a real quote please email
+  <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a> and we'll respond within
+  1-2 business days.
+</p>
+{% endif %}
+
+<p class="eyebrow" data-step-label>Step 1 of 2</p>
+
+{# Page 1: the whole form. Project type comes first because the scope
+   block below it swaps between the instant and custom field sets when a
+   type is picked, and a revealed field has to appear below its trigger. #}
+<div class="step is-active" data-step="form">
+  <h1 class="h2">Get a preliminary fee.</h1>
+  <p class="lede quote__body">Tell us the project type, the scope, and where to send it. Most
+    projects receive a preliminary fee instantly. Larger or specialty projects route to a custom
+    quote returned within 1-2 business days.</p>
+
+  <div class="quote__group">
+    <p class="eyebrow">1 · Project type</p>
+    <h2>What kind of project is it?</h2>
+    <p class="quote__body">Choose the category that best describes your project.</p>
+
+    <p class="quote__pick">Select 1:</p>
+    <div class="tiles">
+      {%- for id, pt in quote.project_types %}
+      <button type="button" class="tile" data-tile="project_type" data-value="{{ id }}"
+              data-track="{{ pt.track }}">
+        <span class="tile__title">{{ pt.title }}</span>
+        <span class="tile__sub">{{ pt.subtitle }}</span>
+      </button>
+      {%- endfor %}
+    </div>
+  </div>
+
+  <div class="quote__group">
+    <p class="eyebrow">2 · Scope</p>
+    <h2>Tell us about the scope.</h2>
+    <p class="quote__body">A few details so we can price your project accurately. We'll only ask
+      what we need to know.</p>
+
+    <div class="field">
+      <label for="project_name">Project name <span class="req" aria-hidden="true">*</span></label>
+      <input id="project_name" name="project_name" type="text" placeholder="Dr Bermudez Dental"
+             autocomplete="off" required aria-describedby="project_name-hint">
+      <p class="hint" id="project_name-hint">Whatever you'd call this job. We use it to name the project file.</p>
+    </div>
+
+    <div class="field">
+      <label for="address">Project address <span class="req" aria-hidden="true">*</span></label>
+      <input id="address" name="address" type="text" placeholder="123 Main St, Springfield"
+             autocomplete="street-address" required aria-describedby="address-hint">
+      <p class="hint" id="address-hint">Street address of the project site.</p>
+    </div>
+
+    <div class="field">
+      <label for="state">Jurisdiction <span class="req" aria-hidden="true">*</span></label>
+      <select id="state" name="state" required>
+        <option value="" selected>Select a state</option>
+        {%- for j in quote.jurisdictions %}
+        {%- if j[0] == '---' %}
+        <option disabled>{{ j[1] }}</option>
+        {%- else %}
+        <option value="{{ j[0] }}">{{ j[1] }}</option>
+        {%- endif %}
+        {%- endfor %}
+      </select>
+    </div>
+
+    {# Instant-track fields. Hidden when a custom-track project type is picked. #}
+    <div data-scope="instant">
+      <div class="field">
+        <label for="sqft">Square Footage <span class="req" aria-hidden="true">*</span></label>
+        <input id="sqft" name="square_footage" type="text" inputmode="numeric" placeholder="12,625"
+               autocomplete="off" required aria-describedby="sqft-hint">
+        <p class="hint" id="sqft-hint">Conditioned area for design jobs</p>
+      </div>
+
+      <p class="quote__label">What service do you need? <span class="req" aria-hidden="true">*</span></p>
+      <p class="quote__pick">Select one or both:</p>
+      {# data-multi makes quote.js treat this group as a toggle rather than
+         a radio. Ordering both adds the two fees together. #}
+      <div class="tiles" data-multi>
+        {%- for id, sv in quote.services %}
+        <button type="button" class="tile" data-tile="services" data-value="{{ id }}"
+                aria-pressed="false">
+          <span class="tile__title">{{ sv.title }}</span>
+          <span class="tile__sub">{{ sv.subtitle }}</span>
+        </button>
+        {%- endfor %}
+      </div>
+    </div>
+
+    {# Custom-track field. Revealed by a custom project type or a server reroute. #}
+    <div data-scope="custom" hidden>
+      <p class="notice quote__notice" data-reason hidden></p>
+      <div class="field">
+        <label for="description">Tell us about the project <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="description" name="description" rows="6" required aria-describedby="description-hint"
+                  placeholder="Describe the project, the issue, or what you need help with. Photos and documents can be attached below."></textarea>
+        <p class="hint" id="description-hint">Provide a brief description of your project</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote__group">
+    <p class="eyebrow">3 · Your details</p>
+    <h2>How can we reach you?</h2>
+    <p class="quote__body">We'll send your quote and any follow-up details to the contact info
+      you provide. Your information stays with Adicot. We don't share leads.</p>
+
+    <div class="field">
+      <label for="name">Your Name <span class="req" aria-hidden="true">*</span></label>
+      <input id="name" name="name" type="text" placeholder="First and last name"
+             autocomplete="name" required>
+    </div>
+
+    <div class="field">
+      <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+      <input id="email" name="email" type="email" placeholder="you@company.com"
+             autocomplete="email" required>
+    </div>
+
+    <div class="field">
+      <label for="company">Company or Firm</label>
+      <input id="company" name="company" type="text"
+             placeholder="Your firm or organization" autocomplete="organization">
+    </div>
+
+    <div class="field">
+      <label for="notes">Anything else we should know</label>
+      <textarea id="notes" name="notes" rows="4"
+                placeholder="Drawings status, deadlines, preferred contact times, etc."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="files">Upload plans or specifications <span class="opt">optional</span></label>
+      <input id="files" name="files" type="file" multiple>
+    </div>
+  </div>
+
+  <p class="hp" aria-hidden="true">
+    <label for="website">Leave this field empty</label>
+    <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+  </p>
+
+  <p class="quote__error" data-error hidden>*Please complete all required fields.</p>
+  <p class="form-actions">
+    <button type="button" class="btn" data-submit>Get My Estimate &rarr;</button>
+  </p>
+
+  {# Submitting writes a sheet row, builds the Drive tree and files the
+     uploads, which can run close to a minute. Shown for that whole wait. #}
+  <div class="working" data-working hidden aria-live="polite">
+    <div class="working__bar"><div class="working__fill" data-working-fill></div></div>
+    <p class="working__text" data-working-text></p>
+    <p class="muted">This can take up to a minute. Please keep this page open.</p>
+  </div>
+</div>
+
+{# Page 2: the result. Estimate and confirmation in one panel. #}
+<div class="step" data-step="result">
+  <p class="eyebrow">Inquiry received</p>
+  <h2 class="h2">Thank you. We have your inquiry.</h2>
+  <p class="lede quote__body" data-done-body></p>
+
+  <div data-result="instant" hidden>
+    <div class="estimate">
+      <p class="eyebrow">Preliminary Estimate</p>
+      <p class="estimate__amount" data-total>$0</p>
+      <p class="muted">Valid for 30 Days. Preliminary estimate based on the scope you provided</p>
+    </div>
+
+    <p class="notice quote__notice" data-license-notice hidden></p>
+
+    <h3 class="summary__head">Fee Breakdown</h3>
+    <dl class="summary">
+      <div class="summary__row"><dt>Base Fee</dt><dd data-fee="base_and_sf"></dd></div>
+      {# Only shown when the jurisdiction needs a new license, so the client
+         never sees a $0 line for a fee that does not apply to them. #}
+      <div class="summary__row" data-needs-license hidden>
+        <dt>Out-of-State License</dt><dd data-fee="license_surcharge"></dd>
+      </div>
+      <div class="summary__row summary__row--total"><dt>Total</dt><dd data-fee="total_fee"></dd></div>
+    </dl>
+
+    <p class="quote__body"><strong>What happens next:</strong> We will review your inquiry and any
+      documents you've shared, then confirm your final fee. If your project scope is more complex
+      than the form captured, we may suggest adjustments. You'll always have the option to accept,
+      decline, or discuss.</p>
+    <p class="muted">This estimate is preliminary and is not a commitment. We'll be in touch
+      within 1-2 business days. Final scope and fee are confirmed in writing before work begins. You can also
+      contact us through Email at: <strong><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></strong></p>
+  </div>
+
+  <div data-result="custom" hidden>
+    <h3>Your project deserves a custom quote.</h3>
+    <p class="quote__body">Some projects (restaurants with kitchen exhaust, multifamily over a
+      certain size, and specialty/utility work) need a closer look before we can give you an
+      accurate fee.</p>
+    <p class="notice quote__notice" data-reason hidden></p>
+
+    <p class="quote__body"><strong>What happens next:</strong> We will personally review your
+      inquiry and respond within 1-2 business days with a scoped quote, an estimated turnaround,
+      and any clarifying questions. No obligation. Submitting just starts the conversation.</p>
+    <p class="muted">Submitting is not a commitment. We'll be in touch within 1-2 business
+      days. Final scope and fee are confirmed in writing before work begins.</p>
+  </div>
+
+  <h3 class="summary__head">Scope Summary</h3>
+  <dl class="summary">
+    <div class="summary__row"><dt>Name</dt><dd data-sum="name"></dd></div>
+    <div class="summary__row"><dt>Email</dt><dd data-sum="email"></dd></div>
+    <div class="summary__row"><dt>Project Address</dt><dd data-sum="address"></dd></div>
+    <div class="summary__row"><dt>Project Type</dt><dd data-sum="project_type"></dd></div>
+    <div class="summary__row" data-only="instant"><dt>Services</dt><dd data-sum="services"></dd></div>
+    <div class="summary__row" data-only="instant"><dt>Square Footage</dt><dd data-sum="square_footage"></dd></div>
+    <div class="summary__row"><dt>Jurisdiction</dt><dd data-sum="state"></dd></div>
+    <div class="summary__row" data-only="custom"><dt>Project Description</dt><dd data-sum="description"></dd></div>
+    <div class="summary__row"><dt>File name(s)</dt><dd data-sum="files"></dd></div>
+    <div class="summary__row"><dt>Project Notes</dt><dd data-sum="notes"></dd></div>
+  </dl>
+
+  <p class="quote__body">Our team has your inquiry and will contact you within 1-2 business
+    days. If it's urgent, email <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a> directly.</p>
+
+  <p class="form-actions">
+    <a class="btn btn-quiet" href="/">&larr; Back to home</a>
+  </p>
+</div>
+</article>

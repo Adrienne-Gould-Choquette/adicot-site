@@ -360,12 +360,12 @@ Stats, project examples, the service list and the state license list all live in
 card-only services to its own page, set `page: true`, add a `slug`, and drop a
 Markdown file in `src/services/`.
 
-**The quote CTA is a placeholder.** Every "Get a Quote" button reads
-`site.quoteUrl` (`/quote`). Miles built the quote tool and will add it to this
-site at `/quote`; if it ends up at another address, set that one value and all
-the references follow.
-`verify-urls.mjs` reports it as PENDING rather than broken, so the gate stays
-meaningful.
+**The quote page is `src/pages/quote.njk`.** Every "Get a Quote" button reads
+`site.quoteUrl` (`/quote`); if the page moves, set that one value and all the
+references follow. Its options come from `src/_data/quote.json`, regenerated
+from the Flask repo with `scripts/export_quote_options.py`. The fee is priced
+server-side: the page posts to `/api/quote/*` on this domain, and
+`functions/api/quote/[[path]].js` forwards that to the Flask app.
 
 **Copy note:** the old site said "nine states" in its prose but listed eleven and
 claimed 11 active licenses. The rebuild uses **11** throughout, matching the
@@ -639,9 +639,7 @@ Open items, roughly in order. Nothing here is started unless it says so.
       `/contact/thanks`, but Formspree honours a custom redirect only on a paid
       plan (confirm on its pricing page); on the free plan visitors see Formspree's
       own thank-you page instead.
-- [ ] The quote page: Miles built it and is adding it to this repo at `/quote`
-      (160 links point there). Until it lands, `verify-urls.mjs` reports `/quote`
-      as PENDING rather than broken.
+- [x] The quote page, at `/quote` (160 links point there).
 - [ ] The 9 calculator icons marked `iconGuess` — see **Things to review**.
 
 **Deploy**
@@ -655,6 +653,11 @@ Open items, roughly in order. Nothing here is started unless it says so.
 - [ ] Copy `deploy/cloudflare/_headers` and `deploy/cloudflare/_redirects` to the
       repo root and connect Cloudflare Pages (build command `npm run build`,
       output `_site`). `_redirects` there holds the path redirects only.
+- [ ] In the Pages project's environment variables, set
+      `QUOTE_API_ORIGIN=https://adicot-load-calc-doc.onrender.com`. The quote
+      form's `/api/quote/*` calls go through the Pages Function in `functions/`,
+      which forwards them there. `eleventy serve` cannot run Functions, so test
+      the form locally with `npx wrangler pages dev _site` after a build.
 - [ ] **Set up the domain redirects in the Cloudflare dashboard**, per
       `deploy/cloudflare/DOMAIN-REDIRECTS.md`: Always Use HTTPS, one Redirect
       Rule (the old engineering site's home page to /services) and the Bulk

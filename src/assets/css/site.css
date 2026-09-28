@@ -1444,3 +1444,94 @@ svg .li-grid { stroke: var(--line); stroke-width: 1; }
 .ab-cta { padding: 22px 24px; border-radius: var(--radius); background: var(--surface-alt); border: 1px solid var(--line); margin: 0 0 10px; }
 .prose .ab-cta h2 { margin-top: 0; }
 .ab-ctabtns { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+
+/* ---------- quote ----------
+   The instant-quote form (src/pages/quote.njk, driven by assets/js/quote.js).
+   Fields, buttons, notices and the honeypot use the shared classes above; this
+   section adds only the tiles, steps, working bar and summaries. */
+
+.quote { max-width: 1024px; }
+.quote [hidden] { display: none !important; }
+.quote-progress { height: 3px; background: var(--line); margin: 0 0 24px; }
+.quote-progress__fill { height: 100%; width: 50%; background: var(--brand); transition: width .3s ease; }
+
+.quote .h2 { font-size: clamp(26px, 4.2vw, 40px); line-height: 1.15; letter-spacing: -0.02em; margin: 6px 0 0; }
+.quote h2:not(.h2) { font-size: 21px; margin: 6px 0 0; }
+.quote h3 { font-size: 18px; margin: 28px 0 0; }
+.quote__body { max-width: 70ch; margin: 14px 0 0; }
+.quote .lede { margin-top: 14px; }
+.quote .muted { font-size: 14px; }
+.quote__pick { font-style: italic; font-weight: 600; margin: 28px 0 12px; }
+.quote__label { font-size: 14.5px; font-weight: 600; margin: 28px 0 0; }
+.quote__notice { margin: 18px 0 0; }
+.quote__group { margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--line); }
+.quote .field { max-width: 34rem; margin: 22px 0 0; }
+
+.quote :is(input[type="text"], input[type="email"], select, textarea) {
+  width: 100%; font: inherit; font-size: 15px;
+  padding: 9px 12px; border: 1px solid var(--field-line); border-radius: 8px;
+  background: var(--bg); color: var(--fg);
+}
+.quote textarea { resize: vertical; }
+.quote input[type="file"] { font: inherit; font-size: 14.5px; color: var(--fg); }
+.quote :is(input, select, textarea):focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
+.quote .is-invalid { border-color: #b3261e; background: var(--need); }
+
+.step { display: none; }
+.step.is-active { display: block; }
+.quote__error { margin: 22px 0 0; font-weight: 600; color: var(--accent); }
+.quote .form-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+/* .form-actions .btn drops the border, which the quiet button needs. */
+.quote .btn-quiet { border: 1px solid var(--line); }
+
+/* Submitting can run close to a minute. The bar creeps toward each stage
+   rather than reporting real progress, and the stripe keeps moving so the
+   page never reads as frozen. */
+.working { margin-top: 22px; max-width: 520px; }
+.working__bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.working__fill {
+  height: 100%; width: 0;
+  background: var(--brand)
+    linear-gradient(110deg, rgba(255,255,255,.4) 25%, transparent 25%, transparent 50%,
+                    rgba(255,255,255,.4) 50%, rgba(255,255,255,.4) 75%, transparent 75%)
+    repeat 0 0 / 22px 22px;
+  animation: working-stripe 900ms linear infinite;
+  transition: width .6s ease;
+}
+@keyframes working-stripe { to { background-position: 22px 0; } }
+.working__text { margin: 12px 0 0; font-weight: 600; }
+.working .muted { margin: 4px 0 0; }
+
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.tile {
+  display: flex; flex-direction: column; gap: 6px; text-align: left;
+  padding: 22px; border: 1px solid var(--field-line); border-radius: var(--radius);
+  background: var(--bg); color: var(--fg); font: inherit; cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.tile:hover { border-color: var(--accent); }
+.tile.is-selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: var(--accent-soft); }
+.tile__title { font-weight: 600; font-size: 16px; line-height: 1.35; }
+.tile__sub { font-size: 14px; line-height: 1.45; color: var(--muted); }
+
+.estimate { margin-top: 26px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.estimate__amount { margin: 10px 0 8px; font-size: clamp(40px, 5vw, 60px); font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+
+.quote .summary__head { margin: 36px 0 0; text-transform: uppercase; letter-spacing: .08em; font-size: 14px; }
+.summary { margin: 12px 0 0; }
+.summary__row { display: flex; justify-content: space-between; gap: 24px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.summary__row dt { color: var(--muted); flex: 0 0 auto; }
+.summary__row dd { margin: 0; text-align: right; font-weight: 600; overflow-wrap: anywhere; }
+.summary__row--total { border-bottom: 0; border-top: 2px solid var(--fg); }
+.summary__row--total :is(dt, dd) { font-size: 19px; font-weight: 700; color: var(--fg); }
+
+@media (max-width: 750px) {
+  .tiles { grid-template-columns: 1fr; }
+  .tile { padding: 18px; }
+  .quote .form-actions .btn { width: 100%; text-align: center; }
+  .summary__row { flex-direction: column; gap: 2px; }
+  .summary__row dd { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quote-progress__fill, .working__fill { transition: none; animation: none; }
+}
