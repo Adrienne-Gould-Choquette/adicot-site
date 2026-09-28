@@ -1,0 +1,60 @@
+{#- The reheat coil sizing calculator, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/reheat.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="rhcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The equation and a worked example are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> US (cfm, °F)</label>
+      <label><input type="radio" name="u" value="Metric"> Metric (l/s, °C)</label>
+    </fieldset>
+
+    <div class="field">
+      <label for="rh-q">Reheat coil airflow <span class="cf-u rh-q">cfm</span>
+        <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="rh-q" name="q" inputmode="decimal" step="any" min="0"
+             required autocomplete="off" placeholder="3000">
+    </div>
+
+    <div class="field">
+      <label for="rh-tl">Leaving coil temperature <span class="cf-u rh-t">°F</span>
+        <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="rh-tl" name="tl" inputmode="decimal" step="any"
+             required autocomplete="off" placeholder="70">
+      <p class="hint">Customarily the room heating setpoint.</p>
+    </div>
+
+    <div class="field">
+      <label for="rh-te">Entering coil temperature <span class="cf-u rh-t">°F</span>
+        <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="rh-te" name="te" inputmode="decimal" step="any"
+             required autocomplete="off" placeholder="52">
+      <p class="hint">Customarily the cooling coil leaving air temperature. Find it with the
+      <a href="/coil-selection-calculator">coil selection calculator</a>.</p>
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="rh-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="rh-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="rh-results-h">
+    <h2 id="rh-results-h">Heating coil capacity</h2>
+    <p class="cf-summary" id="rh-summary" role="status">Enter the reheat coil airflow.</p>
+    <table class="cf-table" id="rh-table" hidden>
+      <caption class="visually-hidden">Heating coil capacity in Btu/h, kW and W</caption>
+      <tbody id="rh-tbody"></tbody>
+    </table>
+    <p class="cf-note">Capacity = 1.0882 × airflow (cfm) × (entering − leaving temperature, °F).
+    A negative capacity denotes heating. Metric inputs are converted to cfm and °F first;
+    1 kW = 3,412 Btu/h.</p>
+  </section>
+</form>

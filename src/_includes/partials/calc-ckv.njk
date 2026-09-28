@@ -1,0 +1,68 @@
+{#- The commercial kitchen exhaust hood calculator, written by hand rather than
+    published from SpreadsheetConverter. The rates and arithmetic are in
+    /assets/js/ckv.js, which check-calculators.mjs holds to the workbook's own
+    answers; this is only the form. It never submits. The appliance rows are
+    built by calc-ckv.js from the template below. -#}
+<form class="calcform" id="ckcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The exhaust rates it uses are printed below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="English" checked> US</label>
+      <label><input type="radio" name="u" value="Metric"> Metric</label>
+    </fieldset>
+
+    <div class="field"><label for="ck-hood">Hood style</label>
+      <select id="ck-hood" name="h">{% for h in ckv.hoods %}<option value="{{ h.value }}">{{ h.value }}</option>{% endfor %}</select></div>
+
+    <fieldset class="cf-radios">
+      <legend>Hood type</legend>
+      <label><input type="radio" name="t" value="Type I" checked> Type I (grease)</label>
+      <label><input type="radio" name="t" value="Type II"> Type II (heat and moisture)</label>
+    </fieldset>
+
+    <fieldset class="cf-stream">
+      <legend>Appliances under the hood</legend>
+      <div id="ck-rows"></div>
+      <p><button type="button" class="btn btn-quiet" id="ck-add">Add appliance</button></p>
+    </fieldset>
+
+    <div class="field"><label for="ck-mua">Make-up air <span class="cf-u">% of exhaust</span></label>
+      <input type="number" id="ck-mua" name="m" inputmode="decimal" step="any" min="0" max="100" autocomplete="off" placeholder="optional, e.g. 80"></div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ck-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="ck-copied" role="status"></span>
+    </p>
+  </div>
+
+  <script type="application/json" id="ck-figures">{{ ckv.figures | dump | safe }}</script>
+
+  <template id="ck-row">
+    <div class="ck-row">
+      <div class="field"><label>Appliance</label>
+        <select><option value="">Choose an appliance…</option>{% for g in ckv.appliances %}<optgroup label="{{ g.label }}">{% for a in g.items %}<option value="{{ a.name }}">{{ a.label }} ({{ a.duty }})</option>{% endfor %}</optgroup>{% endfor %}</select></div>
+      <div class="field ck-len"><label>Length <span class="cf-u ck-lu">in</span></label>
+        <input type="number" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="36"></div>
+      <button type="button" class="btn btn-quiet ck-remove" aria-label="Remove this appliance">Remove</button>
+    </div>
+  </template>
+
+  <section class="cf-results" aria-labelledby="ck-results-h">
+    <h2 id="ck-results-h">Hood exhaust</h2>
+    <p class="cf-summary" id="ck-summary" role="status">Choose the appliances under the hood and enter their lengths.</p>
+    <table class="cf-table">
+      <caption class="visually-hidden">Hood length and exhaust airflow</caption>
+      <tbody id="ck-tbody"></tbody>
+    </table>
+    <figure class="ck-figure">
+      <img id="ck-img" src="{{ ckv.hoods[0].img }}" alt="{{ ckv.hoods[0].value }} hood" width="600" height="456" loading="lazy">
+      <figcaption id="ck-cap">{{ ckv.hoods[0].caption }}</figcaption>
+    </figure>
+    <ol class="cf-note ck-notes" id="ck-notes"></ol>
+  </section>
+</form>

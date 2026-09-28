@@ -1,0 +1,32 @@
+{
+  "commercial-kitchen-exhaust-hood": {
+    "name": "Commercial Kitchen Exhaust Hood"
+  },
+  "drafting-with-autocad": {
+    "name": "Drafting with AutoCAD"
+  },
+  "duct-layout": {
+    "name": "Duct Layout"
+  },
+  "energy-code-compliance": {
+    "name": "Energy Code Compliance"
+  },
+  "equipment-selection": {
+    "name": "Equipment Selection"
+  },
+  "erv": {
+    "name": "ERV"
+  },
+  "heating-and-cooling-load-calculation-2": {
+    "name": "Heating & Cooling Load Calcs"
+  },
+  "hvac-engineering": {
+    "name": "HVAC Engineering"
+  },
+  "math": {
+    "name": "Math"
+  },
+  "psychrometric-chart": {
+    "name": "Psychrometric Chart"
+  }
+}

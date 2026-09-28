@@ -1,0 +1,52 @@
+{#- Annual cooling cost, written by hand (it replaces the HTML widget that was
+    embedded on the Wix page). The maths is in /assets/js/annualcost.js, which
+    check-handworked.mjs holds to worked examples; the cooling hours by city are
+    ENERGY STAR's (cooling-hours.js). This is only the form. It never submits. -#}
+<form class="calcform" id="accalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The method and a worked example are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <div class="field"><label for="ac-c">Cooling capacity <span class="cf-u">Btu/h</span></label>
+      <input type="number" id="ac-c" name="c" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 36000" value="38000"></div>
+
+    <fieldset class="cf-radios">
+      <legend>Efficiency rating</legend>
+      <label><input type="radio" name="r" value="SEER" checked> SEER</label>
+      <label><input type="radio" name="r" value="SEER2"> SEER2</label>
+    </fieldset>
+    <div class="cf-pair">
+      <div class="field"><label for="ac-s" id="ac-s-l">SEER</label>
+        <input type="number" id="ac-s" name="s" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 14" value="11"></div>
+      <div class="field" id="ac-e-f" hidden><label for="ac-e">Equipment type</label>
+        <select id="ac-e" name="e"><option value="">Choose…</option>{% for e in ["Single Split", "Single Package", "Small Duct High Velocity", "Space Constrained"] %}<option>{{ e }}</option>{% endfor %}</select></div>
+    </div>
+
+    <div class="field"><label for="ac-city">Location</label>
+      <select id="ac-city" name="city"><option value="">Enter hours myself</option>{% for g in coolingHours.states %}<optgroup label="{{ g.state }}">{% for c in g.cities %}<option value="{{ c.value }}" data-hours="{{ c.hours }}"{% if c.value == "FL-Miami" %} selected{% endif %}>{{ c.label }}</option>{% endfor %}</optgroup>{% endfor %}</select></div>
+    <div class="field"><label for="ac-h">Full-load cooling hours <span class="cf-u">h/yr</span></label>
+      <input type="number" id="ac-h" name="h" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 1500" value="3931"></div>
+    <p class="hint">Choosing a location fills in its hours (ENERGY STAR). Type your own hours if you know them better.</p>
+
+    <div class="field"><label for="ac-rate">Electricity rate <span class="cf-u">$/kWh</span></label>
+      <input type="number" id="ac-rate" name="rate" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 0.18" value="0.18"></div>
+    <p class="hint">Default: the US average residential price, 17.99 ¢/kWh over the 12 months to July 2026 (EIA). Use the rate on your bill for a better estimate.</p>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ac-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="ac-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="ac-results-h">
+    <h2 id="ac-results-h">Annual cooling cost</h2>
+    <p class="cf-summary" id="ac-summary" role="status">Enter the cooling capacity.</p>
+    <table class="cf-table" id="ac-table" hidden>
+      <caption class="visually-hidden">Annual energy and cost of cooling</caption>
+      <tbody id="ac-tbody"></tbody>
+    </table>
+    <p class="cf-note">Cost = capacity ÷ SEER × full-load cooling hours ÷ 1000 × rate. Full-load cooling hours: ENERGY STAR savings calculator (EPA, 2002).</p>
+  </section>
+</form>

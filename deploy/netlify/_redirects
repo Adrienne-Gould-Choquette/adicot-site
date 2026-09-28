@@ -1,0 +1,39 @@
+# Cloudflare Pages — copy this file to the repo root (it is published as-is).
+# Canonical host is www.adicot.com; everything else 301s to it, path preserved.
+
+https://adicot.com/*                  https://www.adicot.com/:splat  301
+http://adicot.com/*                   https://www.adicot.com/:splat  301
+https://adicotengineering.com/*       https://www.adicot.com/:splat  301
+https://www.adicotengineering.com/*   https://www.adicot.com/:splat  301
+
+# adicotengineeringinc.com folded into adicot.com. Specific rules first:
+# _redirects is first-match-wins, so the wildcards must come last or they
+# would swallow the root mapping and land it on the calculator home page.
+https://adicotengineeringinc.com/              https://www.adicot.com/services   301
+https://www.adicotengineeringinc.com/         https://www.adicot.com/services   301
+https://adicotengineeringinc.com/quote        https://www.adicot.com/quote      301
+https://www.adicotengineeringinc.com/quote    https://www.adicot.com/quote      301
+https://adicotengineeringinc.com/*            https://www.adicot.com/:splat     301
+https://www.adicotengineeringinc.com/*        https://www.adicot.com/:splat     301
+
+# The employee portal lives outside this site (Miles' app on Render). The old
+# engineering site's footer linked /employee-dashboard, which the wildcard above
+# carries over to adicot.com, so send it on. 302: the portal's home may move.
+/employee-dashboard   https://adicot-load-calc-doc.onrender.com/app   302
+
+# Retired scratch page. It was in the Wix sitemap, so redirect rather than 404.
+/junk    /calculators    301
+
+# Retired Sep 2026. The other Wix scratch page: it held an old copy of the mixed
+# air calculator (V1.2, mobile layout), so it goes to the current one. Exact
+# path only; the site's own images under /images/ are unaffected.
+/images  /air-mixing-calculator  301
+
+# Retired Sep 2026. Florida work-order and energy-compliance forms for services
+# no longer offered; they were in the Wix sitemap, so redirect rather than 404.
+# Work orders go to contact (the live way to start a project); the energy forms
+# go to the page that covers that subject now.
+/work-order-commercial           /contact                            301
+/work-order-residential          /contact                            301
+/energy-calculation-commercial   /services/energy-code-compliance    301
+/energy-calculation-residential  /services/energy-code-compliance    301

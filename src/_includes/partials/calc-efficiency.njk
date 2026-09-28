@@ -1,0 +1,52 @@
+{#- The heating and cooling efficiency converter, written by hand rather than
+    published from SpreadsheetConverter. The maths is in /assets/js/efficiency.js,
+    which check-calculators.mjs holds to the workbook's own answers; this is only
+    the form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="efcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This converter runs in your browser and needs JavaScript.
+    Every conversion it uses is written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <div class="cf-pair field">
+      <div>
+        <label for="ef-given">Convert from</label>
+        <select id="ef-given" name="g">
+          {%- for r in ["SEER", "SEER2", "EER", "COP", "HSPF", "HSPF2", "kW/Ton"] %}
+          <option value="{{ r }}">{{ r }}</option>
+          {%- endfor %}
+        </select>
+      </div>
+      <div>
+        <label for="ef-v">Value <span class="req" aria-hidden="true">*</span></label>
+        <input type="number" id="ef-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="15">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="ef-equip">Equipment type</label>
+      <select id="ef-equip" name="e">
+        {%- for e in ["Single Split", "Single Package", "Small Duct High Velocity", "Space Constrained"] %}
+        <option value="{{ e }}">{{ e }}</option>
+        {%- endfor %}
+      </select>
+      <p class="hint">Needed for SEER2 and HSPF2, which use RESNET's factors for each type.</p>
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ef-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="ef-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="ef-results-h">
+    <h2 id="ef-results-h">Results</h2>
+    <p class="cf-summary" id="ef-summary" role="status">Enter the efficiency value.</p>
+    <table class="cf-table" id="ef-table" hidden>
+      <caption class="visually-hidden">The efficiency entered, in every rating</caption>
+      <tbody id="ef-tbody"></tbody>
+    </table>
+  </section>
+</form>

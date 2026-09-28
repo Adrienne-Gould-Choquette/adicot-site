@@ -1,0 +1,18 @@
+{
+  "name": "adicot-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "adicot.com - engineering calculators, static site",
+  "scripts": {
+    "build": "npm run clean && eleventy",
+    "serve": "eleventy --serve",
+    "clean": "node -e \"fs.rmSync('_site',{recursive:true,force:true})\"",
+    "test": "node check-ductulator.mjs && node check-calculators.mjs && node check-ventilation-tables.mjs && node check-cltd-hourly.mjs && node check-airguide.mjs && node check-handworked.mjs",
+    "verify": "node verify-urls.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "sharp": "^0.35.4"
+  }
+}

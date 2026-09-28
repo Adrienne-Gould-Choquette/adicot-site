@@ -1,0 +1,68 @@
+---
+layout: layouts/base.njk
+---
+<article class="page service">
+  <header class="page-head">
+    <p class="crumb"><a href="/services">Engineering Services</a></p>
+    <h1>{{ title }}</h1>
+    {% if eyebrow %}<p class="stamp-line"><span class="stamp">{{ eyebrow }}</span></p>{% endif %}
+    {% if summary %}<p class="subtitle">{{ summary }}</p>{% endif %}
+  </header>
+
+  {#- Decorative: the heading above already names the service, so describing the
+      photograph here would read the page out twice. Generated without type baked
+      in, unlike the cards, because this page carries its own title. -#}
+  {%- if banner %}
+  <picture class="svc-banner">
+    <source srcset="/assets/{{ banner }}.webp" type="image/webp">
+    <img src="/assets/{{ banner }}.png" width="1360" height="420" alt="">
+  </picture>
+  {%- endif %}
+
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+
+  {#- Projects live with the service they demonstrate rather than in one pooled
+      list, so the page that argues for the work also shows it. A project can
+      appear under more than one service where its scope genuinely covers both.
+      `slug` comes from the page's permalink. -#}
+  {%- set slug = page.fileSlug %}
+  {%- set shown = services.projects | forPage(slug) %}
+  {%- if shown | length %}
+  <section class="projects" id="selected-projects">
+    <h2>Representative projects</h2>
+    {%- for p in shown %}
+    {%- set v = p.on[slug] %}
+    <article class="project">
+      <p class="eyebrow">{{ p.sector }}</p>
+      <h3>{{ p.title }}</h3>
+      <p>{{ v.body }}</p>
+      <dl class="facts">
+        {%- for f in v.facts %}<div><dt>{{ f[0] }}</dt><dd>{{ f[1] }}</dd></div>{% endfor %}
+      </dl>
+    </article>
+    {%- endfor %}
+  </section>
+  {%- endif %}
+
+  <aside class="svc-cta">
+    <h2>Priced instantly</h2>
+    <p>Tell us the project type, square footage and turnaround, and the fee appears on screen.</p>
+    <p><a class="btn" href="{{ site.quoteUrl }}">{{ site.quoteLabel }} &rarr;</a></p>
+  </aside>
+
+  <nav class="svc-other" aria-label="Other services">
+    <h2>Other services</h2>
+    <ul>
+      {%- for item in services.items %}
+      {%- if item.name != title %}
+      <li>
+        {%- if item.page %}<a href="/services/{{ item.slug }}">{{ item.name }}</a>
+        {%- else %}<span>{{ item.name }}</span>{% endif %}
+      </li>
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+  </nav>
+</article>

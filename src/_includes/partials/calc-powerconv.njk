@@ -1,0 +1,42 @@
+{#- The power unit converter, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/powerconv.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="pwcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This converter runs in your browser and needs JavaScript.
+    Every conversion factor it uses is listed below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <div class="field">
+      <label for="pw-value">Value to convert <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="pw-value" name="v" inputmode="decimal" step="any"
+             required autocomplete="off" placeholder="36000">
+    </div>
+
+    <fieldset class="cf-radios cf-stack">
+      <legend>Entered in</legend>
+      {%- for u in [["btuh", "Btu/h"], ["mbh", "MBH (1,000 Btu/h)"], ["ton", "Tons of refrigeration"], ["kw", "Kilowatts (kW)"], ["w", "Watts (W)"], ["hp", "Horsepower (hp)"], ["ftlbf", "Foot pound-force per hour"], ["lbft", "Pound-foot per hour"]] %}
+      <label><input type="radio" name="u" value="{{ u[0] }}"{% if loop.first %} checked{% endif %}> {{ u[1] }}</label>
+      {%- endfor %}
+    </fieldset>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="pw-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="pw-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="pw-results-h">
+    <h2 id="pw-results-h">Results</h2>
+    <p class="cf-summary" id="pw-summary" role="status">Enter a value to convert.</p>
+    <table class="cf-table" id="pw-table" hidden>
+      <caption class="visually-hidden">The value entered, in every power unit</caption>
+      <tbody id="pw-tbody"></tbody>
+    </table>
+    <p class="cf-note">1 ton of refrigeration = 12,000 Btu/h; 1 kW = 3,412.14 Btu/h;
+    1 hp = 745.70 W.</p>
+  </section>
+</form>

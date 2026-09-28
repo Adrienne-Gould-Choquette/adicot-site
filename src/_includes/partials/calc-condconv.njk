@@ -1,0 +1,42 @@
+{#- The condensate converter, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/condconv.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="cccalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This converter runs in your browser and needs JavaScript.
+    Every conversion factor it uses is listed below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <div class="field">
+      <label for="cc-value">Value to convert <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="cc-value" name="v" inputmode="decimal" step="any" min="0"
+             required autocomplete="off" placeholder="12000">
+    </div>
+
+    <fieldset class="cf-radios cf-stack">
+      <legend>Entered in</legend>
+      {%- for u in [["btuh", "Btu/h (latent)"], ["W", "Watts (latent)"], ["kW", "kW (latent)"], ["pintsday", "Pints per day"], ["galh", "Gallons per hour"], ["lh", "Liters per hour"], ["lbh", "Pounds per hour"]] %}
+      <label><input type="radio" name="u" value="{{ u[0] }}"{% if loop.first %} checked{% endif %}> {{ u[1] }}</label>
+      {%- endfor %}
+    </fieldset>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="cc-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="cc-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="cc-results-h">
+    <h2 id="cc-results-h">Results</h2>
+    <p class="cf-summary" id="cc-summary" role="status">Enter a value to convert.</p>
+    <table class="cf-table" id="cc-table" hidden>
+      <caption class="visually-hidden">The value entered, in every condensate unit</caption>
+      <tbody id="cc-tbody"></tbody>
+    </table>
+    <p class="cf-note">Latent heat and water removed are linked by 1.04 lb per pint and
+    1,055 Btu per lb of water condensed.</p>
+  </section>
+</form>

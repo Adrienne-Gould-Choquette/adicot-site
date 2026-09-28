@@ -1,0 +1,27 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for page in collections.all %}
+{%- if not page.data.noindex and not page.url.startsWith("/blog/categories/") %}
+  <url>
+    <loc>{{ page.url | canonicalOf }}</loc>
+    {%- set changed = page.inputPath | lastChanged(page.data.date) %}
+    {%- if changed %}
+    <lastmod>{{ changed }}</lastmod>
+    {%- endif %}
+  </url>
+{%- endif %}
+{%- endfor %}
+{#- The blog category pages come from one paginated template, which the
+    collection lists only once, so they are all listed here instead; each is
+    dated by its newest post. #}
+{%- for cat in collections.categories %}
+  <url>
+    <loc>{{ ("/blog/categories/" + cat.slug + ".html") | canonicalOf }}</loc>
+    <lastmod>{{ (cat.posts[0].data.date | isoDate).slice(0, 10) }}</lastmod>
+  </url>
+{%- endfor %}
+</urlset>

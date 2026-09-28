@@ -1,0 +1,69 @@
+{#- The return-air transfer duct and pass-through sizer, written by hand rather
+    than published from SpreadsheetConverter. The maths and the grille catalog are
+    in /assets/js/transfer.js, which check-calculators.mjs holds to the workbook's
+    own answers; this is only the form. It never submits. -#}
+<form class="calcform" id="txcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The method and the grille catalog are printed below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Transfer type</legend>
+      <label><input type="radio" name="ty" value="pass" checked> Pass-through</label>
+      <label><input type="radio" name="ty" value="flex"> Transfer duct, flex</label>
+      <label><input type="radio" name="ty" value="hard"> Transfer duct, hard</label>
+    </fieldset>
+
+    <div class="field"><label for="tx-q">Supply airflow to the room <span class="cf-u">cfm</span></label>
+      <input type="number" id="tx-q" name="q" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="50"></div>
+
+    <fieldset class="cf-radios">
+      <legend>Supply duct to the room</legend>
+      <label><input type="radio" name="m" value="Flex" checked> Flex</label>
+      <label><input type="radio" name="m" value="Duct board"> Duct board</label>
+      <label><input type="radio" name="m" value="Metal"> Metal</label>
+    </fieldset>
+    <p class="hint">Used only to estimate the supply duct's size, which sets the minimum transfer duct area.</p>
+
+    <fieldset class="cf-radios">
+      <legend>Grilles</legend>
+      <label><input type="radio" name="g" value="gt" checked> Grille Tech return</label>
+      <label><input type="radio" name="g" value="ra"> AirGuide RA return</label>
+      <label><input type="radio" name="g" value="dg"> AirGuide DG door/transfer</label>
+    </fieldset>
+
+    <div class="field" id="tx-h-f"><label for="tx-h">Available duct height <span class="cf-u">in.</span></label>
+      <input type="number" id="tx-h" name="h" inputmode="decimal" step="any" min="0" autocomplete="off" value="8" placeholder="8"></div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="tx-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="tx-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="tx-results-h">
+    <h2 id="tx-results-h">Transfer sizing</h2>
+    <p class="cf-summary" id="tx-summary" role="status">Enter the supply airflow.</p>
+    <table class="cf-table">
+      <caption class="visually-hidden">Supply duct estimate, minimum grille and transfer duct areas</caption>
+      <tbody id="tx-tbody"></tbody>
+    </table>
+    <div id="tx-list" hidden>
+      <h3 class="tx-h3">Sample return grilles that suit it</h3>
+      <div class="table-scroll">
+        <table class="cf-table">
+          <caption class="visually-hidden">Suitable return grilles</caption>
+          <thead><tr><th scope="col" id="tx-col">Neck = duct, L × W</th><th scope="col" class="cf-num">Free area A<sub>k</sub></th><th scope="col" class="cf-num">Max supply</th></tr></thead>
+          <tbody id="tx-grilles"></tbody>
+        </table>
+      </div>
+      <p class="cf-note">Sample grilles: <a href="https://www.grilletechinc.com/products/residential/returnairgrilles.html" rel="noopener">return air grilles (Grille Tech)</a>. Use your manufacturer's free area.</p>
+    </div>
+    <p class="cf-note" id="tx-warn" hidden></p>
+    <figure class="ck-figure">
+      <img id="tx-img" src="/images/transfer-pass-through.jpg" alt="Pass-through transfer grilles in a wall" width="1200" height="492" loading="lazy">
+    </figure>
+  </section>
+</form>

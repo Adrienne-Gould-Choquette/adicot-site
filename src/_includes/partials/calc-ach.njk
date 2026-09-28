@@ -1,0 +1,86 @@
+{#- The air change rate calculator, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/ach.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. Labels and units are rewritten by calc-ach.js when the unit system or
+    the known value changes. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="achcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The equation and a worked example are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> US (ft, cfm)</label>
+      <label><input type="radio" name="u" value="SI"> SI (m, l/s)</label>
+    </fieldset>
+
+    <fieldset class="cf-radios cf-stack">
+      <legend>You know the</legend>
+      <label><input type="radio" name="k" value="ACH" checked> Air changes per hour, to find the air flow rate</label>
+      <label><input type="radio" name="k" value="Q"> Air flow rate, to find the air changes per hour</label>
+    </fieldset>
+
+    <div class="field">
+      <label for="ach-value"><span id="ach-value-label">Air changes per hour</span>
+        <span class="cf-u" id="ach-value-u">ACH</span> <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="ach-value" name="v" inputmode="decimal" step="any" min="0"
+             required autocomplete="off" placeholder="3">
+    </div>
+
+    <div class="field">
+      <label for="ach-height">Room height <span class="cf-u ach-len">ft</span>
+        <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="ach-height" name="h" inputmode="decimal" step="any" min="0"
+             required autocomplete="off" placeholder="9">
+    </div>
+
+    <fieldset class="cf-radios">
+      <legend>Floor given as</legend>
+      <label><input type="radio" name="m" value="lw" checked> Length × width</label>
+      <label><input type="radio" name="m" value="area"> Area</label>
+    </fieldset>
+
+    <div class="field" id="ach-lw">
+      <div class="cf-pair">
+        <div>
+          <label for="ach-length">Room length <span class="cf-u ach-len">ft</span>
+            <span class="req" aria-hidden="true">*</span></label>
+          <input type="number" id="ach-length" name="l" inputmode="decimal" step="any" min="0"
+                 required autocomplete="off" placeholder="12">
+        </div>
+        <div>
+          <label for="ach-width">Room width <span class="cf-u ach-len">ft</span>
+            <span class="req" aria-hidden="true">*</span></label>
+          <input type="number" id="ach-width" name="w" inputmode="decimal" step="any" min="0"
+                 required autocomplete="off" placeholder="12">
+        </div>
+      </div>
+    </div>
+
+    <div class="field" id="ach-area-field" hidden>
+      <label for="ach-area">Floor area <span class="cf-u" id="ach-area-u">ft²</span>
+        <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="ach-area" name="a" inputmode="decimal" step="any" min="0"
+             autocomplete="off" placeholder="144">
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ach-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="ach-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="ach-results-h">
+    <h2 id="ach-results-h">Results</h2>
+    <p class="cf-summary" id="ach-summary" role="status">Enter the air changes per hour.</p>
+    <table class="cf-table" id="ach-table" hidden>
+      <caption class="visually-hidden">Room volume, air flow rate and air changes per hour</caption>
+      <tbody id="ach-tbody"></tbody>
+    </table>
+    <p class="cf-note">Q = ACH × room volume ÷ 60 in US units (cfm, ft³), or
+    Q = ACH × room volume × 1000 ÷ 3600 in SI (l/s, m³).</p>
+  </section>
+</form>

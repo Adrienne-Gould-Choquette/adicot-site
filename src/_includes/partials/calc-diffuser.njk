@@ -1,0 +1,80 @@
+{#- FPM to CFM through a diffuser, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/diffuser.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="dfcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The method and a worked example are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="English" checked> US (cfm, fpm, in)</label>
+      <label><input type="radio" name="u" value="Metric"> Metric (l/s, m/s, cm)</label>
+    </fieldset>
+
+    <fieldset class="cf-radios cf-stack">
+      <legend>You know the</legend>
+      <label><input type="radio" name="k" value="V" checked> Air flow rate, to find the velocity</label>
+      <label><input type="radio" name="k" value="Q"> Velocity, to find the air flow rate</label>
+    </fieldset>
+
+    <div class="field">
+      <label for="df-v"><span id="df-v-label">Air flow rate</span> <span class="cf-u" id="df-v-u">cfm</span>
+        <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="df-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="1200">
+    </div>
+
+    <fieldset class="cf-radios cf-stack">
+      <legend>Diffuser area given as</legend>
+      <label><input type="radio" name="m" value="lw" checked> Core length × width, and A<sub>k</sub></label>
+      <label><input type="radio" name="m" value="core"> Core area, and A<sub>k</sub></label>
+      <label><input type="radio" name="m" value="net"> Net free area</label>
+    </fieldset>
+
+    <div class="field" id="df-lw">
+      <div class="cf-pair">
+        <div>
+          <label for="df-l">Core length <span class="cf-u df-len">in</span></label>
+          <input type="number" id="df-l" name="l" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="12">
+        </div>
+        <div>
+          <label for="df-w">Core width <span class="cf-u df-len">in</span></label>
+          <input type="number" id="df-w" name="w" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="18">
+        </div>
+      </div>
+      <p class="hint" id="df-typical"></p>
+    </div>
+    <div class="field" id="df-core-field" hidden>
+      <label for="df-core">Core area <span class="cf-u df-area">ft²</span></label>
+      <input type="number" id="df-core" name="c" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="1.5">
+    </div>
+    <div class="field" id="df-ak-field">
+      <label for="df-ak">Area factor, A<sub>k</sub></label>
+      <input type="number" id="df-ak" name="a" inputmode="decimal" step="any" min="0" max="1" required autocomplete="off" placeholder="0.82">
+      <p class="hint">From the manufacturer; typically 0.4 to 0.9.</p>
+    </div>
+    <div class="field" id="df-net-field" hidden>
+      <label for="df-net">Net free area <span class="cf-u df-area">ft²</span></label>
+      <input type="number" id="df-net" name="n" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="1.23">
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="df-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="df-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="df-results-h">
+    <h2 id="df-results-h">Results</h2>
+    <p class="cf-summary" id="df-summary" role="status">Enter the air flow rate.</p>
+    <table class="cf-table" id="df-table" hidden>
+      <caption class="visually-hidden">Velocity or air flow rate, and net free area</caption>
+      <tbody id="df-tbody"></tbody>
+    </table>
+    <p class="cf-note">V = Q ÷ (A × A<sub>k</sub>). With L and W in inches, A = L × W ÷ 144 ft².</p>
+  </section>
+</form>

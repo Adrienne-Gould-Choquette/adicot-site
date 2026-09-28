@@ -1,0 +1,87 @@
+{#- The duct size calculator, written by hand rather than published from
+    SpreadsheetConverter. The maths lives in /assets/js/ductulator.js, a port of
+    ductulator.py that check-ductulator.mjs holds to the Python's own numbers;
+    this file is only the form. Labels and units are rewritten by
+    calc-duct-size.js when the unit system or the design criterion changes, so
+    every one of them carries an id the script can find.
+
+    The form never submits. There is no server to submit to and nothing here
+    leaves the browser. -#}
+<form class="calcform" id="ductcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs
+    JavaScript. The method it uses is written out in full below, so the duct can
+    also be sized by hand.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="dc-units" value="US" checked> US</label>
+      <label><input type="radio" name="dc-units" value="Metric"> Metric</label>
+    </fieldset>
+
+    <div class="field">
+      <label for="dc-material">Duct material <span class="req" aria-hidden="true">*</span></label>
+      <select id="dc-material" name="dc-material" required aria-describedby="dc-material-note">
+        <option value="" selected>Select duct material</option>
+        {%- for m in ductMaterials %}
+        <option value="{{ m.name }}" data-roughness="{{ m.roughness }}"{% if m.specUrl %} data-spec="{{ m.specUrl }}"{% endif %}>{{ m.name }}</option>
+        {%- endfor %}
+      </select>
+      {#- Roughness is what the material actually changes, so say so rather than
+          leaving the choice looking cosmetic. The spec-sheet link only appears
+          for materials that have one; see HANDOFF.md. -#}
+      <p class="hint" id="dc-material-note">Sets the absolute roughness used for friction loss.</p>
+    </div>
+
+    <div class="field">
+      <label for="dc-volume">Air volume <span class="cf-u" id="dc-volume-u">cfm</span>
+        <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="dc-volume" name="dc-volume" inputmode="decimal"
+             step="any" min="0" required autocomplete="off" placeholder="1000">
+    </div>
+
+    <fieldset class="cf-radios cf-stack">
+      <legend>Design criterion</legend>
+      <label><input type="radio" name="dc-criterion" value="Air Velocity"> Air velocity</label>
+      <label><input type="radio" name="dc-criterion" value="Friction Loss" checked> Friction loss</label>
+      <label><input type="radio" name="dc-criterion" value="Round Duct Dia."> Round duct dia.</label>
+      <label><input type="radio" name="dc-criterion" value="Rect. Duct, W x H"> Rect. duct, W &times; H</label>
+    </fieldset>
+
+    <div class="field">
+      <label for="dc-value"><span id="dc-value-label">Friction loss</span>
+        <span class="cf-u" id="dc-value-u">in. wg/100'</span>
+        <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="dc-value" name="dc-value" inputmode="decimal"
+             step="any" min="0" required autocomplete="off" placeholder="0.08">
+    </div>
+
+    <div class="field">
+      <label for="dc-height"><span id="dc-height-label">Duct height</span>
+        <span class="cf-u" id="dc-height-u">in.</span>
+        <span class="opt" id="dc-height-opt">(optional)</span></label>
+      <input type="number" id="dc-height" name="dc-height" inputmode="decimal"
+             step="any" min="0" autocomplete="off" placeholder="8">
+      <p class="hint" id="dc-height-note">Leave blank for a square duct.</p>
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+    </p>
+  </div>
+
+  {#- Results update as you type, so the table itself is not a live region --
+      announcing eight rows on every keystroke would be unusable. The one-line
+      summary above it is, and it is the sentence someone would read out loud. -#}
+  <section class="cf-results" aria-labelledby="dc-results-h">
+    <h2 id="dc-results-h">Results</h2>
+    <p class="cf-summary" id="dc-summary" role="status">Choose a duct material to size the duct.</p>
+    <table class="cf-table" id="dc-table" hidden>
+      <caption class="visually-hidden">Duct size and air velocity for the values entered</caption>
+      <tbody id="dc-tbody"></tbody>
+    </table>
+    <p class="cf-note" id="dc-note" hidden></p>
+  </section>
+</form>

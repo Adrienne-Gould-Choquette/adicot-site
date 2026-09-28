@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Airflow",
+    "items": [
+      {
+        "label": "ACH to CFM",
+        "path": "/air-change-rate-calculator"
+      },
+      {
+        "label": "Air Mixing",
+        "path": "/air-mixing-calculator"
+      },
+      {
+        "label": "Diffuser Sizer",
+        "path": "/diffuser-size-calculator"
+      },
+      {
+        "label": "Ductulator",
+        "path": "/duct-size-calculator"
+      },
+      {
+        "label": "Temp Loss in Duct",
+        "path": "/temp-loss-through-an-air-duct"
+      },
+      {
+        "label": "Transfer Duct",
+        "path": "/transfer-pass-thru-calculator"
+      },
+      {
+        "label": "FPM to CFM",
+        "path": "/fpm-to-cfm-calculator"
+      },
+      {
+        "label": "Vent-ASHRAE 62.1",
+        "path": "/ventilation-ashrae"
+      }
+    ]
+  },
+  {
+    "name": "Electrical",
+    "items": [
+      {
+        "label": "Ohm's Law",
+        "path": "/ohms-law-with-power-calculator"
+      },
+      {
+        "label": "kW to HP Convert",
+        "path": "/power-unit-converter"
+      }
+    ]
+  },
+  {
+    "name": "Equipment",
+    "items": [
+      {
+        "label": "Coil Calculator",
+        "path": "/coil-selection-calculator"
+      },
+      {
+        "label": "Condensate Pump",
+        "path": "/condensate-pump-size-calculator"
+      }
+    ]
+  },
+  {
+    "name": "Economics",
+    "items": [
+      {
+        "label": "Annual Cooling Cost",
+        "path": "/annual-cooling-cost-calculator"
+      },
+      {
+        "label": "Break Even",
+        "path": "/break-even-calculator"
+      },
+      {
+        "label": "Engineering Econ. (F/P,i,n)",
+        "path": "/present-future-value-calculator"
+      },
+      {
+        "label": "Home Price Comparison",
+        "path": "/home-price-compare"
+      },
+      {
+        "label": "Condensate Converter",
+        "path": "/condensate-converter"
+      },
+      {
+        "label": "Cooling Load Est.",
+        "path": "/cooling-load-estimator"
+      },
+      {
+        "label": "Dehumidifier Sizer",
+        "path": "/dehumidifier-size-calculator"
+      },
+      {
+        "label": "EER SEER SEER2...",
+        "path": "/eer-seer2-cop-hspf2-kwton-converter"
+      },
+      {
+        "label": "CKV Exhaust Hood",
+        "path": "/ckv-commercial-kitchen-ventilation"
+      }
+    ]
+  },
+  {
+    "name": "Humidity/Psychrometrics",
+    "items": [
+      {
+        "label": "Condensate Generated",
+        "path": "/condensate-calculator"
+      },
+      {
+        "label": "Dehumidifier Sizer",
+        "path": "/dehumidifier-size-calculator"
+      },
+      {
+        "label": "Fluid Mixing",
+        "path": "/fluid-mixing-calculator"
+      },
+      {
+        "label": "VPD",
+        "path": "/vapor-pressure-deficit-vpd"
+      },
+      {
+        "label": "Condensate Converter",
+        "path": "/condensate-converter"
+      },
+      {
+        "label": "Psychrometric Chart",
+        "path": "/psychrometric-chart-calculator"
+      },
+      {
+        "label": "Psych Chart- 2 Cond.",
+        "path": "/psychrometric-chart-2-condition"
+      }
+    ]
+  },
+  {
+    "name": "Building Code",
+    "items": [
+      {
+        "label": "CLTD Roof & Wall",
+        "path": "/ctld-roof-and-wall-numbers"
+      },
+      {
+        "label": "U-Factor/SHGC",
+        "path": "/iecc-window-u-shgc-default-values"
+      },
+      {
+        "label": "Vent-ASHRAE 62.1",
+        "path": "/ventilation-ashrae"
+      },
+      {
+        "label": "SH Window Sizer",
+        "path": "/sh-window-size-chart"
+      },
+      {
+        "label": "Reheat/Heating Sizing",
+        "path": "/reheat-heating-sizing-calculator"
+      },
+      {
+        "label": "Wind Load",
+        "path": "/wind-pressure-calculator"
+      }
+    ]
+  },
+  {
+    "name": "Miscellaneous",
+    "items": [
+      {
+        "label": "kW,HP, BTU, Ton...",
+        "path": "/power-unit-converter"
+      },
+      {
+        "label": "Picture Hanger",
+        "path": "/picture-hanger-height-calculator"
+      },
+      {
+        "label": "Bilinear Interpolation",
+        "path": "/bilinear-interpolation"
+      }
+    ]
+  },
+  {
+    "name": "Math",
+    "items": [
+      {
+        "label": "Circle Sphere",
+        "path": "/circle-sphere-calculator"
+      },
+      {
+        "label": "Linear Interpolation",
+        "path": "/linear-interpolation-calculator"
+      },
+      {
+        "label": "Temperature Converter",
+        "path": "/temperature-converter"
+      }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+# Normalise to LF in the repo; the build runs on Linux CI.
+* text=auto eol=lf
+
+# SpreadsheetConverter output is vendor code. Never let git rewrite a byte of it.
+public/calculators/** -text
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary

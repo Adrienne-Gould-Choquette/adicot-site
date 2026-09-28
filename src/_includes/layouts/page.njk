@@ -1,0 +1,66 @@
+---
+layout: layouts/base.njk
+---
+<article class="page">
+  <header class="page-head">
+    <h1>{{ title }}</h1>
+    {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
+  </header>
+
+  {#- Precomputed in _data/relatedIndex.js: curated picks first, then scored fill.
+     Edit _data/related.json to change a page's list. #}
+  {%- set related = relatedIndex[page.url | cleanUrl] or [] %}
+
+  {# Calculator and its related list sit side by side at the top. The row wraps
+     on its own when the calculator is too wide to leave room, so each page
+     follows its own embed width rather than a guessed breakpoint. #}
+  {#- 28 of the 41 embeds are narrow enough to leave room for a sidebar; the rest
+      are 965px or wider, so their list runs as a row underneath instead. #}
+  {#- A hand-written calculator reflows, so it takes whatever the sidebar leaves
+      and keeps the related list beside it; it only wraps on narrow screens. -#}
+  {%- set wideCalc = not calcInclude and calculatorWidth and calculatorWidth > 820 %}
+  <div class="calc-layout{% if wideCalc %} is-wide{% endif %}">
+    {% if calcInclude %}
+    {#- Written by hand, so it themes with the site, resizes with the window and
+        is read by search engines. No iframe, no vendor runtime. -#}
+    <section class="calc-inline" aria-label="{{ calculatorName or title }}">
+      {% include calcInclude %}
+    </section>
+    {% elif calculator %}
+    <section class="calc" aria-label="{{ calculatorName or title }}">
+      <iframe
+        src="{{ calculator }}"
+        title="{{ calculatorName or title }}"
+        width="{{ calculatorWidth or 1000 }}"
+        height="{{ calculatorHeight or 900 }}"
+        loading="lazy"
+        referrerpolicy="no-referrer"></iframe>
+      <p class="calc-meta">
+        <a href="{{ calculator }}" target="_blank" rel="noopener">Open the calculator full screen</a>
+        {% if calculatorName %}<span class="muted"> &middot; {{ calculatorName }}</span>{% endif %}
+      </p>
+    </section>
+    {% endif %}
+
+    {% if related.length %}
+    <aside class="related" aria-labelledby="related-h">
+      <h2 id="related-h">Related calculators</h2>
+      <ul>
+        {%- for r in related %}
+        <li>
+          <a href="{{ r.path }}">
+            {%- if r.icon %}<img class="rel-icon" src="{{ r.icon | iconUrl }}" alt="" width="24" height="24" loading="lazy">
+            {%- else %}<span class="rel-icon rel-icon-blank" aria-hidden="true"></span>{% endif %}
+            <span>{{ r.label }}</span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </aside>
+    {% endif %}
+  </div>
+
+  <div class="prose{% if proseWide %} prose-wide{% endif %}">
+    {{ content | safe }}
+  </div>
+</article>

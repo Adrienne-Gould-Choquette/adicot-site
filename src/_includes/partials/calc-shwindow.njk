@@ -1,0 +1,38 @@
+{#- The single-hung window size chart, written by hand rather than published from
+    SpreadsheetConverter. The table is in /assets/js/shwindow.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits. -#}
+<form class="calcform" id="shcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This converter runs in your browser and needs JavaScript.
+    The complete size chart is printed below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <div class="field">
+      <label for="sh-code">Window size code</label>
+      <select id="sh-code" name="c">
+        {%- for w in shWindows %}
+        <option value="{{ w.code }}"{% if w.code == "SH 24" %} selected{% endif %}>{{ w.code }}{% if w.egress %} (egress){% endif %}</option>
+        {%- endfor %}
+      </select>
+      <p class="hint">Codes marked * are egress windows.</p>
+    </div>
+
+    <p class="cf-actions">
+      <button type="button" class="btn btn-quiet" id="sh-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="sh-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="sh-results-h">
+    <h2 id="sh-results-h">Sizes</h2>
+    <p class="cf-summary" id="sh-summary" role="status">Choose a window size code.</p>
+    <table class="cf-table" id="sh-table" hidden>
+      <caption class="visually-hidden">Frame, masonry opening and clear opening sizes</caption>
+      <tbody id="sh-tbody"></tbody>
+    </table>
+    <p class="cf-note">Width × height. Sizes vary slightly between manufacturers; verify the actual
+    dimensions with the one you use.</p>
+  </section>
+</form>

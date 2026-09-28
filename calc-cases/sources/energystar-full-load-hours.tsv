@@ -1,0 +1,223 @@
+# Full-load cooling and heating hours by city, from ENERGY STAR's air-source heat pump
+# savings calculator (ASHP_Sav_Calc.xls, Assumptions sheet, rows 25-242; data source
+# given there as "EPA 2002"), downloaded from
+# https://www.energystar.gov/sites/default/files/asset/document/ASHP_Sav_Calc.xls on 2026-09-26.
+# city<TAB>cooling hours<TAB>heating hours
+AK-Anchorage	0	3128
+AK-Barrow	0	4612
+AK-Fairbanks	129	3059
+AK-Juneau	0	3414
+AK-Nome	0	3749
+AL-Birmingham	1557	1562
+AL-Huntsville	1464	1606
+AL-Mobile	2265	1130
+AL-Montgomery	1819	1366
+AR-Fort Smith	1432	1738
+AR-Little Rock	1583	1681
+AZ-Flagstaff	179	2854
+AZ-Phoenix	2141	1116
+AZ-Tucson	1842	1261
+AZ-Winslow	950	2112
+AZ-Yuma	2315	907
+CA-Beverly Hills	1166	1277
+CA-Los Angeles	1530	1070
+CA-Palm Springs	2092	630
+CA-Sacramento	871	2016
+CA-San Diego	1347	1467
+CA-San Francisco	224	2948
+CA-Stockton	1158	1834
+CO-Alamosa	97	2947
+CO-Colorado Springs	523	2418
+CO-Denver	628	2255
+CO-Grand Junction	997	2352
+CO-Pueblo	834	2018
+CT-Bridgeport	942	2358
+CT-Hartford	695	2555
+DC-Washington	1320	2061
+DE-Wilmington	1015	2346
+FL-Daytona Beach	2763	720
+FL-Fort Myers	3288	504
+FL-Gainesville	2228	889
+FL-Jacksonville	2086	1020
+FL-Key West	4566	342
+FL-Miami	3931	265
+FL-Orlando	2915	583
+FL-Pensacola	2297	1047
+FL-Tallahassee	2215	1133
+FL-Tampa	3068	709
+FL-W. Palm Beach	3479	314
+GA-Athens	1493	1655
+GA-Atlanta	1484	1686
+GA-Augusta	1548	1467
+GA-Columbus	1845	1379
+GA-Macon	1900	1367
+GA-Savannah	1963	1213
+HI-Hilo	4179	0
+HI-Honolulu	5016	0
+IA-Des Moines	941	2247
+IA-Dubuque	605	2458
+IA-Sioux City	836	2316
+IA-Waterloo	667	2412
+ID-Boise	614	2532
+ID-Lewiston	636	2208
+ID-Pocatello	411	2590
+IL-Chicago	683	2459
+IL-Moline	830	2260
+IL-Peoria	948	2166
+IL-Rockford	714	2418
+IL-Springfield	1036	2154
+IN-Evansville	1181	2027
+IN-Fort Wayne	786	2370
+IN-Indianapolis	948	2152
+IN-South Bend	710	2391
+KS-Dodge City	1109	2024
+KS-Goodland	723	2252
+KS-Topeka	1068	2093
+KS-Wichita	1225	1981
+KY-Lexington	1080	2027
+KY-Louisville	1150	1975
+KY-Paducah	1193	1939
+LA-Baton Rouge	2233	1115
+LA-Lake Charles	2299	1115
+LA-New Orleans	2388	1118
+LA-Shreveport	1892	1361
+MA-Boston	729	2397
+MA-Worcester	453	2734
+MD-Baltimore	1050	2172
+ME-Caribou	220	2959
+ME-Portland	321	2728
+MI-Alpena	216	2843
+MI-Detroit	642	2670
+MI-Flint	497	2650
+MI-Grand Rapids	595	2771
+MI-Lansing	578	2620
+MI-Marquette	222	3130
+MI-Muskegon	570	2817
+MI-Sault St Marie	196	3059
+MN-Duluth	212	2934
+MN-International Falls	288	2828
+MN-Minneapolis	662	2496
+MN-Rochester	523	2580
+MN-St. Cloud	414	2831
+MO-Columbia	1050	2048
+MO-Kansas City	1032	2149
+MO-Springfield	1178	1997
+MO-St. Louis	1215	2009
+MS-Jackson	1832	1433
+MS-Meridian	1726	1417
+MS-Tupelo	1623	1611
+MT-Billings	510	2308
+MT-Glasgow	465	2585
+MT-Great Falls	408	2330
+MT-Havre	403	2735
+MT-Helena	307	2423
+MT-Kalispell	193	2787
+MT-Miles city	621	2367
+MT-Missoula	225	2650
+NC-Asheville	919	2021
+NC-Charlotte	1325	1865
+NC-Greensboro	1203	1978
+NC-Raleigh	1239	1883
+NC-Wilmington	1758	1519
+ND-Bismarck	437	2593
+ND-Fargo	476	2702
+ND-Williston	459	2579
+NE-Grand Island	851	2288
+NE-Lincoln	899	2284
+NE-Norfolk	801	2437
+NE-North Platte	640	2403
+NE-Omaha	890	2327
+NE-Scottsbluff	647	2365
+NH-Concord	385	2641
+NJ-Atlantic City	832	2198
+NJ-Newark	1007	2340
+NM-Albuquerque	1038	2162
+NM-Roswell	1355	1596
+NV-Elko	361	2596
+NV-Ely	209	2678
+NV-Las Vegas	1773	1642
+NV-Reno	317	2631
+NV-Winnemucca	418	2481
+NY-Albany	515	2598
+NY-Binghamton	440	2754
+NY-Buffalo	571	2765
+NY-New York	1089	2337
+NY-Rochester	554	2685
+NY-Syracuse	552	2586
+OH-Akron	714	2539
+OH-Cincinnati	996	2134
+OH-Cleveland	639	2471
+OH-Columbus	828	2274
+OH-Dayton	947	2238
+OH-Mansfield	711	2500
+OH-Toledo	649	2464
+OH-Youngstown	554	2581
+OK-Oklahoma City	1436	1724
+OK-Tulsa	1486	1722
+OR-Astoria	56	3499
+OR-Eugene	261	2679
+OR-Medford	534	2742
+OR-Pendleton	622	2105
+OR-Portland	379	2681
+OR-Salem	248	2842
+PA-Allentown	784	2492
+PA-Erie	482	2901
+PA-Harrisburg	929	2371
+PA-Philadelphia	1032	2328
+PA-Pittsburgh	737	2380
+PA-Scranton	621	2532
+PA-Williamsport	659	2502
+RI-Providence	656	2532
+SC-Charleston	2127	1212
+SC-Columbia	1626	1539
+SC-Greenville	1386	1808
+SD-Aberdeen	544	2571
+SD-Huron	633	2462
+SD-Rapid City	593	2434
+SD-Sioux Falls	691	2490
+TN-Bristol	1066	2050
+TN-Chattanooga	1353	1830
+TN-Knoxville	1288	1909
+TN-Memphis	1654	1638
+TN-Nashville	1375	1768
+TX-Abilene	1741	1398
+TX-Amarillo	1142	1880
+TX-Austin	2412	1142
+TX-Brownsville	3233	562
+TX-Corpus Christi	2958	776
+TX-Dallas	1926	1343
+TX-Del Rio	2380	1098
+TX-El Paso	1524	1559
+TX-Galveston	2967	1037
+TX-Houston	2209	1127
+TX-Lubbock	1298	1688
+TX-Midland	1546	1450
+TX-Port Arthur	2452	1043
+TX-San Angelo	2225	1291
+TX-San Antonio	2237	1101
+TX-Victoria	2465	926
+TX-Waco	2041	1308
+TX-Wichita Falls	1671	1538
+UT-Salt Lake City	785	2443
+VA-Lynchburg	1031	2117
+VA-Norfolk	1346	1923
+VA-Richmond	1188	1980
+VA-Roanoke	1002	2113
+VT-Burlington	455	2651
+WA-Olympia	125	3186
+WA-Seattle	282	2956
+WA-Spokane	395	2622
+WA-Walla Walla	714	1989
+WA-Yakima	415	2412
+WI-Green Bay	457	2641
+WI-La Crosse	713	2445
+WI-Madison	487	2547
+WI-Milwaukee	513	2548
+WV-Beckley	699	2194
+WV-Charleston	967	2088
+WV-Elkins	477	2459
+WV-Huntington	1035	2040
+WY-Casper	439	2620
+WY-Cheyenne	353	2658
+WY-Lander	455	2496
+WY-Sheridan	387	2578

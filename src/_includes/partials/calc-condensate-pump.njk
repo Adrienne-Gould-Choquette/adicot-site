@@ -1,0 +1,75 @@
+{#- The condensate pump size calculator, written by hand. The pump selection is in
+    /assets/js/condensate-pump.js, which check-calculators.mjs holds to Condensate
+    Pump Specifier V5.3's own answers; the condensate from the coil is the exact
+    psychrometric calculation of the condensate calculator (twostate.js). This is
+    only the form. It never submits. -#}
+{%- macro num(id, name, label, unitCls, unit, val, ph) %}
+<div class="field"><label for="cp-{{ id }}">{{ label }} <span class="cf-u {{ unitCls }}">{{ unit }}</span></label>
+  <input type="number" id="cp-{{ id }}" name="{{ name }}" inputmode="decimal" step="any" autocomplete="off" placeholder="{{ ph }}"{% if val %} value="{{ val }}"{% endif %}></div>
+{%- endmacro %}
+<form class="calcform" id="cpcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The method is written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> US (°F, cfm, ft, gph)</label>
+      <label><input type="radio" name="u" value="Metric"> Metric (°C, l/s, m, l/h)</label>
+    </fieldset>
+
+    <fieldset class="cf-radios">
+      <legend>Condensate flow</legend>
+      <label><input type="radio" name="src" value="coil" checked> Calculate it from the coil</label>
+      <label><input type="radio" name="src" value="flow"> I know it</label>
+    </fieldset>
+
+    <div id="cp-coil">
+      <div class="cf-pair">
+{{ num("edb", "edb", "Entering dry bulb", "cp-t", "°F", "80", "e.g. 80") }}
+{{ num("ewb", "ewb", "Entering wet bulb", "cp-t", "°F", "67", "e.g. 67") }}
+{{ num("ldb", "ldb", "Leaving dry bulb", "cp-t", "°F", "55", "e.g. 55") }}
+{{ num("lwb", "lwb", "Leaving wet bulb", "cp-t", "°F", "54", "e.g. 54") }}
+{{ num("cfm", "cfm", "Airflow", "cp-q", "cfm", "1200", "e.g. 1200") }}
+{{ num("alt", "alt", "Altitude", "cp-l", "ft", "0", "e.g. 0") }}
+      </div>
+    </div>
+    <div id="cp-flow" hidden>
+{{ num("q", "q", "Condensate flow", "cp-v", "gph", "", "e.g. 1.5") }}
+    </div>
+
+    <fieldset class="cf-stream">
+      <legend>Pump</legend>
+      <div class="field"><label for="cp-type">Application</label>
+        <select id="cp-type" name="t">{% for t in condensatePump.types %}<option value="{{ t }}"{% if t == "Air conditions, Condensing Furnaces, Boilers and Dehumidifiers" %} selected{% endif %}>{{ t | replace("Air conditions", "Air conditioners") }}</option>{% endfor %}</select></div>
+      <div class="cf-pair">
+        <div class="field"><label for="cp-volts">Voltage</label><select id="cp-volts" name="v"></select></div>
+{{ num("head", "h", "Head height (vertical lift)", "cp-l", "ft", "10", "e.g. 10") }}
+      </div>
+    </fieldset>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="cp-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="cp-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="cp-results-h">
+    <h2 id="cp-results-h">Condensate pumps</h2>
+    <p class="cf-summary" id="cp-summary" role="status">Enter the coil conditions.</p>
+    <table class="cf-table" id="cp-cond" hidden>
+      <caption class="visually-hidden">Condensate generated</caption>
+      <tbody id="cp-cbody"></tbody>
+    </table>
+    <div class="table-scroll">
+      <table class="cf-table cp-list" id="cp-table" hidden>
+        <caption class="visually-hidden">Pumps that lift the condensate to the head, smallest first</caption>
+        <thead><tr><th scope="col">Little Giant model</th><th scope="col" class="cf-num" id="cp-capcol">Flow at the head</th><th scope="col" class="cf-num" id="cp-maxcol">Largest rated flow</th></tr></thead>
+        <tbody id="cp-body"></tbody>
+      </table>
+    </div>
+    <p class="cf-note">Pump flows are Little Giant's catalog ratings. Between the heads the catalog lists, each pump is rated at the next higher listed head (conservative); above its highest listed head it is not listed. Confirm the selection with the manufacturer's data.</p>
+  </section>
+</form>

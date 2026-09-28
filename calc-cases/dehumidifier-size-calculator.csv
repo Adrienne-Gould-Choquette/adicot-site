@@ -1,0 +1,130 @@
+units,ppd,btu,kw,pints,btuh,kW,message,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,h32,h33,h34,h35,h36,h37,h38,h39,h40,h41
+Pints/day,1,999,7,1,45.716666666666669,0.013398230984134504,,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,46,3,1.0061975938753189,46,0.013481267778421884,,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.01,0.74636718920889533,34.12142,0.01,,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,20,999,7,20,914.33333333333337,0.26796461968269003,,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,914,3,19.992708713087858,914,0.26786692933646961,,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.27,20.151914108640177,921.27834,0.27,,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,37,999,7,37,1691.5166666666669,0.49573454641297665,,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,1692,3,37.0105723660226,1692,0.49587619741499622,,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.5,37.318359460444761,1706.071,0.5,,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,37.5,999,7,37.5,1714.375,0.50243366190504379,,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,1714,3,37.491797302223844,1714,0.50232376026554582,,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.5,37.318359460444761,1706.071,0.5,,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,50,999,7,50,2285.833333333333,0.669911549206725,,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,2286,3,50.003645643456068,2286,0.66996039437983534,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.67,50.006601676995992,2286.13514,0.67,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,51,999,7,51,2331.55,0.68330978019085964,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,2332,3,51.009843237331388,2332,0.68344166215825719,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.68,50.752968866204881,2320.2565600000003,0.68,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,60,999,7,60,2743,0.80389385904807009,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,2743,3,60,2743,0.80389385904807009,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.8,59.709375136711635,2729.7136,0.8,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,70,999,7,70,3200.1666666666665,0.93787616888941516,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,3200,3,69.996354356543932,3200,0.937827323716305,,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.94,70.158515785636155,3207.4134799999997,0.94,,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,71,999,7,71,3245.8833333333332,0.95127439987354967,,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,3246,3,71.00255195041926,3246,0.9513085914947268,,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,0.95,70.904882974845052,3241.5348999999997,0.95,,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,80,999,7,80,3657.3333333333335,1.0718584787307601,,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,3657,3,79.99270871308785,3657,1.0717607883845397,,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.07,79.8612892453518,3650.99194,1.07,,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,85,999,7,85,3885.916666666667,1.1388496336514329,,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,3886,3,85.001822821728041,3886,1.1388740562379878,,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.14,85.085859569814062,3889.8418799999995,1.14,,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,90,999,7,90,4114.5,1.2058407885721052,,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,4115,3,90.0109369303682,4115,1.2059873240914358,,1,1,1,1,1,1,1,0,0,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.21,90.310429894276325,4128.69182,1.21,,1,1,1,1,1,1,1,0,0,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,91,999,7,91,4160.2166666666662,1.2192390195562395,,1,1,1,1,1,1,1,0,0,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,4160,3,90.995260663507111,4160,1.2191755208311965,,1,1,1,1,1,1,1,0,0,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.22,91.056797083485222,4162.8132399999995,1.22,,1,1,1,1,1,1,1,0,0,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,100,999,7,100,4571.6666666666661,1.33982309841345,,1,1,1,1,1,1,1,0,0,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,4572,3,100.00729128691214,4572,1.3399207887596707,,1,1,1,1,1,1,1,1,1,0,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.34,100.01320335399198,4572.27028,1.34,,1,1,1,1,1,1,1,1,1,0,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,102.5,999,7,102.5,4685.9583333333339,1.3733186758737868,,1,1,1,1,1,1,1,1,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,4686,3,102.500911410864,4686,1.373330887167064,,1,1,1,1,1,1,1,1,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.37,102.25230492161866,4674.63454,1.37,,1,1,1,1,1,1,1,1,1,1,0,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,110,999,7,110,5028.833333333333,1.4738054082547951,,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,5029,3,110.00364564345607,5029,1.4738542534279055,,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.47,109.71597681370761,5015.8487399999995,1.47,,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,116,999,7,116,5303.1333333333332,1.5541947941596022,,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,5303,3,115.99708348523514,5303,1.5541557180211141,,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.55,115.68691432737879,5288.8201,1.55,,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,125,999,7,125,5714.5833333333339,1.6747788730168129,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,5715,3,125.00911410864016,5715,1.6749009859495883,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.67,124.64332059788549,5698.2771399999992,1.67,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,130,999,7,130,5943.166666666667,1.7417700279374855,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,5943,3,129.99635435654392,5943,1.741721182764375,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.74,129.86789092234775,5937.1270799999993,1.74,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True,True,True,True
+Pints/day,140,999,7,140,6400.333333333333,1.8757523377788303,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,6400,3,139.99270871308786,6400,1.87565464743261,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.88,140.31703157127231,6414.8269599999994,1.88,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+Pints/day,141,999,7,141,6446.05,1.8891505687629648,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,6446,3,140.99890630696319,6446,1.8891359152110319,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+kW,5,999,1.89,141.06339876048122,6448.9483799999989,1.89,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+Pints/day,150,999,7,150,6857.5,2.0097346476201752,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,6858,3,150.01093693036819,6858,2.0098811831395058,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+kW,5,999,2.01,150.01980503098795,6858.4054199999991,2.01,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+Pints/day,155,999,7,155,7086.0833333333348,2.0767258025408482,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+BTU/h,5,7086,3,154.99817717827196,7086,2.0767013799542928,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True,True,True,True
+kW,5,999,2.08,155.24437535545022,7097.25536,2.08,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True
+Pints/day,156,999,7,156,7131.8000000000011,2.0901240335249827,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True
+BTU/h,5,7132,3,156.00437477214729,7132,2.0901826477327146,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True
+kW,5,999,2.09,155.9907425446591,7131.37678,2.09,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True
+Pints/day,165,999,7,165,7543.2499999999991,2.2107081123821928,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True
+BTU/h,5,7543,3,164.99453153481588,7543,2.2106348446225277,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True
+kW,5,999,2.21,164.94714881516586,7540.83382,2.21,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True,True,True,True
+Pints/day,180,999,7,180,8229,2.4116815771442104,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True
+BTU/h,5,8229,3,180,8229,2.4116815771442104,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True
+kW,5,999,2.41,179.8744925993438,8223.26222,2.41,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True
+Pints/day,195,999,7,195,8914.7500000000018,2.6126550419062284,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True
+BTU/h,5,8915,3,195.00546846518412,8915,2.6127283096658931,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True
+kW,5,999,2.61,194.80183638352167,8905.69062,2.61,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True,True
+Pints/day,200,999,7,200,9143.3333333333321,2.6796461968269,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True
+BTU/h,5,9143,3,199.99270871308786,9143,2.67954850648068,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True,True,True,True
+kW,5,999,2.68,200.02640670798397,9144.54056,2.68,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True
+Pints/day,205,999,7,205,9371.9166666666679,2.7466373517475735,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True,True
+BTU/h,5,9372,3,205.001822821728,9372,2.7466617743341279,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True
+kW,5,999,2.75,205.25097703244623,9383.3905,2.75,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True
+Pints/day,225,999,7,225,10286.25,3.0146019714302632,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True
+BTU/h,5,10286,3,224.99453153481588,10286,3.0145287036705977,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True
+kW,5,999,3.01,224.65652395187746,10270.547419999999,3.01,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,True,True,True,True,True
+Pints/day,226,999,7,226,10331.966666666669,3.0280002024143982,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+BTU/h,5,10332,3,226.00072912869123,10332,3.0280099714490194,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+kW,5,999,3.03,226.14925833029528,10338.790259999998,3.03,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+Pints/day,300,999,7,300,13715,4.01946929524035,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+BTU/h,5,13715,3,300,13715,4.01946929524035,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+kW,5,999,4.02,300.03961006197591,13716.810839999998,4.02,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+Pints/day,345,999,7,345,15772.250000000002,4.6223896895264041,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+BTU/h,5,15772,3,344.99453153481591,15772,4.6223164217667376,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+kW,5,999,4.62,344.8216414145096,15764.09604,4.62,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True,True,True
+Pints/day,346,999,7,346,15817.966666666667,4.6357879205105377,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True
+BTU/h,5,15818,3,346.00072912869121,15818,4.63579768954516,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True
+kW,5,999,4.64,346.31437579292736,15832.338879999998,4.64,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True
+Pints/day,400,999,7,400,18286.666666666664,5.3592923936538,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True
+BTU/h,5,18287,3,400.00729128691211,18287,5.3593900840000215,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True
+kW,5,999,5.36,400.05281341596793,18289.08112,5.36,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True
+Pints/day,500,999,7,500,22858.333333333336,6.6991154920672518,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True
+BTU/h,5,22858,3,499.99270871308778,22858,6.6990178017210305,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,True
+kW,5,999,6.7,500.06601676995984,22861.3514,6.7,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+Pints/day,501,999,7,501,22904.049999999996,6.7125137230513845,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+BTU/h,5,22904,3,500.99890630696314,22904,6.7124990694994526,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+kW,5,999,6.71,500.81238395916876,22895.47282,6.71,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+Pints/day,600,999,7,600,27430,8.0389385904807,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+BTU/h,5,27430,3,600,27430,8.0389385904807,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+kW,5,999,8.04,600.07922012395181,27433.621679999997,8.04,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+Pints/day,730,999,7,730,33373.166666666672,9.7807086184181884,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+BTU/h,5,33373,3,729.99635435654386,33373,9.7806597732450768,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+kW,5,999,9.78,729.9471110462996,33370.748759999995,9.78,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0
+Pints/day,731,999,7,731,33418.883333333331,9.79410684940232,"Max Dehumidifier Capacity Exceeded - 
+Enter a Capacity Smaller than 730 Pints/day",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+BTU/h,5,33419,3,731.00255195041916,33419,9.794141041023499,"Max Dehumidifier Capacity Exceeded - 
+Enter a Capacity Smaller than 33,373 BTU/h",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+kW,5,999,9.79,730.69347823550845,33404.87018,9.79,"Max Dehumidifier Capacity Exceeded - 
+Enter a Capacity Smaller than 9.78 kW",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+Pints/day,1000,999,7,1000,45716.666666666672,13.398230984134504,"Max Dehumidifier Capacity Exceeded - 
+Enter a Capacity Smaller than 730 Pints/day",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+BTU/h,5,45717,3,1000.0072912869121,45717,13.398328674480723,"Max Dehumidifier Capacity Exceeded - 
+Enter a Capacity Smaller than 33,373 BTU/h",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+kW,5,999,13.4,1000.1320335399197,45722.7028,13.4,"Max Dehumidifier Capacity Exceeded - 
+Enter a Capacity Smaller than 9.78 kW",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1

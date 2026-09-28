@@ -1,0 +1,221 @@
+{
+  "eyebrow": "MECHANICAL ENGINEERING · LICENSED IN 11 STATES + COUNTING",
+  "headline": [
+    "Leaders in",
+    "HVAC Load Calculations +",
+    "Energy Code Compliance Calculations"
+  ],
+  "lede": "Adicot is a licensed professional mechanical engineering firm specializing in HVAC load calculations and energy code compliance calculations for industrial, commercial, and multi-family projects. We are a woman-owned practice, offering engineer-stamped calcs in eleven states and counting.",
+  "segments": [
+    "Industrial",
+    "Commercial",
+    "Multi-family"
+  ],
+  "stats": [
+    {
+      "figure": "11",
+      "label": "States licensed (and counting)"
+    },
+    {
+      "figure": "5–10 days",
+      "label": "Load calculation turnaround",
+      "note": "From scope confirmation. Rush turnarounds available when schedules require them."
+    },
+    {
+      "figure": "99%+",
+      "label": "First-pass plan approval",
+      "note": "Based on a rolling five-year average of plan-review outcomes. Excludes revisions from client-supplied data or scope changes."
+    },
+    {
+      "figure": "3,000+",
+      "label": "Stamped projects since 2014"
+    },
+    {
+      "figure": "15K+",
+      "label": "Monthly calculator users"
+    }
+  ],
+  "items": [
+    {
+      "n": "01",
+      "name": "Cooling Load Calculations",
+      "slug": "cooling-load-calculations",
+      "page": true,
+      "stamped": true,
+      "summary": "Cooling and heating load calculations at any scale for industrial, commercial and multi-family projects, worked to the code adopted in the project jurisdiction.",
+      "icon": "/images/0179db_c283909cd86a428f9d228d855df64370~mv2.png"
+    },
+    {
+      "n": "02",
+      "name": "Energy Code Compliance",
+      "slug": "energy-code-compliance",
+      "page": true,
+      "stamped": true,
+      "summary": "Energy code compliance for industrial, commercial and multi-family projects, worked to the code and compliance path the jurisdiction actually requires.",
+      "icon": "/images/0179db_6d5c5a5f781645fe820e81ce2e3dfa45~mv2.png"
+    },
+    {
+      "n": "03",
+      "name": "Mechanical Design",
+      "page": false,
+      "stamped": true,
+      "summary": "Full HVAC design including layout, ventilation, and equipment specifications. Multifamily, retail, outpatient medical, restaurants, and specialty utility.",
+      "icon": "/images/0179db_e1db6460d23749b6882a6484fd678d57~mv2.png"
+    },
+    {
+      "n": "04",
+      "name": "Forensics + Design Review",
+      "page": false,
+      "stamped": true,
+      "summary": "When a system isn't performing or a design needs a second opinion. We diagnose and recommend.",
+      "icon": "/images/0179db_a3d84c72fdbe4536be992f5492446824~mv2.png"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Multi-Building Resort Development",
+      "sector": "Hospitality · Key West, Florida",
+      "on": {
+        "energy-code-compliance": {
+          "body": "Nine buildings on one waterfront site, seven new and two renovations, each with its own occupancy, envelope and mechanical scope: hotel blocks, a lobby and restaurant, a fitness center and the ancillary structures behind them. Compliance was carried building by building and reconciled across the development, so no structure cleared on assumptions borrowed from its neighbor.",
+          "facts": [
+            [
+              "Scope",
+              "Energy compliance"
+            ],
+            [
+              "Buildings",
+              "7 new + 2 renovation"
+            ],
+            [
+              "Jurisdiction",
+              "Florida"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "title": "Substation Control Building / Utility Control Enclosure",
+      "sector": "Specialty Utility · Millwood, West Virginia",
+      "on": {
+        "cooling-load-calculations": {
+          "body": "A control enclosure with little margin on either side: too little ventilation and hydrogen accumulates off the battery bank, too much and the room will not hold temperature. Ventilation was derived from the manufacturer-published gassing rates for the batteries actually specified and sized to the one percent hydrogen limit in IEEE 484 and the International Fire Code, with cooling loads run to ASHRAE methods. Stamped and back in five business days.",
+          "facts": [
+            [
+              "Method",
+              "ASHRAE"
+            ],
+            [
+              "Scope",
+              "Cooling + heating load calc"
+            ],
+            [
+              "Jurisdiction",
+              "West Virginia"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "title": "30-Unit Condominium Using Split System Heat Pumps",
+      "sector": "Multifamily · Lakewood Ranch, Florida",
+      "on": {
+        "cooling-load-calculations": {
+          "body": "Thirty units on split-system heat pumps, which means equipment is selected per unit and a tonnage rounded up once is rounded up thirty times. Loads were run room by room with orientation, glazing and party-wall conditions carried per unit rather than averaged across the building, so corner units were not sized off an interior average.",
+          "facts": [
+            [
+              "Scope",
+              "Block + room-by-room"
+            ],
+            [
+              "Units",
+              "30"
+            ],
+            [
+              "Equipment",
+              "Split-system heat pumps"
+            ]
+          ]
+        },
+        "energy-code-compliance": {
+          "body": "Energy code compliance for a 30-unit condominium, taken down the path the jurisdiction required rather than the one that is fastest to produce. One of more than 1,080 multifamily projects Adicot has designed over the past twelve years.",
+          "facts": [
+            [
+              "Scope",
+              "Energy compliance"
+            ],
+            [
+              "Units",
+              "30"
+            ],
+            [
+              "Jurisdiction",
+              "Florida"
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "licensedIn": [
+    {
+      "abbr": "AR",
+      "name": "Arkansas",
+      "license": "PE 20731"
+    },
+    {
+      "abbr": "FL",
+      "name": "Florida",
+      "license": "PE 77100"
+    },
+    {
+      "abbr": "IL",
+      "name": "Illinois",
+      "license": "PE 062088784"
+    },
+    {
+      "abbr": "LA",
+      "name": "Louisiana",
+      "license": "PE.0046611"
+    },
+    {
+      "abbr": "MA",
+      "name": "Massachusetts",
+      "license": "PE 59876"
+    },
+    {
+      "abbr": "NE",
+      "name": "Nebraska",
+      "license": "E-22101"
+    },
+    {
+      "abbr": "OK",
+      "name": "Oklahoma",
+      "license": "PE 32968"
+    },
+    {
+      "abbr": "PA",
+      "name": "Pennsylvania",
+      "license": "PE098610"
+    },
+    {
+      "abbr": "TX",
+      "name": "Texas",
+      "license": "PE 144791"
+    },
+    {
+      "abbr": "WV",
+      "name": "West Virginia",
+      "license": "PE 27173"
+    },
+    {
+      "abbr": "WY",
+      "name": "Wyoming",
+      "license": "PE 19826"
+    }
+  ],
+  "ncees": "NCEES Model Law Engineer designation supports licensure applications in any U.S. jurisdiction.",
+  "pricingIcon": "/images/0179db_9e9024f3fcf44a739bb69ed0d3308497~mv2.png"
+}

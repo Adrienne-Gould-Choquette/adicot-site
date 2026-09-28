@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: Blog
+seoTitle: "HVAC Engineering Blog | adicot.com"
+description: "HVAC engineering notes, calculator walkthroughs and load-calculation guidance from Adicot, Inc., a licensed mechanical engineering firm."
+permalink: /blog.html
+---
+<div class="page-head">
+  <h1>Blog</h1>
+  <p class="subtitle">Calculator walkthroughs and HVAC engineering notes.</p>
+</div>
+
+<ul class="chips">
+  {%- for c in collections.categories %}
+  <li><a href="/blog/categories/{{ c.slug }}">{{ c.name }} ({{ c.posts.length }})</a></li>
+  {%- endfor %}
+</ul>
+
+{%- set posts = collections.posts %}
+{% include "partials/postlist.njk" %}

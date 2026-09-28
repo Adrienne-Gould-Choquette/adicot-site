@@ -1,0 +1,90 @@
+{#- CLTD roof and wall numbers, written by hand rather than published from
+    SpreadsheetConverter. The tables are in /assets/js/cltd-tables.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits. -#}
+<form class="calcform" id="clcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This lookup runs in your browser and needs JavaScript.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-stream">
+      <legend>Roof</legend>
+      <div class="field"><label for="cl-rt">Roof type</label>
+        <select id="cl-rt" name="rt">{% for t in cltd.roofTypes %}<option>{{ t }}</option>{% endfor %}</select></div>
+      <div class="field"><label for="cl-rm">Mass location</label><select id="cl-rm" name="rm"></select></div>
+      <div class="field"><label for="cl-rr">Insulation R-value <span class="cf-u">h·ft²·°F/Btu</span></label>
+        <select id="cl-rr" name="rr">{% for r in cltd.roofR %}<option>{{ r }}</option>{% endfor %}</select></div>
+    </fieldset>
+
+    <fieldset class="cf-stream">
+      <legend>Wall</legend>
+      <div class="field"><label for="cl-wt">Principal wall material</label>
+        <select id="cl-wt" name="wt">{% for t in cltd.wallTypes %}<option>{{ t }}</option>{% endfor %}</select></div>
+      <div class="field"><label for="cl-wm">Mass location</label>
+        <select id="cl-wm" name="wm">{% for m in cltd.wallMass %}<option{% if m == "Mass Evenly Distributed" %} selected{% endif %}>{{ m }}</option>{% endfor %}</select></div>
+      <div class="field"><label for="cl-ws">Secondary material</label>
+        <select id="cl-ws" name="ws">{% for s in cltd.wallSecondary %}<option>{{ s }}</option>{% endfor %}</select></div>
+      <div class="field"><label for="cl-wr">Insulation R-value <span class="cf-u">h·ft²·°F/Btu</span></label>
+        <select id="cl-wr" name="wr">{% for r in cltd.wallR %}<option{% if r == "10.75 - 12.75" %} selected{% endif %}>{{ r }}</option>{% endfor %}</select></div>
+    </fieldset>
+
+    <fieldset class="cf-stream">
+      <legend>Hourly CLTD (July, 40°N)</legend>
+      <fieldset class="cf-radios">
+        <legend>Units</legend>
+        <label><input type="radio" name="u" value="IP" checked> °F</label>
+        <label><input type="radio" name="u" value="SI"> °C</label>
+      </fieldset>
+      <div class="field"><label for="cl-wo">Wall faces</label>
+        <select id="cl-wo" name="wo">{% for o in ["N", "NE", "E", "SE", "S", "SW", "W", "NW"] %}<option{% if o == "W" %} selected{% endif %}>{{ o }}</option>{% endfor %}</select></div>
+      <div class="cl-grid">
+        <div class="field"><label for="cl-ti">Indoor design temperature <span class="cf-u cl-t">°F</span></label>
+          <input type="number" id="cl-ti" name="ti" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 75" value="78"></div>
+        <div class="field"><label for="cl-to">Outdoor design maximum <span class="cf-u cl-t">°F</span></label>
+          <input type="number" id="cl-to" name="to" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 92" value="95"></div>
+        <div class="field"><label for="cl-dr">Daily range <span class="cf-u cl-t">°F</span></label>
+          <input type="number" id="cl-dr" name="dr" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 18" value="21"></div>
+      </div>
+      <div class="cl-grid">
+        <div class="field"><label for="cl-ru">Roof U-factor <span class="cf-u cl-uu">Btu/h·ft²·°F</span></label>
+          <input type="number" id="cl-ru" name="ru" inputmode="decimal" step="any" autocomplete="off" placeholder="optional"></div>
+        <div class="field"><label for="cl-ra">Roof area <span class="cf-u cl-au">ft²</span></label>
+          <input type="number" id="cl-ra" name="ra" inputmode="decimal" step="any" autocomplete="off" placeholder="optional"></div>
+        <div class="field"><label for="cl-wu">Wall U-factor <span class="cf-u cl-uu">Btu/h·ft²·°F</span></label>
+          <input type="number" id="cl-wu" name="wu" inputmode="decimal" step="any" autocomplete="off" placeholder="optional"></div>
+        <div class="field"><label for="cl-wa">Wall area <span class="cf-u cl-au">ft²</span></label>
+          <input type="number" id="cl-wa" name="wa" inputmode="decimal" step="any" autocomplete="off" placeholder="optional"></div>
+      </div>
+      <p class="hint">Add a U-factor and area to get the conduction cooling load, q = U × A × CLTD.</p>
+    </fieldset>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="cl-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="cl-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="cl-results-h">
+    <h2 id="cl-results-h">CLTD numbers</h2>
+    <p class="cf-summary" id="cl-summary" role="status"></p>
+    <table class="cf-table" id="cl-table">
+      <caption class="visually-hidden">CLTD roof and wall numbers</caption>
+      <tbody id="cl-tbody"></tbody>
+    </table>
+    <p class="cf-note" id="cl-hint" hidden></p>
+    <p class="cf-note">1997 ASHRAE Handbook—Fundamentals, Table 31 (roofs) and Tables 33A, 33B and 33C (walls).</p>
+
+    <h2 id="cl-hourly-h" class="cl-hourly-h">CLTD by hour</h2>
+    <p class="cf-summary" id="cl-hsummary" role="status"></p>
+    <div class="table-scroll">
+      <table class="cf-table cl-hours" id="cl-htable" hidden>
+        <caption class="visually-hidden">Corrected CLTD and cooling load for each hour, solar time</caption>
+        <thead id="cl-hhead"></thead>
+        <tbody id="cl-hbody"></tbody>
+      </table>
+    </div>
+    <p class="cf-note" id="cl-hnote"></p>
+  </section>
+</form>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{# Theme is the visitor's choice and applies to the whole site, so it is decided
+   at runtime, not per page. #}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{# Applied before first paint. Without this a visitor who chose dark gets a
+   white flash on every navigation. Kept inline and tiny for that reason. #}
+<script>(function(){try{var t=localStorage.getItem('adicot:theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<title>{{ seoTitle or (title + " | " + site.name) }}</title>
+{% if description %}<meta name="description" content="{{ description }}">{% endif %}
+<link rel="canonical" href="{{ canonical or (page.url | canonicalOf) }}">
+{% if noindex %}<meta name="robots" content="noindex">{% endif %}
+
+<meta property="og:type" content="{{ ogType or 'website' }}">
+<meta property="og:title" content="{{ ogTitle or seoTitle or title }}">
+{% if description %}<meta property="og:description" content="{{ ogDescription or description }}">{% endif %}
+<meta property="og:url" content="{{ canonical or (page.url | canonicalOf) }}">
+<meta property="og:image" content="{{ site.url }}{{ ogImage or '/assets/og-default.png' }}">
+<meta property="og:site_name" content="adicot.com">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+{#- What the page is, for search engines: the firm and the site on every page,
+    plus the page's own type (calculator, article, service, list...). Built by
+    tools/schema.mjs from the page's data. -#}
+{%- set pageUrl = canonical or (page.url | canonicalOf) %}
+{%- set isPost = page.url.startsWith('/post/') %}
+<script type="application/ld+json">{{ {
+  url: pageUrl, path: page.url | cleanUrl, title: title, description: description,
+  image: (site.url + ogImage) if ogImage else '',
+  date: (page.date | isoDate) if isPost else '',
+  calc: true if (calculator or calcInclude) else false,
+  post: isPost
+} | schemaGraph | safe }}</script>
+
+<link rel="stylesheet" href="{{ "/assets/css/site.css" | bust }}">
+<link rel="icon" href="{{ "/assets/favicon-32.png" | bust }}" sizes="32x32" type="image/png">
+<link rel="icon" href="{{ "/assets/favicon-48.png" | bust }}" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="{{ "/assets/apple-touch-icon.png" | bust }}">
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }} blog" href="/feed.xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+{% include "partials/header.njk" %}
+
+{# Sentinel for the back-to-top observer: when this leaves the viewport, the
+   top of the page is off screen. tabindex on <main> so focus can be moved
+   back here after the jump. #}
+<span id="top-sentinel" aria-hidden="true"></span>
+<main id="main" tabindex="-1">
+  {{ content | safe }}
+</main>
+
+<a class="to-top" href="#top">
+  <span aria-hidden="true">&uarr;</span> Top
+</a>
+
+{% include "partials/footer.njk" %}
+
+<script src="{{ "/assets/js/theme.js" | bust }}" defer></script>
+<script src="{{ "/assets/js/nav.js" | bust }}" defer></script>
+<script src="{{ "/assets/js/search.js" | bust }}" defer></script>
+<script src="{{ "/assets/js/to-top.js" | bust }}" defer></script>
+{% if pageScript %}<script src="{{ ("/assets/js/" + pageScript) | bust }}" defer></script>{% endif %}
+{# Modules defer by default, and are the only way a page script can import the
+   shared model in /assets/js. #}
+{% if pageModule %}<script type="module" src="{{ ("/assets/js/" + pageModule) | bust }}"></script>{% endif %}
+</body>
+</html>

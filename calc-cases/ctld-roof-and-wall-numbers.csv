@@ -1,0 +1,67 @@
+type,mass,r,roof
+"1"" Wood",Mass evenly placed,0-5,1
+"1"" Wood",Mass evenly placed,5-10,2
+"1"" Wood",Mass evenly placed,10-15,2
+"1"" Wood",Mass evenly placed,15-20,4
+"1"" Wood",Mass evenly placed,20-25,4
+"1"" Wood",Mass evenly placed,25-30,No Value
+"1"" Wood",Mass evenly placed w/suspended ceiling,0-5,No Value
+"1"" Wood",Mass evenly placed w/suspended ceiling,5-10,4
+"1"" Wood",Mass evenly placed w/suspended ceiling,10-15,5
+"1"" Wood",Mass evenly placed w/suspended ceiling,15-20,9
+"1"" Wood",Mass evenly placed w/suspended ceiling,20-25,10
+"1"" Wood",Mass evenly placed w/suspended ceiling,25-30,10
+"2"" HW Concrete",Mass evenly placed,0-5,2
+"2"" HW Concrete",Mass evenly placed,5-10,No Value
+"2"" HW Concrete",Mass evenly placed,10-15,No Value
+"2"" HW Concrete",Mass evenly placed,15-20,No Value
+"2"" HW Concrete",Mass evenly placed,20-25,No Value
+"2"" HW Concrete",Mass evenly placed,25-30,No Value
+"2"" HW Concrete",Mass evenly placed w/suspended ceiling,0-5,3
+"2"" HW Concrete",Mass evenly placed w/suspended ceiling,5-10,No Value
+"2"" HW Concrete",Mass evenly placed w/suspended ceiling,10-15,No Value
+"2"" HW Concrete",Mass evenly placed w/suspended ceiling,15-20,No Value
+"2"" HW Concrete",Mass evenly placed w/suspended ceiling,20-25,No Value
+"2"" HW Concrete",Mass evenly placed w/suspended ceiling,25-30,No Value
+"2"" HW Concrete",Mass inside insulation,0-5,2
+"2"" HW Concrete",Mass inside insulation,5-10,2
+"2"" HW Concrete",Mass inside insulation,10-15,4
+"2"" HW Concrete",Mass inside insulation,15-20,4
+"2"" HW Concrete",Mass inside insulation,20-25,5
+"2"" HW Concrete",Mass inside insulation,25-30,No Value
+"2"" HW Concrete",Mass inside insulation w/suspended ceiling,0-5,5
+"2"" HW Concrete",Mass inside insulation w/suspended ceiling,5-10,8
+"2"" HW Concrete",Mass inside insulation w/suspended ceiling,10-15,13
+"2"" HW Concrete",Mass inside insulation w/suspended ceiling,15-20,13
+"2"" HW Concrete",Mass inside insulation w/suspended ceiling,20-25,14
+"2"" HW Concrete",Mass inside insulation w/suspended ceiling,25-30,No Value
+"2"" HW Concrete",Mass outside insulation,0-5,2
+"2"" HW Concrete",Mass outside insulation,5-10,3
+"2"" HW Concrete",Mass outside insulation,10-15,4
+"2"" HW Concrete",Mass outside insulation,15-20,5
+"2"" HW Concrete",Mass outside insulation,20-25,5
+"2"" HW Concrete",Mass outside insulation,25-30,No Value
+"2"" HW Concrete",Mass outside insulation w/suspended ceiling,0-5,3
+"2"" HW Concrete",Mass outside insulation w/suspended ceiling,5-10,3
+"2"" HW Concrete",Mass outside insulation w/suspended ceiling,10-15,4
+"2"" HW Concrete",Mass outside insulation w/suspended ceiling,15-20,5
+"2"" HW Concrete",Mass outside insulation w/suspended ceiling,20-25,No Value
+"2"" HW Concrete",Mass outside insulation w/suspended ceiling,25-30,No Value
+Steel Deck,Mass evenly placed,0-5,1
+Steel Deck,Mass evenly placed,5-10,1
+Steel Deck,Mass evenly placed,10-15,1
+Steel Deck,Mass evenly placed,15-20,2
+Steel Deck,Mass evenly placed,20-25,2
+Steel Deck,Mass evenly placed,25-30,No Value
+Steel Deck,Mass evenly placed w/suspended ceiling,0-5,1
+Steel Deck,Mass evenly placed w/suspended ceiling,5-10,1
+Steel Deck,Mass evenly placed w/suspended ceiling,10-15,2
+Steel Deck,Mass evenly placed w/suspended ceiling,15-20,2
+Steel Deck,Mass evenly placed w/suspended ceiling,20-25,4
+Steel Deck,Mass evenly placed w/suspended ceiling,25-30,No Value
+Attic-Ceiling Combination,Mass evenly placed,0-5,1
+Attic-Ceiling Combination,Mass evenly placed,5-10,2
+Attic-Ceiling Combination,Mass evenly placed,10-15,2
+Attic-Ceiling Combination,Mass evenly placed,15-20,2
+Attic-Ceiling Combination,Mass evenly placed,20-25,4
+Attic-Ceiling Combination,Mass evenly placed,25-30,No Value

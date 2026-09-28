@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+---
+<article class="page post">
+  <header class="page-head">
+    <p class="crumb"><a href="/blog">Blog</a></p>
+    <h1>{{ title }}</h1>
+    <p class="meta">
+      {{ site.author }} &middot; <time datetime="{{ date | isoDate }}">{{ date | readableDate }}</time>
+      {%- if categories.length %} &middot;
+      {%- for c in categories %}
+      <a href="/blog/categories/{{ c }}">{{ blogCategoryNames[c] or c }}</a>{% if not loop.last %}, {% endif %}
+      {%- endfor %}{% endif %}
+    </p>
+  </header>
+
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+
+  <nav class="post-nav" aria-label="More posts">
+    <a href="/blog">&larr; All posts</a>
+  </nav>
+</article>

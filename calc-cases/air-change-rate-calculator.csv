@@ -1,0 +1,181 @@
+units,given,value,height,mode,area,length,width,volume,Q,ACH
+English,"Air Flow Rate, Q",25,2.4,Area,144,,,345.59999999999997,25,4.3402777777777777
+English,"Air Flow Rate, Q",25,2.4,Length x Width,,12,12,345.59999999999997,25,4.3402777777777777
+English,"Air Flow Rate, Q",25,2.4,Length x Width,,250.5,80,48096,25,0.031187624750499
+English,"Air Flow Rate, Q",25,8,Area,144,,,1152,25,1.3020833333333333
+English,"Air Flow Rate, Q",25,8,Length x Width,,12,12,1152,25,1.3020833333333333
+English,"Air Flow Rate, Q",25,8,Length x Width,,250.5,80,160320,25,0.0093562874251497015
+English,"Air Flow Rate, Q",25,14,Area,144,,,2016,25,0.744047619047619
+English,"Air Flow Rate, Q",25,14,Length x Width,,12,12,2016,25,0.744047619047619
+English,"Air Flow Rate, Q",25,14,Length x Width,,250.5,80,280560,25,0.0053464499572284
+English,"Air Flow Rate, Q",100.8,2.4,Area,144,,,345.59999999999997,100.8,17.5
+English,"Air Flow Rate, Q",100.8,2.4,Length x Width,,12,12,345.59999999999997,100.8,17.5
+English,"Air Flow Rate, Q",100.8,2.4,Length x Width,,250.5,80,48096,100.8,0.12574850299401197
+English,"Air Flow Rate, Q",100.8,8,Area,144,,,1152,100.8,5.25
+English,"Air Flow Rate, Q",100.8,8,Length x Width,,12,12,1152,100.8,5.25
+English,"Air Flow Rate, Q",100.8,8,Length x Width,,250.5,80,160320,100.8,0.03772455089820359
+English,"Air Flow Rate, Q",100.8,14,Area,144,,,2016,100.8,2.9999999999999996
+English,"Air Flow Rate, Q",100.8,14,Length x Width,,12,12,2016,100.8,2.9999999999999996
+English,"Air Flow Rate, Q",100.8,14,Length x Width,,250.5,80,280560,100.8,0.021556886227544911
+English,"Air Flow Rate, Q",450,2.4,Area,144,,,345.59999999999997,450,78.125000000000014
+English,"Air Flow Rate, Q",450,2.4,Length x Width,,12,12,345.59999999999997,450,78.125000000000014
+English,"Air Flow Rate, Q",450,2.4,Length x Width,,250.5,80,48096,450,0.56137724550898194
+English,"Air Flow Rate, Q",450,8,Area,144,,,1152,450,23.4375
+English,"Air Flow Rate, Q",450,8,Length x Width,,12,12,1152,450,23.4375
+English,"Air Flow Rate, Q",450,8,Length x Width,,250.5,80,160320,450,0.16841317365269462
+English,"Air Flow Rate, Q",450,14,Area,144,,,2016,450,13.392857142857144
+English,"Air Flow Rate, Q",450,14,Length x Width,,12,12,2016,450,13.392857142857144
+English,"Air Flow Rate, Q",450,14,Length x Width,,250.5,80,280560,450,0.0962360992301112
+English,"Air Flow Rate, Q",2375.5,2.4,Area,144,,,345.59999999999997,2375.5,412.41319444444446
+English,"Air Flow Rate, Q",2375.5,2.4,Length x Width,,12,12,345.59999999999997,2375.5,412.41319444444446
+English,"Air Flow Rate, Q",2375.5,2.4,Length x Width,,250.5,80,48096,2375.5,2.9634481037924152
+English,"Air Flow Rate, Q",2375.5,8,Area,144,,,1152,2375.5,123.72395833333334
+English,"Air Flow Rate, Q",2375.5,8,Length x Width,,12,12,1152,2375.5,123.72395833333334
+English,"Air Flow Rate, Q",2375.5,8,Length x Width,,250.5,80,160320,2375.5,0.88903443113772451
+English,"Air Flow Rate, Q",2375.5,14,Area,144,,,2016,2375.5,70.699404761904773
+English,"Air Flow Rate, Q",2375.5,14,Length x Width,,12,12,2016,2375.5,70.699404761904773
+English,"Air Flow Rate, Q",2375.5,14,Length x Width,,250.5,80,280560,2375.5,0.50801967493584255
+English,"Air Flow Rate, Q",12000,2.4,Area,144,,,345.59999999999997,12000,2083.3333333333339
+English,"Air Flow Rate, Q",12000,2.4,Length x Width,,12,12,345.59999999999997,12000,2083.3333333333339
+English,"Air Flow Rate, Q",12000,2.4,Length x Width,,250.5,80,48096,12000,14.97005988023952
+English,"Air Flow Rate, Q",12000,8,Area,144,,,1152,12000,625
+English,"Air Flow Rate, Q",12000,8,Length x Width,,12,12,1152,12000,625
+English,"Air Flow Rate, Q",12000,8,Length x Width,,250.5,80,160320,12000,4.4910179640718555
+English,"Air Flow Rate, Q",12000,14,Area,144,,,2016,12000,357.14285714285717
+English,"Air Flow Rate, Q",12000,14,Length x Width,,12,12,2016,12000,357.14285714285717
+English,"Air Flow Rate, Q",12000,14,Length x Width,,250.5,80,280560,12000,2.5662959794696323
+English,"Air Changes/hr, ACH",0.35,2.4,Area,144,,,345.59999999999997,2.0159999999999996,0.35
+English,"Air Changes/hr, ACH",0.35,2.4,Length x Width,,12,12,345.59999999999997,2.0159999999999996,0.35
+English,"Air Changes/hr, ACH",0.35,2.4,Length x Width,,250.5,80,48096,280.56,0.35
+English,"Air Changes/hr, ACH",0.35,8,Area,144,,,1152,6.72,0.35
+English,"Air Changes/hr, ACH",0.35,8,Length x Width,,12,12,1152,6.72,0.35
+English,"Air Changes/hr, ACH",0.35,8,Length x Width,,250.5,80,160320,935.2,0.35
+English,"Air Changes/hr, ACH",0.35,14,Area,144,,,2016,11.759999999999998,0.35
+English,"Air Changes/hr, ACH",0.35,14,Length x Width,,12,12,2016,11.759999999999998,0.35
+English,"Air Changes/hr, ACH",0.35,14,Length x Width,,250.5,80,280560,1636.6,0.35
+English,"Air Changes/hr, ACH",3,2.4,Area,144,,,345.59999999999997,17.279999999999998,3
+English,"Air Changes/hr, ACH",3,2.4,Length x Width,,12,12,345.59999999999997,17.279999999999998,3
+English,"Air Changes/hr, ACH",3,2.4,Length x Width,,250.5,80,48096,2404.8,3
+English,"Air Changes/hr, ACH",3,8,Area,144,,,1152,57.6,3
+English,"Air Changes/hr, ACH",3,8,Length x Width,,12,12,1152,57.6,3
+English,"Air Changes/hr, ACH",3,8,Length x Width,,250.5,80,160320,8016,3
+English,"Air Changes/hr, ACH",3,14,Area,144,,,2016,100.8,3
+English,"Air Changes/hr, ACH",3,14,Length x Width,,12,12,2016,100.8,3
+English,"Air Changes/hr, ACH",3,14,Length x Width,,250.5,80,280560,14028,3
+English,"Air Changes/hr, ACH",6,2.4,Area,144,,,345.59999999999997,34.559999999999995,6
+English,"Air Changes/hr, ACH",6,2.4,Length x Width,,12,12,345.59999999999997,34.559999999999995,6
+English,"Air Changes/hr, ACH",6,2.4,Length x Width,,250.5,80,48096,4809.6,6
+English,"Air Changes/hr, ACH",6,8,Area,144,,,1152,115.2,6
+English,"Air Changes/hr, ACH",6,8,Length x Width,,12,12,1152,115.2,6
+English,"Air Changes/hr, ACH",6,8,Length x Width,,250.5,80,160320,16032,6
+English,"Air Changes/hr, ACH",6,14,Area,144,,,2016,201.6,6
+English,"Air Changes/hr, ACH",6,14,Length x Width,,12,12,2016,201.6,6
+English,"Air Changes/hr, ACH",6,14,Length x Width,,250.5,80,280560,28056,6
+English,"Air Changes/hr, ACH",12.5,2.4,Area,144,,,345.59999999999997,72,12.5
+English,"Air Changes/hr, ACH",12.5,2.4,Length x Width,,12,12,345.59999999999997,72,12.5
+English,"Air Changes/hr, ACH",12.5,2.4,Length x Width,,250.5,80,48096,10020,12.5
+English,"Air Changes/hr, ACH",12.5,8,Area,144,,,1152,240,12.5
+English,"Air Changes/hr, ACH",12.5,8,Length x Width,,12,12,1152,240,12.5
+English,"Air Changes/hr, ACH",12.5,8,Length x Width,,250.5,80,160320,33400,12.5
+English,"Air Changes/hr, ACH",12.5,14,Area,144,,,2016,420,12.5
+English,"Air Changes/hr, ACH",12.5,14,Length x Width,,12,12,2016,420,12.5
+English,"Air Changes/hr, ACH",12.5,14,Length x Width,,250.5,80,280560,58450,12.5
+English,"Air Changes/hr, ACH",25,2.4,Area,144,,,345.59999999999997,144,25
+English,"Air Changes/hr, ACH",25,2.4,Length x Width,,12,12,345.59999999999997,144,25
+English,"Air Changes/hr, ACH",25,2.4,Length x Width,,250.5,80,48096,20040,25
+English,"Air Changes/hr, ACH",25,8,Area,144,,,1152,480,25
+English,"Air Changes/hr, ACH",25,8,Length x Width,,12,12,1152,480,25
+English,"Air Changes/hr, ACH",25,8,Length x Width,,250.5,80,160320,66800,25
+English,"Air Changes/hr, ACH",25,14,Area,144,,,2016,840,25
+English,"Air Changes/hr, ACH",25,14,Length x Width,,12,12,2016,840,25
+English,"Air Changes/hr, ACH",25,14,Length x Width,,250.5,80,280560,116900,25
+SI,"Air Flow Rate, Q",25,2.4,Area,144,,,345.59999999999997,25,0.26041666666666669
+SI,"Air Flow Rate, Q",25,2.4,Length x Width,,12,12,345.59999999999997,25,0.26041666666666669
+SI,"Air Flow Rate, Q",25,2.4,Length x Width,,250.5,80,48096,25,0.0018712574850299401
+SI,"Air Flow Rate, Q",25,8,Area,144,,,1152,25,0.078125
+SI,"Air Flow Rate, Q",25,8,Length x Width,,12,12,1152,25,0.078125
+SI,"Air Flow Rate, Q",25,8,Length x Width,,250.5,80,160320,25,0.000561377245508982
+SI,"Air Flow Rate, Q",25,14,Area,144,,,2016,25,0.044642857142857144
+SI,"Air Flow Rate, Q",25,14,Length x Width,,12,12,2016,25,0.044642857142857144
+SI,"Air Flow Rate, Q",25,14,Length x Width,,250.5,80,280560,25,0.00032078699743370403
+SI,"Air Flow Rate, Q",100.8,2.4,Area,144,,,345.59999999999997,100.8,1.05
+SI,"Air Flow Rate, Q",100.8,2.4,Length x Width,,12,12,345.59999999999997,100.8,1.05
+SI,"Air Flow Rate, Q",100.8,2.4,Length x Width,,250.5,80,48096,100.8,0.0075449101796407191
+SI,"Air Flow Rate, Q",100.8,8,Area,144,,,1152,100.8,0.315
+SI,"Air Flow Rate, Q",100.8,8,Length x Width,,12,12,1152,100.8,0.315
+SI,"Air Flow Rate, Q",100.8,8,Length x Width,,250.5,80,160320,100.8,0.0022634730538922156
+SI,"Air Flow Rate, Q",100.8,14,Area,144,,,2016,100.8,0.18
+SI,"Air Flow Rate, Q",100.8,14,Length x Width,,12,12,2016,100.8,0.18
+SI,"Air Flow Rate, Q",100.8,14,Length x Width,,250.5,80,280560,100.8,0.0012934131736526946
+SI,"Air Flow Rate, Q",450,2.4,Area,144,,,345.59999999999997,450,4.6875000000000009
+SI,"Air Flow Rate, Q",450,2.4,Length x Width,,12,12,345.59999999999997,450,4.6875000000000009
+SI,"Air Flow Rate, Q",450,2.4,Length x Width,,250.5,80,48096,450,0.033682634730538924
+SI,"Air Flow Rate, Q",450,8,Area,144,,,1152,450,1.40625
+SI,"Air Flow Rate, Q",450,8,Length x Width,,12,12,1152,450,1.40625
+SI,"Air Flow Rate, Q",450,8,Length x Width,,250.5,80,160320,450,0.010104790419161677
+SI,"Air Flow Rate, Q",450,14,Area,144,,,2016,450,0.8035714285714286
+SI,"Air Flow Rate, Q",450,14,Length x Width,,12,12,2016,450,0.8035714285714286
+SI,"Air Flow Rate, Q",450,14,Length x Width,,250.5,80,280560,450,0.0057741659538066729
+SI,"Air Flow Rate, Q",2375.5,2.4,Area,144,,,345.59999999999997,2375.5,24.744791666666668
+SI,"Air Flow Rate, Q",2375.5,2.4,Length x Width,,12,12,345.59999999999997,2375.5,24.744791666666668
+SI,"Air Flow Rate, Q",2375.5,2.4,Length x Width,,250.5,80,48096,2375.5,0.1778068862275449
+SI,"Air Flow Rate, Q",2375.5,8,Area,144,,,1152,2375.5,7.4234375
+SI,"Air Flow Rate, Q",2375.5,8,Length x Width,,12,12,1152,2375.5,7.4234375
+SI,"Air Flow Rate, Q",2375.5,8,Length x Width,,250.5,80,160320,2375.5,0.053342065868263476
+SI,"Air Flow Rate, Q",2375.5,14,Area,144,,,2016,2375.5,4.2419642857142854
+SI,"Air Flow Rate, Q",2375.5,14,Length x Width,,12,12,2016,2375.5,4.2419642857142854
+SI,"Air Flow Rate, Q",2375.5,14,Length x Width,,250.5,80,280560,2375.5,0.030481180496150558
+SI,"Air Flow Rate, Q",12000,2.4,Area,144,,,345.59999999999997,12000,125.00000000000001
+SI,"Air Flow Rate, Q",12000,2.4,Length x Width,,12,12,345.59999999999997,12000,125.00000000000001
+SI,"Air Flow Rate, Q",12000,2.4,Length x Width,,250.5,80,48096,12000,0.89820359281437134
+SI,"Air Flow Rate, Q",12000,8,Area,144,,,1152,12000,37.5
+SI,"Air Flow Rate, Q",12000,8,Length x Width,,12,12,1152,12000,37.5
+SI,"Air Flow Rate, Q",12000,8,Length x Width,,250.5,80,160320,12000,0.26946107784431139
+SI,"Air Flow Rate, Q",12000,14,Area,144,,,2016,12000,21.428571428571427
+SI,"Air Flow Rate, Q",12000,14,Length x Width,,12,12,2016,12000,21.428571428571427
+SI,"Air Flow Rate, Q",12000,14,Length x Width,,250.5,80,280560,12000,0.15397775876817793
+SI,"Air Changes/hr, ACH",0.35,2.4,Area,144,,,345.59999999999997,33.6,0.35
+SI,"Air Changes/hr, ACH",0.35,2.4,Length x Width,,12,12,345.59999999999997,33.6,0.35
+SI,"Air Changes/hr, ACH",0.35,2.4,Length x Width,,250.5,80,48096,4676,0.35
+SI,"Air Changes/hr, ACH",0.35,8,Area,144,,,1152,111.99999999999999,0.35
+SI,"Air Changes/hr, ACH",0.35,8,Length x Width,,12,12,1152,111.99999999999999,0.35
+SI,"Air Changes/hr, ACH",0.35,8,Length x Width,,250.5,80,160320,15586.666666666666,0.35
+SI,"Air Changes/hr, ACH",0.35,14,Area,144,,,2016,195.99999999999997,0.35
+SI,"Air Changes/hr, ACH",0.35,14,Length x Width,,12,12,2016,195.99999999999997,0.35
+SI,"Air Changes/hr, ACH",0.35,14,Length x Width,,250.5,80,280560,27276.666666666664,0.35
+SI,"Air Changes/hr, ACH",3,2.4,Area,144,,,345.59999999999997,288,3
+SI,"Air Changes/hr, ACH",3,2.4,Length x Width,,12,12,345.59999999999997,288,3
+SI,"Air Changes/hr, ACH",3,2.4,Length x Width,,250.5,80,48096,40080.000000000007,3
+SI,"Air Changes/hr, ACH",3,8,Area,144,,,1152,960.00000000000011,3
+SI,"Air Changes/hr, ACH",3,8,Length x Width,,12,12,1152,960.00000000000011,3
+SI,"Air Changes/hr, ACH",3,8,Length x Width,,250.5,80,160320,133600.00000000003,3
+SI,"Air Changes/hr, ACH",3,14,Area,144,,,2016,1680.0000000000002,3
+SI,"Air Changes/hr, ACH",3,14,Length x Width,,12,12,2016,1680.0000000000002,3
+SI,"Air Changes/hr, ACH",3,14,Length x Width,,250.5,80,280560,233800,3
+SI,"Air Changes/hr, ACH",6,2.4,Area,144,,,345.59999999999997,576,6
+SI,"Air Changes/hr, ACH",6,2.4,Length x Width,,12,12,345.59999999999997,576,6
+SI,"Air Changes/hr, ACH",6,2.4,Length x Width,,250.5,80,48096,80160.000000000015,6
+SI,"Air Changes/hr, ACH",6,8,Area,144,,,1152,1920.0000000000002,6
+SI,"Air Changes/hr, ACH",6,8,Length x Width,,12,12,1152,1920.0000000000002,6
+SI,"Air Changes/hr, ACH",6,8,Length x Width,,250.5,80,160320,267200.00000000006,6
+SI,"Air Changes/hr, ACH",6,14,Area,144,,,2016,3360.0000000000005,6
+SI,"Air Changes/hr, ACH",6,14,Length x Width,,12,12,2016,3360.0000000000005,6
+SI,"Air Changes/hr, ACH",6,14,Length x Width,,250.5,80,280560,467600,6
+SI,"Air Changes/hr, ACH",12.5,2.4,Area,144,,,345.59999999999997,1199.9999999999998,12.5
+SI,"Air Changes/hr, ACH",12.5,2.4,Length x Width,,12,12,345.59999999999997,1199.9999999999998,12.5
+SI,"Air Changes/hr, ACH",12.5,2.4,Length x Width,,250.5,80,48096,167000,12.5
+SI,"Air Changes/hr, ACH",12.5,8,Area,144,,,1152,4000,12.5
+SI,"Air Changes/hr, ACH",12.5,8,Length x Width,,12,12,1152,4000,12.5
+SI,"Air Changes/hr, ACH",12.5,8,Length x Width,,250.5,80,160320,556666.66666666663,12.5
+SI,"Air Changes/hr, ACH",12.5,14,Area,144,,,2016,7000,12.5
+SI,"Air Changes/hr, ACH",12.5,14,Length x Width,,12,12,2016,7000,12.5
+SI,"Air Changes/hr, ACH",12.5,14,Length x Width,,250.5,80,280560,974166.66666666663,12.5
+SI,"Air Changes/hr, ACH",25,2.4,Area,144,,,345.59999999999997,2399.9999999999995,25
+SI,"Air Changes/hr, ACH",25,2.4,Length x Width,,12,12,345.59999999999997,2399.9999999999995,25
+SI,"Air Changes/hr, ACH",25,2.4,Length x Width,,250.5,80,48096,334000,25
+SI,"Air Changes/hr, ACH",25,8,Area,144,,,1152,8000,25
+SI,"Air Changes/hr, ACH",25,8,Length x Width,,12,12,1152,8000,25
+SI,"Air Changes/hr, ACH",25,8,Length x Width,,250.5,80,160320,1113333.3333333333,25
+SI,"Air Changes/hr, ACH",25,14,Area,144,,,2016,14000,25
+SI,"Air Changes/hr, ACH",25,14,Length x Width,,12,12,2016,14000,25
+SI,"Air Changes/hr, ACH",25,14,Length x Width,,250.5,80,280560,1948333.3333333333,25

@@ -1,0 +1,117 @@
+<header class="site-header">
+  <div class="bar">
+    {#- The logo always goes to the engineering services page. That page is the
+        front of the business; the calculator library is what brings people in,
+        but it is not where the brand mark should land them. #}
+    {%- set brandHref = site.servicesUrl %}
+    <a class="brand" href="{{ brandHref }}"
+       aria-label="{{ site.company }}, engineering services">
+      {#- Both logos ship and CSS shows the right one, because the theme is now a
+          runtime choice rather than something known at build time. The dark
+          artwork is remapped (white letterforms, orange wordmark, transparent
+          ground), not an inversion. #}
+      <picture class="logo-light">
+        <source srcset="/assets/logo.webp" type="image/webp">
+        <img class="brand-logo" src="/assets/logo.png" width="225" height="124"
+             alt="{{ site.company }}">
+      </picture>
+      <picture class="logo-dark" aria-hidden="true">
+        <source srcset="/assets/logo-dark.webp" type="image/webp">
+        <img class="brand-logo" src="/assets/logo-dark.png" width="225" height="124" alt="">
+      </picture>
+    </a>
+
+    <input type="checkbox" id="navtoggle" class="navtoggle" hidden>
+    <label for="navtoggle" class="navbtn" aria-hidden="true">Menu</label>
+
+    <form id="sitesearch" class="sitesearch" role="search" hidden>
+      <label class="visually-hidden" for="searchq">Search adicot.com</label>
+      <input id="searchq" type="search" placeholder="Search calculators…" autocomplete="off"
+             role="combobox" aria-expanded="false" aria-controls="searchresults" aria-autocomplete="list">
+      <ul id="searchresults" class="searchresults" role="listbox" aria-label="Search results" hidden></ul>
+      <p id="searchstatus" class="visually-hidden" role="status" aria-live="polite"></p>
+    </form>
+
+    {#- Two of these carry a mega menu. The top level is a real link in every
+        case, so without JavaScript the nav still reaches /services and
+        /calculators; the disclosure button beside it is revealed by nav.js and
+        is the only part that needs scripting. Menu contents come from the same
+        data the pages are built from, so a new category or service page appears
+        here without anyone remembering to add it. -#}
+    <nav class="mainnav" aria-label="Main">
+      <ul>
+        <li class="nav-has-menu">
+          <a href="{{ site.servicesUrl }}"{% if "/services" in page.url %} aria-current="page"{% endif %}>Engineering Services</a>
+          <button type="button" class="nav-disclose" aria-expanded="false" aria-controls="mm-services" hidden>
+            <span class="visually-hidden">Engineering services menu</span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+          <div class="megamenu" id="mm-services" hidden>
+            <ul>
+              {%- for item in services.items %}{% if item.page %}
+              <li>
+                <a href="/services/{{ item.slug }}">{{ item.name }}</a>
+                <span>{{ item.summary | truncate(72) }}</span>
+              </li>
+              {%- endif %}{% endfor %}
+              <li class="mm-all"><a href="{{ site.servicesUrl }}">All engineering services &rarr;</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-has-menu">
+          <a href="/calculators"{% if page.url == "/calculators.html" %} aria-current="page"{% endif %}>Calculators</a>
+          <button type="button" class="nav-disclose" aria-expanded="false" aria-controls="mm-calcs" hidden>
+            <span class="visually-hidden">Calculators menu</span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+          <div class="megamenu megamenu-wide" id="mm-calcs" hidden>
+            <ul>
+              {%- for group in taxonomy %}
+              <li>
+                <a href="/calculators#{{ group.name | slugify }}">{{ group.name }}</a>
+                <span>{{ group.items | length }} calculator{% if group.items | length != 1 %}s{% endif %}</span>
+              </li>
+              {%- endfor %}
+              <li class="mm-updates">
+                <a href="/calculator-updates">Calculator Updates</a>
+                <span>New calculators and corrections, by email</span>
+              </li>
+              <li class="mm-all"><a href="/calculators">See all {{ calculatorCount }} calculators &rarr;</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="/about"{% if page.url == "/about.html" %} aria-current="page"{% endif %}>About</a></li>
+        <li><a href="/blog"{% if "/blog" in page.url %} aria-current="page"{% endif %}>Blog</a></li>
+        <li><a href="/contact"{% if page.url == "/contact.html" %} aria-current="page"{% endif %}>Contact</a></li>
+        {#- The two actions sit at the end, the primary one last. Updates is secondary
+            to Get a Quote, so outlined rather than filled: two solid buttons side by
+            side compete instead of ranking. Its label says what you get, since
+            "Updates" alone did not say it was a signup. -#}
+        <li><a class="nav-sub" href="/calculator-updates" title="Email when a calculator is added or corrected">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6.5 9 6 9-6"/>
+          </svg>Get Calculator Updates</a></li>
+        <li><a class="nav-cta" href="{{ site.quoteUrl }}">{{ site.quoteLabel }}</a></li>
+        {#- Light/dark switch, last. It shows where it takes you, as an icon and a
+            word ("Dark" in light mode, "Light" in dark mode), which reads more
+            plainly than an icon of the current state. Revealed by theme.js:
+            without JavaScript it cannot do anything, so it should not be there. #}
+        <li class="nav-theme"><button type="button" id="themetoggle" class="themetoggle" hidden>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>
+          </svg>
+          <span class="theme-label">Dark</span>
+        </button></li>
+      </ul>
+    </nav>
+  </div>
+</header>

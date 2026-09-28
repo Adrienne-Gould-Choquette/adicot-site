@@ -1,0 +1,70 @@
+{#- The fluid mixing calculator, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/fluidmix.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="fmcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The equations and the specific heat of every fluid are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> US (°F, lb)</label>
+      <label><input type="radio" name="u" value="Metric"> Metric (°C, kg)</label>
+    </fieldset>
+
+    {%- for n in [1, 2] %}
+    <fieldset class="cf-stream">
+      <legend>Fluid {{ n }}</legend>
+      <div class="field">
+        <label for="fm-f{{ n }}">Fluid type <span class="req" aria-hidden="true">*</span></label>
+        <select id="fm-f{{ n }}" name="f{{ n }}" required>
+          <option value="">Select a fluid</option>
+          <option value="_Other">Other: enter the specific heat</option>
+          {%- for f in fluidSpecificHeats %}
+          <option value="{{ f.name }}"{% if n == 2 and f.name == "Water, fresh" %} selected{% endif %}>{{ f.label }}</option>
+          {%- endfor %}
+        </select>
+        <p class="hint" id="fm-cp{{ n }}-note"></p>
+      </div>
+      <div class="field" id="fm-cp{{ n }}-field" hidden>
+        <label for="fm-cp{{ n }}">Specific heat <span class="cf-u fm-cpu">Btu/lb·°F</span>
+          <span class="req" aria-hidden="true">*</span></label>
+        <input type="number" id="fm-cp{{ n }}" name="c{{ n }}" inputmode="decimal" step="any" min="0"
+               autocomplete="off" placeholder="0.5">
+      </div>
+      <div class="cf-pair">
+        <div>
+          <label for="fm-t{{ n }}">Temperature <span class="cf-u fm-tu">°F</span></label>
+          <input type="number" id="fm-t{{ n }}" name="t{{ n }}" inputmode="decimal" step="any"
+                 required autocomplete="off" placeholder="{{ '60' if n == 1 else '180' }}">
+        </div>
+        <div>
+          <label for="fm-m{{ n }}">Mass <span class="cf-u fm-mu">lb</span></label>
+          <input type="number" id="fm-m{{ n }}" name="m{{ n }}" inputmode="decimal" step="any" min="0"
+                 required autocomplete="off" placeholder="{{ '50' if n == 1 else '100' }}">
+        </div>
+      </div>
+    </fieldset>
+    {%- endfor %}
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="fm-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="fm-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="fm-results-h">
+    <h2 id="fm-results-h">Mixed fluid</h2>
+    <p class="cf-summary" id="fm-summary" role="status">Choose the fluid 1 type.</p>
+    <table class="cf-table" id="fm-table" hidden>
+      <caption class="visually-hidden">Mixed temperature, specific heat and mass</caption>
+      <tbody id="fm-tbody"></tbody>
+    </table>
+    <p class="cf-note">T = (m₁c₁T₁ + m₂c₂T₂) ÷ (m₁c₁ + m₂c₂); the mixed specific heat is the
+    mass-weighted average. Specific heat in kcal/kg·°C is the same number as in Btu/lb·°F.</p>
+  </section>
+</form>

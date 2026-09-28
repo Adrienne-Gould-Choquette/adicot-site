@@ -1,0 +1,28 @@
+# Cloudflare Pages — copy this file to the repo root (it is published as-is).
+# Canonical host is www.adicot.com. The domain-level 301s (adicot.com without www,
+# adicotengineering.com, adicotengineeringinc.com) cannot live here: Cloudflare
+# Pages' _redirects supports paths only. They are a Redirect Rule and a Bulk
+# Redirects list in the Cloudflare dashboard; see DOMAIN-REDIRECTS.md and
+# bulk-redirects.csv in this folder.
+
+# The employee portal lives outside this site (Miles' app on Render). The old
+# engineering site's footer linked /employee-dashboard, which the domain redirect
+# carries over to adicot.com, so send it on. 302: the portal's home may move.
+/employee-dashboard   https://adicot-load-calc-doc.onrender.com/app   302
+
+# Retired scratch page. It was in the Wix sitemap, so redirect rather than 404.
+/junk    /calculators    301
+
+# Retired Sep 2026. The other Wix scratch page: it held an old copy of the mixed
+# air calculator (V1.2, mobile layout), so it goes to the current one. Exact
+# path only; the site's own images under /images/ are unaffected.
+/images  /air-mixing-calculator  301
+
+# Retired Sep 2026. Florida work-order and energy-compliance forms for services
+# no longer offered; they were in the Wix sitemap, so redirect rather than 404.
+# Work orders go to contact (the live way to start a project); the energy forms
+# go to the page that covers that subject now.
+/work-order-commercial           /contact                            301
+/work-order-residential          /contact                            301
+/energy-calculation-commercial   /services/energy-code-compliance    301
+/energy-calculation-residential  /services/energy-code-compliance    301

@@ -1,0 +1,55 @@
+{#- The long-term capital gains estimator, written by hand rather than published
+    from SpreadsheetConverter. The maths is in /assets/js/capgains.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="cgcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This estimator runs in your browser and needs JavaScript.
+    The method and a worked example are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    {%- for f in [["pp", "Original purchase price", "$", "555000", true], ["sp", "Sales price", "$", "1900000", true], ["ex", "Expenses and improvements", "$", "300000", true], ["cm", "Sales commission", "%", "7", true], ["ti", "Taxable income, excluding this gain", "$", "260000", true], ["mo", "Remaining mortgage (optional)", "$", "100000", false], ["nh", "Next home's purchase price (optional)", "$", "", false]] %}
+    <div class="field">
+      <label for="cg-{{ f[0] }}">{{ f[1] }} <span class="cf-u">{{ f[2] }}</span>{% if f[4] %} <span class="req" aria-hidden="true">*</span>{% endif %}</label>
+      <input type="number" id="cg-{{ f[0] }}" name="{{ f[0] }}" inputmode="decimal" step="any" min="0"{% if f[4] %} required{% endif %} autocomplete="off" placeholder="{{ f[3] }}">
+    </div>
+    {%- endfor %}
+
+    <fieldset class="cf-radios">
+      <legend>Primary residence for 2 of the last 5 years?</legend>
+      <label><input type="radio" name="pr" value="yes" checked> Yes</label>
+      <label><input type="radio" name="pr" value="no"> No</label>
+    </fieldset>
+    <div class="field">
+      <label for="cg-st">Filing status</label>
+      <select id="cg-st" name="st">
+        <option>Single</option><option selected>Married, filing jointly</option>
+        <option>Married, filing separately</option><option>Head of household</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="cg-yr">Tax year of the sale</label>
+      <select id="cg-yr" name="yr"><option>2025</option><option selected>2026</option></select>
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="cg-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="cg-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="cg-results-h">
+    <h2 id="cg-results-h">Estimate</h2>
+    <p class="cf-summary" id="cg-summary" role="status">Enter the original purchase price.</p>
+    <table class="cf-table" id="cg-table" hidden>
+      <caption class="visually-hidden">Capital gains estimate</caption>
+      <tbody id="cg-tbody"></tbody>
+    </table>
+    <p class="cf-note" id="cg-warn" hidden></p>
+    <p class="cf-note">An estimate of federal tax on a long-term gain, with the IRS rate thresholds for
+    the tax year chosen. It leaves out state tax, depreciation recapture and adjustments to basis.
+    Consult a tax professional.</p>
+  </section>
+</form>

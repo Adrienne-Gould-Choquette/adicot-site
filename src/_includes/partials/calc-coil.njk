@@ -1,0 +1,80 @@
+{#- The coil selection calculator: four small tools that share one unit system,
+    written by hand rather than published from SpreadsheetConverter. The maths is
+    in /assets/js/coil.js, which check-calculators.mjs holds to the workbook's own
+    answers; this is only the form. It never submits. -#}
+{%- macro solveFor(name, opts) %}
+<div class="field"><label for="co-{{ name }}">Solve for</label>
+  <select id="co-{{ name }}" name="{{ name }}">{% for o in opts %}<option value="{{ o[0] }}">{{ o[1] }}</option>{% endfor %}</select></div>
+{%- endmacro %}
+{%- macro num(id, label, unitClass, unit, eg) %}
+<div class="field co-f" data-var="{{ id }}"><label for="co-{{ id }}">{{ label }} <span class="cf-u {{ unitClass }}">{{ unit }}</span></label>
+  <input type="number" id="co-{{ id }}" name="{{ id }}" inputmode="decimal" step="any" autocomplete="off" placeholder="{{ eg }}"></div>
+{%- endmacro %}
+<form class="calcform" id="cocalc" novalidate>
+  <noscript><p class="cf-noscript">This calculator runs in your browser and needs JavaScript.</p></noscript>
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units (all tools)</legend>
+      <label><input type="radio" name="u" value="English" checked> US</label>
+      <label><input type="radio" name="u" value="Metric"> Metric</label>
+    </fieldset>
+
+    <fieldset class="cf-stream co-tool" data-tool="air">
+      <legend>1. Coil air side: sensible, latent and total cooling</legend>
+      {{ solveFor("af", [["loads", "Cooling loads"], ["flow", "Airflow for a total cooling load"]]) }}
+      {%- set moisture = [["db-wb", "Wet bulb"], ["db-rh", "Relative humidity"], ["db-dp", "Dew point"]] %}
+      <div class="cf-pair">
+        <div class="field"><label for="co-am1">Entering air moisture as</label>
+          <select id="co-am1" name="am1">{% for o in moisture %}<option value="{{ o[0] }}">{{ o[1] }}</option>{% endfor %}</select></div>
+        <div class="field"><label for="co-am2">Leaving air moisture as</label>
+          <select id="co-am2" name="am2">{% for o in moisture %}<option value="{{ o[0] }}">{{ o[1] }}</option>{% endfor %}</select></div>
+      </div>
+      <div class="cf-pair">{{ num("e1", "Entering dry bulb", "co-t", "°F", "80") }}{{ num("x1", "Leaving dry bulb", "co-t", "°F", "55") }}</div>
+      <div class="cf-pair">{{ num("e2", "Entering wet bulb", "co-m1", "°F", "67") }}{{ num("x2", "Leaving wet bulb", "co-m2", "°F", "54") }}</div>
+      <div class="cf-pair">{{ num("aq", "Airflow", "co-a", "cfm", "1000") }}{{ num("qt", "Total cooling", "co-q", "Btu/h", "36000") }}</div>
+      {{ num("alt", "Altitude", "co-l", "ft", "0") }}
+      <p class="hint cf-group">Each air state comes from its dry bulb and wet bulb, RH or dew point, with the
+      ASHRAE psychrometric equations at the altitude given (sea level if blank). The airflow is at the
+      entering air; the same airflow is used for the coil face velocity below. Entering air is the air at the coil: return or mixed air for a recirculating system, outdoor air for a DOAS.</p>
+    </fieldset>
+
+    <fieldset class="cf-stream co-tool" data-tool="face">
+      <legend>2. Coil face area and velocity</legend>
+      <div class="cf-pair">{{ num("fh", "Face height", "co-d", "in", "24") }}{{ num("fw", "Face width", "co-d", "in", "36") }}</div>
+    </fieldset>
+
+    <fieldset class="cf-stream co-tool" data-tool="water">
+      <legend>3. Water and glycol flow</legend>
+      {{ solveFor("wf", [["load", "Heat load"], ["flow", "Flow rate"], ["entering", "Entering temperature"], ["leaving", "Leaving temperature"]]) }}
+      <div class="field"><label for="co-fluid">Fluid</label>
+        <select id="co-fluid" name="fl">{% for f in ["Water", "Ethylene Glycol 10%", "Ethylene Glycol 20%", "Ethylene Glycol 30%", "Ethylene Glycol 40%", "Ethylene Glycol 50%", "Propylene Glycol 10%", "Propylene Glycol 20%", "Propylene Glycol 30%", "Propylene Glycol 40%", "Propylene Glycol 50%"] %}<option value="{{ f }}">{{ f }}{% if "Glycol" in f %} (by volume){% endif %}</option>{% endfor %}</select></div>
+      <fieldset class="cf-radios">
+        <legend>Coil</legend>
+        <label><input type="radio" name="wc" value="Cooling" checked> Cooling (water warms up)</label>
+        <label><input type="radio" name="wc" value="Heating"> Heating (water cools down)</label>
+      </fieldset>
+      <div class="cf-pair">{{ num("w1", "Entering water", "co-t", "°F", "45") }}{{ num("w2", "Leaving water", "co-t", "°F", "55") }}</div>
+      <div class="cf-pair">{{ num("w3", "Heat load", "co-q", "Btu/h", "240000") }}{{ num("w4", "Flow rate", "co-g", "gpm", "48") }}</div>
+      <p class="hint">Leave the heat load blank to use the total cooling from tool 1.</p>
+    </fieldset>
+
+    <fieldset class="cf-stream co-tool" data-tool="tubes">
+      <legend>4. Water velocity in coil tubes</legend>
+      <div class="cf-trio">{{ num("vq", "Flow rate", "co-g", "gpm", "48") }}{{ num("vd", "Tube inside dia.", "co-td", "in", "0.5") }}{{ num("vn", "Tubes fed", "", "", "12") }}</div>
+      <p class="hint">Leave the flow rate blank to use the flow from tool 3.</p>
+    </fieldset>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="co-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="co-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="co-results-h">
+    <h2 id="co-results-h">Results</h2>
+    <p class="cf-summary" id="co-summary" role="status">Fill in any of the tools; each result appears as soon as its inputs are complete.</p>
+    <table class="cf-table"><caption class="visually-hidden">Results of each tool</caption><tbody id="co-tbody"></tbody></table>
+    <p class="cf-note" id="co-note" hidden></p>
+  </section>
+</form>

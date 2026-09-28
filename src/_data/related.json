@@ -1,0 +1,195 @@
+{
+  "/air-change-rate-calculator": [
+    "/air-mixing-calculator",
+    "/duct-size-calculator",
+    "/temp-loss-through-an-air-duct",
+    "/psychrometric-chart-calculator",
+    "/infiltration-pressurization-calculator"
+  ],
+  "/air-mixing-calculator": [
+    "/coil-selection-calculator",
+    "/cooling-load-estimator",
+    "/duct-size-calculator",
+    "/temp-loss-through-an-air-duct"
+  ],
+  "/annual-cooling-cost-calculator": [
+    "/coil-selection-calculator",
+    "/condensate-calculator",
+    "/cooling-load-estimator",
+    "/heat-pump-balance-point-calculator"
+  ],
+  "/bilinear-interpolation": [
+    "/linear-interpolation-calculator"
+  ],
+  "/break-even-calculator": [
+    "/capital-gains-estimator"
+  ],
+  "/capital-gains-estimator": [
+    "/break-even-calculator"
+  ],
+  "/ckv-commercial-kitchen-ventilation": [
+    "/condensate-calculator",
+    "/duct-size-calculator",
+    "/psychrometric-chart-calculator"
+  ],
+  "/coil-selection-calculator": [
+    "/ventilation-ashrae",
+    "/condensate-calculator",
+    "/cooling-load-estimator",
+    "/condensate-pump-size-calculator"
+  ],
+  "/condensate-calculator": [
+    "/air-mixing-calculator",
+    "/dehumidifier-size-calculator",
+    "/duct-size-calculator",
+    "/psychrometric-chart-calculator",
+    "/condensate-pump-size-calculator"
+  ],
+  "/condensate-converter": [
+    "/air-mixing-calculator",
+    "/condensate-calculator",
+    "/cooling-load-estimator",
+    "/psychrometric-chart-calculator",
+    "/reheat-heating-sizing-calculator",
+    "/condensate-pump-size-calculator"
+  ],
+  "/cooling-load-estimator": [
+    "/air-mixing-calculator",
+    "/condensate-calculator",
+    "/duct-size-calculator",
+    "/psychrometric-chart-calculator",
+    "/infiltration-pressurization-calculator",
+    "/heat-pump-balance-point-calculator"
+  ],
+  "/ctld-roof-and-wall-numbers": [
+    "/cooling-load-estimator",
+    "/duct-size-calculator"
+  ],
+  "/dehumidifier-size-calculator": [
+    "/air-mixing-calculator",
+    "/condensate-calculator",
+    "/cooling-load-estimator",
+    "/psychrometric-chart-calculator",
+    "/reheat-heating-sizing-calculator",
+    "/condensate-pump-size-calculator"
+  ],
+  "/diffuser-size-calculator": [
+    "/air-mixing-calculator",
+    "/transfer-pass-thru-calculator",
+    "/ventilation-ashrae",
+    "/dehumidifier-size-calculator"
+  ],
+  "/eer-seer2-cop-hspf2-kwton-converter": [
+    "/temperature-converter",
+    "/duct-size-calculator",
+    "/heat-pump-balance-point-calculator"
+  ],
+  "/fluid-mixing-calculator": [
+    "/air-mixing-calculator",
+    "/condensate-calculator",
+    "/duct-size-calculator",
+    "/psychrometric-chart-calculator"
+  ],
+  "/fpm-to-cfm-calculator": [
+    "/air-mixing-calculator",
+    "/transfer-pass-thru-calculator",
+    "/ventilation-ashrae",
+    "/dehumidifier-size-calculator"
+  ],
+  "/home-price-compare": [
+    "/annual-cooling-cost-calculator",
+    "/present-future-value-calculator",
+    "/dehumidifier-size-calculator",
+    "/temp-loss-through-an-air-duct"
+  ],
+  "/iecc-window-u-shgc-default-values": [
+    "/duct-size-calculator",
+    "/infiltration-pressurization-calculator"
+  ],
+  "/linear-interpolation-calculator": [
+    "/bilinear-interpolation",
+    "/air-mixing-calculator",
+    "/condensate-calculator",
+    "/duct-size-calculator",
+    "/psychrometric-chart-calculator"
+  ],
+  "/ohms-law-with-power-calculator": [
+    "/present-future-value-calculator",
+    "/coil-selection-calculator",
+    "/dehumidifier-size-calculator"
+  ],
+  "/power-unit-converter": [
+    "/ohms-law-with-power-calculator",
+    "/psychrometric-chart-calculator",
+    "/ventilation-ashrae"
+  ],
+  "/psychrometric-chart-2-condition": [
+    "/air-mixing-calculator",
+    "/condensate-calculator",
+    "/duct-size-calculator",
+    "/condensate-pump-size-calculator"
+  ],
+  "/psychrometric-chart-calculator": [
+    "/air-mixing-calculator",
+    "/condensate-calculator",
+    "/duct-size-calculator"
+  ],
+  "/reheat-heating-sizing-calculator": [
+    "/coil-selection-calculator",
+    "/psychrometric-chart-calculator",
+    "/air-mixing-calculator",
+    "/heat-pump-balance-point-calculator"
+  ],
+  "/sh-window-size-chart": [
+    "/temperature-converter",
+    "/duct-size-calculator"
+  ],
+  "/temp-loss-through-an-air-duct": [
+    "/coil-selection-calculator",
+    "/condensate-calculator",
+    "/cooling-load-estimator",
+    "/psychrometric-chart-calculator"
+  ],
+  "/transfer-pass-thru-calculator": [
+    "/coil-selection-calculator"
+  ],
+  "/vapor-pressure-deficit-vpd": [
+    "/condensate-calculator",
+    "/dehumidifier-size-calculator",
+    "/duct-size-calculator",
+    "/air-mixing-calculator"
+  ],
+  "/ventilation-ashrae": [
+    "/bilinear-interpolation",
+    "/cooling-load-estimator",
+    "/temp-loss-through-an-air-duct",
+    "/sh-window-size-chart",
+    "/infiltration-pressurization-calculator"
+  ],
+  "/wind-pressure-calculator": [
+    "/coil-selection-calculator",
+    "/dehumidifier-size-calculator",
+    "/duct-size-calculator",
+    "/diffuser-size-calculator"
+  ],
+  "/infiltration-pressurization-calculator": [
+    "/cooling-load-estimator",
+    "/air-change-rate-calculator",
+    "/iecc-window-u-shgc-default-values",
+    "/wind-pressure-calculator"
+  ],
+  "/heat-pump-balance-point-calculator": [
+    "/reheat-heating-sizing-calculator",
+    "/eer-seer2-cop-hspf2-kwton-converter",
+    "/power-unit-converter",
+    "/cooling-load-estimator"
+  ],
+  "/condensate-pump-size-calculator": [
+    "/condensate-calculator",
+    "/condensate-converter",
+    "/dehumidifier-size-calculator",
+    "/coil-selection-calculator",
+    "/psychrometric-chart-2-condition",
+    "/psychrometric-chart-calculator"
+  ]
+}

@@ -1,0 +1,73 @@
+units,given,value,mode,L,W,core,Ak,net,result,hint
+English,"Q, Flow Rate",150,L x W & Ak,12,18,,0.82,,121.95121951219512,(Ak=0.94ft2)
+English,"Q, Flow Rate",150,L x W & Ak,24,24,,0.65,,57.692307692307693,(Ak=2.59ft2)
+English,"Q, Flow Rate",150,L x W & Ak,30.5,45.7,,0.7,,22.13806568651064,(Ak=6.32ft2)
+English,"Q, Flow Rate",1200,L x W & Ak,12,18,,0.82,,975.609756097561,(Ak=0.94ft2)
+English,"Q, Flow Rate",1200,L x W & Ak,24,24,,0.65,,461.53846153846155,(Ak=2.59ft2)
+English,"Q, Flow Rate",1200,L x W & Ak,30.5,45.7,,0.7,,177.10452549208512,(Ak=6.32ft2)
+English,"Q, Flow Rate",150,Core Area & Ak,,,1.5,0.82,,121.95121951219512,
+English,"Q, Flow Rate",150,Core Area & Ak,,,4,0.65,,57.692307692307693,
+English,"Q, Flow Rate",150,Core Area & Ak,,,0.139,0.7,,1541.6238437821171,
+English,"Q, Flow Rate",1200,Core Area & Ak,,,1.5,0.82,,975.609756097561,
+English,"Q, Flow Rate",1200,Core Area & Ak,,,4,0.65,,461.53846153846155,
+English,"Q, Flow Rate",1200,Core Area & Ak,,,0.139,0.7,,12332.990750256937,
+English,"Q, Flow Rate",150,Net Area,,,,,1.23,121.95121951219512,
+English,"Q, Flow Rate",150,Net Area,,,,,2.58,58.139534883720927,
+English,"Q, Flow Rate",150,Net Area,,,,,0.097,1546.3917525773195,
+English,"Q, Flow Rate",1200,Net Area,,,,,1.23,975.609756097561,
+English,"Q, Flow Rate",1200,Net Area,,,,,2.58,465.11627906976742,
+English,"Q, Flow Rate",1200,Net Area,,,,,0.097,12371.134020618556,
+English,"V, Velocity",350,L x W & Ak,12,18,,0.82,,430.5,(Ak=0.94ft2)
+English,"V, Velocity",350,L x W & Ak,24,24,,0.65,,910,(Ak=2.59ft2)
+English,"V, Velocity",350,L x W & Ak,30.5,45.7,,0.7,,2371.4809027777778,(Ak=6.32ft2)
+English,"V, Velocity",976,L x W & Ak,12,18,,0.82,,1200.48,(Ak=0.94ft2)
+English,"V, Velocity",976,L x W & Ak,24,24,,0.65,,2537.6,(Ak=2.59ft2)
+English,"V, Velocity",976,L x W & Ak,30.5,45.7,,0.7,,6613.0438888888893,(Ak=6.32ft2)
+English,"V, Velocity",350,Core Area & Ak,,,1.5,0.82,,430.5,
+English,"V, Velocity",350,Core Area & Ak,,,4,0.65,,910,
+English,"V, Velocity",350,Core Area & Ak,,,0.139,0.7,,34.055,
+English,"V, Velocity",976,Core Area & Ak,,,1.5,0.82,,1200.48,
+English,"V, Velocity",976,Core Area & Ak,,,4,0.65,,2537.6,
+English,"V, Velocity",976,Core Area & Ak,,,0.139,0.7,,94.9648,
+English,"V, Velocity",350,Net Area,,,,,1.23,430.5,
+English,"V, Velocity",350,Net Area,,,,,2.58,903,
+English,"V, Velocity",350,Net Area,,,,,0.097,33.95,
+English,"V, Velocity",976,Net Area,,,,,1.23,1200.48,
+English,"V, Velocity",976,Net Area,,,,,2.58,2518.08,
+English,"V, Velocity",976,Net Area,,,,,0.097,94.672,
+Metric,"Q, Flow Rate",70,L x W & Ak,12,18,,0.82,,3.9521228545618792,(Ak=0.94ft2)
+Metric,"Q, Flow Rate",70,L x W & Ak,24,24,,0.65,,1.8696581196581197,(Ak=2.59ft2)
+Metric,"Q, Flow Rate",70,L x W & Ak,30.5,45.7,,0.7,,0.71743731391469667,(Ak=6.32ft2)
+Metric,"Q, Flow Rate",566,L x W & Ak,12,18,,0.82,,31.955736224028911,(Ak=0.94ft2)
+Metric,"Q, Flow Rate",566,L x W & Ak,24,24,,0.65,,15.117521367521368,(Ak=2.59ft2)
+Metric,"Q, Flow Rate",566,L x W & Ak,30.5,45.7,,0.7,,5.8009931382245474,(Ak=6.32ft2)
+Metric,"Q, Flow Rate",70,Core Area & Ak,,,1.5,0.82,,0.056910569105691061,
+Metric,"Q, Flow Rate",70,Core Area & Ak,,,4,0.65,,0.026923076923076925,
+Metric,"Q, Flow Rate",70,Core Area & Ak,,,0.139,0.7,,0.71942446043165464,
+Metric,"Q, Flow Rate",566,Core Area & Ak,,,1.5,0.82,,0.4601626016260163,
+Metric,"Q, Flow Rate",566,Core Area & Ak,,,4,0.65,,0.21769230769230768,
+Metric,"Q, Flow Rate",566,Core Area & Ak,,,0.139,0.7,,5.8170606372045226,
+Metric,"Q, Flow Rate",70,Net Area,,,,,1.23,0.056910569105691061,
+Metric,"Q, Flow Rate",70,Net Area,,,,,2.58,0.027131782945736434,
+Metric,"Q, Flow Rate",70,Net Area,,,,,0.097,0.72164948453608246,
+Metric,"Q, Flow Rate",566,Net Area,,,,,1.23,0.4601626016260163,
+Metric,"Q, Flow Rate",566,Net Area,,,,,2.58,0.2193798449612403,
+Metric,"Q, Flow Rate",566,Net Area,,,,,0.097,5.8350515463917523,
+Metric,"V, Velocity",2.5,L x W & Ak,12,18,,0.82,,44.28,(Ak=0.94ft2)
+Metric,"V, Velocity",2.5,L x W & Ak,24,24,,0.65,,93.600000000000009,(Ak=2.59ft2)
+Metric,"V, Velocity",2.5,L x W & Ak,30.5,45.7,,0.7,,243.92374999999998,(Ak=6.32ft2)
+Metric,"V, Velocity",5,L x W & Ak,12,18,,0.82,,88.56,(Ak=0.94ft2)
+Metric,"V, Velocity",5,L x W & Ak,24,24,,0.65,,187.20000000000002,(Ak=2.59ft2)
+Metric,"V, Velocity",5,L x W & Ak,30.5,45.7,,0.7,,487.84749999999997,(Ak=6.32ft2)
+Metric,"V, Velocity",2.5,Core Area & Ak,,,1.5,0.82,,3075,
+Metric,"V, Velocity",2.5,Core Area & Ak,,,4,0.65,,6500,
+Metric,"V, Velocity",2.5,Core Area & Ak,,,0.139,0.7,,243.25,
+Metric,"V, Velocity",5,Core Area & Ak,,,1.5,0.82,,6150,
+Metric,"V, Velocity",5,Core Area & Ak,,,4,0.65,,13000,
+Metric,"V, Velocity",5,Core Area & Ak,,,0.139,0.7,,486.5,
+Metric,"V, Velocity",2.5,Net Area,,,,,1.23,3075,
+Metric,"V, Velocity",2.5,Net Area,,,,,2.58,6450,
+Metric,"V, Velocity",2.5,Net Area,,,,,0.097,242.5,
+Metric,"V, Velocity",5,Net Area,,,,,1.23,6150,
+Metric,"V, Velocity",5,Net Area,,,,,2.58,12900,
+Metric,"V, Velocity",5,Net Area,,,,,0.097,485,

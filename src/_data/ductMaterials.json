@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Duct board",
+    "roughness": "0.0019 ft",
+    "specUrl": ""
+  },
+  {
+    "name": "Fabric DurkeeSox",
+    "roughness": "0.024 ft",
+    "specUrl": ""
+  },
+  {
+    "name": "Flex",
+    "roughness": "0.00775 ft",
+    "specUrl": ""
+  },
+  {
+    "name": "Metal",
+    "roughness": "0.0003 ft",
+    "specUrl": ""
+  }
+]

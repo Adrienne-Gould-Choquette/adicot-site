@@ -1,0 +1,20 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel>
+<title>{{ site.name }} blog</title>
+<link>https://www.adicot.com/blog</link>
+<description>{{ site.tagline }}</description>
+<language>en-us</language>
+{%- for post in collections.posts %}
+<item>
+  <title>{{ post.data.title }}</title>
+  <link>{{ post.url | canonicalOf }}</link>
+  <guid>{{ post.url | canonicalOf }}</guid>
+  <pubDate>{{ post.data.date | isoDate }}</pubDate>
+  {%- if post.data.description %}<description>{{ post.data.description }}</description>{%- endif %}
+</item>
+{%- endfor %}
+</channel></rss>

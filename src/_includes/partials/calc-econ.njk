@@ -1,0 +1,59 @@
+{#- The engineering economics (present and future value) calculator, written by
+    hand rather than published from SpreadsheetConverter. The maths is in
+    /assets/js/econ.js, which check-calculators.mjs holds to the workbook's own
+    answers; this is only the form. It never submits. -#}
+<form class="calcform" id="eccalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    Every factor it uses is written out below, with a worked example.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios cf-stack">
+      <legend>Find</legend>
+      <label><input type="radio" name="find" value="F" checked> Future value, F</label>
+      <label><input type="radio" name="find" value="P"> Present value, P</label>
+      <label><input type="radio" name="find" value="A"> Uniform series, A</label>
+    </fieldset>
+
+    <fieldset class="cf-stream">
+      <legend>Given <span class="opt">(any that apply; leave the rest blank)</span></legend>
+      {%- for g in [["P", "Present value, P", "5000"], ["F", "Future value, F", "10000"], ["A", "Uniform series, A (per period)", "500"], ["G", "Arithmetic gradient, G (per period)", "2000"]] %}
+      <div class="field" id="ec-{{ g[0] }}-field">
+        <label for="ec-{{ g[0] }}">{{ g[1] }} <span class="cf-u">$</span></label>
+        <input type="number" id="ec-{{ g[0] }}" name="{{ g[0] | lower }}" inputmode="decimal" step="any" autocomplete="off" placeholder="{{ g[2] }}">
+      </div>
+      {%- endfor %}
+    </fieldset>
+
+    <div class="cf-pair field">
+      <div>
+        <label for="ec-i">Interest rate, i <span class="cf-u">% per period</span></label>
+        <input type="number" id="ec-i" name="i" inputmode="decimal" step="any" required autocomplete="off" placeholder="5">
+      </div>
+      <div>
+        <label for="ec-n">Periods, n</label>
+        <input type="number" id="ec-n" name="n" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="10">
+      </div>
+    </div>
+    <p class="hint">The rate and the periods must match: 12 % a year for 10 years, or 1 % a month for 24 months.</p>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ec-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="ec-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="ec-results-h">
+    <h2 id="ec-results-h">Result</h2>
+    <p class="cf-summary" id="ec-summary" role="status">Enter the interest rate per period.</p>
+    <table class="cf-table" id="ec-table" hidden>
+      <caption class="visually-hidden">The value found</caption>
+      <tbody id="ec-tbody"></tbody>
+    </table>
+    <p class="cf-note">Each given amount is converted with its factor and the results are added,
+    e.g. F = A(F/A) + G(F/G) + P(F/P). Enter payments made as negative and receipts as positive,
+    or the reverse, consistently.</p>
+  </section>
+</form>

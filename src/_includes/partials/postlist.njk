@@ -1,0 +1,29 @@
+{#- Post listing, shared by /blog and the category pages. Set `posts` before
+    including.
+
+    The thumbnail is decorative: the heading beside it is the link and names the
+    post, so describing the picture here would have a screen reader read the
+    same item twice. Rendered only for slugs present in postThumbs, which
+    build-post-thumbs.mjs writes, so a post whose lead image is missing gets a
+    row without a picture rather than a broken image. -#}
+<ul class="postlist">
+  {%- for post in posts %}
+  {%- set thumb = postThumbs[post.fileSlug] %}
+  <li{% if thumb %} class="has-thumb"{% endif %}>
+    {%- if thumb %}
+    <a class="post-thumb" href="{{ post.url | cleanUrl }}" tabindex="-1" aria-hidden="true">
+      <picture>
+        <source srcset="/assets/thumbs/{{ post.fileSlug }}.webp" type="image/webp">
+        <img src="/assets/thumbs/{{ post.fileSlug }}.jpg"
+             width="{{ thumb.w }}" height="{{ thumb.h }}" loading="lazy" alt="">
+      </picture>
+    </a>
+    {%- endif %}
+    <div class="post-body">
+      <h2><a href="{{ post.url | cleanUrl }}">{{ post.data.title }}</a></h2>
+      <p class="meta"><time datetime="{{ post.data.date | isoDate }}">{{ post.data.date | readableDate }}</time></p>
+      {% if post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
+    </div>
+  </li>
+  {%- endfor %}
+</ul>

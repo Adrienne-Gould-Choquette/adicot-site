@@ -1,0 +1,25 @@
+{
+  "name": "adicot.com",
+  "company": "Adicot, Inc.",
+  "tagline": "HVAC load calculations and energy code compliance for industrial, commercial and multi-family projects, plus access to our engineering calculator library.",
+  "url": "https://www.adicot.com",
+  "servicesUrl": "/services",
+  "servicesExternal": false,
+  "author": "Adrienne Gould-Choquette, P.E.",
+  "quoteUrl": "/quote",
+  "quoteLabel": "Get a Quote",
+  "contact": {
+    "email": "admin@adicot.com",
+    "formspreeId": ""
+  },
+  "updates": {
+    "listName": "Calculator Updates",
+    "action": "https://buttondown.com/api/emails/embed-subscribe/YOUR-BUTTONDOWN-USERNAME",
+    "emailField": "email",
+    "nameField": "",
+    "redirectField": "",
+    "honeypotField": ""
+  },
+  "employeePortalUrl": "https://adicot-load-calc-doc.onrender.com/app",
+  "clientPortalUrl": "/client-portal"
+}

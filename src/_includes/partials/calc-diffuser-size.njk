@@ -1,0 +1,72 @@
+{#- The diffuser and return grille sizer, written by hand rather than published
+    from SpreadsheetConverter. The catalogs and the selection rules are in
+    /assets/js/diffuser-size.js, which check-calculators.mjs holds to the
+    workbook's own answers; this is only the form. It never submits. -#}
+<form class="calcform" id="dscalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The method is written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> US (cfm, fpm)</label>
+      <label><input type="radio" name="u" value="Metric"> Metric (l/s, m/s)</label>
+    </fieldset>
+
+    <div class="field"><label for="ds-type">Diffuser or grille type</label>
+      <select id="ds-type" name="t">
+        <optgroup label="Grille Tech">
+        <option value="Return Grille">Return grille</option>
+        <option value="Supply: 1-Way Curved Blade, Louvered Face" selected>Supply: 1-way ceiling, curved blade, louvered face</option>
+        <option value="Supply: 1-Way Multi-Shutter">Supply: 1-way ceiling, multi-shutter</option>
+        <option value="Supply: 2-Way Curved Blade, Louvered Face">Supply: 2-way ceiling, curved blade, louvered face</option>
+        <option value="Supply: 3-Way Curved Blade, Louvered Face">Supply: 3-way ceiling, curved blade, louvered face</option>
+        <option value="Supply: 4-Way Curved Blade, Louvered Face">Supply: 4-way ceiling, curved blade, louvered face</option>
+        </optgroup>
+        <optgroup label="AirGuide">
+        <option value="AirGuide: RA fixed blade return grille">Return grille, RA fixed blade</option>
+        <option value="AirGuide: V/VH sidewall register, 0° deflection">Supply: sidewall register V/VH, 0° deflection</option>
+        <option value="AirGuide: V/VH sidewall register, 22½° deflection">Supply: sidewall register V/VH, 22½° deflection</option>
+        <option value="AirGuide: V/VH sidewall register, 45° deflection">Supply: sidewall register V/VH, 45° deflection</option>
+        <option value="AirGuide: CB curved blade, 1-way">Supply: curved blade CB, 1-way</option>
+        <option value="AirGuide: CB curved blade, 2-way">Supply: curved blade CB, 2-way</option>
+        <option value="AirGuide: CB curved blade, 3-way">Supply: curved blade CB, 3-way</option>
+        <option value="AirGuide: CB curved blade, 4-way">Supply: curved blade CB, 4-way</option>
+        </optgroup>
+      </select></div>
+
+    <div class="cf-pair">
+      <div class="field"><label for="ds-v">Neck velocity <span class="cf-u" id="ds-vu">fpm</span></label>
+        <input type="number" id="ds-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="500"></div>
+      <div class="field"><label for="ds-q">Airflow <span class="cf-u" id="ds-qu">cfm</span></label>
+        <input type="number" id="ds-q" name="q" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="200"></div>
+    </div>
+    <div class="field"><label for="ds-nc">Maximum NC (optional)</label>
+      <input type="number" id="ds-nc" name="nc" inputmode="decimal" step="any" min="20" autocomplete="off" placeholder="e.g. 30"></div>
+    <p class="hint">Sizes rated above this noise criterion at the neck velocity are left out. See the room guidelines below.</p>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ds-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="ds-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="ds-results-h">
+    <h2 id="ds-results-h">Sizes that fit</h2>
+    <p class="cf-summary" id="ds-summary" role="status">Enter the neck velocity and the airflow.</p>
+    <p class="cf-note" id="ds-note" hidden></p>
+    <div class="table-scroll" id="ds-wrap" hidden>
+      <table class="cf-table ds-table">
+        <caption class="visually-hidden">Catalog ratings of the sizes that fit</caption>
+        <thead id="ds-head"></thead>
+        <tbody id="ds-body"></tbody>
+      </table>
+    </div>
+    <div class="ds-type">
+      <img id="ds-img" src="/images/diffuser-1-way.jpg" alt="1-way curved blade ceiling diffuser" width="160" height="168" loading="lazy">
+      <p class="cf-note"><a id="ds-spec" href="https://www.grilletechinc.com/products/commercial/curvedbladeceilingsupply.html" rel="noopener">Sample specification sheet</a>. Adicot is not affiliated with any diffuser manufacturer; links are for illustration only.</p>
+    </div>
+  </section>
+</form>

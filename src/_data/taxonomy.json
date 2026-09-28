@@ -1,0 +1,348 @@
+[
+  {
+    "name": "Airflow",
+    "items": [
+      {
+        "label": "ACH to CFM",
+        "path": "/air-change-rate-calculator",
+        "fav": true,
+        "icon": "/images/0179db_ecbc8263a2644789b6b27f4061db7ad9~mv2.png",
+        "iconAlt": "air change rate"
+      },
+      {
+        "label": "Infiltration & Pressure",
+        "path": "/infiltration-pressurization-calculator",
+        "isNew": true,
+        "icon": "/images/0179db_044ecfd483f74344b3ba53fea94a6ec9~mv2.png",
+        "iconAlt": "Window"
+      },
+      {
+        "label": "Air Mixing",
+        "path": "/air-mixing-calculator",
+        "fav": true,
+        "icon": "/images/0179db_635860096b654d0c9d5498b1f7b8959a~mv2.png",
+        "iconAlt": "Air Mixing"
+      },
+      {
+        "label": "Diffuser Sizer",
+        "path": "/diffuser-size-calculator",
+        "fav": true,
+        "icon": "/images/0179db_74c40783aac94e6b8593e836d84ef91b~mv2.png",
+        "iconAlt": "Supply Air Diffuser"
+      },
+      {
+        "label": "Ductulator",
+        "path": "/duct-size-calculator",
+        "fav": true,
+        "icon": "/images/0179db_b67d1fd0f09d4251a0c844b9af4e9576~mv2.png",
+        "iconAlt": "Flexible duct"
+      },
+      {
+        "label": "Temp Loss in Duct",
+        "path": "/temp-loss-through-an-air-duct",
+        "icon": "/images/0179db_a464c34bf59243b4b48c42bf9b552db7~mv2.png",
+        "iconAlt": "Round Duct"
+      },
+      {
+        "label": "FPM to CFM",
+        "path": "/fpm-to-cfm-calculator",
+        "icon": "/images/0179db_8d629da068e74aada39639a15b0ecd7e~mv2.png",
+        "iconAlt": "FPM CFM DIFFUSER"
+      },
+      {
+        "label": "Transfer Duct",
+        "path": "/transfer-pass-thru-calculator",
+        "icon": "/images/0179db_ea078ea0d2ef412bad56745b6df4b160~mv2.png",
+        "iconAlt": "Pass Through"
+      },
+      {
+        "label": "Ventilation Rates",
+        "path": "/ventilation-ashrae",
+        "isNew": true,
+        "icon": "/images/0179db_ecbc8263a2644789b6b27f4061db7ad9~mv2.png",
+        "iconAlt": "air change rate"
+      }
+    ]
+  },
+  {
+    "name": "Building Code",
+    "items": [
+      {
+        "label": "CLTD Roof, Wall & Hourly",
+        "path": "/ctld-roof-and-wall-numbers",
+        "icon": "/images/0179db_649c47ea91134764b0214ff7b3a49aa8~mv2.png",
+        "iconAlt": "Roof"
+      },
+      {
+        "label": "U-Factor/SHGC",
+        "path": "/iecc-window-u-shgc-default-values",
+        "icon": "/images/0179db_044ecfd483f74344b3ba53fea94a6ec9~mv2.png",
+        "iconAlt": "Window"
+      },
+      {
+        "label": "SH Window Sizer",
+        "path": "/sh-window-size-chart",
+        "fav": true,
+        "icon": "/images/0179db_1be8dff13a61464684fbc40efb9d0265~mv2.png",
+        "iconAlt": "Window",
+        "iconGuess": true
+      },
+      {
+        "label": "Ventilation Rates",
+        "path": "/ventilation-ashrae",
+        "fav": true,
+        "icon": "/images/0179db_ecbc8263a2644789b6b27f4061db7ad9~mv2.png",
+        "iconAlt": "air change rate"
+      }
+    ]
+  },
+  {
+    "name": "Equipment",
+    "items": [
+      {
+        "label": "Coil Calculator",
+        "path": "/coil-selection-calculator",
+        "fav": true,
+        "icon": "/images/0179db_f91e0224a65043d79618cc092fc6c24c~mv2.png",
+        "iconAlt": "Cooling Coil"
+      },
+      {
+        "label": "Condensate Pump",
+        "path": "/condensate-pump-size-calculator",
+        "icon": "/images/0179db_551cac1de3cc4bbaad491feb78f95bf0~mv2.png",
+        "iconAlt": "Condensate Pump",
+        "isNew": true
+      },
+      {
+        "label": "Condensate Converter",
+        "path": "/condensate-converter",
+        "fav": true,
+        "icon": "/images/0179db_9eae866b6a7f4745b8908695ebe1744f~mv2.png",
+        "iconAlt": "AC Cycle",
+        "iconGuess": true
+      },
+      {
+        "label": "Cooling Load Est.",
+        "path": "/cooling-load-estimator",
+        "fav": true,
+        "icon": "/images/0179db_c283909cd86a428f9d228d855df64370~mv2.png",
+        "iconAlt": "Load Calc"
+      },
+      {
+        "label": "Infiltration & Pressure",
+        "path": "/infiltration-pressurization-calculator",
+        "isNew": true,
+        "icon": "/images/0179db_044ecfd483f74344b3ba53fea94a6ec9~mv2.png",
+        "iconAlt": "Window"
+      },
+      {
+        "label": "Dehumidifier Sizer",
+        "path": "/dehumidifier-size-calculator",
+        "fav": true,
+        "icon": "/images/0179db_c149578151514616b75c0f88f9b461fa~mv2.png",
+        "iconAlt": "Dehumidifier"
+      },
+      {
+        "label": "EER SEER SEER2…",
+        "path": "/eer-seer2-cop-hspf2-kwton-converter",
+        "icon": "/images/0179db_e1db6460d23749b6882a6484fd678d57~mv2.png",
+        "iconAlt": "Condensing Unit",
+        "iconGuess": true
+      },
+      {
+        "label": "Heat Pump Balance Pt.",
+        "path": "/heat-pump-balance-point-calculator",
+        "isNew": true,
+        "icon": "/images/0179db_e1db6460d23749b6882a6484fd678d57~mv2.png",
+        "iconAlt": "Condensing Unit",
+        "iconGuess": true
+      },
+      {
+        "label": "CKV Exhaust Hood",
+        "path": "/ckv-commercial-kitchen-ventilation",
+        "icon": "/images/0179db_32e5b2b28f0e4a11801a6592583496c2~mv2.png",
+        "iconAlt": "ckv"
+      },
+      {
+        "label": "Reheat/Heating Sizing",
+        "path": "/reheat-heating-sizing-calculator",
+        "icon": "/images/0179db_cba14f0c17654fb5801df3b629485af6~mv2.png",
+        "iconAlt": "Air Handler components",
+        "iconGuess": true
+      },
+      {
+        "label": "Wind Load",
+        "path": "/wind-pressure-calculator",
+        "icon": "/images/0179db_17509ad7f7d647d2b973cc3ae8cca957~mv2.png",
+        "iconAlt": "Wind on a Condensing Unit"
+      },
+      {
+        "label": "kW, HP, BTU, Ton…",
+        "path": "/power-unit-converter",
+        "fav": true,
+        "icon": "/images/0179db_a175cbda9df34876ab05df46bd8f1477~mv2.png",
+        "iconAlt": "Power Cord"
+      }
+    ]
+  },
+  {
+    "name": "Humidity/Psychrometrics",
+    "items": [
+      {
+        "label": "Condensate Generated",
+        "path": "/condensate-calculator",
+        "icon": "/images/0179db_117b564d31b14da78ab5554911481dd3~mv2.png",
+        "iconAlt": "Condensate Pump",
+        "iconGuess": true
+      },
+      {
+        "label": "Condensate Pump",
+        "path": "/condensate-pump-size-calculator",
+        "icon": "/images/0179db_551cac1de3cc4bbaad491feb78f95bf0~mv2.png",
+        "iconAlt": "Condensate Pump",
+        "isNew": true
+      },
+      {
+        "label": "Dehumidifier Sizer",
+        "path": "/dehumidifier-size-calculator",
+        "fav": true,
+        "icon": "/images/0179db_c149578151514616b75c0f88f9b461fa~mv2.png",
+        "iconAlt": "Dehumidifier"
+      },
+      {
+        "label": "Fluid Mixing",
+        "path": "/fluid-mixing-calculator",
+        "icon": "/images/0179db_9eae866b6a7f4745b8908695ebe1744f~mv2.png",
+        "iconAlt": "AC Cycle",
+        "iconGuess": true
+      },
+      {
+        "label": "VPD",
+        "path": "/vapor-pressure-deficit-vpd",
+        "icon": "/images/0179db_6d5c5a5f781645fe820e81ce2e3dfa45~mv2.png",
+        "iconAlt": "Leaves"
+      },
+      {
+        "label": "Condensate Converter",
+        "path": "/condensate-converter",
+        "fav": true,
+        "icon": "/images/0179db_9eae866b6a7f4745b8908695ebe1744f~mv2.png",
+        "iconAlt": "AC Cycle",
+        "iconGuess": true
+      },
+      {
+        "label": "Psychrometric Chart",
+        "path": "/psychrometric-chart-calculator",
+        "fav": true,
+        "icon": "/images/0179db_19bdc525c6374f91ba8f97e28d62dd19~mv2.png",
+        "iconAlt": "Psychrometric Chart"
+      },
+      {
+        "label": "Psych Chart – 2 Cond.",
+        "path": "/psychrometric-chart-2-condition",
+        "icon": "/images/0179db_19bdc525c6374f91ba8f97e28d62dd19~mv2.png",
+        "iconAlt": "Psychrometric Chart"
+      }
+    ]
+  },
+  {
+    "name": "Economics",
+    "items": [
+      {
+        "label": "Annual Cooling Cost",
+        "path": "/annual-cooling-cost-calculator",
+        "icon": "/images/0179db_996972b06e2c4a2cb10eb025eca2a6c3~mv2.png",
+        "iconAlt": "Home Energy"
+      },
+      {
+        "label": "Break Even",
+        "path": "/break-even-calculator",
+        "icon": "/images/0179db_7106ce40737543dda893e3150cfabe65~mv2.png",
+        "iconAlt": "Economics"
+      },
+      {
+        "label": "Engineering Econ. (F/P,i,n)",
+        "path": "/present-future-value-calculator",
+        "fav": true,
+        "icon": "/images/0179db_b40289323a474e3c9a0adbbb920a0c72~mv2.png",
+        "iconAlt": "Home $",
+        "iconGuess": true
+      },
+      {
+        "label": "Home Price Comparison",
+        "path": "/home-price-compare",
+        "fav": true,
+        "icon": "/images/0179db_9e9024f3fcf44a739bb69ed0d3308497~mv2.png",
+        "iconAlt": "Money"
+      },
+      {
+        "label": "Capital Gains Estimator",
+        "path": "/capital-gains-estimator",
+        "icon": "/images/0179db_9e9024f3fcf44a739bb69ed0d3308497~mv2.png",
+        "iconAlt": "Money"
+      }
+    ]
+  },
+  {
+    "name": "Electrical",
+    "items": [
+      {
+        "label": "Ohm's Law",
+        "path": "/ohms-law-with-power-calculator",
+        "fav": true,
+        "icon": "/images/0179db_a19a196c1b2848bd8505c93f6e66bf82~mv2.png",
+        "iconAlt": "Power Cord"
+      },
+      {
+        "label": "kW to HP Convert",
+        "path": "/power-unit-converter",
+        "fav": true,
+        "icon": "/images/0179db_a175cbda9df34876ab05df46bd8f1477~mv2.png",
+        "iconAlt": "Power Cord"
+      }
+    ]
+  },
+  {
+    "name": "Math",
+    "items": [
+      {
+        "label": "Bilinear Interpolation",
+        "path": "/bilinear-interpolation",
+        "fav": true,
+        "icon": "/images/0179db_e1db435002b642dcb4ca378f85b2fe8c~mv2.png",
+        "iconAlt": "Interpolation"
+      },
+      {
+        "label": "Circle Sphere",
+        "path": "/circle-sphere-calculator",
+        "icon": "/images/0179db_04160c334a4e43c0a7956f556f242441~mv2.png",
+        "iconAlt": "Sphere"
+      },
+      {
+        "label": "Linear Interpolation",
+        "path": "/linear-interpolation-calculator",
+        "fav": true,
+        "icon": "/images/0179db_e1db435002b642dcb4ca378f85b2fe8c~mv2.png",
+        "iconAlt": "Interpolation"
+      },
+      {
+        "label": "Temperature Converter",
+        "path": "/temperature-converter",
+        "icon": "/images/0179db_a3d84c72fdbe4536be992f5492446824~mv2.png",
+        "iconAlt": "Thermostat",
+        "iconGuess": true
+      }
+    ]
+  },
+  {
+    "name": "Miscellaneous",
+    "items": [
+      {
+        "label": "Picture Hanger",
+        "path": "/picture-hanger-height-calculator",
+        "icon": "/images/0179db_b9489b41e2c140ce853584765e7e8f4e~mv2.png",
+        "iconAlt": "Picture Height Hanger"
+      }
+    ]
+  }
+]

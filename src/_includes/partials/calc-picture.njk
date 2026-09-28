@@ -1,0 +1,46 @@
+{#- The picture hanger height calculator, written by hand rather than published
+    from SpreadsheetConverter. The maths is in /assets/js/picture.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+{%- set eighths = ["0", "1/8", "1/4", "3/8", "1/2", "5/8", "3/4", "7/8"] %}
+{%- macro measure(id, label, eg, req, dflt) %}
+<div class="field">
+  <label for="ph-{{ id }}">{{ label }} <span class="cf-u">in</span>{% if req %} <span class="req" aria-hidden="true">*</span>{% endif %}</label>
+  <div class="cf-pair">
+    <input type="number" id="ph-{{ id }}" name="{{ id }}" inputmode="numeric" step="1" min="0"{% if req %} required{% endif %} autocomplete="off" placeholder="{{ eg }}"{% if dflt %} value="{{ dflt }}"{% endif %} aria-label="{{ label }}, whole inches">
+    <select id="ph-{{ id }}f" name="{{ id }}f" aria-label="{{ label }}, fraction of an inch">
+      {%- for e in eighths %}<option value="{{ e }}">{{ e if e != "0" else "+ 0" }}{% if e != "0" %} in{% endif %}</option>{% endfor %}
+    </select>
+  </div>
+</div>
+{%- endmacro %}
+<form class="calcform" id="phcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The method is written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    {{ measure("h", "Picture height", "24", true) }}
+    {{ measure("d", "Top of picture to the hook", "3", true) }}
+    {{ measure("c", "Height of the picture's center", "60", true, "60") }}
+    <p class="hint">60 in is the recommended eye level for the center of a picture.</p>
+    {{ measure("w", "Picture width (optional)", "36", false) }}
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ph-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="ph-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="ph-results-h">
+    <h2 id="ph-results-h">Where to put the hook</h2>
+    <p class="cf-summary" id="ph-summary" role="status">Enter the picture height.</p>
+    <table class="cf-table" id="ph-table" hidden>
+      <caption class="visually-hidden">Hook height, and the picture's center line and thirds</caption>
+      <tbody id="ph-tbody"></tbody>
+    </table>
+    <p class="cf-note">Rounded up to the next ⅛ in; the exact value is in brackets.</p>
+  </section>
+</form>

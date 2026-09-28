@@ -1,0 +1,49 @@
+{#- Bilinear interpolation, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/bilinear.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form, laid out like the grid it interpolates. It never submits. -#}
+<form class="calcform" id="bicalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The method and a worked example are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <p class="hint">Enter the bounding x and y values across the top and down the side, the four known
+    values in the corners, and the point you want in the middle row and column.</p>
+    <div class="bi-grid">
+      <span></span>
+      {%- for f in [["x1", "x₁", "75"], ["x", "x", "79"], ["x2", "x₂", "85"]] %}
+      <label class="bi-cell bi-head">{{ f[1] }}<input type="number" id="bi-{{ f[0] }}" name="{{ f[0] }}" inputmode="decimal" step="any" required autocomplete="off" placeholder="{{ f[2] }}"></label>
+      {%- endfor %}
+      <label class="bi-cell bi-head">y₂<input type="number" id="bi-y2" name="y2" inputmode="decimal" step="any" required autocomplete="off" placeholder="67"></label>
+      <label class="bi-cell">P₁₂<input type="number" id="bi-P12" name="p12" inputmode="decimal" step="any" required autocomplete="off" placeholder="59"></label>
+      <span class="bi-cell bi-empty"></span>
+      <label class="bi-cell">P₂₂<input type="number" id="bi-P22" name="p22" inputmode="decimal" step="any" required autocomplete="off" placeholder="56.34"></label>
+      <label class="bi-cell bi-head">y<input type="number" id="bi-y" name="y" inputmode="decimal" step="any" required autocomplete="off" placeholder="65"></label>
+      <span class="bi-cell bi-empty"></span>
+      <output class="bi-cell bi-result" id="bi-out" for="bi-x bi-y">?</output>
+      <span class="bi-cell bi-empty"></span>
+      <label class="bi-cell bi-head">y₁<input type="number" id="bi-y1" name="y1" inputmode="decimal" step="any" required autocomplete="off" placeholder="63"></label>
+      <label class="bi-cell">P₁₁<input type="number" id="bi-P11" name="p11" inputmode="decimal" step="any" required autocomplete="off" placeholder="55.04"></label>
+      <span class="bi-cell bi-empty"></span>
+      <label class="bi-cell">P₂₁<input type="number" id="bi-P21" name="p21" inputmode="decimal" step="any" required autocomplete="off" placeholder="52.59"></label>
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="bi-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="bi-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="bi-results-h">
+    <h2 id="bi-results-h">Result</h2>
+    <p class="cf-summary" id="bi-summary" role="status">Enter x₁.</p>
+    <p class="cf-note" id="bi-warn" hidden></p>
+    <p class="cf-note">R(x,y) = [P₁₁(x₂−x)(y₂−y) + P₂₁(x−x₁)(y₂−y) + P₁₂(x₂−x)(y−y₁) + P₂₂(x−x₁)(y−y₁)] ÷ [(x₂−x₁)(y₂−y₁)]</p>
+    <figure class="bi-graph">
+      <img src="/images/0179db_8692d1927168444b86d9a32ded3a0768~mv2.jpg" alt="Bilinear interpolation graph: the four known points P11, P12, P21 and P22 around the point (x, y)" width="1365" height="1240" loading="lazy">
+    </figure>
+  </section>
+</form>

@@ -1,0 +1,92 @@
+{#- The psychrometric calculator (one state, or two for the coil and condensate
+    calculators), written by hand rather than published from SpreadsheetConverter.
+    The maths is in /assets/js/psychro.js and psychsheet.js, which
+    check-calculators.mjs holds to the workbooks' own answers; this is only the
+    form. Set psychStates to 2 and psychKind ('coil' or 'condensate') before
+    including it for the two-state calculators. It never submits. -#}
+{%- set two = psychStates == 2 %}
+<form class="calcform" id="pscalc" novalidate data-states="{{ 2 if two else 1 }}" data-kind="{{ psychKind or 'state' }}">
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The equations it uses are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> US (°F, ft)</label>
+      <label><input type="radio" name="u" value="Metric"> Metric (°C, m)</label>
+    </fieldset>
+
+    {%- set given = [["db-wb", "Dry bulb and wet bulb"], ["db-rh", "Dry bulb and relative humidity"], ["db-dp", "Dry bulb and dew point"], ["dp-rh", "Dew point and relative humidity"]] %}
+    {%- if two %}
+    {#- Entering and leaving air each have their own "Given", so a leaving state
+        known by its dew point can go with an entering state known by its RH. #}
+    <div class="cf-pair ps-states">
+      {%- for st in [[1, "Entering air", "95", "78"], [2, "Leaving air", "55", "54"]] %}
+      <fieldset class="ps-state">
+        <legend>{{ st[1] }}</legend>
+        <div class="field">
+          <label for="ps-m{{ st[0] }}">Given</label>
+          <select id="ps-m{{ st[0] }}" name="m{{ st[0] }}">{% for o in given %}<option value="{{ o[0] }}">{{ o[1] }}</option>{% endfor %}</select>
+        </div>
+        {%- for f in [["a", "ps-l1-", "Dry bulb", st[2]], ["b", "ps-l2-", "Wet bulb", st[3]]] %}
+        <div class="field">
+          <label for="ps-{{ f[0] }}{{ st[0] }}"><span id="{{ f[1] }}{{ st[0] }}">{{ f[2] }}</span> <span class="cf-u" id="{{ f[1] }}{{ st[0] }}u">°F</span> <span class="req" aria-hidden="true">*</span></label>
+          <input type="number" id="ps-{{ f[0] }}{{ st[0] }}" name="{{ f[0] }}{{ st[0] }}" inputmode="decimal" step="any" required autocomplete="off" placeholder="{{ f[3] }}">
+        </div>
+        {%- endfor %}
+      </fieldset>
+      {%- endfor %}
+    </div>
+    <p class="hint">Entering air is the air at the coil: return or mixed air for a recirculating system, outdoor air for a DOAS.</p>
+    {%- else %}
+    <fieldset class="cf-radios cf-stack">
+      <legend>Given</legend>
+      {%- for o in given %}
+      <label><input type="radio" name="m" value="{{ o[0] }}"{% if loop.first %} checked{% endif %}> {{ o[1] }}</label>
+      {%- endfor %}
+    </fieldset>
+    {%- for f in [["a", "ps-l1", "Dry bulb", "75"], ["b", "ps-l2", "Wet bulb", "62.5"]] %}
+    <div class="field">
+      <label for="ps-{{ f[0] }}1"><span id="{{ f[1] }}">{{ f[2] }}</span> <span class="cf-u" id="{{ f[1] }}u">°F</span> <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="ps-{{ f[0] }}1" name="{{ f[0] }}1" inputmode="decimal" step="any" required autocomplete="off" placeholder="{{ f[3] }}">
+    </div>
+    {%- endfor %}
+    {%- endif %}
+
+    {%- if two %}
+    <div class="field">
+      <label for="ps-q">Airflow <span class="cf-u" id="ps-qu">cfm</span> <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="ps-q" name="q" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="1000">
+    </div>
+    {%- endif %}
+    <div class="field">
+      <label for="ps-alt">Altitude <span class="cf-u" id="ps-altu">ft</span></label>
+      <input type="number" id="ps-alt" name="z" inputmode="decimal" step="any" required autocomplete="off" placeholder="0" value="0">
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ps-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="ps-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="ps-results-h">
+    <h2 id="ps-results-h">Results</h2>
+    <p class="cf-summary" id="ps-summary" role="status">Enter the dry bulb.</p>
+    <table class="cf-table" id="ps-head" hidden>
+      <caption class="visually-hidden">Coil or condensate results</caption>
+      <tbody id="ps-htbody"></tbody>
+    </table>
+    <div class="table-scroll" id="ps-props-wrap" hidden>
+      <table class="ref-table" id="ps-props">
+        <caption class="visually-hidden">Psychrometric properties</caption>
+        {%- if two %}<thead><tr><th scope="col"></th><th scope="col">Entering</th><th scope="col">Leaving</th><th scope="col"></th></tr></thead>{% endif %}
+        <tbody id="ps-ptbody"></tbody>
+      </table>
+    </div>
+    <p class="cf-note">Exact ASHRAE Fundamentals, chapter 1 equations; no curve fits.</p>
+  </section>
+</form>

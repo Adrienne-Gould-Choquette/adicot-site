@@ -1,0 +1,66 @@
+units,hood,type,mua,b1,b2,b3,b4,f1,f2,f3,f4,i1,i2,i3,equipLen,hoodLen,maxDuty,code,muaCode,hbLow,hbHigh,muaLow,muaHigh,dishwasher,wLow,wHigh
+English,Wall-mounted canopy,Type I,0,"Oven, convection, full-size, electric and gas",,,,72,,,,,,,6,7,1,1400,0,1050,1400,,0,,1050,1400
+English,Wall-mounted canopy,Type I,80,"Fryer, open deep-fat, electric and gas",,,,72,,,,,,,6,7,2,2100,1680,1400,2100,1120,1680,,1400,2100
+English,Wall-mounted canopy,Type I,0,"Range, wok, gas and electric",,,,72,,,,,,,6,7,3,2800,0,1400,2800,,0,,1400,2800
+English,Wall-mounted canopy,Type I,0,"Oven, stone hearth, wood-fired or wood for flavoring",,,,72,,,,,,,6,7,4,3850,0,2450,+,,,,2450,2450
+English,Wall-mounted canopy,Type II,0,Dishwasher,,,,72,,,,,,,6,7,5,700,0,700,,,,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,700,700
+English,Wall-mounted canopy,Type I,0,"Range, open-burner, gas (with or without oven)","Griddle, flat, electric and gas","Fryer, pressure, electric and gas",,24,36,48,,1,1,,9,10,2,3000,0,2000,3000,,0,,2000,3000
+English,Wall-mounted canopy,Type I,100,"Oven, baking, electric and gas","Broiler, gas, under-fired",,,42,54,,,1,,,8,9,3,3600,3600,1800,3600,1800,3600,,1603.125,2812.5
+English,Wall-mounted canopy,Type I,85,"Salamander, electric and gas","Range, hot top, electric and gas","Broiler, chain conveyor, gas","Oven, deck, electric and gas",48,60,24,36,1,1,1,14,15,3,6000,5100,3000,6000,2550,5100,,2625,3964.2857142857142
+English,Wall-mounted canopy,Type I,0,"Braising pan/tilting skillet, electric","Oven, rotisserie, electric and gas",,,60,24,,,1,,,7,8,1,1600,0,1200,1600,,0,,1200,1600
+English,Wall-mounted canopy,Type I,50,Dishwasher,"Oven, baking, electric and gas",,,24,36,,,1,,,5,6,5,600,300,900,1200,450,600,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,780,960
+English,Wall-mounted canopy,Type I,0,"Oven, baking, electric and gas",Dishwasher,,,36,48,,,1,,,7,8,5,800,0,1200,1600,,0,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,971.42857142857144,1142.8571428571429
+English,Wall-mounted canopy,Type I,70,"Fryer, kettle, electric and gas","Oven, revolving rack, electric and gas","Oven, rapid cook, electric",,48,60,24,,1,1,,11,12,2,3600,2520,2400,3600,1680,2520,,2018.1818181818182,2836.3636363636365
+English,Wall-mounted canopy,Type I,0,"Solid fuel cooking appliances combusting a solid fuel (such as wood, charcoal, or coal) to provide all or part of the heat for the cooking process","Grill, plancha, electric and gas",,,60,24,,,1,,,7,8,4,4400,0,2800,3200+,,#ERROR,,2457.1428571428573,2914.2857142857142
+English,Single-island canopy,Type I,0,"Oven, convection, full-size, electric and gas",,,,72,,,,,,,6,7,1,2800,0,1750,2100,,0,,1750,2100
+English,Single-island canopy,Type I,80,"Fryer, open deep-fat, electric and gas",,,,72,,,,,,,6,7,2,3500,2800,2100,2800,1680,2240,,2100,2800
+English,Single-island canopy,Type I,0,"Range, wok, gas and electric",,,,72,,,,,,,6,7,3,4200,0,2100,4200,,0,,2100,4200
+English,Single-island canopy,Type I,0,"Oven, stone hearth, wood-fired or wood for flavoring",,,,72,,,,,,,6,7,4,4900,0,3850,+,,,,3850,3850
+English,Single-island canopy,Type II,0,Dishwasher,,,,72,,,,,,,6,7,5,700,0,700,,,,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,700,700
+English,Single-island canopy,Type I,0,"Range, open-burner, gas (with or without oven)","Griddle, flat, electric and gas","Fryer, pressure, electric and gas",,24,36,48,,1,1,,9,10,2,5000,0,3000,4000,,0,,3000,4000
+English,Single-island canopy,Type I,100,"Oven, baking, electric and gas","Broiler, gas, under-fired",,,42,54,,,1,,,8,9,3,5400,5400,2700,5400,2700,5400,,2503.125,4218.75
+English,Single-island canopy,Type I,85,"Salamander, electric and gas","Range, hot top, electric and gas","Broiler, chain conveyor, gas","Oven, deck, electric and gas",48,60,24,36,1,1,1,14,15,3,9000,7650,4500,9000,3825,7650,,4125,5678.5714285714284
+English,Single-island canopy,Type I,0,"Braising pan/tilting skillet, electric","Oven, rotisserie, electric and gas",,,60,24,,,1,,,7,8,1,3200,0,2000,2400,,0,,2000,2400
+English,Single-island canopy,Type I,50,Dishwasher,"Oven, baking, electric and gas",,,24,36,,,1,,,5,6,5,600,300,1500,1800,750,900,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,1140,1320
+English,Single-island canopy,Type I,0,"Oven, baking, electric and gas",Dishwasher,,,36,48,,,1,,,7,8,5,800,0,2000,2400,,0,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,1314.2857142857142,1485.7142857142858
+English,Single-island canopy,Type I,70,"Fryer, kettle, electric and gas","Oven, revolving rack, electric and gas","Oven, rapid cook, electric",,48,60,24,,1,1,,11,12,2,6000,4200,3600,4800,2520,3360,,3218.181818181818,4036.3636363636365
+English,Single-island canopy,Type I,0,"Solid fuel cooking appliances combusting a solid fuel (such as wood, charcoal, or coal) to provide all or part of the heat for the cooking process","Grill, plancha, electric and gas",,,60,24,,,1,,,7,8,4,5600,0,4400,4800+,,#ERROR,,3828.5714285714284,4514.2857142857147
+English,Double-island canopy (per side),Type I,0,"Oven, convection, full-size, electric and gas",,,,72,,,,,,,6,7,1,1750,0,1050,1400,,0,,1050,1400
+English,Double-island canopy (per side),Type I,80,"Fryer, open deep-fat, electric and gas",,,,72,,,,,,,6,7,2,2100,1680,1400,2100,1120,1680,,1400,2100
+English,Double-island canopy (per side),Type I,0,"Range, wok, gas and electric",,,,72,,,,,,,6,7,3,2800,0,1750,2800,,0,,1750,2800
+English,Double-island canopy (per side),Type I,0,"Oven, stone hearth, wood-fired or wood for flavoring",,,,72,,,,,,,6,7,4,3850,0,3500,+,,,,3500,3500
+English,Double-island canopy (per side),Type II,0,Dishwasher,,,,72,,,,,,,6,7,5,700,0,700,,,,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,700,700
+English,Double-island canopy (per side),Type I,0,"Range, open-burner, gas (with or without oven)","Griddle, flat, electric and gas","Fryer, pressure, electric and gas",,24,36,48,,1,1,,9,10,2,3000,0,2000,3000,,0,,2000,3000
+English,Double-island canopy (per side),Type I,100,"Oven, baking, electric and gas","Broiler, gas, under-fired",,,42,54,,,1,,,8,9,3,3600,3600,2250,3600,2250,3600,,1856.25,2812.5
+English,Double-island canopy (per side),Type I,85,"Salamander, electric and gas","Range, hot top, electric and gas","Broiler, chain conveyor, gas","Oven, deck, electric and gas",48,60,24,36,1,1,1,14,15,3,6000,5100,3750,6000,3187.5,5100,,2732.1428571428573,3964.2857142857142
+English,Double-island canopy (per side),Type I,0,"Braising pan/tilting skillet, electric","Oven, rotisserie, electric and gas",,,60,24,,,1,,,7,8,1,2000,0,1200,1600,,0,,1200,1600
+English,Double-island canopy (per side),Type I,50,Dishwasher,"Oven, baking, electric and gas",,,24,36,,,1,,,5,6,5,600,300,900,1200,450,600,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,780,960
+English,Double-island canopy (per side),Type I,0,"Oven, baking, electric and gas",Dishwasher,,,36,48,,,1,,,7,8,5,800,0,1200,1600,,0,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,971.42857142857144,1142.8571428571429
+English,Double-island canopy (per side),Type I,70,"Fryer, kettle, electric and gas","Oven, revolving rack, electric and gas","Oven, rapid cook, electric",,48,60,24,,1,1,,11,12,2,3600,2520,2400,3600,1680,2520,,2018.1818181818182,2836.3636363636365
+English,Double-island canopy (per side),Type I,0,"Solid fuel cooking appliances combusting a solid fuel (such as wood, charcoal, or coal) to provide all or part of the heat for the cooking process","Grill, plancha, electric and gas",,,60,24,,,1,,,7,8,4,4400,0,4000,+,,,,3428.5714285714284,3771.4285714285716
+English,Eyebrow,Type I,0,"Oven, convection, full-size, electric and gas",,,,72,,,,,,,6,7,1,1750,0,1050,1750,,0,,1050,1750
+English,Eyebrow,Type I,80,"Fryer, open deep-fat, electric and gas",,,,72,,,,,,,6,7,2,1750,1400,1050,1750,840,1400,,1050,1750
+English,Eyebrow,Type I,0,"Range, wok, gas and electric",,,,72,,,,,,,6,7,3,Hood Type Not Allowed,SELECT HOOD,0,,,,,#ERROR,#ERROR
+English,Eyebrow,Type I,0,"Oven, stone hearth, wood-fired or wood for flavoring",,,,72,,,,,,,6,7,4,Hood Type Not Allowed,SELECT HOOD,0,,,,,#ERROR,#ERROR
+English,Eyebrow,Type II,0,Dishwasher,,,,72,,,,,,,6,7,5,700,0,700,,,,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,700,700
+English,Eyebrow,Type I,0,"Range, open-burner, gas (with or without oven)","Griddle, flat, electric and gas","Fryer, pressure, electric and gas",,24,36,48,,1,1,,9,10,2,2500,0,1500,2500,,0,,1500,2500
+English,Eyebrow,Type I,100,"Oven, baking, electric and gas","Broiler, gas, under-fired",,,42,54,,,1,,,8,9,3,Hood Type Not Allowed,SELECT HOOD,0,,,,,#ERROR,#ERROR
+English,Eyebrow,Type I,85,"Salamander, electric and gas","Range, hot top, electric and gas","Broiler, chain conveyor, gas","Oven, deck, electric and gas",48,60,24,36,1,1,1,14,15,3,Hood Type Not Allowed,SELECT HOOD,0,,,,,#ERROR,#ERROR
+English,Eyebrow,Type I,0,"Braising pan/tilting skillet, electric","Oven, rotisserie, electric and gas",,,60,24,,,1,,,7,8,1,2000,0,1200,2000,,0,,1200,2000
+English,Eyebrow,Type I,50,Dishwasher,"Oven, baking, electric and gas",,,24,36,,,1,,,5,6,5,600,300,900,1500,450,750,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,780,1140
+English,Eyebrow,Type I,0,"Oven, baking, electric and gas",Dishwasher,,,36,48,,,1,,,7,8,5,800,0,1200,2000,,0,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,971.42857142857144,1314.2857142857142
+English,Eyebrow,Type I,70,"Fryer, kettle, electric and gas","Oven, revolving rack, electric and gas","Oven, rapid cook, electric",,48,60,24,,1,1,,11,12,2,3000,2100,1800,3000,1260,2100,,1800,3000
+English,Eyebrow,Type I,0,"Solid fuel cooking appliances combusting a solid fuel (such as wood, charcoal, or coal) to provide all or part of the heat for the cooking process","Grill, plancha, electric and gas",,,60,24,,,1,,,7,8,4,Hood Type Not Allowed,SELECT HOOD,0,,,,,#ERROR,#ERROR
+English,Back shelf/proximity/pass-over,Type I,0,"Oven, convection, full-size, electric and gas",,,,72,,,,,,,6,7,1,1750,0,700,1400,,0,,700,1400
+English,Back shelf/proximity/pass-over,Type I,80,"Fryer, open deep-fat, electric and gas",,,,72,,,,,,,6,7,2,2100,1680,1400,2100,1120,1680,,1400,2100
+English,Back shelf/proximity/pass-over,Type I,0,"Range, wok, gas and electric",,,,72,,,,,,,6,7,3,2800,0,2100,2800,,0,,2100,2800
+English,Back shelf/proximity/pass-over,Type I,0,"Oven, stone hearth, wood-fired or wood for flavoring",,,,72,,,,,,,6,7,4,Hood Type Not Allowed,SELECT HOOD,0,,,,,#ERROR,#ERROR
+English,Back shelf/proximity/pass-over,Type II,0,Dishwasher,,,,72,,,,,,,6,7,5,700,0,700,,,,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,700,700
+English,Back shelf/proximity/pass-over,Type I,0,"Range, open-burner, gas (with or without oven)","Griddle, flat, electric and gas","Fryer, pressure, electric and gas",,24,36,48,,1,1,,9,10,2,3000,0,2000,3000,,0,,2000,3000
+English,Back shelf/proximity/pass-over,Type I,100,"Oven, baking, electric and gas","Broiler, gas, under-fired",,,42,54,,,1,,,8,9,3,3600,3600,2700,3600,2700,3600,,1912.5,2812.5
+English,Back shelf/proximity/pass-over,Type I,85,"Salamander, electric and gas","Range, hot top, electric and gas","Broiler, chain conveyor, gas","Oven, deck, electric and gas",48,60,24,36,1,1,1,14,15,3,6000,5100,4500,6000,3825,5100,,2464.2857142857142,3964.2857142857142
+English,Back shelf/proximity/pass-over,Type I,0,"Braising pan/tilting skillet, electric","Oven, rotisserie, electric and gas",,,60,24,,,1,,,7,8,1,2000,0,800,1600,,0,,800,1600
+English,Back shelf/proximity/pass-over,Type I,50,Dishwasher,"Oven, baking, electric and gas",,,24,36,,,1,,,5,6,5,600,300,600,1200,300,600,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,600,960
+English,Back shelf/proximity/pass-over,Type I,0,"Oven, baking, electric and gas",Dishwasher,,,36,48,,,1,,,7,8,5,800,0,800,1600,,0,ONCE A DISHWASHER HAS BEEN SELECTED ALL EQUIPMENT IS ASSUMED TO BE A DISHWASHER,800,1142.8571428571429
+English,Back shelf/proximity/pass-over,Type I,70,"Fryer, kettle, electric and gas","Oven, revolving rack, electric and gas","Oven, rapid cook, electric",,48,60,24,,1,1,,11,12,2,3600,2520,2400,3600,1680,2520,,1636.3636363636363,2836.3636363636365
+English,Back shelf/proximity/pass-over,Type I,0,"Solid fuel cooking appliances combusting a solid fuel (such as wood, charcoal, or coal) to provide all or part of the heat for the cooking process","Grill, plancha, electric and gas",,,60,24,,,1,,,7,8,4,Hood Type Not Allowed,SELECT HOOD,0,,,,,#ERROR,#ERROR

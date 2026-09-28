@@ -1,0 +1,111 @@
+{#- The mechanical equipment wind pressure calculator, written by hand rather than
+    published from SpreadsheetConverter. The maths is in /assets/js/windload.js,
+    which check-calculators.mjs holds to the workbook's own answers; this is only
+    the form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="wlcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The ASCE 7-22 equations it uses are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <div class="field">
+      <label for="wl-model">Equipment model number <span class="opt">(optional, for the printout)</span></label>
+      <input type="text" id="wl-model" name="mn" autocomplete="off" placeholder="Generic">
+    </div>
+
+    <fieldset class="cf-radios">
+      <legend>Rooftop equipment?</legend>
+      <label><input type="radio" name="rt" value="yes" checked> Yes</label>
+      <label><input type="radio" name="rt" value="no"> No</label>
+    </fieldset>
+
+    <div id="wl-roof">
+      <fieldset class="cf-radios">
+        <legend>Project in Miami-Dade or Broward (HVHZ)?</legend>
+        <label><input type="radio" name="fl" value="yes"> Yes</label>
+        <label><input type="radio" name="fl" value="no" checked> No</label>
+      </fieldset>
+      <div class="cf-pair field">
+        <div>
+          <label for="wl-clear">Clearance or curb <span class="cf-u">in</span></label>
+          <input type="number" id="wl-clear" name="c" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="14">
+        </div>
+        <div>
+          <label for="wl-roofh">Roof height <span class="cf-u">ft</span></label>
+          <input type="number" id="wl-roofh" name="rh" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="30">
+        </div>
+      </div>
+    </div>
+
+    <div id="wl-ground" hidden>
+      <fieldset class="cf-radios">
+        <legend>Mounting</legend>
+        <label><input type="radio" name="mt" value="Slab Mounted" checked> Slab</label>
+        <label><input type="radio" name="mt" value="Wall Mounted"> Wall</label>
+      </fieldset>
+      <div class="field">
+        <label for="wl-mh">Height to bottom of equipment <span class="cf-u">ft</span></label>
+        <input type="number" id="wl-mh" name="mh" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="0">
+        <p class="hint">Enter 0 for slab-mounted equipment.</p>
+      </div>
+    </div>
+
+    <fieldset class="cf-stream">
+      <legend>Equipment dimensions, from the manufacturer</legend>
+      <div class="cf-trio">
+        <div>
+          <label for="wl-l">Length <span class="cf-u">in</span></label>
+          <input type="number" id="wl-l" name="l" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="96">
+        </div>
+        <div>
+          <label for="wl-d">Depth <span class="cf-u">in</span></label>
+          <input type="number" id="wl-d" name="d" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="60">
+        </div>
+        <div>
+          <label for="wl-h">Height <span class="cf-u">in</span></label>
+          <input type="number" id="wl-h" name="h" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="44">
+        </div>
+      </div>
+      <p class="hint">Length is the longer horizontal dimension, depth the shorter.</p>
+    </fieldset>
+
+    <div class="cf-pair field">
+      <div>
+        <label for="wl-risk">Risk category</label>
+        <select id="wl-risk" name="rc">
+          <option>I</option><option selected>II</option><option>III</option><option>IV</option>
+        </select>
+      </div>
+      <div>
+        <label for="wl-exp">Exposure</label>
+        <select id="wl-exp" name="ex">
+          <option>B</option><option selected>C</option><option>D</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="wl-v">Ultimate wind speed, V<sub>ult</sub> <span class="cf-u">mph</span></label>
+      <input type="number" id="wl-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="150">
+      <p class="hint">ASCE 7-22, 26.5.1, for the project's location and risk category. Look it up on the <a href="https://gis.asce.org/beta-7-22/" target="_blank" rel="noopener">ASCE Hazard Tool</a>.</p>
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="wl-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="wl-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="wl-results-h">
+    <h2 id="wl-results-h">Design wind pressures (ASD)</h2>
+    <p class="cf-summary" id="wl-summary" role="status">Enter the clearance below the equipment.</p>
+    <table class="cf-table" id="wl-table" hidden>
+      <caption class="visually-hidden">Lateral and uplift pressure, and the values they were calculated from</caption>
+      <tbody id="wl-tbody"></tbody>
+    </table>
+    <p class="cf-note" id="wl-warn" hidden></p>
+    <p class="cf-note">ASCE 7-22, Chapters 26 and 29. Results are not valid unless verified, signed and
+    sealed by a registered engineer.</p>
+  </section>
+</form>

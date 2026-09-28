@@ -1,0 +1,53 @@
+{#- The heat pump balance point calculator, written by hand. The maths is in
+    /assets/js/balancepoint.js, which check-calculators.mjs holds to the
+    workbook's own answers; this is only the form. It never submits. The chart
+    is drawn by calc-balancepoint.js. -#}
+{%- macro pair(id, label, unit, tval, tph, cid, clabel, cval, cph) %}
+<div class="bp-pair">
+  <div class="field"><label for="bp-{{ id }}">{{ label }} <span class="cf-u">{{ unit }}</span></label>
+    <input type="number" id="bp-{{ id }}" name="{{ id }}" inputmode="decimal" step="any" required autocomplete="off" placeholder="e.g. {{ tph }}" value="{{ tval }}"></div>
+  <div class="field"><label for="bp-{{ cid }}">{{ clabel }} <span class="cf-u">Btu/h</span></label>
+    <input type="number" id="bp-{{ cid }}" name="{{ cid }}" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="e.g. {{ cph }}" value="{{ cval }}"></div>
+</div>
+{%- endmacro %}
+<form class="calcform" id="bpcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The method is written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-stream">
+      <legend>Building heat loss</legend>
+      <div class="field"><label for="bp-z">Outdoor temperature with no heating load <span class="cf-u">°F</span></label>
+        <input type="number" id="bp-z" name="z" inputmode="decimal" step="any" required autocomplete="off" placeholder="e.g. 65" value="65"></div>
+      <p class="hint bp-hint">Usually 60–65 °F: internal and solar gains carry the building above it.</p>
+      {{ pair("dt", "Outdoor design temperature", "°F", "17", "17", "dl", "Design heat loss", "15000", "15000") }}
+    </fieldset>
+
+    <fieldset class="cf-stream">
+      <legend>Heat pump heating capacity, from the manufacturer's data</legend>
+      {{ pair("lt", "Low rating temperature", "°F", "17", "17", "lc", "Capacity", "10700", "10700") }}
+      {{ pair("ht", "High rating temperature", "°F", "47", "47", "hc", "Capacity", "17800", "17800") }}
+    </fieldset>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="bp-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="bp-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="bp-results-h">
+    <h2 id="bp-results-h">Balance point and supplemental heat</h2>
+    <p class="cf-summary" id="bp-summary" role="status">Enter the design heat loss.</p>
+    <table class="cf-table" id="bp-table" hidden>
+      <caption class="visually-hidden">Balance point, capacity at the design temperature and supplemental heat</caption>
+      <tbody id="bp-tbody"></tbody>
+    </table>
+    <figure class="bp-chart" id="bp-fig" hidden>
+      <div id="bp-svg"></div>
+      <figcaption>Building heat loss and heat pump capacity against outdoor temperature. They cross at the balance point.</figcaption>
+    </figure>
+    <p class="cf-note">Strip heaters are sized to the next standard size: 5, 8, 10, 15, 20 or 25 kW. Confirm the sizes available for your air handler.</p>
+  </section>
+</form>

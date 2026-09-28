@@ -1,0 +1,43 @@
+{#- Linear interpolation, written by hand (it replaces the HTML widget that was
+    embedded on the Wix page). The maths is in /assets/js/linear.js, which
+    check-handworked.mjs holds to worked examples; this is only the form. It never
+    submits. The graph is drawn by calc-linear.js. -#}
+<form class="calcform" id="licalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The method and a worked example are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-stream">
+      <legend>Known points</legend>
+      <div class="li-grid">
+        <div class="field"><label for="li-x1">x<sub>1</sub></label><input type="number" id="li-x1" name="x1" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 75" value="75"></div>
+        <div class="field"><label for="li-y1">y<sub>1</sub></label><input type="number" id="li-y1" name="y1" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 55.04" value="55.04"></div>
+        <div class="field"><label for="li-x2">x<sub>2</sub></label><input type="number" id="li-x2" name="x2" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 85" value="85"></div>
+        <div class="field"><label for="li-y2">y<sub>2</sub></label><input type="number" id="li-y2" name="y2" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 52.59" value="52.59"></div>
+      </div>
+    </fieldset>
+
+    <fieldset class="cf-radios">
+      <legend>Find</legend>
+      <label><input type="radio" name="s" value="y" checked> y at a given x</label>
+      <label><input type="radio" name="s" value="x"> x at a given y</label>
+    </fieldset>
+    <div class="field"><label for="li-v" id="li-v-l">x</label>
+      <input type="number" id="li-v" name="v" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 79" value="79"></div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="li-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="li-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="li-results-h">
+    <h2 id="li-results-h">Result</h2>
+    <p class="cf-summary cf-answerline" id="li-summary" role="status">Enter x₁.</p>
+    <p class="cf-note" id="li-warn" hidden></p>
+    <figure class="li-chart" id="li-fig" hidden><div id="li-svg"></div></figure>
+    <p class="cf-note">y = y₁(x₂ − x)/(x₂ − x₁) + y₂(x − x₁)/(x₂ − x₁)</p>
+  </section>
+</form>

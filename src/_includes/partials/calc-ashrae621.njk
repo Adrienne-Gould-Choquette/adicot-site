@@ -1,0 +1,64 @@
+{#- Ventilation and exhaust rates, written by hand rather than published from
+    SpreadsheetConverter. ASHRAE 62.1 comes from /assets/js/ashrae621-tables.js,
+    generated from the standard's captured tables and held to them; the IMC,
+    FBC-Mechanical, ASHRAE 170 and 62.2 tables are in ventilation-tables.js, held
+    to their captured sources. This is only the form. It never submits.
+    The occupancy drop-down is a plain <select>; calc-ashrae621.js lays a
+    searchable list over it and swaps its options when the standard changes. -#}
+<form class="calcform" id="ascalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The ASHRAE 62.1 tables are printed in full below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <div class="field"><label for="as-std">Standard or code</label>
+      <select id="as-std" name="std" class="cf-wide">{% for s in ventilation.standards %}<option value="{{ s.id }}">{{ s.label }}</option>{% endfor %}</select></div>
+
+    <div class="field" id="as-cat-f"><label for="as-cat">Occupancy category</label>
+      <select id="as-cat" name="c">{% for g in ashrae621.groups %}<optgroup label="{{ g.label }}">{% for o in g.options %}<option value="{{ o.value }}">{{ o.label }}</option>{% endfor %}</optgroup>{% endfor %}</select>
+      <p class="hint" id="as-cat-hint">Type part of a name, such as “exam”, or open the list to browse.</p></div>
+
+    <fieldset class="cf-radios" id="as-units">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="English" checked> US</label>
+      <label><input type="radio" name="u" value="Metric"> Metric</label>
+    </fieldset>
+    <p class="hint" id="as-units-note" hidden>This code’s table is in US units only.</p>
+
+    <fieldset class="cf-stream">
+      <legend id="as-zone-l">Zone (optional)</legend>
+      <div class="cf-pair">
+        <div class="field"><label for="as-az"><span id="as-az-l">Floor area, A<sub>z</sub></span> <span class="cf-u as-area">ft²</span></label>
+          <input type="number" id="as-az" name="az" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 2000"></div>
+        <div class="field" id="as-pz-f"><label for="as-pz">Occupants, P<sub>z</sub></label>
+          <input type="number" id="as-pz" name="pz" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="enter a floor area"></div>
+        <div class="field" id="as-ht-f" hidden><label for="as-ht">Ceiling height <span class="cf-u as-len">ft</span></label>
+          <input type="number" id="as-ht" name="ht" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 9"></div>
+        <div class="field" id="as-br-f" hidden><label for="as-br">Bedrooms</label>
+          <input type="number" id="as-br" name="br" inputmode="numeric" step="1" min="0" autocomplete="off" placeholder="e.g. 3"></div>
+      </div>
+      <p class="hint" id="as-zone-hint">Occupants start at the table’s default occupant density times the floor area. Type your own number to override it; clear it to go back to the default.</p>
+    </fieldset>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="as-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="as-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="as-results-h">
+    <h2 id="as-results-h">Results</h2>
+    <p class="cf-summary" id="as-summary" role="status"></p>
+    <table class="cf-table">
+      <caption class="visually-hidden" id="as-oa-cap">Ventilation rates and zone outdoor airflow</caption>
+      <tbody id="as-oa"></tbody>
+    </table>
+    <table class="cf-table">
+      <caption class="visually-hidden" id="as-ex-cap">Exhaust rates</caption>
+      <tbody id="as-ex"></tbody>
+    </table>
+    <ul class="cf-note as-notes" id="as-note" hidden></ul>
+    <p class="cf-note" id="as-source">ANSI/ASHRAE Standard 62.1-2025, Table 6-1 (minimum ventilation rates in the breathing zone), Normative Appendix E Table E-1 (outpatient health care) and Table 6-2 (minimum exhaust rates).</p>
+  </section>
+</form>

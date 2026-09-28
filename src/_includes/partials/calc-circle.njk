@@ -1,0 +1,53 @@
+{#- The circle and sphere calculator, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/circle.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="cscalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    Every equation it uses is written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="s" value="US" checked> US (in, ft)</label>
+      <label><input type="radio" name="s" value="Metric"> Metric (cm, m)</label>
+    </fieldset>
+
+    <fieldset class="cf-radios cf-stack">
+      <legend>You know the</legend>
+      {%- for t in ["Radius", "Diameter", "Area of a Circle", "Circumference", "Volume of a Sphere", "Area of a Sphere"] %}
+      <label><input type="radio" name="t" value="{{ t }}"{% if loop.index == 2 %} checked{% endif %}> {{ t | replace("Area of a Circle", "Area of a circle") | replace("Volume of a Sphere", "Volume of a sphere") | replace("Area of a Sphere", "Surface area of a sphere") }}</label>
+      {%- endfor %}
+    </fieldset>
+
+    <div class="cf-pair field">
+      <div>
+        <label for="cs-v">Value <span class="req" aria-hidden="true">*</span></label>
+        <input type="number" id="cs-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="18">
+      </div>
+      <div>
+        <label for="cs-u">In</label>
+        <select id="cs-u" name="u"></select>
+      </div>
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="cs-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="cs-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="cs-results-h">
+    <h2 id="cs-results-h">Results</h2>
+    <p class="cf-summary" id="cs-summary" role="status">Enter a value.</p>
+    <table class="cf-table" id="cs-table" hidden>
+      <caption class="visually-hidden">Radius, diameter, areas, circumference and volume</caption>
+      <tbody id="cs-tbody"></tbody>
+    </table>
+    <p class="cf-note">D = 2R; circle area = πD²/4; circumference = πD; sphere volume = 4/3 πR³;
+    sphere surface area = 4πR².</p>
+  </section>
+</form>

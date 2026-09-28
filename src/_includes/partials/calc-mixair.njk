@@ -1,0 +1,66 @@
+{#- The air mixing calculator, written by hand rather than published from
+    SpreadsheetConverter. The maths is in /assets/js/mixair.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+{%- set streams = [
+  { k: "o", name: "Outdoor air", req: true, eg: ["150", "91", "77"] },
+  { k: "r", name: "Return air", req: true, eg: ["1550", "75", "62.3"] },
+  { k: "x", name: "Third air stream", req: false, eg: ["300", "55", "54.5"] }
+] %}
+<form class="calcform" id="mixcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The equation and a worked example are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> US (cfm, °F)</label>
+      <label><input type="radio" name="u" value="SI"> SI (l/s, °C)</label>
+    </fieldset>
+
+    {%- for s in streams %}
+    <fieldset class="cf-stream">
+      <legend>{{ loop.index }}. {{ s.name }}{% if not s.req %} <span class="opt">(optional, such as bypass air)</span>{% endif %}</legend>
+      <div class="cf-trio">
+        <div>
+          <label for="mx-{{ s.k }}q">Air flow <span class="cf-u mx-q">cfm</span></label>
+          <input type="number" id="mx-{{ s.k }}q" name="{{ s.k }}q" inputmode="decimal" step="any" min="0"
+                 {% if s.req %}required {% endif %}autocomplete="off" placeholder="{{ s.eg[0] }}">
+        </div>
+        <div>
+          <label for="mx-{{ s.k }}db">Dry bulb <span class="cf-u mx-t">°F</span></label>
+          <input type="number" id="mx-{{ s.k }}db" name="{{ s.k }}db" inputmode="decimal" step="any"
+                 {% if s.req %}required {% endif %}autocomplete="off" placeholder="{{ s.eg[1] }}">
+        </div>
+        <div>
+          <label for="mx-{{ s.k }}wb">Wet bulb <span class="cf-u mx-t">°F</span></label>
+          <input type="number" id="mx-{{ s.k }}wb" name="{{ s.k }}wb" inputmode="decimal" step="any"
+                 {% if s.req %}required {% endif %}autocomplete="off" placeholder="{{ s.eg[2] }}">
+        </div>
+      </div>
+      {%- if s.k == "o" %}
+      <p class="hint">Design conditions for your location: <a href="https://ashrae-meteo.info/v3.0/" target="_blank" rel="noopener">ASHRAE climate data</a>.</p>
+      {%- endif %}
+    </fieldset>
+    {%- endfor %}
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="mx-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="mx-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="mx-results-h">
+    <h2 id="mx-results-h">Results</h2>
+    <p class="cf-summary" id="mx-summary" role="status">Enter the outdoor air flow.</p>
+    <table class="cf-table" id="mx-table" hidden>
+      <caption class="visually-hidden">Mixed air flow, dry bulb and wet bulb</caption>
+      <tbody id="mx-tbody"></tbody>
+    </table>
+    <p class="cf-note">Each mixed temperature is the flow-weighted average of the streams:
+    T = (T₁Q₁ + T₂Q₂ + T₃Q₃) ÷ (Q₁ + Q₂ + Q₃), for dry bulb and wet bulb alike.</p>
+  </section>
+</form>

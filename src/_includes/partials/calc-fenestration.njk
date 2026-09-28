@@ -1,0 +1,63 @@
+{#- The default fenestration and door values lookup, written by hand rather than
+    published from SpreadsheetConverter. The tables are in
+    /assets/js/fenestration.js, which check-calculators.mjs holds to the
+    workbook's own answers; this is only the form. It never submits. -#}
+<form class="calcform" id="fncalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This lookup runs in your browser and needs JavaScript.
+    The complete code tables are printed below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-stream">
+      <legend>Window, glass door or skylight</legend>
+      <div class="field">
+        <label for="fn-frame">Frame type</label>
+        <select id="fn-frame" name="f">
+          {%- for f in fenestration.frames %}
+          <option value="{{ f }}">{{ f }}</option>
+          {%- endfor %}
+        </select>
+      </div>
+      <fieldset class="cf-radios">
+        <legend>Panes</legend>
+        <label><input type="radio" name="p" value="Double Pane" checked> Double</label>
+        <label><input type="radio" name="p" value="Single Pane"> Single</label>
+      </fieldset>
+      <fieldset class="cf-radios">
+        <legend>Glazing</legend>
+        <label><input type="radio" name="g" value="Clear" checked> Clear</label>
+        <label><input type="radio" name="g" value="Tinted"> Tinted</label>
+      </fieldset>
+    </fieldset>
+
+    <fieldset class="cf-stream">
+      <legend>Opaque door</legend>
+      <div class="field">
+        <label for="fn-door">Door type</label>
+        <select id="fn-door" name="d">
+          {%- for d in fenestration.doors %}
+          <option value="{{ d[0] }}">{{ d[0] }}</option>
+          {%- endfor %}
+        </select>
+      </div>
+    </fieldset>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="fn-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="fn-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="fn-results-h">
+    <h2 id="fn-results-h">Code default values</h2>
+    <p class="cf-summary" id="fn-summary" role="status">Choose a frame type.</p>
+    <table class="cf-table" id="fn-table" hidden>
+      <caption class="visually-hidden">Default U-factor, SHGC and VT, and door U-factor</caption>
+      <tbody id="fn-tbody"></tbody>
+    </table>
+    <p class="cf-note">2024 IECC and 2023 Florida Building Code, Energy Conservation,
+    Tables C303.1.3(1), (2) and (3). Use these only where no NFRC-rated values are available.</p>
+  </section>
+</form>

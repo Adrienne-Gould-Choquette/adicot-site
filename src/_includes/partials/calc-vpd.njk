@@ -1,0 +1,59 @@
+{#- The vapour pressure deficit calculator, written by hand rather than published
+    from SpreadsheetConverter. The maths is in /assets/js/vpd.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="vpcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The equations are written out below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> US (°F, ft)</label>
+      <label><input type="radio" name="u" value="Metric"> Metric (°C, m)</label>
+    </fieldset>
+    <div class="field">
+      <label for="vp-t">Room temperature <span class="cf-u vp-t">°F</span></label>
+      <input type="number" id="vp-t" name="t" inputmode="decimal" step="any" required autocomplete="off" placeholder="77">
+    </div>
+    <fieldset class="cf-radios">
+      <legend>Humidity from</legend>
+      <label><input type="radio" name="hm" value="rh" checked> Relative humidity</label>
+      <label><input type="radio" name="hm" value="wb"> Wet bulb</label>
+    </fieldset>
+    <div class="field" id="vp-rh-f">
+      <label for="vp-rh">Relative humidity <span class="cf-u">%</span></label>
+      <input type="number" id="vp-rh" name="rh" inputmode="decimal" step="any" min="0" max="100" autocomplete="off" placeholder="55">
+    </div>
+    <div class="field" id="vp-wb-f" hidden>
+      <label for="vp-wb">Wet bulb <span class="cf-u vp-t">°F</span></label>
+      <input type="number" id="vp-wb" name="wb" inputmode="decimal" step="any" autocomplete="off" placeholder="65">
+    </div>
+    <div class="field">
+      <label for="vp-leaf">Leaf temperature (optional) <span class="cf-u vp-t">°F</span></label>
+      <input type="number" id="vp-leaf" name="lf" inputmode="decimal" step="any" autocomplete="off" placeholder="75">
+    </div>
+    <div class="field">
+      <label for="vp-alt">Altitude <span class="cf-u" id="vp-altu">ft</span></label>
+      <input type="number" id="vp-alt" name="z" inputmode="decimal" step="any" required autocomplete="off" value="0" placeholder="0">
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="vp-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="vp-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="vp-results-h">
+    <h2 id="vp-results-h">Vapor pressure deficit</h2>
+    <p class="cf-summary" id="vp-summary" role="status">Enter the room temperature.</p>
+    <table class="cf-table" id="vp-table" hidden>
+      <caption class="visually-hidden">Vapor pressure deficit and air properties</caption>
+      <tbody id="vp-tbody"></tbody>
+    </table>
+    <p class="cf-note">High VPD: the air is relatively dry. Low VPD: the air is relatively saturated.</p>
+  </section>
+</form>

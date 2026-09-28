@@ -1,0 +1,54 @@
+{#- Calculator Updates signup. Included in the footer on every page, and again
+    at full width on /calculator-updates.
+
+    The list host is not baked into the markup. `action` and the input names
+    come from `site.updates` in src/_data/site.json, because every provider
+    names its fields differently (email_address vs EMAIL vs email) and hardcoding
+    one would mean editing templates to switch. Read the names off the provider's
+    own embed code and put them in the data file.
+
+    Set `nlWide` before including for the full-width variant.
+
+    When `action` is empty the form is not rendered at all — unlike a broken
+    action URL, a mailto line cannot silently swallow what someone types. -#}
+{%- set nl = site.updates %}
+{#- A placeholder address (YOUR-…) counts as not set: the form would only error. #}
+{%- if nl.action and not ("YOUR-" in nl.action) %}
+<form class="nlform{% if nlWide %} nlform-wide{% endif %}" method="POST" action="{{ nl.action }}">
+  {%- if nl.redirectField %}
+  <input type="hidden" name="{{ nl.redirectField }}" value="{{ site.url }}/calculator-updates/thanks">
+  {%- endif %}
+  {%- if nl.honeypotField %}
+  {#- Honeypot, off-screen rather than display:none — some bots skip hidden fields. #}
+  <p class="hp" aria-hidden="true">
+    <label for="nl-hp{{ nlWide | default('') }}">Leave this field empty</label>
+    <input id="nl-hp{{ nlWide | default('') }}" type="text" name="{{ nl.honeypotField }}" tabindex="-1" autocomplete="off">
+  </p>
+  {%- endif %}
+
+  <div class="nlform-fields">
+    {#- Only rendered once `nameField` holds the provider's real parameter name.
+        A guessed name would be accepted by the POST and then silently dropped,
+        so the field stays off until someone has read it off the embed code. #}
+    {%- if nl.nameField %}
+    <div class="field">
+      <label for="nl-name{{ nlWide | default('') }}">Name <span class="opt">optional</span></label>
+      <input id="nl-name{{ nlWide | default('') }}" name="{{ nl.nameField }}" type="text" autocomplete="name">
+    </div>
+    {%- endif %}
+    <div class="field">
+      <label for="nl-email{{ nlWide | default('') }}">Email <span class="req" aria-hidden="true">*</span></label>
+      <input id="nl-email{{ nlWide | default('') }}" name="{{ nl.emailField }}" type="email" required autocomplete="email">
+    </div>
+    <p class="form-actions">
+      <button class="btn" type="submit">Sign up</button>
+    </p>
+  </div>
+</form>
+{%- else %}
+<p class="nlform-fallback">
+  Sign-up by form isn’t open yet. Email
+  <a href="mailto:{{ site.contact.email }}?subject={{ nl.listName | urlencode }}">{{ site.contact.email }}</a>
+  and we will add you to the list.
+</p>
+{%- endif %}

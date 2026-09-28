@@ -1,0 +1,44 @@
+{#- The dehumidifier selector, written by hand rather than published from
+    SpreadsheetConverter. The catalog and the selection rule are in
+    /assets/js/dehumidifier.js, which check-calculators.mjs holds to the
+    workbook's own answers; this is only the form. It never submits. -#}
+<form class="calcform" id="dhcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The full list of dehumidifiers is printed below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Capacity units</legend>
+      <label><input type="radio" name="u" value="Pints/day" checked> Pints/day</label>
+      <label><input type="radio" name="u" value="BTU/h"> Btu/h</label>
+      <label><input type="radio" name="u" value="kW"> kW</label>
+    </fieldset>
+    <div class="field"><label for="dh-cap">Required latent capacity <span class="cf-u" id="dh-cu">pints/day</span></label>
+      <input type="number" id="dh-cap" name="c" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="90" required></div>
+    <p class="hint">The excess latent load to remove, from a load calculation or the <a href="/condensate-calculator">condensate calculator</a>.</p>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="dh-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="dh-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="dh-results-h">
+    <h2 id="dh-results-h">Dehumidifiers that meet it</h2>
+    <p class="cf-summary" id="dh-summary" role="status">Enter the required capacity.</p>
+    <table class="cf-table">
+      <caption class="visually-hidden">Required capacity in each unit</caption>
+      <tbody id="dh-conv"></tbody>
+    </table>
+    <div class="table-scroll" id="dh-list" hidden>
+      <table class="cf-table dh-models">
+        <caption class="visually-hidden">Recommended dehumidifiers</caption>
+        <thead><tr><th scope="col">Model (spec sheet)</th><th scope="col" class="cf-num">Pints/day</th><th scope="col" class="cf-num">cfm</th><th scope="col" class="cf-num">Pints/kWh</th><th scope="col" class="cf-num">Approx. price</th></tr></thead>
+        <tbody id="dh-tbody"></tbody>
+      </table>
+    </div>
+    <p class="cf-note">Ratings at 80°F / 60% RH entering air. Prices from an internet search on 26 September 2026. Always confirm the selection with the manufacturer.</p>
+  </section>
+</form>

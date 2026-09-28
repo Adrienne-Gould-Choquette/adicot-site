@@ -1,0 +1,86 @@
+{#- Temperature loss through an air duct, written by hand rather than published
+    from SpreadsheetConverter. The maths is in /assets/js/ducttemp.js, which
+    check-calculators.mjs holds to the workbook's own answers; this is only the
+    form. It never submits: nothing leaves the browser. -#}
+<form class="calcform" id="dtcalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
+    The method is written out step by step below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Duct shape</legend>
+      <label><input type="radio" name="s" value="Rectangular" checked> Rectangular</label>
+      <label><input type="radio" name="s" value="Round"> Round</label>
+    </fieldset>
+
+    <div class="field" id="dt-rect">
+      <div class="cf-pair">
+        <div>
+          <label for="dt-h">Height <span class="cf-u">in</span></label>
+          <input type="number" id="dt-h" name="h" inputmode="decimal" step="any" min="0" required autocomplete="off" value="16" placeholder="16">
+        </div>
+        <div>
+          <label for="dt-w">Width <span class="cf-u">in</span></label>
+          <input type="number" id="dt-w" name="w" inputmode="decimal" step="any" min="0" required autocomplete="off" value="14" placeholder="14">
+        </div>
+      </div>
+    </div>
+    <div class="field" id="dt-round" hidden>
+      <label for="dt-d">Inside diameter <span class="cf-u">in</span> <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="dt-d" name="d" inputmode="decimal" step="any" min="0" autocomplete="off" value="18" placeholder="18">
+    </div>
+
+    <div class="field">
+      <label for="dt-ext">Exterior duct conditions</label>
+      <select id="dt-ext" name="x">
+        <option value="0">Still air, h = 1 Btu/h·ft²·°F</option>
+        <option value="1" selected>Moving air, h = 1.75 Btu/h·ft²·°F</option>
+        <option value="2">Outdoors (wind), h = 4 Btu/h·ft²·°F</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="dt-q">Air flow rate, Q <span class="cf-u">cfm</span> <span class="req" aria-hidden="true">*</span></label>
+      <input type="number" id="dt-q" name="q" inputmode="decimal" step="any" min="0" required autocomplete="off" value="1000" placeholder="1000">
+    </div>
+    <div class="cf-pair field">
+      <div>
+        <label for="dt-ta">Entering air <span class="cf-u">°F</span></label>
+        <input type="number" id="dt-ta" name="ta" inputmode="decimal" step="any" required autocomplete="off" value="155" placeholder="155">
+      </div>
+      <div>
+        <label for="dt-to">Outside the duct <span class="cf-u">°F</span></label>
+        <input type="number" id="dt-to" name="to" inputmode="decimal" step="any" required autocomplete="off" value="-4" placeholder="-4">
+      </div>
+    </div>
+    <div class="cf-pair field">
+      <div>
+        <label for="dt-r">Insulation <span class="cf-u">R-value</span></label>
+        <input type="number" id="dt-r" name="r" inputmode="decimal" step="any" min="0" required autocomplete="off" value="6" placeholder="6">
+      </div>
+      <div>
+        <label for="dt-l">Duct length <span class="cf-u">ft</span></label>
+        <input type="number" id="dt-l" name="l" inputmode="decimal" step="any" min="0" required autocomplete="off" value="100" placeholder="100">
+      </div>
+    </div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="dt-share" hidden>Copy link to this result</button>
+      <span class="cf-copied" id="dt-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="dt-results-h">
+    <h2 id="dt-results-h">Exit air temperature</h2>
+    <p class="cf-summary" id="dt-summary" role="status">Enter the duct height.</p>
+    <table class="cf-table" id="dt-table" hidden>
+      <caption class="visually-hidden">Exit air temperature and the values it was calculated from</caption>
+      <tbody id="dt-tbody"></tbody>
+    </table>
+    <img class="cf-figure" id="dt-fig" src="/images/temp-loss-rectangular-duct.jpg" width="1200" height="852"
+         alt="Heat transfer through the wall of an insulated rectangular duct" loading="lazy">
+  </section>
+</form>

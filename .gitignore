@@ -1,0 +1,24 @@
+node_modules/
+_site/
+icon-review.html
+.DS_Store
+*.log
+qa-review.html
+
+# Contact/subscriber exports must never be committed.
+*.csv
+
+# ...but this one is a test fixture, not an export: it is ductulator.py's own
+# output and the duct model gate checks the JavaScript against it.
+!ductulator-cases.csv
+# Likewise the calculator answer keys: each is written by tools/gen-cases.mjs
+# from a workbook, and check-calculators.mjs fails the build without it.
+!calc-cases/*.csv
+# And the list of URLs the Wix site published, which verify-urls.mjs holds the
+# site to. Page addresses only, no personal data.
+!deploy/wix-url-inventory.csv
+# And the Cloudflare Bulk Redirects list: domains only.
+!deploy/cloudflare/bulk-redirects.csv
+
+# Reference PDFs (e.g. manufacturer catalogs) dropped in the project root are not site content.
+/*.pdf

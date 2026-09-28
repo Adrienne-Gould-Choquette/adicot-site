@@ -1,0 +1,31 @@
+# Render — copy this file to the repo root.
+services:
+  - type: web
+    name: adicot-com
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./_site
+    pullRequestPreviewsEnabled: true
+    headers:
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /images/*
+        name: Cache-Control
+        value: public, max-age=31536000
+      - path: /calculators/*
+        name: Cache-Control
+        value: public, max-age=86400
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+# Render serves _site/404.html automatically for unmatched paths; no route
+# rules are needed for a multi-page static site (a catch-all rewrite would
+# break every real URL).
+#
+# Apex -> www and the adicotengineering.com redirect are set in the Render
+# dashboard under Settings > Custom Domains (Render handles cross-domain
+# redirects there rather than in this file).

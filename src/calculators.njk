@@ -1,0 +1,77 @@
+---
+layout: layouts/base.njk
+title: All Engineering Calculators
+seoTitle: "All Engineering Calculators | adicot.com"
+description: "Free online HVAC, electrical, economics and unit-conversion calculators from Adicot, Inc. Duct sizing, psychrometrics, ventilation, coil selection and more."
+permalink: /calculators.html
+pageScript: favorites.js
+---
+<div class="page-head">
+  <h1>All Engineering Calculators</h1>
+  <p class="subtitle">{{ calculatorCount }} free tools for HVAC design, building-code compliance and everyday engineering math.</p>
+</div>
+
+<nav class="jump" aria-label="Jump to category">
+  {%- for group in taxonomy %}
+  <a href="#{{ group.name | slugify }}">{{ group.name }}</a>
+  {%- endfor %}
+  <a href="#helpful-links">Helpful Links</a>
+</nav>
+
+<input type="checkbox" id="favonly" class="favonly-input">
+<div class="favbar">
+  <label for="favonly" class="favonly-label">
+    <span class="star" aria-hidden="true"></span> Show favorites only
+  </label>
+  <button type="button" id="favreset" class="favreset" hidden>Reset to suggested</button>
+  <span class="favhint" hidden>Tap a star to keep your own list on this device.</span>
+</div>
+
+<p class="favempty" hidden>You have no favorites starred. Uncheck the filter, or star a calculator to add it.</p>
+
+<div class="catgroups">
+  {%- for group in taxonomy %}
+  <section class="catgroup" id="{{ group.name | slugify }}">
+    <h2>{{ group.name }}</h2>
+    {% if group.note %}<p class="groupnote">{{ group.note }}</p>{% endif %}
+    <ul class="cards">
+      {%- for item in group.items %}
+      <li class="card{% if item.fav %} is-fav{% endif %}" data-path="{{ item.path }}">
+        <a class="card-link" href="{{ item.path }}">
+          <span class="card-top">
+            {% if item.icon %}<img class="card-icon" src="{{ item.icon | iconUrl }}" alt="" loading="lazy" width="34" height="34">{% endif %}
+            <strong>{{ item.label }}</strong>
+          </span>
+          <span class="card-desc">{{ blurbs[item.path] | cardBlurb | truncate(84) }}</span>
+        </a>
+        {# Static star until favorites.js upgrades it to a real toggle. #}
+        <span class="star card-star" data-label="{{ item.label }}" aria-hidden="true"></span>
+        {% if item.isNew %}<span class="badge">NEW</span>{% endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endfor %}
+</div>
+
+<section class="linksection" id="helpful-links">
+  <h2>Helpful Links</h2>
+  <p class="subtitle">Manufacturer literature, codes and product-approval directories.</p>
+
+  {%- for group in links %}
+  <div class="linkgroup">
+    <h3>{{ group.name }}</h3>
+    <ul class="linklist">
+      {%- for item in group.items %}
+      <li>
+        <a href="{{ item.url }}"{% if not item.internal %} target="_blank" rel="noopener"{% endif %}>
+          {{ item.label }}
+          {% if item.fav %}<span class="star" title="Favorite" aria-label="Favorite"></span>{% endif %}
+          {%- if not item.internal %}<span class="ext" aria-hidden="true">&#8599;</span>{% endif %}
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endfor %}
+</section>

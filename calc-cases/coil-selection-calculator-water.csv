@@ -1,0 +1,185 @@
+units,find,load,te,tl,flow,fluid,coil,result
+English,Heat Load,240000,45,55,48,Ethylene Glycol 10%,Cooling,230883.10186732007
+English,Heat Load,480000,180,160,48,Ethylene Glycol 10%,Heating,461766.20373464015
+English,Temp-Entering,240000,45,55,48,Ethylene Glycol 10%,Cooling,44.60512925983128
+English,Temp-Entering,480000,180,160,48,Ethylene Glycol 10%,Heating,180.78974148033745
+English,Temp-Leaving,240000,45,55,48,Ethylene Glycol 10%,Cooling,55.39487074016872
+English,Temp-Leaving,480000,180,160,48,Ethylene Glycol 10%,Heating,159.21025851966255
+English,Volumetric Flow Rate,240000,45,55,48,Ethylene Glycol 10%,Cooling,49.895379552809864
+English,Volumetric Flow Rate,480000,180,160,48,Ethylene Glycol 10%,Heating,49.895379552809864
+English,Heat Load,240000,45,55,48,Ethylene Glycol 20%,Cooling,225168.12067887851
+English,Heat Load,480000,180,160,48,Ethylene Glycol 20%,Heating,450336.241357757
+English,Temp-Entering,240000,45,55,48,Ethylene Glycol 20%,Cooling,44.341297547965333
+English,Temp-Entering,480000,180,160,48,Ethylene Glycol 20%,Heating,181.31740490406932
+English,Temp-Leaving,240000,45,55,48,Ethylene Glycol 20%,Cooling,55.658702452034667
+English,Temp-Leaving,480000,180,160,48,Ethylene Glycol 20%,Heating,158.68259509593068
+English,Volumetric Flow Rate,240000,45,55,48,Ethylene Glycol 20%,Cooling,51.161771769766396
+English,Volumetric Flow Rate,480000,180,160,48,Ethylene Glycol 20%,Heating,51.161771769766396
+English,Heat Load,240000,45,55,48,Ethylene Glycol 30%,Cooling,218252.70092259813
+English,Heat Load,480000,180,160,48,Ethylene Glycol 30%,Heating,436505.40184519626
+English,Temp-Entering,240000,45,55,48,Ethylene Glycol 30%,Cooling,44.003572510879742
+English,Temp-Entering,480000,180,160,48,Ethylene Glycol 30%,Heating,181.9928549782405
+English,Temp-Leaving,240000,45,55,48,Ethylene Glycol 30%,Cooling,55.996427489120258
+English,Temp-Leaving,480000,180,160,48,Ethylene Glycol 30%,Heating,158.0071450217595
+English,Volumetric Flow Rate,240000,45,55,48,Ethylene Glycol 30%,Cooling,52.782851947777232
+English,Volumetric Flow Rate,480000,180,160,48,Ethylene Glycol 30%,Heating,52.782851947777232
+English,Heat Load,240000,45,55,48,Ethylene Glycol 40%,Cooling,210321.65218996364
+English,Heat Load,480000,180,160,48,Ethylene Glycol 40%,Heating,420643.30437992729
+English,Temp-Entering,240000,45,55,48,Ethylene Glycol 40%,Cooling,43.588906681693871
+English,Temp-Entering,480000,180,160,48,Ethylene Glycol 40%,Heating,182.82218663661226
+English,Temp-Leaving,240000,45,55,48,Ethylene Glycol 40%,Cooling,56.411093318306129
+English,Temp-Leaving,480000,180,160,48,Ethylene Glycol 40%,Heating,157.17781336338774
+English,Volumetric Flow Rate,240000,45,55,48,Ethylene Glycol 40%,Cooling,54.77324792786942
+English,Volumetric Flow Rate,480000,180,160,48,Ethylene Glycol 40%,Heating,54.77324792786942
+English,Heat Load,240000,45,55,48,Ethylene Glycol 50%,Cooling,201327.32458956508
+English,Heat Load,480000,180,160,48,Ethylene Glycol 50%,Heating,402654.64917913015
+English,Temp-Entering,240000,45,55,48,Ethylene Glycol 50%,Cooling,43.079114422780179
+English,Temp-Entering,480000,180,160,48,Ethylene Glycol 50%,Heating,183.84177115443964
+English,Temp-Leaving,240000,45,55,48,Ethylene Glycol 50%,Cooling,56.920885577219821
+English,Temp-Leaving,480000,180,160,48,Ethylene Glycol 50%,Heating,156.15822884556036
+English,Volumetric Flow Rate,240000,45,55,48,Ethylene Glycol 50%,Cooling,57.220250770655149
+English,Volumetric Flow Rate,480000,180,160,48,Ethylene Glycol 50%,Heating,57.220250770655149
+English,Heat Load,240000,45,55,48,Propylene Glycol 10%,Cooling,235746.73986006505
+English,Heat Load,480000,180,160,48,Propylene Glycol 10%,Heating,471493.4797201301
+English,Temp-Entering,240000,45,55,48,Propylene Glycol 10%,Cooling,44.819583501241226
+English,Temp-Entering,480000,180,160,48,Propylene Glycol 10%,Heating,180.36083299751755
+English,Temp-Leaving,240000,45,55,48,Propylene Glycol 10%,Cooling,55.180416498758774
+English,Temp-Leaving,480000,180,160,48,Propylene Glycol 10%,Heating,159.63916700248245
+English,Volumetric Flow Rate,240000,45,55,48,Propylene Glycol 10%,Cooling,48.865999194042132
+English,Volumetric Flow Rate,480000,180,160,48,Propylene Glycol 10%,Heating,48.865999194042132
+English,Heat Load,240000,45,55,48,Propylene Glycol 20%,Cooling,232198.59650992346
+English,Heat Load,480000,180,160,48,Propylene Glycol 20%,Heating,464397.19301984692
+English,Temp-Entering,240000,45,55,48,Propylene Glycol 20%,Cooling,44.664020213414894
+English,Temp-Entering,480000,180,160,48,Propylene Glycol 20%,Heating,180.67195957317023
+English,Temp-Leaving,240000,45,55,48,Propylene Glycol 20%,Cooling,55.335979786585106
+English,Temp-Leaving,480000,180,160,48,Propylene Glycol 20%,Heating,159.32804042682977
+English,Volumetric Flow Rate,240000,45,55,48,Propylene Glycol 20%,Cooling,49.612702975608514
+English,Volumetric Flow Rate,480000,180,160,48,Propylene Glycol 20%,Heating,49.612702975608514
+English,Heat Load,240000,45,55,48,Propylene Glycol 30%,Cooling,226809.88604833197
+English,Heat Load,480000,180,160,48,Propylene Glycol 30%,Heating,453619.77209666395
+English,Temp-Entering,240000,45,55,48,Propylene Glycol 30%,Cooling,44.418450660089071
+English,Temp-Entering,480000,180,160,48,Propylene Glycol 30%,Heating,181.16309867982187
+English,Temp-Leaving,240000,45,55,48,Propylene Glycol 30%,Cooling,55.581549339910929
+English,Temp-Leaving,480000,180,160,48,Propylene Glycol 30%,Heating,158.83690132017813
+English,Volumetric Flow Rate,240000,45,55,48,Propylene Glycol 30%,Cooling,50.791436831572447
+English,Volumetric Flow Rate,480000,180,160,48,Propylene Glycol 30%,Heating,50.791436831572447
+English,Heat Load,240000,45,55,48,Propylene Glycol 40%,Cooling,219717.3634627162
+English,Heat Load,480000,180,160,48,Propylene Glycol 40%,Heating,439434.72692543239
+English,Temp-Entering,240000,45,55,48,Propylene Glycol 40%,Cooling,44.076876027564133
+English,Temp-Entering,480000,180,160,48,Propylene Glycol 40%,Heating,181.84624794487172
+English,Temp-Leaving,240000,45,55,48,Propylene Glycol 40%,Cooling,55.923123972435867
+English,Temp-Leaving,480000,180,160,48,Propylene Glycol 40%,Heating,158.15375205512828
+English,Volumetric Flow Rate,240000,45,55,48,Propylene Glycol 40%,Cooling,52.430995067692166
+English,Volumetric Flow Rate,480000,180,160,48,Propylene Glycol 40%,Heating,52.430995067692166
+English,Heat Load,240000,45,55,48,Propylene Glycol 50%,Cooling,210847.35440317341
+English,Heat Load,480000,180,160,48,Propylene Glycol 50%,Heating,421694.70880634681
+English,Temp-Entering,240000,45,55,48,Propylene Glycol 50%,Cooling,43.617357771486091
+English,Temp-Entering,480000,180,160,48,Propylene Glycol 50%,Heating,182.76528445702783
+English,Temp-Leaving,240000,45,55,48,Propylene Glycol 50%,Cooling,56.382642228513909
+English,Temp-Leaving,480000,180,160,48,Propylene Glycol 50%,Heating,157.23471554297217
+English,Volumetric Flow Rate,240000,45,55,48,Propylene Glycol 50%,Cooling,54.636682696866764
+English,Volumetric Flow Rate,480000,180,160,48,Propylene Glycol 50%,Heating,54.636682696866764
+English,Heat Load,240000,45,55,48,Water,Cooling,240432.19199999995
+English,Heat Load,480000,180,160,48,Water,Heating,480864.3839999999
+English,Temp-Entering,240000,45,55,48,Water,Cooling,45.017975629486415
+English,Temp-Entering,480000,180,160,48,Water,Heating,179.96404874102717
+English,Temp-Leaving,240000,45,55,48,Water,Cooling,54.982024370513585
+English,Temp-Leaving,480000,180,160,48,Water,Heating,160.03595125897283
+English,Volumetric Flow Rate,240000,45,55,48,Water,Cooling,47.913716978465189
+English,Volumetric Flow Rate,480000,180,160,48,Water,Heating,47.913716978465189
+Metric,Heat Load,70,7,12.5,3.1,Ethylene Glycol 10%,Cooling,68.5739032605
+Metric,Heat Load,140,82,71,3.1,Ethylene Glycol 10%,Heating,137.147806521
+Metric,Temp-Entering,70,7,12.5,3.1,Ethylene Glycol 10%,Cooling,6.885619285262881
+Metric,Temp-Entering,140,82,71,3.1,Ethylene Glycol 10%,Heating,82.228761429474233
+Metric,Temp-Leaving,70,7,12.5,3.1,Ethylene Glycol 10%,Cooling,12.61438071473712
+Metric,Temp-Leaving,140,82,71,3.1,Ethylene Glycol 10%,Heating,70.771238570525767
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Ethylene Glycol 10%,Cooling,3.1644691301245582
+Metric,Volumetric Flow Rate,140,82,71,3.1,Ethylene Glycol 10%,Heating,3.1644691301245582
+Metric,Heat Load,70,7,12.5,3.1,Ethylene Glycol 20%,Cooling,66.8765136985
+Metric,Heat Load,140,82,71,3.1,Ethylene Glycol 20%,Heating,133.753027397
+Metric,Temp-Entering,70,7,12.5,3.1,Ethylene Glycol 20%,Cooling,6.7431209596884933
+Metric,Temp-Entering,140,82,71,3.1,Ethylene Glycol 20%,Heating,82.513758080623
+Metric,Temp-Leaving,70,7,12.5,3.1,Ethylene Glycol 20%,Cooling,12.756879040311507
+Metric,Temp-Leaving,140,82,71,3.1,Ethylene Glycol 20%,Heating,70.486241919377
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Ethylene Glycol 20%,Cooling,3.2447863681755762
+Metric,Volumetric Flow Rate,140,82,71,3.1,Ethylene Glycol 20%,Heating,3.2447863681755762
+Metric,Heat Load,70,7,12.5,3.1,Ethylene Glycol 30%,Cooling,64.822585448499993
+Metric,Heat Load,140,82,71,3.1,Ethylene Glycol 30%,Heating,129.64517089699999
+Metric,Temp-Entering,70,7,12.5,3.1,Ethylene Glycol 30%,Cooling,6.5607120599058275
+Metric,Temp-Entering,140,82,71,3.1,Ethylene Glycol 30%,Heating,82.87857588018835
+Metric,Temp-Leaving,70,7,12.5,3.1,Ethylene Glycol 30%,Cooling,12.939287940094172
+Metric,Temp-Leaving,140,82,71,3.1,Ethylene Glycol 30%,Heating,70.12142411981165
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Ethylene Glycol 30%,Cooling,3.3475986571439882
+Metric,Volumetric Flow Rate,140,82,71,3.1,Ethylene Glycol 30%,Heating,3.3475986571439882
+Metric,Heat Load,70,7,12.5,3.1,Ethylene Glycol 40%,Cooling,62.467008257500005
+Metric,Heat Load,140,82,71,3.1,Ethylene Glycol 40%,Heating,124.93401651500001
+Metric,Temp-Entering,70,7,12.5,3.1,Ethylene Glycol 40%,Cooling,6.336746616502551
+Metric,Temp-Entering,140,82,71,3.1,Ethylene Glycol 40%,Heating,83.3265067669949
+Metric,Temp-Leaving,70,7,12.5,3.1,Ethylene Glycol 40%,Cooling,13.163253383497448
+Metric,Temp-Leaving,140,82,71,3.1,Ethylene Glycol 40%,Heating,69.6734932330051
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Ethylene Glycol 40%,Cooling,3.4738337252440172
+Metric,Volumetric Flow Rate,140,82,71,3.1,Ethylene Glycol 40%,Heating,3.4738337252440172
+Metric,Heat Load,70,7,12.5,3.1,Ethylene Glycol 50%,Cooling,59.795629773
+Metric,Heat Load,140,82,71,3.1,Ethylene Glycol 50%,Heating,119.591259546
+Metric,Temp-Entering,70,7,12.5,3.1,Ethylene Glycol 50%,Cooling,6.0614023723546078
+Metric,Temp-Entering,140,82,71,3.1,Ethylene Glycol 50%,Heating,83.877195255290786
+Metric,Temp-Leaving,70,7,12.5,3.1,Ethylene Glycol 50%,Cooling,13.438597627645393
+Metric,Temp-Leaving,140,82,71,3.1,Ethylene Glycol 50%,Heating,69.122804744709214
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Ethylene Glycol 50%,Cooling,3.6290277537637663
+Metric,Volumetric Flow Rate,140,82,71,3.1,Ethylene Glycol 50%,Heating,3.6290277537637663
+Metric,Heat Load,70,7,12.5,3.1,Propylene Glycol 10%,Cooling,70.0184379125
+Metric,Heat Load,140,82,71,3.1,Propylene Glycol 10%,Heating,140.036875825
+Metric,Temp-Entering,70,7,12.5,3.1,Propylene Glycol 10%,Cooling,7.001448311641524
+Metric,Temp-Entering,140,82,71,3.1,Propylene Glycol 10%,Heating,81.99710337671695
+Metric,Temp-Leaving,70,7,12.5,3.1,Propylene Glycol 10%,Cooling,12.498551688358475
+Metric,Temp-Leaving,140,82,71,3.1,Propylene Glycol 10%,Heating,71.00289662328305
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Propylene Glycol 10%,Cooling,3.0991836788929592
+Metric,Volumetric Flow Rate,140,82,71,3.1,Propylene Glycol 10%,Heating,3.0991836788929592
+Metric,Heat Load,70,7,12.5,3.1,Propylene Glycol 20%,Cooling,68.964614411
+Metric,Heat Load,140,82,71,3.1,Propylene Glycol 20%,Heating,137.929228822
+Metric,Temp-Entering,70,7,12.5,3.1,Propylene Glycol 20%,Cooling,6.917426918309693
+Metric,Temp-Entering,140,82,71,3.1,Propylene Glycol 20%,Heating,82.165146163380612
+Metric,Temp-Leaving,70,7,12.5,3.1,Propylene Glycol 20%,Cooling,12.582573081690306
+Metric,Temp-Leaving,140,82,71,3.1,Propylene Glycol 20%,Heating,70.834853836619388
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Propylene Glycol 20%,Cooling,3.1465411914981734
+Metric,Volumetric Flow Rate,140,82,71,3.1,Propylene Glycol 20%,Heating,3.1465411914981734
+Metric,Heat Load,70,7,12.5,3.1,Propylene Glycol 30%,Cooling,67.364129547
+Metric,Heat Load,140,82,71,3.1,Propylene Glycol 30%,Heating,134.728259094
+Metric,Temp-Entering,70,7,12.5,3.1,Propylene Glycol 30%,Cooling,6.7847921796215713
+Metric,Temp-Entering,140,82,71,3.1,Propylene Glycol 30%,Heating,82.430415640756863
+Metric,Temp-Leaving,70,7,12.5,3.1,Propylene Glycol 30%,Cooling,12.715207820378428
+Metric,Temp-Leaving,140,82,71,3.1,Propylene Glycol 30%,Heating,70.569584359243137
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Propylene Glycol 30%,Cooling,3.2212989533042053
+Metric,Volumetric Flow Rate,140,82,71,3.1,Propylene Glycol 30%,Heating,3.2212989533042053
+Metric,Heat Load,70,7,12.5,3.1,Propylene Glycol 40%,Cooling,65.2576005125
+Metric,Heat Load,140,82,71,3.1,Propylene Glycol 40%,Heating,130.515201025
+Metric,Temp-Entering,70,7,12.5,3.1,Propylene Glycol 40%,Cooling,6.600304072224449
+Metric,Temp-Entering,140,82,71,3.1,Propylene Glycol 40%,Heating,82.799391855551107
+Metric,Temp-Leaving,70,7,12.5,3.1,Propylene Glycol 40%,Cooling,12.89969592777555
+Metric,Temp-Leaving,140,82,71,3.1,Propylene Glycol 40%,Heating,70.200608144448893
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Propylene Glycol 40%,Cooling,3.3252831592916747
+Metric,Volumetric Flow Rate,140,82,71,3.1,Propylene Glycol 40%,Heating,3.3252831592916747
+Metric,Heat Load,70,7,12.5,3.1,Propylene Glycol 50%,Cooling,62.623145508
+Metric,Heat Load,140,82,71,3.1,Propylene Glycol 50%,Heating,125.246291016
+Metric,Temp-Entering,70,7,12.5,3.1,Propylene Glycol 50%,Cooling,6.3521133539863959
+Metric,Temp-Entering,140,82,71,3.1,Propylene Glycol 50%,Heating,83.2957732920272
+Metric,Temp-Leaving,70,7,12.5,3.1,Propylene Glycol 50%,Cooling,13.147886646013603
+Metric,Temp-Leaving,140,82,71,3.1,Propylene Glycol 50%,Heating,69.7042267079728
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Propylene Glycol 50%,Cooling,3.4651724732076676
+Metric,Volumetric Flow Rate,140,82,71,3.1,Propylene Glycol 50%,Heating,3.4651724732076676
+Metric,Heat Load,70,7,12.5,3.1,Water,Cooling,71.386565291250008
+Metric,Heat Load,140,82,71,3.1,Water,Heating,142.77313058250002
+Metric,Temp-Entering,70,7,12.5,3.1,Water,Cooling,7.1068283516759942
+Metric,Temp-Entering,140,82,71,3.1,Water,Heating,81.786343296648013
+Metric,Temp-Leaving,70,7,12.5,3.1,Water,Cooling,12.393171648324007
+Metric,Temp-Leaving,140,82,71,3.1,Water,Heating,71.213656703351987
+Metric,Volumetric Flow Rate,70,7,12.5,3.1,Water,Cooling,3.0397876563280759
+Metric,Volumetric Flow Rate,140,82,71,3.1,Water,Heating,3.0397876563280759
+Metric,Temp-Entering,40,-8,-3,2,Propylene Glycol 40%,Cooling,-8.225444964601202
+English,Temp-Entering,90000,10,20,20,Ethylene Glycol 50%,Cooling,9.2712029805021583
+Metric,Temp-Leaving,40,-8,-3,2,Propylene Glycol 40%,Cooling,-2.7745550353987971
+English,Temp-Leaving,90000,10,20,20,Ethylene Glycol 50%,Cooling,20.72879701949784
+Metric,Temp-Entering,40,-8,-3,2,Propylene Glycol 40%,Heating,2.2254449646012029
+English,Temp-Entering,90000,10,20,20,Ethylene Glycol 50%,Heating,30.72879701949784
+Metric,Temp-Leaving,40,-8,-3,2,Propylene Glycol 40%,Heating,-13.225444964601202
+English,Temp-Leaving,90000,10,20,20,Ethylene Glycol 50%,Heating,-0.7287970194978417

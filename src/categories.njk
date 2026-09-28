@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.categories
+  size: 1
+  alias: category
+permalink: "/blog/categories/{{ category.slug }}.html"
+eleventyComputed:
+  title: "{{ category.name | safe }}"
+  seoTitle: "{{ category.name | safe }} Articles | adicot.com"
+  description: "Articles on {{ category.name | safe }} from Adicot, Inc.: HVAC engineering notes, calculator walkthroughs and load-calculation guidance."
+---
+<div class="page-head">
+  <p class="crumb"><a href="/blog">Blog</a></p>
+  <h1>{{ category.name }}</h1>
+  <p class="subtitle">{{ category.posts.length }} post{% if category.posts.length != 1 %}s{% endif %}</p>
+</div>
+
+{%- set posts = category.posts %}
+{% include "partials/postlist.njk" %}
+
+<nav class="post-nav"><a href="/blog">&larr; All posts</a></nav>

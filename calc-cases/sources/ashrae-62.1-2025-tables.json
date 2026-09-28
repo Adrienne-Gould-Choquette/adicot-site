@@ -1,0 +1,1967 @@
+{
+ "source": "ANSI/ASHRAE Standard 62.1-2025, Ventilation and Acceptable Indoor Air Quality (ASHRAE 62.1-2025.pdf), Tables 6-1 and 6-2 and Normative Appendix E Table E-1, read by tools/extract/pdftext.mjs and tools/extract/ashrae621-2025.mjs",
+ "columns61": [
+  "Rp cfm/person",
+  "Rp L/s·person",
+  "Ra cfm/ft²",
+  "Ra L/s·m²",
+  "Default occupant density #/1000 ft² or #/100 m²",
+  "Air class",
+  "Maximum CO2 above ambient C6.1 (ppm)"
+ ],
+ "columns62": [
+  "cfm/unit",
+  "cfm/ft²",
+  "L/s·unit",
+  "L/s·m²",
+  "Air class"
+ ],
+ "columnsE1": [
+  "Rp cfm/person",
+  "Rp L/s·person",
+  "Ra cfm/ft²",
+  "Ra L/s·m²",
+  "Default occupant density",
+  "Air class"
+ ],
+ "table61": [
+  {
+   "group": "Animal Facilities",
+   "name": "Animal exam room (veterinary office)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "20",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal imaging (MRI/CT/PET)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal operating rooms",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal postoperative recovery room",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal preparation rooms",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal procedure room",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal surgery scrub",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Large-animal holding room",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Necropsy",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Small-animal-cage room (static cages)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Small-animal-cage room (ventilated cages)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Correctional Facilities",
+   "name": "Booking/waiting",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "50",
+    "2",
+    "1200"
+   ]
+  },
+  {
+   "group": "Correctional Facilities",
+   "name": "Cell",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.12",
+    "0.6",
+    "25",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Correctional Facilities",
+   "name": "Dayroom",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "30",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "Correctional Facilities",
+   "name": "Guard stations",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "15",
+    "1",
+    "1200"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Art classroom",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Assembly without fixed seats—concentrated (chairs only—fixed)",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "65",
+    "1",
+    "1200"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Classrooms (ages 5 to 8)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "25",
+    "1",
+    "600"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Classrooms (age 9+)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "35",
+    "1",
+    "600"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Corridors (ages 5+)",
+   "os": false,
+   "values": [
+    "—",
+    "—",
+    "0.12",
+    "0.6",
+    "—",
+    "1",
+    "NA"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Daycare sickroom",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "25",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Daycare (through age 4)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "25",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Information technology equipment facilities (occupiable)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "25",
+    "1",
+    "600"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Lecture hall (fixed seats)",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "143",
+    "1",
+    "1200"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Libraries",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.12",
+    "0.6",
+    "10",
+    "",
+    "600"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Media center",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "25",
+    "1",
+    "600"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Multiuse assembly (tables and chairs)",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "67",
+    "1",
+    "1200"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Music/theater/dance",
+   "os": true,
+   "values": [
+    "10",
+    "5",
+    "0.06",
+    "0.3",
+    "35",
+    "1",
+    "2100"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Science laboratories",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "25",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "University/college laboratories",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "25",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Educational Facilities",
+   "name": "Wood/metal shop",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Food and Beverage Service",
+   "name": "Bars, cocktail lounges",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.18",
+    "0.9",
+    "100",
+    "2",
+    "1200"
+   ]
+  },
+  {
+   "group": "Food and Beverage Service",
+   "name": "Cafeteria/fast-food dining",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.18",
+    "0.9",
+    "67",
+    "2",
+    "900"
+   ]
+  },
+  {
+   "group": "Food and Beverage Service",
+   "name": "Kitchen (cooking)",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "5",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Food and Beverage Service",
+   "name": "Restaurant dining rooms",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.18",
+    "0.9",
+    "67",
+    "2",
+    "1500"
+   ]
+  },
+  {
+   "group": "General",
+   "name": "Break rooms",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "25",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "General",
+   "name": "Coffee stations",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "20",
+    "1",
+    "1200"
+   ]
+  },
+  {
+   "group": "General",
+   "name": "Conference/meeting",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "50",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "General",
+   "name": "Corridors",
+   "os": true,
+   "values": [
+    "—",
+    "—",
+    "0.06",
+    "0.3",
+    "—",
+    "1",
+    "NA"
+   ]
+  },
+  {
+   "group": "General",
+   "name": "Occupiable storage rooms for liquids or gels",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.12",
+    "0.6",
+    "2",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Hotels, Motels, Resorts, Dormitories",
+   "name": "Barracks sleeping areas",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "20",
+    "1",
+    "900"
+   ]
+  },
+  {
+   "group": "Hotels, Motels, Resorts, Dormitories",
+   "name": "Bedroom/living room",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "10",
+    "1",
+    "600"
+   ]
+  },
+  {
+   "group": "Hotels, Motels, Resorts, Dormitories",
+   "name": "Laundry rooms, central",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.12",
+    "0.6",
+    "10",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Hotels, Motels, Resorts, Dormitories",
+   "name": "Laundry rooms within dwelling units",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.12",
+    "0.6",
+    "10",
+    "1",
+    "NA"
+   ]
+  },
+  {
+   "group": "Hotels, Motels, Resorts, Dormitories",
+   "name": "Lobbies/prefunction",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "30",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "Hotels, Motels, Resorts, Dormitories",
+   "name": "Multipurpose assembly",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "120",
+    "1",
+    "1800"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Banks or bank lobbies",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "15",
+    "1",
+    "900"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Bank vaults/safe deposit",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "5",
+    "2",
+    "600"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Freezer and refrigerated spaces (<50°F [10°C])",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0",
+    "0",
+    "0",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Information technology equipment facilities (occupiable)",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "3",
+    "1",
+    "NA"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Manufacturing where hazardous materials are not used",
+   "os": false,
+   "values": [
+    "10",
+    "5.0",
+    "0.18",
+    "0.9",
+    "7",
+    "2",
+    "600"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Manufacturing where hazardous materials are used (excludes heavy industrial and chemical processes)",
+   "os": false,
+   "values": [
+    "10",
+    "5.0",
+    "0.18",
+    "0.9",
+    "7",
+    "3",
+    "NA"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Pharmacy (prep. area)",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.18",
+    "0.9",
+    "10",
+    "2",
+    "900"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Photo studios",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.12",
+    "0.6",
+    "10",
+    "1",
+    "NA"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Shipping/receiving",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "2",
+    "2",
+    "700"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Sorting, packing, light assembly",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "7",
+    "2",
+    "900"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Telephone closets",
+   "os": false,
+   "values": [
+    "—",
+    "—",
+    "0.00",
+    "0.0",
+    "—",
+    "1",
+    "NA"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Transportation waiting",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "67",
+    "1",
+    "1800"
+   ]
+  },
+  {
+   "group": "Miscellaneous Spaces",
+   "name": "Warehouses",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.06",
+    "0.3",
+    "—",
+    "2",
+    "700"
+   ]
+  },
+  {
+   "group": "Office Buildings",
+   "name": "Main entry lobbies",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "10",
+    "1",
+    "1200"
+   ]
+  },
+  {
+   "group": "Office Buildings",
+   "name": "Occupiable storage rooms for dry materials",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "2",
+    "1",
+    "700"
+   ]
+  },
+  {
+   "group": "Office Buildings",
+   "name": "Office space",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "5",
+    "1",
+    "600"
+   ]
+  },
+  {
+   "group": "Office Buildings",
+   "name": "Reception areas",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "30",
+    "1",
+    "2100"
+   ]
+  },
+  {
+   "group": "Office Buildings",
+   "name": "Telephone/data entry",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "60",
+    "1",
+    "1800"
+   ]
+  },
+  {
+   "group": "Public Assembly Spaces",
+   "name": "Auditorium seating area",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "143",
+    "1",
+    "1800"
+   ]
+  },
+  {
+   "group": "Public Assembly Spaces",
+   "name": "Courtrooms",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "70",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "Public Assembly Spaces",
+   "name": "Legislative chambers",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "50",
+    "1",
+    "1800"
+   ]
+  },
+  {
+   "group": "Public Assembly Spaces",
+   "name": "Libraries",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.12",
+    "0.6",
+    "10",
+    "1",
+    "600"
+   ]
+  },
+  {
+   "group": "Public Assembly Spaces",
+   "name": "Lobbies",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "150",
+    "1",
+    "1800"
+   ]
+  },
+  {
+   "group": "Public Assembly Spaces",
+   "name": "Museums (children’s)",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "40",
+    "1",
+    "1800"
+   ]
+  },
+  {
+   "group": "Public Assembly Spaces",
+   "name": "Museums/galleries",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "33",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "Public Assembly Spaces",
+   "name": "Places of religious worship",
+   "os": true,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "120",
+    "1",
+    "1800"
+   ]
+  },
+  {
+   "group": "Residential",
+   "name": "Common corridors",
+   "os": true,
+   "values": [
+    "—",
+    "—",
+    "0.06",
+    "0.3",
+    "",
+    "1",
+    "NA"
+   ]
+  },
+  {
+   "group": "Retail",
+   "name": "Sales (except as below)",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "15",
+    "2",
+    "900"
+   ]
+  },
+  {
+   "group": "Retail",
+   "name": "Barbershop",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "7",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Retail",
+   "name": "Beauty and nail salons",
+   "os": false,
+   "values": [
+    "20",
+    "10",
+    "0.12",
+    "0.6",
+    "7",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Retail",
+   "name": "Coin-operated laundries",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "7",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Retail",
+   "name": "Mall common areas",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "33",
+    "1",
+    "2100"
+   ]
+  },
+  {
+   "group": "Retail",
+   "name": "Pet shops (animal areas)",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.18",
+    "0.9",
+    "10",
+    "2",
+    "NA"
+   ]
+  },
+  {
+   "group": "Retail",
+   "name": "Supermarket",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "8",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Bowling alley (seating)",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "40",
+    "1",
+    "900"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Disco/dance floors",
+   "os": true,
+   "values": [
+    "20",
+    "10",
+    "0.06",
+    "0.3",
+    "100",
+    "2",
+    "1500"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Gambling casinos",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.18",
+    "0.9",
+    "91",
+    "1",
+    "1200"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Game arcades",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.18",
+    "0.9",
+    "20",
+    "1",
+    "900"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Gym, sports arena (play area)",
+   "os": false,
+   "values": [
+    "20",
+    "10",
+    "0.18",
+    "0.9",
+    "7",
+    "2",
+    "900"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Health club/aerobics room",
+   "os": false,
+   "values": [
+    "20",
+    "10",
+    "0.06",
+    "0.3",
+    "20",
+    "2",
+    "1200"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Health club/weight rooms",
+   "os": false,
+   "values": [
+    "20",
+    "10",
+    "0.06",
+    "0.3",
+    "10",
+    "2",
+    "1500"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Spectator areas",
+   "os": true,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.06",
+    "0.3",
+    "143",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Stages, studios",
+   "os": true,
+   "values": [
+    "10",
+    "5",
+    "0.06",
+    "0.3",
+    "67",
+    "1",
+    "1500"
+   ]
+  },
+  {
+   "group": "Sports and Entertainment",
+   "name": "Swimming (pool and deck)",
+   "os": false,
+   "values": [
+    "—",
+    "—",
+    "0.48",
+    "2.4",
+    "—",
+    "2",
+    "NA"
+   ]
+  }
+ ],
+ "table62": [
+  {
+   "group": "Animal Facilities",
+   "name": "Animal imaging (MRI/CT/PET)",
+   "values": [
+    "—",
+    "0.90",
+    "—",
+    "4.5",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal operating rooms",
+   "values": [
+    "—",
+    "3.00",
+    "—",
+    "15",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal postoperative recovery room",
+   "values": [
+    "—",
+    "1.50",
+    "—",
+    "7.5",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal preparation rooms",
+   "values": [
+    "—",
+    "1.50",
+    "—",
+    "7.5",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal procedure room",
+   "values": [
+    "—",
+    "2.25",
+    "—",
+    "11.3",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Animal surgery scrub",
+   "values": [
+    "—",
+    "1.50",
+    "—",
+    "7.5",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Large-animal holding room",
+   "values": [
+    "—",
+    "2.25",
+    "—",
+    "11.3",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Necropsy",
+   "values": [
+    "—",
+    "2.25",
+    "—",
+    "11.3",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Small-animal-cage room (static cages)",
+   "values": [
+    "—",
+    "2.25",
+    "—",
+    "11.3",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": "Animal Facilities",
+   "name": "Small-animal-cage room (ventilated cages)",
+   "values": [
+    "—",
+    "1.50",
+    "—",
+    "7.5",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Arenas",
+   "values": [
+    "—",
+    "0.50",
+    "—",
+    "—",
+    "1"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Art classrooms",
+   "values": [
+    "—",
+    "0.70",
+    "—",
+    "3.5",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Auto repair rooms",
+   "values": [
+    "—",
+    "1.50",
+    "—",
+    "7.5",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Barber shops",
+   "values": [
+    "—",
+    "0.50",
+    "—",
+    "2.5",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Beauty and nail salons",
+   "values": [
+    "—",
+    "0.60",
+    "—",
+    "3.0",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Cells with toilet",
+   "values": [
+    "—",
+    "1.00",
+    "—",
+    "5.0",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Copy, printing rooms",
+   "values": [
+    "—",
+    "0.50",
+    "—",
+    "2.5",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Darkrooms",
+   "values": [
+    "—",
+    "1.00",
+    "—",
+    "5.0",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Dwelling-unit kitchens",
+   "values": [
+    "—",
+    "—",
+    "—",
+    "—",
+    "2"
+   ],
+   "modes": [
+    {
+     "mode": "Continuous",
+     "cfmUnit": "50",
+     "lsUnit": "25"
+    },
+    {
+     "mode": "Intermittent",
+     "cfmUnit": "100",
+     "lsUnit": "50"
+    }
+   ]
+  },
+  {
+   "group": null,
+   "name": "Janitor closets, trash rooms, recycling",
+   "values": [
+    "—",
+    "1.00",
+    "—",
+    "5.0",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Kitchenettes",
+   "values": [
+    "—",
+    "0.30",
+    "—",
+    "1.5",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Kitchens—commercial",
+   "values": [
+    "—",
+    "0.70",
+    "—",
+    "3.5",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Locker rooms for athletic, industrial, and health care facilities",
+   "values": [
+    "—",
+    "0.50",
+    "—",
+    "2.5",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "All other locker rooms",
+   "values": [
+    "—",
+    "0.25",
+    "—",
+    "1.25",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Shower rooms per shower head",
+   "values": [
+    "—",
+    "—",
+    "—",
+    "—",
+    "2"
+   ],
+   "modes": [
+    {
+     "mode": "Continuous",
+     "cfmUnit": "20",
+     "lsUnit": "10"
+    },
+    {
+     "mode": "Intermittent",
+     "cfmUnit": "50",
+     "lsUnit": "25"
+    }
+   ]
+  },
+  {
+   "group": null,
+   "name": "Parking garages",
+   "values": [
+    "—",
+    "0.75",
+    "—",
+    "3.7",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Pet shops (animal areas)",
+   "values": [
+    "—",
+    "0.90",
+    "—",
+    "4.5",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Science laboratories",
+   "values": [
+    "—",
+    "0.35",
+    "—",
+    "1.75",
+    "2"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Soiled laundry storage rooms",
+   "values": [
+    "—",
+    "1.00",
+    "—",
+    "5.0",
+    "3"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Storage rooms, chemical",
+   "values": [
+    "—",
+    "1.50",
+    "—",
+    "7.5",
+    "4"
+   ],
+   "modes": []
+  },
+  {
+   "group": null,
+   "name": "Toilets—private (one person)",
+   "values": [
+    "—",
+    "—",
+    "—",
+    "—",
+    "2"
+   ],
+   "modes": [
+    {
+     "mode": "Continuous",
+     "cfmUnit": "25",
+     "lsUnit": "12.5"
+    },
+    {
+     "mode": "Intermittent",
+     "cfmUnit": "50",
+     "lsUnit": "25"
+    }
+   ]
+  },
+  {
+   "group": null,
+   "name": "Toilets—public (>1 person) per fixture (water closet or urinal)",
+   "values": [
+    "—",
+    "—",
+    "—",
+    "—",
+    "2"
+   ],
+   "modes": [
+    {
+     "mode": "Continuous",
+     "cfmUnit": "50",
+     "lsUnit": "25"
+    },
+    {
+     "mode": "Intermittent",
+     "cfmUnit": "70",
+     "lsUnit": "35"
+    }
+   ]
+  },
+  {
+   "group": null,
+   "name": "Woodwork shop/classrooms",
+   "values": [
+    "—",
+    "0.50",
+    "—",
+    "2.5",
+    "2"
+   ],
+   "modes": []
+  }
+ ],
+ "tableE1": [
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Birthing room",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "15",
+    "2"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Class 1 imaging rooms",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "5",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Dental operatory",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "General examination room",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "20",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Other dental treatment areas",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "5",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Physical therapy exercise area",
+   "os": false,
+   "values": [
+    "20",
+    "10",
+    "0.18",
+    "0.9",
+    "7",
+    "2"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Physical therapy individual room",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "20",
+    "2"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Physical therapeutic pool area",
+   "os": false,
+   "values": [
+    "—",
+    "—",
+    "0.48",
+    "2.4",
+    "—",
+    "3"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Prosthetics and orthotics room",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "2"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Psychiatric consultation room",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "20",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Psychiatric examination room",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "20",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Psychiatric group room",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "50",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Psychiatric seclusion room",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.12",
+    "0.6",
+    "5",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Speech therapy room",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "20",
+    "1"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Urgent care examination room",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "20",
+    "2"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Urgent care observation room",
+   "os": false,
+   "values": [
+    "5",
+    "2.5",
+    "0.06",
+    "0.3",
+    "20",
+    "2"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Urgent care treatment room",
+   "os": false,
+   "values": [
+    "7.5",
+    "3.8",
+    "0.12",
+    "0.6",
+    "20",
+    "2"
+   ]
+  },
+  {
+   "group": "Outpatient Health Care Facilities",
+   "name": "Urgent care triage room",
+   "os": false,
+   "values": [
+    "10",
+    "5",
+    "0.18",
+    "0.9",
+    "20",
+    "3"
+   ]
+  }
+ ]
+}

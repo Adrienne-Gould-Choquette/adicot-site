@@ -1,0 +1,40 @@
+{#- The cooling load ballpark estimator, written by hand rather than published
+    from SpreadsheetConverter. The figures and arithmetic are in
+    /assets/js/coolingload.js, which check-calculators.mjs holds to the
+    workbook's own answers; this is only the form. It never submits. -#}
+<form class="calcform" id="clecalc" novalidate>
+  <noscript>
+    <p class="cf-noscript">This calculator runs in your browser and needs JavaScript. The check figures are printed in full below.</p>
+  </noscript>
+
+  <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="English" checked> US</label>
+      <label><input type="radio" name="u" value="Metric"> Metric</label>
+    </fieldset>
+    <div class="field"><label for="ce-area">Project floor area <span class="cf-u" id="ce-au">ft²</span></label>
+      <input type="number" id="ce-area" name="a" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="10000" required></div>
+    <div class="field"><label for="ce-type">Building type</label>
+      <select id="ce-type" name="t">{% for g in coolingLoad.groups %}<optgroup label="{{ g.label }}">{% for o in g.options %}<option value="{{ o.value }}"{% if o.value == "Office: Office Buildings (General)" %} selected{% endif %}>{{ o.label }}</option>{% endfor %}</optgroup>{% endfor %}</select></div>
+
+    <p class="cf-actions">
+      <button type="reset" class="btn btn-quiet">Reset</button>
+      <button type="button" class="btn btn-quiet" id="ce-share" hidden>Copy link to these results</button>
+      <span class="cf-copied" id="ce-copied" role="status"></span>
+    </p>
+  </div>
+
+  <section class="cf-results" aria-labelledby="ce-results-h">
+    <h2 id="ce-results-h">Ballpark estimate</h2>
+    <p class="cf-summary" id="ce-summary" role="status">Enter the floor area.</p>
+    <div class="table-scroll">
+      <table class="cf-table ce-table">
+        <caption class="visually-hidden">Low, average and high estimates</caption>
+        <thead><tr><th scope="col"></th><th scope="col" class="cf-num">Low</th><th scope="col" class="cf-num">Avg</th><th scope="col" class="cf-num">High</th></tr></thead>
+        <tbody id="ce-tbody"></tbody>
+      </table>
+    </div>
+    <p class="cf-note">A pre-design ballpark from historical check figures, not a load calculation. Blank cells: the figures give only an average for this building type.</p>
+  </section>
+</form>

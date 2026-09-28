@@ -1,0 +1,50 @@
+<footer class="site-footer">
+  {#- One row: heading, one line, field and button. The earlier version of this
+      carried a picture and two paragraphs and stood about 250px tall on every
+      page, which was too much. This is the same prominence at a third of the
+      height. -#}
+  <div class="nlband">
+    <div class="nlband-inner">
+      <div class="nlband-copy">
+        <h2>Sign up for Calculator Updates</h2>
+        <p>New calculators and corrections to existing ones, by email.
+        <a href="/calculator-updates">Read more</a>.</p>
+      </div>
+      {% include "partials/updates-signup.njk" %}
+    </div>
+  </div>
+  <div class="cols">
+    <div>
+      <h2>Calculators</h2>
+      <ul>
+        {%- for group in taxonomy | limit(5) %}
+        <li><a href="/calculators#{{ group.name | slugify }}">{{ group.name }}</a></li>
+        {%- endfor %}
+        <li><a href="/calculators">See all</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Site</h2>
+      <ul>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/calculator-updates">Calculator Updates</a></li>
+        <li><a href="/site-terms">Site Terms</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>{{ site.company }}</h2>
+      <p class="muted">{{ site.tagline }}</p>
+      <ul>
+        <li><a href="/services">Engineering Services</a></li>
+        <li><a href="/services/cooling-load-calculations">Cooling Load Calculations</a></li>
+        <li><a href="/services/energy-code-compliance">Energy Code Compliance</a></li>
+        <li><a href="{{ site.quoteUrl }}">{{ site.quoteLabel }}</a></li>
+        <li><a href="{{ site.clientPortalUrl }}">Client Portal</a></li>
+        <li><a href="{{ site.employeePortalUrl }}" rel="noopener">Employee Portal</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="legal">&copy; {{ buildYear }} {{ site.company }} Calculators are estimating aids and do not replace engineering judgment.</p>
+</footer>
