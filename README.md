@@ -52,7 +52,7 @@ generated logo assets are committed, so this only matters if the logo changes.
 | `src/assets/js/favorites.js` | Visitor-set favorites on `/calculators` (progressive enhancement). |
 | `src/assets/css/site.css` | The entire stylesheet. Tokens at the top, with light and dark themes. |
 | `public/images/` | 263 images. |
-| `deploy/` | Host configs — pick one, copy to the repo root. |
+| `deploy/` | Host configs. Cloudflare's `_headers` and `_redirects` are live in `public/`; the Netlify and Render copies here are alternatives. |
 | `verify-urls.mjs` | Checks every legacy URL still resolves and no internal link is broken. |
 | `check-contrast.mjs` | WCAG contrast check for the palette. |
 | `build-logo.mjs` | Regenerates the logo assets from the master TIF on Google Drive. |
@@ -650,8 +650,8 @@ Open items, roughly in order. Nothing here is started unless it says so.
       photos no page used were removed, with the originals in `adicot-export/images`.
       Two large photos that look unused are the sources `build-service-images.mjs` reads.
 - [ ] Push this repo to GitHub. It has no remote.
-- [ ] Copy `deploy/cloudflare/_headers` and `deploy/cloudflare/_redirects` to the
-      repo root and connect Cloudflare Pages (build command `npm run build`,
+- [ ] Connect Cloudflare Pages. `_headers` and `_redirects` live in `public/`, so the
+      build copies them into `_site`, which is the only place Pages reads them (build command `npm run build`,
       output `_site`). `_redirects` there holds the path redirects only.
 - [ ] In the Pages project's environment variables, set
       `QUOTE_API_ORIGIN=https://adicot-load-calc-doc.onrender.com`. The quote

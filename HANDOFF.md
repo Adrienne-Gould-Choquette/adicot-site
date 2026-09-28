@@ -134,8 +134,8 @@ page); on the free plan visitors see Formspree's own thank-you page instead.
 ## 4. Deploy (Cloudflare Pages)
 
 In `README.md` under **Before launch → Deploy**, in order: push the repo to
-GitHub (it has no remote yet); copy `deploy/cloudflare/_headers` and
-`deploy/cloudflare/_redirects` to the repo root and connect Cloudflare Pages
+GitHub (it has no remote yet); `_headers` and `_redirects` already sit in `public/`, which the build copies
+into `_site` where Pages reads them; connect Cloudflare Pages
 (build command `npm run build`, output `_site`); set up the domain redirects
 in the Cloudflare dashboard per `deploy/cloudflare/DOMAIN-REDIRECTS.md` (Pages'
 `_redirects` cannot redirect whole domains, so adicot.com without www and the

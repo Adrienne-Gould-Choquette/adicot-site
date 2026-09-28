@@ -27,7 +27,7 @@ const exists = p => {
 };
 
 // Pages deliberately taken down. They were in the Wix sitemap, so each has a 301
-// in deploy/*/_redirects rather than being left to 404. Listed here so the
+// in public/_redirects (and deploy/netlify/_redirects) rather than being left to 404. Listed here so the
 // inventory check reports them as retired instead of missing.
 const RETIRED = new Set([
   '/junk',

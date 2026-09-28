@@ -1,4 +1,4 @@
-# Cloudflare Pages — copy to the repo root alongside _redirects.
+# Cloudflare Pages. Lives in public/ alongside _redirects, so the build copies it into _site.
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable

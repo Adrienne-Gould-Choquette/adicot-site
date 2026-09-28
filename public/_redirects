@@ -1,4 +1,4 @@
-# Cloudflare Pages — copy this file to the repo root (it is published as-is).
+# Cloudflare Pages. Lives in public/ so the build copies it into _site, where Pages reads it.
 # Canonical host is www.adicot.com. The domain-level 301s (adicot.com without www,
 # adicotengineering.com, adicotengineeringinc.com) cannot live here: Cloudflare
 # Pages' _redirects supports paths only. They are a Redirect Rule and a Bulk
