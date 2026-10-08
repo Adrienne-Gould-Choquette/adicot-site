@@ -1312,7 +1312,9 @@ main > :last-child { margin-bottom: 0; }
    their explanations follow the inputs, each across the whole row. */
 .cm-duo { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 10px 22px; align-items: end; }
 .cm-duo > .cm-side { display: contents; }
-.cm-duo > .cm-side > .hint { order: 1; grid-column: 1 / -1; }
+.cm-duo > .cm-side > :is(.hint, .cm-more) { order: 1; grid-column: 1 / -1; margin: 0; }
+/* A group of explanations takes no room while all of them are closed. */
+.cm-more:not(:has(> :not([hidden]))) { display: none; }
 .cf-stream > :is(.cm-side, .cm-duo) + :is(.cm-side, .cm-duo) { margin-top: 12px; }
 /* The window totals: crack length and area side by side, their explanation below. */
 #cm-wtotals { grid-template-columns: minmax(0, 1fr); }
