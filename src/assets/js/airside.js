@@ -47,11 +47,12 @@ export function coilLoads(units, a, b, airflow) {
   };
 }
 
-// The airflow (cfm or l/s, at the entering air) that removes a given total load
-// (Btu/h or kW) between the two states; null when the states cannot remove it.
-export function airflowFor(units, a, b, load) {
+// The airflow (cfm or l/s, at the entering air) that removes a given load (Btu/h
+// or kW) between the two states; null when the states cannot remove it. kind:
+// which load it is, 'total', 'sensible' or 'latent'.
+export function airflowFor(units, a, b, load, kind = 'total') {
   const us = units === 'US';
-  const perLb = perPound(a, b).total;
+  const p = perPound(a, b), perLb = kind === 'sensible' ? p.sensible : kind === 'latent' ? p.total - p.sensible : p.total;
   const q = us ? load : load * BTUH_PER_KW;
   if (!(perLb !== 0) || !(q / perLb > 0)) return null;
   const cfm = q / perLb * a.ip.v / 60;

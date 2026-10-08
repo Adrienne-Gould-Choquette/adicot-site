@@ -1287,6 +1287,10 @@ main > :last-child { margin-bottom: 0; }
 .cm-row + .cm-row { margin-top: 12px; }
 .cm-fitdesc { margin-bottom: 18px; }
 /* An input, or a stack of inputs, with its explanation to the right. */
+/* Coil calculator: how an end's moisture is known, beside its value. */
+.co-moist { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 8px; }
+.calcform .co-moist select { padding-inline: 8px 24px; background-position: calc(100% - 13px) 50%, calc(100% - 8px) 50%; }
+.calcform .co-moist input { padding-inline: 8px; }
 .cm-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6px 22px; align-items: center; }
 .cm-side[hidden] { display: none; }
 .cm-side > .hint, .cm-side > p { margin: 0; }

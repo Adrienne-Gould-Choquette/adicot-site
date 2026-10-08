@@ -21,16 +21,16 @@
 
     <fieldset class="cf-stream co-tool" data-tool="air">
       <legend>1. Coil air side: sensible, latent and total cooling</legend>
-      {{ solveFor("af", [["loads", "Cooling loads"], ["flow", "Airflow for a total cooling load"], ["leave", "Leaving air for sensible and total cooling"], ["ldb", "Leaving dry bulb for a total cooling load"], ["enter", "Entering air for sensible and total cooling"], ["edb", "Entering dry bulb for a total cooling load"]]) }}
-      {%- set moisture = [["db-wb", "Wet bulb"], ["db-rh", "Relative humidity"], ["db-dp", "Dew point"]] %}
-      <div class="cf-pair">
-        <div class="field"><label for="co-am1">Entering air moisture as</label>
-          <select id="co-am1" name="am1">{% for o in moisture %}<option value="{{ o[0] }}">{{ o[1] }}</option>{% endfor %}</select></div>
-        <div class="field"><label for="co-am2">Leaving air moisture as</label>
-          <select id="co-am2" name="am2">{% for o in moisture %}<option value="{{ o[0] }}">{{ o[1] }}</option>{% endfor %}</select></div>
-      </div>
+      {{ solveFor("af", [["loads", "Cooling loads"], ["flow", "Airflow for a cooling load"], ["leave", "Leaving air for sensible and total cooling"], ["ldb", "Leaving dry bulb for a total cooling load"], ["enter", "Entering air for sensible and total cooling"], ["edb", "Entering dry bulb for a total cooling load"]]) }}
+      {%- set moisture = [["db-wb", "Wet bulb"], ["db-rh", "Rel. hum."], ["db-dp", "Dew point"]] %}
+      {#- The moisture of one end: how it is known, and its value, on one line. -#}
+      {%- macro moist(sel, id, which, unitClass, eg) %}
+        <div class="field co-f" data-var="{{ id }}"><label for="co-{{ id }}">{{ which }} air moisture <span class="cf-u {{ unitClass }}">°F</span></label>
+          <div class="co-moist"><select id="co-{{ sel }}" name="{{ sel }}" aria-label="{{ which }} air moisture given as">{% for o in moisture %}<option value="{{ o[0] }}">{{ o[1] }}</option>{% endfor %}</select>
+          <input type="number" id="co-{{ id }}" name="{{ id }}" inputmode="decimal" step="any" autocomplete="off" placeholder="{{ eg }}"></div></div>
+      {%- endmacro %}
       <div class="cf-pair">{{ num("e1", "Entering dry bulb", "co-t", "°F", "80") }}{{ num("x1", "Leaving dry bulb", "co-t", "°F", "55") }}</div>
-      <div class="cf-pair">{{ num("e2", "Entering wet bulb", "co-m1", "°F", "67") }}{{ num("x2", "Leaving wet bulb", "co-m2", "°F", "54") }}</div>
+      <div class="cf-pair">{{ moist("am1", "e2", "Entering", "co-m1", "67") }}{{ moist("am2", "x2", "Leaving", "co-m2", "54") }}</div>
       <div class="cf-pair">{{ num("aq", "Airflow", "co-a", "cfm", "1000") }}{{ num("qs", "Sensible cooling", "co-q", "Btu/h", "27000") }}</div>
       <div class="cf-pair">{{ num("ql", "Latent cooling", "co-q", "Btu/h", "9000") }}{{ num("qt", "Total cooling", "co-q", "Btu/h", "36000") }}</div>
       {{ num("alt", "Altitude", "co-l", "ft", "0") }}

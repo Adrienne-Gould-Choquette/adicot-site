@@ -113,6 +113,16 @@ export function checkHandworked() {
     same('entering air: more than the load at its dew point refused', enteringForTotal('US', b, 'db-dp', 70, 1000, 10000).problem, 'dewpoint');
     same('entering air: a sensible load beyond the airflow refused', enteringDryBulbFor('US', 55, 100, 1e6), null);
   }
+  // The airflow for one load: exact with both states, and from part of the
+  // conditions the single-load formulas are proportional to the airflow.
+  {
+    const a = S('US', 'db-wb', 95, 78), b = S('US', 'db-wb', 55, 54), r = coilLoads('US', a, b, 2000);
+    near('airflow: from the sensible load, 2,000 cfm', airflowFor('US', a, b, r.sensible, 'sensible'), 2000, 1e-6);
+    near('airflow: from the latent load, 2,000 cfm', airflowFor('US', a, b, r.latent, 'latent'), 2000, 1e-6);
+    same('airflow: a heating load across a cooling coil refused', airflowFor('US', a, b, -5000, 'sensible'), null);
+    near('airflow: dry-air sensible is proportional to the airflow', sensibleLoad('US', 95, 55, 2000) / sensibleLoad('US', 95, 55, 1), 2000, 1e-9);
+    near('airflow: dew-point latent is proportional to the airflow', latentLoad('US', a.ip.W, b.ip.W, 2000) / latentLoad('US', a.ip.W, b.ip.W, 1), 2000, 1e-9);
+  }
   // By hand, dry air at sea level: v = 0.370486 × 554.67 / 14.696, qs = m × 0.240 × 40.
   near('single load: dry-air sensible by hand', sensibleLoad('US', 95, 55, 2000), 2000 * 60 / (0.370486 * 554.67 / 14.696) * 0.240 * 40, 1e-6);
   near('single load: page example dry-air sensible 82,384 Btu/h', sensibleLoad('US', 95, 55, 2000), 82384, 0.5);

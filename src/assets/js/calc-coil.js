@@ -23,8 +23,6 @@ function init(form) {
   const el = id => document.getElementById(id);
   const ids = ['af', 'am1', 'am2', 'e1', 'e2', 'x1', 'x2', 'aq', 'qs', 'ql', 'qt', 'alt', 'fh', 'fw', 'wf', 'fl', 'w1', 'w2', 'w3', 'w4', 'vq', 'vd', 'vn'];
   shareable(form, ['u', 'wc', ...ids], el('co-share'), el('co-copied'));
-  // The moisture inputs' labels follow each state's "moisture as" choice.
-  const setLabel = (id, text) => { const l = form.querySelector(`label[for="co-${id}"]`); if (l) l.firstChild.textContent = text + ' '; };
 
   function recalc() {
     const units = form.querySelector('input[name="u"]:checked')?.value ?? 'English';
@@ -45,20 +43,17 @@ function init(form) {
       if (off && el(id).value === 'db-wb') el(id).value = 'db-rh';
     }
     const m1 = el('co-am1').value, m2 = el('co-am2').value;
-    const WORD = { 'db-wb': 'wet bulb', 'db-rh': 'RH', 'db-dp': 'dew point' };
     U.m1 = m1 === 'db-rh' ? '%' : U.t; U.m2 = m2 === 'db-rh' ? '%' : U.t;
     for (const [cls, k] of [['co-t', 't'], ['co-q', 'q'], ['co-a', 'a'], ['co-d', 'd'], ['co-g', 'g'], ['co-td', 'td'], ['co-l', 'l'], ['co-m1', 'm1'], ['co-m2', 'm2']]) {
       for (const s of form.querySelectorAll('.' + cls)) s.textContent = U[k];
     }
-    setLabel('e2', 'Entering ' + WORD[m1]);
-    setLabel('x2', 'Leaving ' + WORD[m2]);
     const rows = [], notes = [];
 
     // Tool 1: the coil's air side, from the entering and leaving air conditions.
     const show = (id, on) => { el('co-' + id).closest('.field').hidden = !on; };
     const fromLoads = findLeave || findEnter;        // an end of the coil, from the loads
     const side = findLeave || findDb ? 'lev' : findEnter || findEdb ? 'ent' : null;   // the end being solved for
-    show('aq', !findFlow); show('qt', find !== 'loads'); show('qs', fromLoads); show('ql', fromLoads);
+    show('aq', !findFlow); show('qt', find !== 'loads'); show('qs', fromLoads || findFlow); show('ql', fromLoads || findFlow);
     show('e1', side !== 'ent'); show('e2', !findEnter); show('am1', !findEnter);
     show('x1', side !== 'lev'); show('x2', !findLeave); show('am2', !findLeave);
     let airflow = null;        // for the face velocity
@@ -90,6 +85,12 @@ function init(form) {
     const DRY = 'With no moisture entered, the sensible cooling takes the air as dry, which runs up to about 1 % high for humid air; enter the moisture at both ends for the exact loads.';
     const SAME = 'The sensible cooling takes the moisture as unchanged through the coil; enter the moisture at both ends for the latent and total cooling.';
     const AT_DEW = 'With no dry bulb, the latent cooling takes the air at its dew point, which runs about 3 to 4 % high for a typical cooling coil; enter the dry bulbs for the exact loads.';
+
+    const NO_W = 'A wet bulb or an RH does not fix the moisture in the air without its dry bulb. For the latent cooling alone, give the moisture at both ends as dew points; otherwise enter the dry bulbs too.';
+    const NO_FLOW = 'No airflow carries that load between these conditions: check the sign of the load against the entering and leaving air.';
+    // The load an airflow is wanted for: the total if given, else the sensible,
+    // else the latent.
+    const flowLoad = !findFlow ? null : [['total', 'qt'], ['sensible', 'qs'], ['latent', 'ql']].map(([k, id]) => [k, num(el('co-' + id))]).find(([, v]) => given(v)) ?? null;
 
     // The air at one end, when it is the unknown: found from the other end, the
     // airflow and the loads, then carried through the same results as a given one.
@@ -162,13 +163,10 @@ function init(form) {
       const wa = us ? a.grains : a.W, wb = us ? b.grains : b.W;   // gr/lb or g/kg
       rows.push(['Entering air enthalpy', fmt(a.h, 2), U.h], ['Leaving air enthalpy', fmt(b.h, 2), U.h],
         ['Entering humidity ratio', fmt(wa, us ? 1 : 2), U.w], ['Leaving humidity ratio', fmt(wb, us ? 1 : 2), U.w]);
-      if (findFlow) {
-        const qt = num(el('co-qt'));
-        if (given(qt)) {
-          const flow = airflowFor(psyUnits, a, b, qt);
-          if (flow !== null) { airflow = flow; rows.push(['Airflow for the total cooling', fmt(flow, us ? 0 : 1), U.a, 'cf-key']); }
-          else notes.push('The leaving air must hold less heat than the entering air to remove that load.');
-        }
+      if (flowLoad) {
+        const [kind, load] = flowLoad, flow = airflowFor(psyUnits, a, b, load, kind);
+        if (flow !== null) { airflow = flow; rows.push([`Airflow for the ${kind} cooling`, fmt(flow, us ? 0 : 1), U.a, 'cf-key']); }
+        else notes.push(kind === 'total' ? 'The leaving air must hold less heat than the entering air to remove that load.' : NO_FLOW);
       }
       if (airflow !== null) {
         const r = coilLoads(psyUnits, a, b, airflow);
@@ -178,6 +176,25 @@ function init(form) {
         if (r.shr !== null && qtot > 0) rows.push(['Sensible heat ratio', fmt(r.shr, 2), '']);
         if (qs < 0 || qtot < 0) notes.push('A negative load denotes heating.');
         if (ql < 0) notes.push('A negative latent load denotes adding moisture.');
+      }
+    } else if (flowLoad && !bad) {
+      // The airflow from one load and part of the conditions: each single-load
+      // formula is proportional to the airflow, so the load is divided by the
+      // load of one cfm (or l/s).
+      const [kind, load] = flowLoad, bothDb = given(ent.first) && given(lev.first);
+      let flow = null;
+      if (kind === 'sensible' && bothDb) {
+        flow = load / sensibleLoad(psyUnits, ent.first, lev.first, 1, altitude, W1, W2);
+        if (flow > 0 && Number.isFinite(flow)) notes.push(W1 === null && W2 === null
+          ? 'With no moisture entered, the airflow takes the air as dry, which runs up to about 1 % low for humid air; enter the moisture at both ends for the exact airflow.'
+          : 'The airflow takes the moisture as unchanged through the coil; enter the moisture at both ends for the exact airflow.');
+      } else if (kind === 'latent' && W1 !== null && W2 !== null) {
+        flow = load / latentLoad(psyUnits, W1, W2, 1, altitude, given(ent.first) ? ent.first : null, given(lev.first) ? lev.first : null);
+        if (flow > 0 && Number.isFinite(flow) && !given(ent.first)) notes.push('With no dry bulb, the airflow takes the air at its dew point, which runs about 3 to 4 % low for a typical cooling coil; enter the dry bulbs for the exact airflow.');
+      } else if (kind === 'latent' && !bothDb && given(ent.second) && given(lev.second)) notes.push(NO_W);
+      if (flow !== null) {
+        if (flow > 0 && Number.isFinite(flow)) { airflow = flow; rows.push([`Airflow for the ${kind} cooling`, fmt(flow, us ? 0 : 1), U.a, 'cf-key']); }
+        else notes.push(NO_FLOW);
       }
     } else if (find === 'loads' && airflow !== null && !bad) {
       // Part of the conditions: the dry bulbs alone give the sensible cooling, and
@@ -196,7 +213,7 @@ function init(form) {
         else if (!bothDb) notes.push('With no leaving dry bulb, the latent cooling takes the leaving air at its dew point, which changes it by well under 1 %; enter the leaving dry bulb for the exact loads.');
         if (ql < 0) notes.push('A negative latent load denotes adding moisture.');
       } else if (!bothDb && given(ent.second) && given(lev.second)) {
-        notes.push('A wet bulb or an RH does not fix the moisture in the air without its dry bulb. For the latent cooling alone, give the moisture at both ends as dew points; otherwise enter the dry bulbs too.');
+        notes.push(NO_W);
       }
     }
 
