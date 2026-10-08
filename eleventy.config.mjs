@@ -163,6 +163,16 @@ export default function (eleventyConfig) {
     });
   });
 
+  // Links off the site open in a new tab, so the adicot.com page stays open.
+  eleventyConfig.addTransform('external-links', function (content) {
+    if (!(this.page.outputPath || '').endsWith('.html')) return content;
+    return content.replace(/<a\b[^>]*\shref="https?:\/\/(?!(?:www\.)?adicot\.com[/"])[^"]*"[^>]*>/g, tag => {
+      if (!/\starget=/.test(tag)) tag = tag.replace(/^<a\b/, '<a target="_blank"');
+      if (!/\srel=/.test(tag)) return tag.replace(/^<a\b/, '<a rel="noopener"');
+      return /\srel="[^"]*\bnoopener\b/.test(tag) ? tag : tag.replace(/\srel="/, ' rel="noopener ');
+    });
+  });
+
 
   return {
     dir: { input: 'src', includes: '_includes', data: '_data', output: '_site' },
