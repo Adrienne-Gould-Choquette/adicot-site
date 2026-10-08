@@ -12,7 +12,35 @@ const MPH = 0.44704, IN = 25.4, IN2 = 6.4516, LBF = 4.4482216152605, INWC = 249.
 // The page's worked example: four 3 × 5 ft windows and one 3 × 7 ft door.
 const EXAMPLE = { windows: [['4', '3', '5']], doors: [['1', '3', '7']] };
 
+// Each explanation opens from a "?" beside what it explains, rather than all of
+// them showing. Without scripting they stay as written, beside their inputs.
+function helpButtons(form) {
+  let n = 0;
+  for (const side of form.querySelectorAll('.cm-side')) {
+    const hints = [...side.querySelectorAll('.hint')];
+    if (!hints.length) continue;
+    const label = side.querySelector('label'), about = side.dataset.help ?? label?.firstChild.textContent.trim() ?? 'this';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = label ? 'cm-help' : 'cm-help cm-help-plain';
+    button.textContent = '?';
+    button.setAttribute('aria-label', 'Explain ' + about);
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', hints.map(h => (h.id ||= 'cm-help-' + ++n)).join(' '));
+    for (const h of hints) h.hidden = true;
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(open));
+      for (const h of hints) h.hidden = !open;
+    });
+    // At the end of the first label's line, or after the button a row starts with.
+    const field = side.querySelector('.field');
+    if (field) field.insertBefore(button, field.firstChild); else side.firstElementChild.append(button);
+  }
+}
+
 function init(form) {
+  helpButtons(form);
   const el = id => document.getElementById(id);
   const tpl = el('cm-row');
   const si = () => form.querySelector('input[name="u"]:checked')?.value === 'SI';

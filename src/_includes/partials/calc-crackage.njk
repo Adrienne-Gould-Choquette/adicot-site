@@ -16,7 +16,8 @@
     </fieldset>
 
     {#- Each input, or group of inputs, sits in a .cm-side with its explanation
-        to the right; they stack on a narrow screen. #}
+        to the right; they stack on a narrow screen. calc-crackage.js hides each
+        explanation behind a "?" button, named by data-help or the first label. #}
     <div class="cm-side">
       <div class="field"><label for="cm-v">Winter wind speed <span class="cf-u" data-si="m/s">mph</span> <span class="req" aria-hidden="true">*</span></label>
         <input type="number" id="cm-v" name="v" inputmode="decimal" step="any" required autocomplete="off" placeholder="e.g. 15" data-si="e.g. 6.7" value="20"></div>
@@ -49,7 +50,7 @@
         <div id="cm-rows"></div>
         <p><button type="button" class="btn btn-quiet" id="cm-add">Add another window size</button></p>
       </div>
-      <div id="cm-wtotals" class="cm-side">
+      <div id="cm-wtotals" class="cm-side" data-help="the window totals">
         <div class="cm-stack">
           <div class="field"><label for="cm-tl">Total crack length <span class="cf-u" data-si="m">ft</span></label>
             <input type="number" id="cm-tl" name="tl" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 640" data-si="e.g. 195" value="64"></div>
@@ -63,7 +64,7 @@
     <fieldset class="cf-stream">
       <legend>Doors</legend>
       <div id="cm-drows"></div>
-      <div class="cm-side">
+      <div class="cm-side" data-help="the doors">
         <p><button type="button" class="btn btn-quiet" id="cm-dadd">Add another door size</button></p>
         <p class="hint">Exterior doors, one row per size: their cracks count with the windows', and the opening force check below checks every size. For a pair of doors, count each leaf and enter one leaf's width; a person pushes one leaf.</p>
       </div>
@@ -88,7 +89,7 @@
           <input type="number" id="cm-oa" name="oa" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 500" data-si="e.g. 240" value="500"></div>
         <p class="hint">Is the outdoor air over-pressurizing the building? Enter the outdoor air supplied minus the air exhausted (negative if more is exhausted). The calculator finds the pressure at which that surplus leaks out through the cracks above, and checks it against the force needed to open the doors above.</p>
       </div>
-      <div class="cm-side">
+      <div class="cm-side" data-help="the wall, roof and other leakage">
         <div class="cm-stack">
           <div class="field"><label for="cm-wt">Walls</label>
             <select id="cm-wt" name="wt">
@@ -114,7 +115,7 @@
           <input type="number" id="cm-q75" name="q75" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="optional" aria-describedby="cm-q75-hint"></div>
         <p class="hint" id="cm-q75-hint">From a blower-door test of this building. It replaces the wall and roof estimate.</p>
       </div>
-      <div class="cm-side">
+      <div class="cm-side" data-help="the door opening force inputs">
         <div class="cm-stack">
           <div class="field"><label for="cm-dk">Knob to latch edge <span class="cf-u" data-si="mm">in</span></label>
             <input type="number" id="cm-dk" name="dk" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 3" data-si="e.g. 75" value="3"></div>

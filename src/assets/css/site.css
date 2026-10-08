@@ -1286,13 +1286,18 @@ main > :last-child { margin-bottom: 0; }
 .cm-bldg { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .cm-row + .cm-row { margin-top: 12px; }
 .cm-fitdesc { margin-bottom: 18px; }
-/* An input, or a stack of inputs, with its explanation to the right. */
 /* Coil calculator: how an end's moisture is known, beside its value. */
 .co-moist { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 8px; }
 .calcform .co-moist select { padding-inline: 8px 24px; background-position: calc(100% - 13px) 50%, calc(100% - 8px) 50%; }
 .calcform .co-moist input { padding-inline: 8px; }
+/* An input, or a stack of inputs, with its explanation to the right. */
 .cm-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6px 22px; align-items: center; }
 .cm-side[hidden] { display: none; }
+/* With scripting, each explanation opens from a "?" at the end of its label's
+   line (calc-crackage.js). */
+.cm-help { float: right; margin: 0 0 3px 8px; width: 22px; height: 22px; padding: 0; border: 1px solid var(--accent); border-radius: 50%; background: var(--bg); color: var(--accent); font: inherit; font-size: 13px; font-weight: 700; line-height: 1; cursor: pointer; }
+.cm-help.cm-help-plain { float: none; margin: 0 0 0 10px; vertical-align: middle; }
+.cm-help:hover, .cm-help[aria-expanded="true"] { background: var(--accent); color: var(--accent-fg); }
 .cm-side > .hint, .cm-side > p { margin: 0; }
 .cm-side .field { margin: 0; }
 .cm-stack { display: grid; gap: 10px; }
