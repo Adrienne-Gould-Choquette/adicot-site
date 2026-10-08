@@ -25,15 +25,17 @@ function init(form) {
       return;
     }
     // A blank third stream contributes nothing, as in the workbook.
-    const r = mix(streams.map(s => ({ q: s.q ?? 0, db: s.db ?? 0, wb: s.wb ?? 0 })));
+    const r = mix(streams.map(s => ({ q: s.q ?? 0, db: s.db ?? 0, wb: s.wb ?? 0 })), si());
     fillRows(el('mx-tbody'), [
       ['Total air flow', fmt(r.total), u.q],
       ['Mixed air dry bulb', fmt(r.db), u.t, 'cf-key'],
       ['Mixed air wet bulb', fmt(r.wb), u.t],
+      ['Mixed air humidity ratio', si() ? fmt(r.w * 1000) : fmt(r.w * 7000, 1), si() ? 'g/kg' : 'gr/lb'],
     ]);
     el('mx-table').hidden = false;
     el('mx-summary').textContent =
-      `${fmt(r.total)} ${u.q} mixes to ${fmt(r.db)} ${u.t} dry bulb, ${fmt(r.wb)} ${u.t} wet bulb.`;
+      `${fmt(r.total)} ${u.q} mixes to ${fmt(r.db)} ${u.t} dry bulb, ${fmt(r.wb)} ${u.t} wet bulb.`
+      + (r.fog ? ' The mix is past saturation: some of its moisture condenses as fog, which warms it to the saturated temperature shown.' : '');
   }
 
   live(form, recalc);

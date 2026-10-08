@@ -7,6 +7,7 @@ import { readHours } from './tools/extract/build-cooling-hours.mjs';
 import { state } from './src/assets/js/psychsheet.js';
 import { coilLoads, airflowFor } from './src/assets/js/airside.js';
 import { doorForce, doorPressure, pressurization, leakage, leakPerFoot, doorProblem, crackage } from './src/assets/js/crackage.js';
+import { mix } from './src/assets/js/mixair.js';
 
 export function checkHandworked() {
   const lines = [], issues = [];
@@ -82,6 +83,7 @@ export function checkHandworked() {
   near('pressurization: page example 0.058 in. w.c.', p.dp, 0.058, 0.0005);
   near('pressurization: page example door force 3.4 lbf', p.force, 3.4, 0.05);
   near('pressurization: page example 639 cfm allowed', p.maxOA, 639, 0.5);
+  near('pressurization: page example 2,046 cfm allowed at 30 lbf', pressurization({ fit: 'Average', crack: 84, env, netOA: 500, door, limit: 30 }).maxOA, 2046, 0.5);
   // Each path by hand at 0.1 in. w.c.
   near('walls and roof at 0.1 in.: 4599 × 0.30 × (0.1/0.3)^0.65', leakage('Average', 0, env, 0.1), 4599 * 0.30 * (0.1 / 0.3) ** 0.65, 1e-9);
   near('cracks at 0.1 in.: 84 × 2.1 × 0.1^0.64', leakage('Average', 84, {}, 0.1), 84 * 2.1 * 0.1 ** 0.64, 1e-9);
@@ -102,6 +104,30 @@ export function checkHandworked() {
   // Cracks only, 500 cfm: far past the crack curves' 0.6 in. w.c. range, and flagged.
   same('beyond the crack data: flagged', pressurization({ fit: 'Average', crack: 84, env: {}, netOA: 500, door, limit: 30 }).beyondCrackData, true);
   lines.push("  pressurization and door force: the 30 and 5 lbf hand calculations, the page example and each leakage path; depressurization and the no-leakage and past-the-data cases");
+
+  // Air mixing: moisture mixes by humidity ratio. Worked through the psychrometric
+  // calculator: each stream's W from its dry and wet bulb, the flow-weighted W,
+  // and the mixed state must have that W at the mixed dry bulb and wet bulb.
+  const W = (db, wb, units = 'US') => state({ units, mode: 'db-wb', first: db, second: wb, altitude: 0 }).ip.W;
+  const ex = [{ q: 150, db: 91, wb: 77 }, { q: 1550, db: 75, wb: 62.3 }, { q: 300, db: 55, wb: 54.5 }];
+  const mixed = mix(ex);
+  near('air mixing: page example W is the flow-weighted W', mixed.w, (150 * W(91, 77) + 1550 * W(75, 62.3) + 300 * W(55, 54.5)) / 2000, 1e-12);
+  near('air mixing: page example mixed state has that W', W(mixed.db, mixed.wb), mixed.w, 1e-9);
+  near('air mixing: page example 73.20 °F dry bulb', mixed.db, 73.2, 1e-9);
+  near('air mixing: page example 62.51 °F wet bulb', mixed.wb, 62.51, 0.005);
+  const si = mix([{ q: 236, db: 35, wb: 25 }, { q: 944, db: 24, wb: 17 }], true);
+  near('air mixing: SI mixed state has the flow-weighted W', W(si.db, si.wb, 'Metric'), (236 * W(35, 25, 'Metric') + 944 * W(24, 17, 'Metric')) / 1180, 1e-9);
+  const winter = mix([{ q: 1000, db: 20, wb: 18 }, { q: 1600, db: 72, wb: 60 }]);
+  near('air mixing: winter air (ice on the wick) mixes by W too', W(winter.db, winter.wb), winter.w, 1e-9);
+  // Saturated 20 °F and 95 °F air, half and half, is past saturation at 57.5 °F:
+  // it fogs, and settles saturated at the mix's enthalpy.
+  const fog = mix([{ q: 1000, db: 20, wb: 20 }, { q: 1000, db: 95, wb: 95 }]);
+  same('air mixing: past saturation is flagged', fog.fog, true);
+  same('air mixing: fog leaves it saturated', fog.db, fog.wb);
+  const h = (t, w) => 0.24 * t + w * (1061 + 0.444 * t);
+  near('air mixing: fog keeps the enthalpy', h(fog.db, W(fog.db, fog.db)), h(57.5, fog.w), 1e-6);
+  same('air mixing: the page example does not fog', mixed.fog, false);
+  lines.push('  air mixing: wet bulb from the flow-weighted humidity ratio (page example, SI, winter, fog)');
   return { lines, issues, checks };
 }
 
