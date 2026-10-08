@@ -31,35 +31,47 @@ This calculator can also include a third air stream. An example of a third air s
 
 > "Simple and inexpensive, this option blends cold, dry air leaving the cooling coil with warm, moist, mixed air (return air and outdoor air) to achieve the proper supply-air temperature."
 
-The mixed air dry bulb of three air streams is the flow-weighted mean of their dry bulbs:
+The calculator mixes the streams the way the ASHRAE Handbook—Fundamentals, chapter 1, describes adiabatic mixing of moist air. Mixing keeps the mass of dry air, the water vapor and the energy of the streams. So each stream's air flow is first converted to a mass flow of dry air, and the mix's humidity ratio and enthalpy are the mass-weighted averages of the streams':
 
-**T<sub>MA</sub> = (T<sub>1</sub> × Q<sub>1</sub> + T<sub>2</sub> × Q<sub>2</sub> + T<sub>3</sub> × Q<sub>3</sub>) ÷ (Q<sub>1</sub> + Q<sub>2</sub> + Q<sub>3</sub>)**
+**m<sub>#</sub> = Q<sub>#</sub> ÷ v<sub>#</sub>**
 
-Wet bulb does not mix that way. Moisture mixes by humidity ratio (W, the mass of water vapor per mass of dry air), so the calculator finds each stream's humidity ratio from its dry bulb and wet bulb, takes their flow-weighted mean in the same way, and then solves for the wet bulb at the mixed dry bulb and mixed humidity ratio:
+**W<sub>MA</sub> = (m<sub>1</sub> × W<sub>1</sub> + m<sub>2</sub> × W<sub>2</sub> + m<sub>3</sub> × W<sub>3</sub>) ÷ (m<sub>1</sub> + m<sub>2</sub> + m<sub>3</sub>)**
 
-**W<sub>MA</sub> = (W<sub>1</sub> × Q<sub>1</sub> + W<sub>2</sub> × Q<sub>2</sub> + W<sub>3</sub> × Q<sub>3</sub>) ÷ (Q<sub>1</sub> + Q<sub>2</sub> + Q<sub>3</sub>)**
+**h<sub>MA</sub> = (m<sub>1</sub> × h<sub>1</sub> + m<sub>2</sub> × h<sub>2</sub> + m<sub>3</sub> × h<sub>3</sub>) ÷ (m<sub>1</sub> + m<sub>2</sub> + m<sub>3</sub>)**
+
+**T<sub>MA</sub> = (h<sub>MA</sub> − 1,061 × W<sub>MA</sub>) ÷ (0.240 + 0.444 × W<sub>MA</sub>)**
 
 Where:
 
-- **T<sub>MA</sub>**: the mixed air dry bulb, °F (°C)
-- **T<sub>#</sub>**: the dry bulb of each air stream, °F (°C)
-- **W<sub>MA</sub>, W<sub>#</sub>**: the humidity ratio of the mix and of each stream, lb/lb (kg/kg)
 - **Q<sub>#</sub>**: the flow rate of each air stream, CFM (l/s)
+- **v<sub>#</sub>**: the specific volume of each stream, ft³ per lb of dry air, from its dry bulb and humidity ratio
+- **m<sub>#</sub>**: the mass flow of dry air in each stream, lb/min
+- **W<sub>MA</sub>, W<sub>#</sub>**: the humidity ratio of the mix and of each stream (the mass of water vapor per mass of dry air), lb/lb, from each stream's dry bulb and wet bulb
+- **h<sub>MA</sub>, h<sub>#</sub>**: the enthalpy of the mix and of each stream, Btu per lb of dry air
+- **T<sub>MA</sub>**: the mixed air dry bulb, °F
 
-The humidity ratios and the mixed wet bulb use the psychrometric equations of the ASHRAE Handbook—Fundamentals, chapter 1, at sea-level pressure (14.696 psia). Weighting by volume flow rather than by mass of dry air is the usual simplification for ventilation and air conditioning; the difference is small at these temperatures. If the mix lands past saturation (cold air mixed with very humid air), some of the moisture condenses as fog, and the calculator reports the saturated temperature the mix settles at.
+The mixed air wet bulb is then solved from T<sub>MA</sub> and W<sub>MA</sub>. Every property uses the chapter's psychrometric equations at sea-level pressure (14.696 psia); metric inputs are converted to these units and back. Averaging the dry bulbs and wet bulbs by flow, as a quick hand estimate does, is close for the dry bulb but not exact, and wet bulb does not mix linearly at all. If the mix lands past saturation (cold air mixed with very humid air), some of the moisture condenses as fog, and the calculator reports the saturated temperature the mix settles at.
 
-**Example:** calculate the mixed air temperature of three air streams:
+**Example:** calculate the mixed air conditions of three air streams:
 
 - Outdoor air: 150 CFM at 91 °F dry bulb / 77 °F wet bulb
 - Return air: 1,550 CFM at 75 °F dry bulb / 62.3 °F wet bulb
 - Bypass air: 300 CFM at 55 °F dry bulb / 54.5 °F wet bulb
 
-Dry bulb mixed air temperature:
+Each stream's properties, from its dry bulb and wet bulb:
 
-T<sub>MA,DB</sub> = (91 °F × 150 CFM + 75 °F × 1,550 CFM + 55 °F × 300 CFM) ÷ (150 CFM + 1,550 CFM + 300 CFM) = 73.20 °F dry bulb
+| Stream | W, lb/lb | v, ft³/lb | m = Q ÷ v, lb/min | h, Btu/lb |
+|---|---|---|---|---|
+| Outdoor air | 0.016782 | 14.257 | 10.52 | 40.324 |
+| Return air | 0.009069 | 13.676 | 113.34 | 27.924 |
+| Bypass air | 0.008912 | 13.161 | 22.79 | 22.873 |
 
-Humidity ratio of each stream, from its dry bulb and wet bulb: outdoor air 0.01678 lb/lb, return air 0.00907 lb/lb, bypass air 0.00891 lb/lb.
+The total dry air is 146.65 lb/min, so:
 
-W<sub>MA</sub> = (0.01678 × 150 CFM + 0.00907 × 1,550 CFM + 0.00891 × 300 CFM) ÷ 2,000 CFM = 0.00962 lb/lb (67.4 gr/lb)
+W<sub>MA</sub> = (10.52 × 0.016782 + 113.34 × 0.009069 + 22.79 × 0.008912) ÷ 146.65 = 0.009598 lb/lb (67.2 gr/lb)
 
-At 73.20 °F dry bulb and 0.00962 lb/lb, the mixed air wet bulb is 62.51 °F. Averaging the wet bulbs directly would give 62.23 °F, about 0.3 °F low.
+h<sub>MA</sub> = (10.52 × 40.324 + 113.34 × 27.924 + 22.79 × 22.873) ÷ 146.65 = 28.029 Btu/lb
+
+T<sub>MA</sub> = (28.029 − 1,061 × 0.009598) ÷ (0.240 + 0.444 × 0.009598) = 73.06 °F dry bulb
+
+At 73.06 °F dry bulb and 0.009598 lb/lb, the mixed air wet bulb is 62.43 °F. Averaging by flow instead would give 73.20 °F dry bulb and 62.23 °F wet bulb.

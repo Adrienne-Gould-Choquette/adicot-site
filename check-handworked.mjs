@@ -105,29 +105,38 @@ export function checkHandworked() {
   same('beyond the crack data: flagged', pressurization({ fit: 'Average', crack: 84, env: {}, netOA: 500, door, limit: 30 }).beyondCrackData, true);
   lines.push("  pressurization and door force: the 30 and 5 lbf hand calculations, the page example and each leakage path; depressurization and the no-leakage and past-the-data cases");
 
-  // Air mixing: moisture mixes by humidity ratio. Worked through the psychrometric
-  // calculator: each stream's W from its dry and wet bulb, the flow-weighted W,
-  // and the mixed state must have that W at the mixed dry bulb and wet bulb.
-  const W = (db, wb, units = 'US') => state({ units, mode: 'db-wb', first: db, second: wb, altitude: 0 }).ip.W;
-  const ex = [{ q: 150, db: 91, wb: 77 }, { q: 1550, db: 75, wb: 62.3 }, { q: 300, db: 55, wb: 54.5 }];
-  const mixed = mix(ex);
-  near('air mixing: page example W is the flow-weighted W', mixed.w, (150 * W(91, 77) + 1550 * W(75, 62.3) + 300 * W(55, 54.5)) / 2000, 1e-12);
-  near('air mixing: page example mixed state has that W', W(mixed.db, mixed.wb), mixed.w, 1e-9);
-  near('air mixing: page example 73.20 °F dry bulb', mixed.db, 73.2, 1e-9);
-  near('air mixing: page example 62.51 °F wet bulb', mixed.wb, 62.51, 0.005);
-  const si = mix([{ q: 236, db: 35, wb: 25 }, { q: 944, db: 24, wb: 17 }], true);
-  near('air mixing: SI mixed state has the flow-weighted W', W(si.db, si.wb, 'Metric'), (236 * W(35, 25, 'Metric') + 944 * W(24, 17, 'Metric')) / 1180, 1e-9);
+  // Air mixing: ASHRAE adiabatic mixing. Worked through the psychrometric
+  // calculator: each stream's W, h and v from its dry and wet bulb, the dry air
+  // mass Q / v, and the mixed state must carry the mass-weighted W and h.
+  const P = (db, wb, units = 'US') => state({ units, mode: 'db-wb', first: db, second: wb, altitude: 0 }).ip;
+  const massMix = (streams, units) => {
+    const ps = streams.map(([q, db, wb]) => ({ ...P(db, wb, units), m: q / P(db, wb, units).v }));
+    const m = ps.reduce((t, x) => t + x.m, 0);
+    return { W: ps.reduce((t, x) => t + x.m * x.W, 0) / m, h: ps.reduce((t, x) => t + x.m * x.h, 0) / m };
+  };
+  const ex = [[150, 91, 77], [1550, 75, 62.3], [300, 55, 54.5]];
+  const mixed = mix(ex.map(([q, db, wb]) => ({ q, db, wb })));
+  const want = massMix(ex);
+  near('air mixing: page example W is the mass-weighted W', mixed.w, want.W, 1e-9);
+  near('air mixing: page example mixed state has that W', P(mixed.db, mixed.wb).W, want.W, 1e-9);
+  near('air mixing: page example mixed state has the mass-weighted h', P(mixed.db, mixed.wb).h, want.h, 1e-6);
+  near('air mixing: page example 73.06 °F dry bulb', mixed.db, 73.06, 0.005);
+  near('air mixing: page example 62.43 °F wet bulb', mixed.wb, 62.43, 0.005);
+  near('air mixing: page example 67.2 gr/lb', mixed.w * 7000, 67.2, 0.05);
+  const siEx = [[236, 35, 25], [944, 24, 17]];
+  const si = mix(siEx.map(([q, db, wb]) => ({ q, db, wb })), true);
+  near('air mixing: SI mixed state has the mass-weighted W', P(si.db, si.wb, 'Metric').W, massMix(siEx, 'Metric').W, 1e-9);
   const winter = mix([{ q: 1000, db: 20, wb: 18 }, { q: 1600, db: 72, wb: 60 }]);
-  near('air mixing: winter air (ice on the wick) mixes by W too', W(winter.db, winter.wb), winter.w, 1e-9);
-  // Saturated 20 °F and 95 °F air, half and half, is past saturation at 57.5 °F:
+  near('air mixing: winter air (ice on the wick) mixes by W too', P(winter.db, winter.wb).W, winter.w, 1e-9);
+  // Saturated 20 °F and 95 °F air, half and half by flow, is past saturation:
   // it fogs, and settles saturated at the mix's enthalpy.
-  const fog = mix([{ q: 1000, db: 20, wb: 20 }, { q: 1000, db: 95, wb: 95 }]);
+  const fogEx = [[1000, 20, 20], [1000, 95, 95]];
+  const fog = mix(fogEx.map(([q, db, wb]) => ({ q, db, wb })));
   same('air mixing: past saturation is flagged', fog.fog, true);
   same('air mixing: fog leaves it saturated', fog.db, fog.wb);
-  const h = (t, w) => 0.24 * t + w * (1061 + 0.444 * t);
-  near('air mixing: fog keeps the enthalpy', h(fog.db, W(fog.db, fog.db)), h(57.5, fog.w), 1e-6);
+  near('air mixing: fog keeps the enthalpy', P(fog.db, fog.db).h, massMix(fogEx).h, 1e-4);
   same('air mixing: the page example does not fog', mixed.fog, false);
-  lines.push('  air mixing: wet bulb from the flow-weighted humidity ratio (page example, SI, winter, fog)');
+  lines.push('  air mixing: ASHRAE adiabatic mixing by dry air mass (page example, SI, winter, fog)');
   return { lines, issues, checks };
 }
 

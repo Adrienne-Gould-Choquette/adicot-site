@@ -13,24 +13,20 @@ for (const units of ['English Units', 'Metric Units']) for (const o of OA) for (
 }
 
 const n = v => (v === '' ? 0 : Number(v));
-const fogless = (row, r) => (r.fog ? { ...r, db: Number(row.db) } : r);
 
 export default {
   workbook: 'G:\\My Drive\\5-Calculators\\Mixed Air Calculator V1.6.xlsx',
   sheet: 'Mixed Air Calculator',
   inputs: { units: 'C2', oq: 'C5', odb: 'C6', owb: 'C7', rq: 'D5', rdb: 'D6', rwb: 'D7', xq: 'E5', xdb: 'E6', xwb: 'E7' },
-  // The workbook's wet bulb (D13) was a flow-weighted mean, which is wrong;
-  // check-handworked.mjs checks the psychrometric wet bulb instead.
-  outputs: { total: 'D11', db: 'D12' },
+  // The workbook averaged the dry bulb (D12) and wet bulb (D13) by flow, which
+  // only approximates mixing; check-handworked.mjs checks the adiabatic mix.
+  outputs: { total: 'D11' },
   cases,
-  // Past saturation the mix fogs and its latent heat warms it; the workbook
-  // ignores that, so its dry bulb is compared only where nothing condenses.
-  // check-handworked.mjs covers the fog case.
-  run: row => fogless(row, mix([
+  run: row => mix([
     { q: n(row.oq), db: n(row.odb), wb: n(row.owb) },
     { q: n(row.rq), db: n(row.rdb), wb: n(row.rwb) },
     { q: n(row.xq), db: n(row.xdb), wb: n(row.xwb) },
-  ], row.units === 'Metric Units')),
+  ], row.units === 'Metric Units'),
   refuse: [
     { args: [{ q: 150, db: 91, wb: null }, { q: 1550, db: 75, wb: 62 }, { q: null, db: null, wb: null }], says: 'Enter the outdoor air wet bulb' },
     { args: [{ q: 150, db: 91, wb: 77 }, { q: 1550, db: 75, wb: 62 }, { q: 300, db: null, wb: null }], says: 'Enter the third air stream dry bulb' },

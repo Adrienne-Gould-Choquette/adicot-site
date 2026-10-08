@@ -63,8 +63,8 @@
       <caption class="visually-hidden">Mixed air flow, dry bulb and wet bulb</caption>
       <tbody id="mx-tbody"></tbody>
     </table>
-    <p class="cf-note">The dry bulb and the humidity ratio are flow-weighted averages of the streams':
-    T = (T₁Q₁ + T₂Q₂ + T₃Q₃) ÷ (Q₁ + Q₂ + Q₃), and the same for W. The wet bulb is then found
-    from the mixed dry bulb and humidity ratio, at sea-level pressure.</p>
+    <p class="cf-note">Each stream's air flow is converted to a mass of dry air. The mixed humidity ratio
+    and enthalpy are the mass-weighted averages of the streams', and the mixed dry bulb and wet bulb
+    follow from them (ASHRAE adiabatic mixing, at sea-level pressure).</p>
   </section>
 </form>
