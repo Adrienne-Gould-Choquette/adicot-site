@@ -64,7 +64,7 @@ A building that takes in more outdoor air than it exhausts is pressurized until 
 **Leakage.** At a pressure difference ΔP (in. w.c.), the building leaks through:
 
 - **Window and door cracks:** crack length × the fit's rate above, with ΔP in place of VHF (the crack curves give leakage per foot against pressure difference).
-- **Walls and roof:** area × rate × (ΔP / 0.30)^0.65. ASHRAE Handbook—Fundamentals (2025), chapter 16, gives typical commercial wall leakage of 0.10, 0.30 and 0.60 cfm per ft² at 0.30 in. w.c. for tight, average and leaky walls, with a flow exponent of 0.65. It gives no separate roof figure, so the roof uses the same choices. The wall area is the perimeter × height less the windows and doors; the roof area is length × width.
+- **Walls and roof:** area × rate × (ΔP / 0.30)^0.65. Typical commercial wall leakage is 0.10, 0.30 and 0.60 cfm per ft² at 0.30 in. w.c. for tight, average and leaky walls (Tamura and Shaw 1976a, as reported in the ventilation and infiltration chapter of the ASHRAE Handbook—Fundamentals), with a flow exponent of 0.65. There is no separate roof figure, so the roof uses the same choices. The wall area is the perimeter × height less the windows and doors; the roof area is length × width.
 - **Other openings** that stay open, such as relief dampers and louvers: Q = 2610 × A × ΔP^0.5, with A the free area in ft² (the orifice equation with a flow coefficient of 0.65).
 - **Measured leakage:** a blower-door result in cfm at 75 Pa (0.30 in. w.c.) replaces the wall and roof estimate, scaled by (ΔP / 0.30)^0.65.
 
@@ -80,14 +80,14 @@ The building pressure is the ΔP at which the total leakage equals the net outdo
 - **ΔP**: pressure difference across the door, in. w.c.
 - **d**: distance from the knob to the latch edge, ft
 
-**Force limits.** IBC Section 1010.1.3 limits interior swinging egress doors, other than fire doors, to 5 lbf. Other swinging doors must set in motion at 30 lbf (IBC 1010.1.3 and NFPA 101 Section 7.2.1.4.5). Check the code your jurisdiction adopts.
+**Force limits.** The doors in the calculator are exterior doors, so the limit starts at 30 lbf. Exterior and other swinging doors must release the latch at no more than 15 lbf, set in motion at 30 lbf and swing fully open at 15 lbf (IBC Section 1010.1.3 and NFPA 101 Section 7.2.1.4.5). The pressure acts from the moment the door starts to move, so the calculator checks the 30 lbf set-in-motion force. Interior hinged doors are limited to 5 lbf, not counting the force to retract the latch: IBC 1010.1.3 for interior swinging egress doors other than fire doors, ADA Standards 404.2.9 and ICC A117.1 Section 404.2.8. Choose 5 lbf for an interior door that sees the pressure, such as one between a pressurized zone and a corridor. Check the code edition your jurisdiction adopts.
 
 **Example.** A 3 × 7 ft door on plain hinges (F<sub>dc</sub> = 0), knob 3 in. from the edge:
 
-- At the 5 lbf interior limit: ΔP = 5 × 2 × (3 − 0.25) / (5.2 × 3 × 21) = 27.5 / 327.6 = 0.084 in. w.c.
-- At the 30 lbf limit: ΔP = 165 / 327.6 = 0.504 in. w.c.
+- At the 30 lbf exterior limit: ΔP = 30 × 2 × (3 − 0.25) / (5.2 × 3 × 21) = 165 / 327.6 = 0.504 in. w.c.
+- At the 5 lbf interior limit: ΔP = 27.5 / 327.6 = 0.084 in. w.c.
 
-The example building above, 30 × 60 × 16 ft, with average walls and roof, has 2,799 ft² of wall (after the windows and doors) and 1,800 ft² of roof. With 500 cfm of net outdoor air it settles at 0.058 in. w.c.: 472 cfm leaks through the walls and roof and 28 cfm through the cracks. The door then takes 3.4 lbf to open, within the 5 lbf limit, and the door allows up to about 639 cfm of net outdoor air.
+The calculator starts with this example: the building above, 30 × 60 × 16 ft, with average-fit windows and average walls and roof. It has 2,799 ft² of wall (after the windows and doors) and 1,800 ft² of roof. With 500 cfm of net outdoor air it settles at 0.058 in. w.c.: 472 cfm leaks through the walls and roof and 28 cfm through the cracks. The door then takes 3.4 lbf to open, within the 30 lbf exterior limit, and the door allows up to about 2,046 cfm of net outdoor air. Against the 5 lbf interior limit it would allow about 639 cfm. Change any input and the results move away from these figures.
 
 If more air is exhausted than brought in, enter the net outdoor air as a negative number: the building is depressurized by the same amount, and the force check applies to a door that opens inward.
 

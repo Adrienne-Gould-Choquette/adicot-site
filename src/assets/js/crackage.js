@@ -44,11 +44,11 @@ export function crackage({ wind, fit, openings, building, extraCrack = 0 }) {
 // wind: the pressure at which the cracks leak exactly that surplus.
 const CURVE = { 1: [0.95, 0.55], 2: [2.1, 0.64], 6: [6.05, 0.62] };
 export const leakPerFoot = (fit, dp) => { const [c, n] = CURVE[FITS[fit].k]; return c * dp ** n; };   // cfm/ft
-// The rest of the envelope leaks too. ASHRAE Handbook—Fundamentals (2025),
-// chapter 16 ("Commercial and Institutional Infiltration"): commercial walls leak
-// 0.10, 0.30 and 0.60 cfm per ft² of wall at 0.30 in. w.c. when tight, average
-// and leaky (Tamura and Shaw 1976a), with flow exponent n = 0.65. The chapter
-// gives no separate roof figure, so the roof takes the same choices. Other
+// The rest of the envelope leaks too. Commercial walls leak 0.10, 0.30 and
+// 0.60 cfm per ft² of wall at 0.30 in. w.c. when tight, average and leaky
+// (Tamura and Shaw 1976a, as reported in the ventilation and infiltration
+// chapter of the ASHRAE Handbook—Fundamentals), with flow exponent n = 0.65.
+// There is no separate roof figure, so the roof takes the same choices. Other
 // openings (relief dampers, louvers, gaps) flow as orifices, flow coefficient
 // 0.65: Q = 2610 A ΔP^0.5, cfm, A ft², ΔP in. w.c. A blower-door result (cfm at
 // 75 Pa) replaces the wall and roof estimate.
@@ -86,8 +86,8 @@ export const doorPressure = ({ width, height, knob, closer }, limit) => (limit -
 
 // Opening-force limits for swinging doors.
 export const DOOR_LIMITS = {
-  interior: { lbf: 5, label: 'Interior swinging egress door, 5 lbf (IBC 1010.1.3)' },
-  motion: { lbf: 30, label: 'Other swinging doors, 30 lbf to set the door in motion (IBC 1010.1.3, NFPA 101 7.2.1.4.5)' },
+  motion: { lbf: 30, label: 'Exterior and other swinging doors, 30 lbf to set the door in motion (IBC 1010.1.3, NFPA 101 7.2.1.4.5)' },
+  interior: { lbf: 5, label: 'Interior hinged door, 5 lbf (IBC 1010.1.3, ADA 404.2.9, ICC A117.1 404.2.8)' },
 };
 
 // netOA: outdoor air supplied minus air exhausted, cfm; env as leakageParts;
