@@ -33,6 +33,7 @@
       <div class="cf-pair">{{ moist("am1", "e2", "Entering", "co-m1", "67") }}{{ moist("am2", "x2", "Leaving", "co-m2", "54") }}</div>
       <div class="cf-pair">{{ num("aq", "Airflow", "co-a", "cfm", "1000") }}{{ num("qs", "Sensible cooling", "co-q", "Btu/h", "27000") }}</div>
       <div class="cf-pair">{{ num("ql", "Latent cooling", "co-q", "Btu/h", "9000") }}{{ num("qt", "Total cooling", "co-q", "Btu/h", "36000") }}</div>
+      <p class="hint" id="co-loadhint" hidden></p>
       {{ num("alt", "Altitude", "co-l", "ft", "0") }}
       <p class="hint cf-group">Each air state comes from its dry bulb and wet bulb, RH or dew point, with the
       ASHRAE psychrometric equations at the altitude given (sea level if blank). The dry bulbs alone give

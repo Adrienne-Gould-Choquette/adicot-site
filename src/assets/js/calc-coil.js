@@ -56,6 +56,12 @@ function init(form) {
     const side = findLeave ? 'lev' : findEnter ? 'ent' : null;   // the end being solved for
     show('aq', !findFlow); show('qt', find !== 'loads'); show('qs', find !== 'loads'); show('ql', find !== 'loads');
     show('e1', side !== 'ent'); show('x1', side !== 'lev');
+    // How many of the three loads each choice needs.
+    const end = side === 'ent' ? 'entering' : 'leaving';
+    el('co-loadhint').hidden = find === 'loads';
+    el('co-loadhint').textContent = findFlow
+      ? 'Enter one of the three loads. If more than one is entered, the total is used, then the sensible.'
+      : `Enter any two of the three loads, or the total cooling with the ${end} RH or dew point above. One load alone gives the ${end} dry bulb (sensible) or dew point (latent).`;
     let airflow = null;        // for the face velocity
     let totalCooling = null;   // for the water tool
     const altitude = num(el('co-alt')) ?? 0;
@@ -96,7 +102,6 @@ function init(form) {
     // airflow and the loads, then carried through the same results as a given one.
     let entMode = m1, levMode = m2, solved = false, byTotal = false;
     const says = SAYS(us, side === 'ent');
-    const end = side === 'ent' ? 'entering' : 'leaving';
     // That end's own moisture, if given, and how.
     const sideMoist = side === 'ent' ? ent.second : side === 'lev' ? lev.second : null, sideMode = side === 'ent' ? m1 : m2;
     if (side && airflow !== null && !bad) {
