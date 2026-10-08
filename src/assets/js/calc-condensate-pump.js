@@ -72,21 +72,25 @@ function init(form) {
     const why = problem(input);
     if (why) return hide(why);
 
-    const shown = selectPumps(input).filter(p => p.ok).sort((a, b) => a.capacity - b.capacity || a.row - b.row);
+    // The best fit is the smallest rating at the head that covers the flow; models
+    // tied at it are one pump with different options, so all are listed.
+    const fits = selectPumps(input).filter(p => p.ok).sort((a, b) => a.capacity - b.capacity || a.row - b.row);
+    const best = fits.filter(p => p.capacity === fits[0].capacity);
     const flow = g => fmt(us ? g : g * L_PER_GAL, us && g < 10 ? 1 : 0);
     const at = ft => (us ? `${ft} ft` : `${fmt(ft * FT, 1)} m`);
-    el('cp-body').replaceChildren(...shown.map(p => {
+    el('cp-body').replaceChildren(...best.map(p => {
       const tr = document.createElement('tr');
       const th = Object.assign(document.createElement('th'), { scope: 'row', textContent: p.model });
       const td = t => Object.assign(document.createElement('td'), { className: 'cf-num', textContent: t });
       tr.append(th, td(`${flow(p.capacity)} (at ${at(p.ratedAt)})`), td(flow(p.max)));
       return tr;
     }));
-    el('cp-table').hidden = !shown.length;
+    el('cp-table').hidden = !best.length;
     const need = `${flow(gph)} ${flowUnit} to ${us ? `${fmt(head, 1)} ft` : `${fmt(headIn, 2)} m`}`;
-    el('cp-summary').textContent = shown.length
-      ? `${shown.length === 1 ? '1 pump lifts' : `${shown.length} pumps lift`} ${need}${shown.length === 1 ? '' : ', smallest first'}.`
-      : `No ${input.volts} V pump of this type lifts ${need}. Try another application or voltage, or a lower head.`;
+    const more = fits.length - best.length;
+    el('cp-summary').textContent = !best.length
+      ? `No ${input.volts} V pump of this type lifts ${need}. Try another application or voltage, or a lower head.`
+      : `${best.length === 1 ? `The best fit for ${need} is the ${best[0].model}` : `The best fit for ${need} is one pump sold as ${best.length} models with different options`}${more ? ` (${more} larger ${more === 1 ? 'pump also fits' : 'pumps also fit'})` : ''}.`;
   }
 
   live(form, recalc);

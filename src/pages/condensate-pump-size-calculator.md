@@ -19,7 +19,7 @@ Review the methodology below to make sure it aligns with your project's requirem
 2. Give the condensate flow: either calculate it from the coil's entering and leaving dry-bulb and wet-bulb temperatures and its airflow, or enter it directly.
 3. Choose the application (the kind of equipment the pump serves) and the voltage available.
 4. Enter the head height: the vertical lift from the pump to the highest point of the discharge line.
-5. The pumps that deliver at least the condensate flow at that head appear in the results, smallest first, with their flow at the head and their largest rated flow.
+5. The best-fit pump appears in the results: the one with the smallest rated flow at that head that still delivers the condensate flow, with its flow at the head and its largest rated flow. When several models share that rating (the same pump with options such as a safety switch or tubing), all of them are listed.
 
 Use **Copy link to these results** to save or share the selection.
 
@@ -37,11 +37,11 @@ where v is the specific volume of the entering air (ft³/lb) and W the humidity 
 
 A pump suits the job when it is made for the application and the voltage, and its flow at the head height is at least the condensate flow. Manufacturers rate condensate pumps at a few heads only, so between those heads the calculator takes the pump's flow at the next higher listed head, which is conservative. Above a pump's highest listed head it is not rated, and is not listed.
 
-Condensate pumps run on a float switch: the pump starts when the reservoir fills and stops when it empties. A pump with more capacity than the condensate simply runs for shorter periods, so the calculator does not rule out larger pumps. It lists them smallest first, since the smallest pump that does the job is usually the quietest and least expensive.
+Condensate pumps run on a float switch: the pump starts when the reservoir fills and stops when it empties. A pump with more capacity than the condensate simply runs for shorter periods, so any larger pump would also work. The calculator shows only the smallest pump that does the job, since it is usually the quietest and least expensive, and says how many larger pumps also fit.
 
 ### Example
 
-A coil cooling 1,200 cfm from 80 °F dry bulb, 67 °F wet bulb to 55 °F dry bulb, 54 °F wet bulb, at sea level, makes about 13.2 lb/h, or 1.6 gph, of condensate (the calculator's starting values). For an air conditioner at 115 V with a 10 ft lift, 12 Little Giant pumps qualify, starting with the VCMA-15 models at 25 gph at 10 ft. The VCL-24 models are rated only up to 9 ft, so they drop out at a 10 ft lift.
+A coil cooling 1,200 cfm from 80 °F dry bulb, 67 °F wet bulb to 55 °F dry bulb, 54 °F wet bulb, at sea level, makes about 13.2 lb/h, or 1.6 gph, of condensate (the calculator's starting values). For an air conditioner at 115 V with a 10 ft lift, 12 Little Giant pumps qualify, and the best fit is the VCMA-15 at 25 gph at 10 ft, sold as four models (VCMA-15UL, -15ULS, -15ULST and -15ULT). The VCL-24 models are rated only up to 9 ft, so they drop out at a 10 ft lift.
 
 ## Notes
 
