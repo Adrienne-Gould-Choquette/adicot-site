@@ -1305,9 +1305,14 @@ main > :last-child { margin-bottom: 0; }
 .cm-stack { display: grid; gap: 10px; }
 /* Fewer rows: a .cm-wide stack runs across the form, and a .cm-duo holds two
    single inputs side by side; each explanation opens underneath. */
-.cm-side.cm-wide, .cm-duo > .cm-side { grid-template-columns: minmax(0, 1fr); }
-.cm-side.cm-wide > .cm-stack { grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: 10px 22px; align-items: end; }
-.cm-duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: 10px 22px; align-items: start; }
+.cm-side.cm-wide { grid-template-columns: minmax(0, 1fr); }
+/* auto-fill, not auto-fit, so a row with fewer inputs keeps the same columns. */
+.cm-side.cm-wide > .cm-stack { grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 10px 22px; align-items: end; }
+/* A .cm-duo's inputs line up along the bottom, whatever their labels' height;
+   their explanations follow the inputs, each across the whole row. */
+.cm-duo { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 10px 22px; align-items: end; }
+.cm-duo > .cm-side { display: contents; }
+.cm-duo > .cm-side > .hint { order: 1; grid-column: 1 / -1; }
 .cf-stream > :is(.cm-side, .cm-duo) + :is(.cm-side, .cm-duo) { margin-top: 12px; }
 /* The window totals: crack length and area side by side, their explanation below. */
 #cm-wtotals { grid-template-columns: minmax(0, 1fr); }

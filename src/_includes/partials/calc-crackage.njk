@@ -84,21 +84,18 @@
 
     <fieldset class="cf-stream">
       <legend>Pressurization and door opening force (optional)</legend>
-      {#- Fewer rows: the two airflows side by side, then the leakage inputs on
-          one row and the door inputs on another, each explanation underneath. #}
+      {#- In the order the check uses them: the air to get rid of, where it leaks
+          out, and the door it pushes on. Each of those has a value or a default.
+          The two inputs that can be left empty come last. Rows run across the
+          form, each explanation underneath. #}
       <div class="cm-duo">
         <div class="cm-side">
           <div class="field"><label for="cm-oa">Net outdoor air <span class="cf-u" data-si="l/s">cfm</span></label>
             <input type="number" id="cm-oa" name="oa" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 500" data-si="e.g. 240" value="500"></div>
           <p class="hint">Is the outdoor air over-pressurizing the building? Enter the outdoor air supplied minus the air exhausted (negative if more is exhausted). The calculator finds the pressure at which that surplus leaks out through the cracks above, and checks it against the force needed to open the doors above.</p>
         </div>
-        <div class="cm-side">
-          <div class="field"><label for="cm-q75">Measured envelope leakage <span class="cf-u" data-si="l/s at 75 Pa">cfm at 75 Pa</span></label>
-            <input type="number" id="cm-q75" name="q75" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="optional" aria-describedby="cm-q75-hint"></div>
-          <p class="hint" id="cm-q75-hint">From a blower-door test of this building. It replaces the wall and roof estimate.</p>
-        </div>
       </div>
-      <div class="cm-side cm-wide" data-help="the wall, roof and other leakage">
+      <div class="cm-side cm-wide" data-help="the wall and roof leakage">
         <div class="cm-stack">
           <div class="field"><label for="cm-wt">Walls</label>
             <select id="cm-wt" name="wt">
@@ -114,16 +111,14 @@
               <option value="Leaky" data-si="Leaky: 3.05 l/s per m²">Leaky: 0.60 cfm/ft²</option>
               <option value="None">Not counted</option>
             </select></div>
-          <div class="field"><label for="cm-oe">Other openings <span class="cf-u" data-si="cm²">in²</span></label>
-            <input type="number" id="cm-oe" name="oe" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 0" aria-describedby="cm-oe-hint"></div>
         </div>
-        <p class="hint" id="cm-oe-hint">Air also leaks through the walls, roof and penetrations. The wall and roof areas come from the building dimensions above (the walls less the windows and doors). Rates are per unit of surface at 0.30 in. w.c. (75 Pa). Other openings are penetrations that stay open, such as relief dampers, louvers and unsealed gaps, as free area.</p>
+        <p class="hint">Air also leaks through the walls and roof. Their areas come from the building dimensions above (the walls less the windows and doors). Rates are per unit of surface at 0.30 in. w.c. (75 Pa).</p>
       </div>
       <div class="cm-side cm-wide" data-help="the door opening force inputs">
         <div class="cm-stack">
           <div class="field"><label for="cm-dk">Knob to latch edge <span class="cf-u" data-si="mm">in</span></label>
             <input type="number" id="cm-dk" name="dk" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 3" data-si="e.g. 75" value="3"></div>
-          <div class="field"><label for="cm-dc">Door closer force, part of the total <span class="cf-u" data-si="N">lbf</span></label>
+          <div class="field"><label for="cm-dc">Door closer force <span class="cf-u" data-si="N">lbf</span></label>
             <input type="number" id="cm-dc" name="dc" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="0 if none" value="0"></div>
           <div class="field"><label for="cm-dl">Total opening force limit</label>
             <select id="cm-dl" name="dl">
@@ -134,7 +129,19 @@
           <div class="field" id="cm-df-f" hidden><label for="cm-df">Total force limit <span class="cf-u" data-si="N">lbf</span></label>
             <input type="number" id="cm-df" name="df" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 15" data-si="e.g. 67"></div>
         </div>
-        <p class="hint">Closer force is the manufacturer's published value; 0 for a door on plain hinges. The doors above are exterior doors, so the limit starts at 30 lbf (133 N), the force to set the door in motion (IBC 1010.1.3, NFPA 101 7.2.1.4.5). The same sections also allow 15 lbf (67 N) to release the latch and 15 lbf to swing the door fully open; the calculator checks the 30 lbf. Use 5 lbf (22 N) for an interior hinged door, such as one between a pressurized zone and a corridor (IBC 1010.1.3 for egress doors other than fire doors, ADA 404.2.9, ICC A117.1 404.2.8). The 5 lbf limit does not include the force to retract the latch.</p>
+        <p class="hint">Closer force is the manufacturer's published value, and is part of the total opening force; 0 for a door on plain hinges. The doors above are exterior doors, so the limit starts at 30 lbf (133 N), the force to set the door in motion (IBC 1010.1.3, NFPA 101 7.2.1.4.5). The same sections also allow 15 lbf (67 N) to release the latch and 15 lbf to swing the door fully open; the calculator checks the 30 lbf. Use 5 lbf (22 N) for an interior hinged door, such as one between a pressurized zone and a corridor (IBC 1010.1.3 for egress doors other than fire doors, ADA 404.2.9, ICC A117.1 404.2.8). The 5 lbf limit does not include the force to retract the latch.</p>
+      </div>
+      <div class="cm-duo">
+        <div class="cm-side">
+          <div class="field"><label for="cm-oe">Other openings <span class="cf-u" data-si="cm²">in²</span></label>
+            <input type="number" id="cm-oe" name="oe" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="optional" aria-describedby="cm-oe-hint"></div>
+          <p class="hint" id="cm-oe-hint">Optional. Penetrations that stay open, such as relief dampers, louvers and unsealed gaps, as free area.</p>
+        </div>
+        <div class="cm-side">
+          <div class="field"><label for="cm-q75">Measured leakage <span class="cf-u" data-si="l/s at 75 Pa">cfm at 75 Pa</span></label>
+            <input type="number" id="cm-q75" name="q75" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="optional" aria-describedby="cm-q75-hint"></div>
+          <p class="hint" id="cm-q75-hint">Optional. The envelope leakage from a blower-door test of this building. It replaces the wall and roof estimate.</p>
+        </div>
       </div>
     </fieldset>
 
