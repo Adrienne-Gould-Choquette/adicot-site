@@ -120,9 +120,11 @@ function init(form) {
   // Reset clears the form. The browser's own reset puts back the worked example
   // the page opens with (the inputs' value attributes), so once it has run the
   // number fields are emptied, the opening rows cut to one blank row each, and
-  // any open explanation closed.
+  // any open explanation closed. The knob distance and closer force keep their
+  // defaults (3 in., no closer): they are assumptions, not project figures.
   form.addEventListener('reset', () => setTimeout(() => {
-    for (const i of form.querySelectorAll('input[type="number"]')) i.value = '';
+    const keep = [el('cm-dk'), el('cm-dc')];
+    for (const i of form.querySelectorAll('input[type="number"]')) if (!keep.includes(i)) i.value = '';
     windows.fill([['', '', '']]); doors.fill([['', '', '']]);
     for (const b of form.querySelectorAll('.cm-help[aria-expanded="true"]')) b.click();
     recalc();
