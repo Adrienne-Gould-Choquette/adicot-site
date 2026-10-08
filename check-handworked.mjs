@@ -5,7 +5,7 @@ import { annualCost, problem as costProblem } from './src/assets/js/annualcost.j
 import { COOLING_HOURS } from './src/assets/js/cooling-hours.js';
 import { readHours } from './tools/extract/build-cooling-hours.mjs';
 import { state } from './src/assets/js/psychsheet.js';
-import { coilLoads, airflowFor, leavingForLoads, leavingForTotal, humidityAtDewPoint, sensibleLoad, latentLoad, leavingDryBulbFor, leavingDewPointFor } from './src/assets/js/airside.js';
+import { coilLoads, airflowFor, leavingForLoads, leavingForTotal, humidityAtDewPoint, sensibleLoad, latentLoad, leavingDryBulbFor, leavingDewPointFor, enteringForLoads, enteringForTotal, enteringDryBulbFor, enteringDewPointFor } from './src/assets/js/airside.js';
 import { doorForce, doorPressure, pressurization, leakage, leakPerFoot, doorProblem, crackage } from './src/assets/js/crackage.js';
 import { mix } from './src/assets/js/mixair.js';
 
@@ -95,6 +95,24 @@ export function checkHandworked() {
     same(tag + 'dry-air sensible is within 1.5 % above the exact', dry / r.sensible > 1 && dry / r.sensible < 1.015, true);
     same(tag + 'dew-point latent is within 4 % above the exact', wet / r.latent > 1 && wet / r.latent < 1.04, true);
   }
+  // The entering-air solvers invert the same loads, the airflow being at the air found.
+  for (const [units, e, l, q, alt] of [['US', [95, 78], [55, 54], 2000, 0], ['US', [80, 67], [55, 54], 1000, 5000], ['Metric', [27, 19], [13, 12], 500, 0], ['US', [60, 45], [95, 58.6], 1000, 0]]) {
+    const a = S(units, 'db-wb', e[0], e[1], alt), b = S(units, 'db-wb', l[0], l[1], alt), r = coilLoads(units, a, b, q);
+    const back = enteringForLoads(units, b, q, r.sensible, r.total, alt), tag = `entering air (${units}, ${alt}, ${e[0]}): `;
+    near(tag + 'dry bulb from sensible and total', back.db, e[0], 1e-6);
+    near(tag + 'wet bulb from sensible and total', S(units, 'db-rh', back.db, back.rh, alt).wb, e[1], 1e-6);
+    near(tag + 'dry bulb from total and RH', enteringForTotal(units, b, 'db-rh', a.rh, q, r.total, alt).db, e[0], 1e-6);
+    near(tag + 'dry bulb from total and dew point', enteringForTotal(units, b, 'db-dp', a.dp, q, r.total, alt).db, e[0], 1e-6);
+    near(tag + 'dry bulb from the dry-air sensible', enteringDryBulbFor(units, l[0], q, sensibleLoad(units, e[0], l[0], q, alt), alt), e[0], 1e-9);
+    near(tag + 'dry bulb from the sensible at the leaving moisture', enteringDryBulbFor(units, l[0], q, sensibleLoad(units, e[0], l[0], q, alt, null, b.ip.W), alt, b.ip.W), e[0], 1e-9);
+    near(tag + 'dew point from the dew-point latent', enteringDewPointFor(units, b.ip.W, q, latentLoad(units, a.ip.W, b.ip.W, q, alt), alt).dewPoint, a.dp, 1e-6);
+  }
+  {
+    const b = S('US', 'db-wb', 55, 54);
+    same('entering air: past saturation refused', enteringForLoads('US', b, 1000, 5000, 200000).problem, 'saturated');
+    same('entering air: more than the load at its dew point refused', enteringForTotal('US', b, 'db-dp', 70, 1000, 10000).problem, 'dewpoint');
+    same('entering air: a sensible load beyond the airflow refused', enteringDryBulbFor('US', 55, 100, 1e6), null);
+  }
   // By hand, dry air at sea level: v = 0.370486 × 554.67 / 14.696, qs = m × 0.240 × 40.
   near('single load: dry-air sensible by hand', sensibleLoad('US', 95, 55, 2000), 2000 * 60 / (0.370486 * 554.67 / 14.696) * 0.240 * 40, 1e-6);
   near('single load: page example dry-air sensible 82,384 Btu/h', sensibleLoad('US', 95, 55, 2000), 82384, 0.5);
@@ -108,7 +126,7 @@ export function checkHandworked() {
   const byRh = S('US', 'db-rh', 80, 50), byDp = S('US', 'db-dp', 80, byRh.dp);
   near('db + dp: humidity ratio matches db + rh', byDp.ip.W, byRh.ip.W, 1e-9);
   near('db + dp: wet bulb matches db + rh', byDp.wb, byRh.wb, 1e-6);
-  lines.push('  coil loads: ASHRAE Fundamentals chapter 1 Examples 2 and 3; the leaving-air solvers return the leaving air the loads came from; one load from the dry bulbs or the dew points alone; dry bulb + dew point agrees with dry bulb + RH');
+  lines.push('  coil loads: ASHRAE Fundamentals chapter 1 Examples 2 and 3; the leaving-air solvers return the leaving air the loads came from; the entering-air solvers likewise; one load from the dry bulbs or the dew points alone; dry bulb + dew point agrees with dry bulb + RH');
 
   // Door opening force (crack-method page): the hand calculation for a 3 × 7 ft
   // hinged door, knob 3 in. from the edge, no closer.

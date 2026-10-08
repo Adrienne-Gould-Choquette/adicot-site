@@ -126,10 +126,10 @@ export function humidityAtDewPoint(units, dewPoint, altitude = 0) {
 }
 
 // qs = m (0.240 + 0.444 W2) (t1 - t2), with m at the entering dry bulb and W1.
-// W1 null: dry air. W2 null: the moisture does not change (W2 = W1).
+// One moisture null: it does not change through the coil. Both null: dry air.
 export function sensibleLoad(units, t1, t2, airflow, altitude = 0, W1 = null, W2 = null) {
   const us = units === 'US', f1 = toF(us, t1), f2 = toF(us, t2);
-  const m = (us ? airflow : airflow * CFM_PER_LS) * 60 / volume(f1, W1 ?? 0, ptAt(us, altitude));
+  const m = (us ? airflow : airflow * CFM_PER_LS) * 60 / volume(f1, W1 ?? W2 ?? 0, ptAt(us, altitude));
   const q = m * (0.240 + 0.444 * (W2 ?? W1 ?? 0)) * (f1 - f2);
   return us ? q : q / BTUH_PER_KW;
 }
@@ -168,4 +168,75 @@ export function leavingDewPointFor(units, W1, airflow, latent, altitude = 0, t1 
     if (done) break;
   }
   return { dewPoint: fromF(us, f2), W: W2 };
+}
+
+// --- The entering air, when it is the unknown ---
+//
+// The same equations again, for t1 and W1. The airflow is at the entering air, so
+// the mass flow depends on the answer and is settled along with it.
+
+// The entering air that a sensible and a total load call for, to reach a known
+// leaving state b. Returns the entering dry bulb and RH, or { problem }.
+export function enteringForLoads(units, b, airflow, sensible, total, altitude = 0) {
+  const us = units === 'US', pt = ptAt(us, altitude);
+  const cfm60 = (us ? airflow : airflow * CFM_PER_LS) * 60;
+  const qs = us ? sensible : sensible * BTUH_PER_KW, ql = (us ? total : total * BTUH_PER_KW) - qs;
+  const f2 = b.ip.db, W2 = b.ip.W;
+  let f1 = f2, W1 = W2;
+  for (let i = 0; i < 200; i++) {
+    const m = cfm60 / volume(f1, W1, pt);
+    const nf = f2 + qs / (m * (0.240 + 0.444 * W2)), nW = W2 + ql / (m * (1093 + 0.444 * nf - f2));
+    if (!Number.isFinite(nf) || !Number.isFinite(nW) || nf < -459) return { problem: 'range' };
+    const done = Math.abs(nf - f1) < 1e-11 && Math.abs(nW - W1) < 1e-15;
+    f1 = nf; W1 = nW;
+    if (done) break;
+  }
+  if (!(W1 > 0)) return { problem: 'dry' };
+  const rh = 100 * (pt * W1 / (0.621945 + W1)) / pws(f1);
+  if (rh > 100 + 1e-9) return { problem: 'saturated' };
+  return { db: fromF(us, f1), rh: Math.min(rh, 100) };
+}
+
+// The entering dry bulb at which a total load is removed, when the entering air's
+// RH ('db-rh') or dew point ('db-dp') is known: by bisection, as leavingForTotal.
+export function enteringForTotal(units, b, mode, second, airflow, total, altitude = 0) {
+  const us = units === 'US';
+  const miss = f => coilLoads(units, state({ units, mode, first: fromF(us, f), second, altitude }), b, airflow).total - total;
+  let lo = mode === 'db-dp' ? toF(us, second) : -40, hi = 150;
+  if (!(lo < hi)) return { problem: 'range' };
+  if (!(miss(lo) <= 0)) return { problem: mode === 'db-dp' ? 'dewpoint' : 'range' };
+  if (!(miss(hi) >= 0)) return { problem: 'range' };
+  for (let i = 0; i < 80; i++) {
+    const mid = (lo + hi) / 2;
+    if (miss(mid) < 0) lo = mid; else hi = mid;
+  }
+  return { db: fromF(us, (lo + hi) / 2) };
+}
+
+// The entering dry bulb for a sensible load alone. With m = K / (t1 + 459.67),
+// qs = K cp (t1 - t2) / (t1 + 459.67) solves directly. W: the moisture, taken as
+// unchanged (null: dry air). null when no entering air carries the load.
+export function enteringDryBulbFor(units, t2, airflow, sensible, altitude = 0, W = null) {
+  const us = units === 'US', f2 = toF(us, t2), w = W ?? 0;
+  const K = (us ? airflow : airflow * CFM_PER_LS) * 60 * ptAt(us, altitude) / (0.370486 * (1 + 1.607858 * w));
+  const kc = K * (0.240 + 0.444 * w), qs = us ? sensible : sensible * BTUH_PER_KW;
+  return kc > qs ? fromF(us, (qs * 459.67 + kc * f2) / (kc - qs)) : null;
+}
+
+// The entering dew point and humidity ratio for a latent load alone. The entering
+// dry bulb is unknown, so the entering dew point stands in for it; t2 null: the
+// leaving dew point stands in for the leaving dry bulb.
+export function enteringDewPointFor(units, W2, airflow, latent, altitude = 0, t2 = null) {
+  const us = units === 'US', pt = ptAt(us, altitude);
+  const f2 = t2 === null ? dewF(W2, pt) : toF(us, t2);
+  const cfm60 = (us ? airflow : airflow * CFM_PER_LS) * 60, ql = us ? latent : latent * BTUH_PER_KW;
+  let W1 = W2;
+  for (let i = 0; i < 200; i++) {
+    const f1 = dewF(W1, pt), next = W2 + ql / (cfm60 / volume(f1, W1, pt) * (1093 + 0.444 * f1 - f2));
+    if (!(next > 0)) return { problem: 'dry' };
+    const done = Math.abs(next - W1) < 1e-15;
+    W1 = next;
+    if (done) break;
+  }
+  return { dewPoint: fromF(us, dewF(W1, pt)), W: W1 };
 }
