@@ -70,18 +70,39 @@ export default function (eleventyConfig) {
   // /assets/* with max-age=31536000, immutable, so a returning visitor would
   // keep an old site.css for a year after a fix and never revalidate it. The
   // hash is over the file's own bytes, so the URL changes exactly when the file
-  // does and stays stable when it does not.
+  // does and stays stable when it does not. A script's hash also covers the
+  // scripts it imports, and the build writes the same ?v= onto each import, so
+  // a fix to a shared module reaches every page that loads it.
+  const IMPORT = /((?:from|import)\s*\(?\s*)(['"])(\.\/[\w.-]+\.js)\2/g;
+  const versions = new Map();
+  const version = file => {
+    if (versions.has(file)) return versions.get(file);
+    versions.set(file, '');   // an import cycle adds nothing rather than recursing forever
+    const text = fs.readFileSync(file, 'utf8');
+    const deps = file.endsWith('.js') ? [...text.matchAll(IMPORT)].map(m => version(path.join(path.dirname(file), m[3]))) : [];
+    const v = crypto.createHash('sha1').update(text + deps.join('')).digest('hex').slice(0, 8);
+    versions.set(file, v);
+    return v;
+  };
   const bustCache = new Map();
   eleventyConfig.addFilter('bust', (url) => {
     if (bustCache.has(url)) return bustCache.get(url);
     const onDisk = path.join('src', url.replace(/^[/]/, ''));
     let out = url;
     try {
-      const hash = crypto.createHash('sha1').update(fs.readFileSync(onDisk)).digest('hex').slice(0, 8);
-      out = url + '?v=' + hash;
+      out = url + '?v=' + version(onDisk);
     } catch { /* not a local file we build: leave it alone */ }
     bustCache.set(url, out);
     return out;
+  });
+  eleventyConfig.on('eleventy.after', ({ dir }) => {
+    const js = path.join(dir.output, 'assets', 'js');
+    for (const name of fs.readdirSync(js).filter(f => f.endsWith('.js'))) {
+      const file = path.join(js, name);
+      const text = fs.readFileSync(file, 'utf8');
+      const out = text.replace(IMPORT, (m, pre, q, spec) => `${pre}${q}${spec}?v=${version(path.join('src', 'assets', 'js', spec))}${q}`);
+      if (out !== text) fs.writeFileSync(file, out);
+    }
   });
 
   // Entries whose `pages` list names this slug. Used for the representative
