@@ -1,7 +1,7 @@
 ---
 layout: layouts/page.njk
 title: "Vapor Pressure Deficit (VPD)"
-seoTitle: "Vapor Pressure Deficit (VPD) | adicot.com"
+seoTitle: "Vapor Pressure Deficit (VPD) Calculator | adicot.com"
 description: "Calculate the room and leaf vapor pressure deficit (VPD) for grow rooms from the room temperature and humidity."
 permalink: /vapor-pressure-deficit-vpd.html
 ogImage: "/images/0179db_d72711d97cd24dde93dda8621a925f10~mv2.png"

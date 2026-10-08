@@ -2,7 +2,7 @@
 layout: layouts/post.njk
 title: "How to Use Adicot's Linear Interpolation Calculator"
 seoTitle: "How to Use Adicot's Linear Interpolation Calculator"
-description: "For anyone who needs precise calculations, our Linear Interpolation Calculator is here to save the day!"
+description: "What linear interpolation is and how to use Adicot's Linear Interpolation Calculator to estimate a value between two known points, with examples."
 date: 2024-06-10T04:00:00.000Z
 permalink: /post/unlock-the-power-of-precision-with-our-linear-interpolation-calculator.html
 ogImage: "/images/0179db_854b228d75e24c4bb9a9242d690ab530~mv2.jpg"

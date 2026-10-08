@@ -2,7 +2,7 @@
 layout: layouts/post.njk
 title: "Effect of ERV on AC Run Time"
 seoTitle: "Effect of ERV on AC Run Time"
-description: "The method to calculate the ERV effect on AC equipment run time using Adicot calculators."
+description: "How to calculate what an ERV does to air-conditioner run time, step by step, with the Psychrometric Chart 2-Condition Calculator and a worked example."
 date: 2023-08-20T03:07:47.010Z
 permalink: /post/erv-effect-on-ac-run-time.html
 ogImage: "/images/0179db_bfee65eeb17c497d81dfac22d7f649a7~mv2.png"

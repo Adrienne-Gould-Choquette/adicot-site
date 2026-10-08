@@ -1,8 +1,8 @@
 ---
 layout: layouts/page.njk
 title: "Temp Loss Thru Air Ducts"
-seoTitle: "Temp Loss through an Air Duct | adicot.com"
-description: "Easy-to-use *FREE* Calculator for finding the heat loss through an insulated air duct."
+seoTitle: "Temp Loss through an Air Duct Calculator | adicot.com"
+description: "Free calculator for the temperature change and heat loss of air in an insulated duct, from the airflow, duct size, length, insulation and surroundings."
 permalink: /temp-loss-through-an-air-duct.html
 ogImage: "/images/0179db_84454a352b5146639da5df235a00246c~mv2.png"
 calcInclude: "partials/calc-ducttemp.njk"

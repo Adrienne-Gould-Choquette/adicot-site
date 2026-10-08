@@ -1,7 +1,7 @@
 ---
 layout: layouts/post.njk
 title: "Pass-Through / Transfer Ducts"
-seoTitle: "PASS THROUGH / TRANSFER DUCTS"
+seoTitle: "Pass-Through / Transfer Ducts"
 description: "Why a closed room needs a return air path, and how transfer ducts and pass-through grilles balance the air distribution."
 date: 2024-11-18T18:50:49.926Z
 permalink: /post/pass-through-transfer-ducts.html

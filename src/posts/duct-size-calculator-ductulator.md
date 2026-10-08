@@ -2,7 +2,7 @@
 layout: layouts/post.njk
 title: "How to Use the Duct Size Calculator / Ductulator"
 seoTitle: "How to Use the Duct Size Calculator / Ductulator"
-description: "Step by step description of how to use Adicot's Duct Size Calculator / Ductulator along with a YouTube video"
+description: "A step-by-step guide to Adicot's Duct Size Calculator (ductulator) for flex, duct board and metal ducts, with a YouTube video walk-through."
 date: 2021-11-18T18:36:43.296Z
 permalink: /post/duct-size-calculator-ductulator.html
 ogImage: "/images/0179db_24fac65b3a4e4e5f9785e9edf77d1dda~mv2.jpg"

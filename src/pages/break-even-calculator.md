@@ -2,7 +2,7 @@
 layout: layouts/page.njk
 title: "Breakeven Calculator"
 seoTitle: "Breakeven Calculator | adicot.com"
-description: "Determine the break-even point based on the number of units, cost per unit, fixed costs, variable costs, and per period costs. "
+description: "Determine the break-even point based on the number of units, cost per unit, fixed costs, variable costs, and per-period costs."
 permalink: /break-even-calculator.html
 ogImage: "/images/0179db_1d772bf88645484c96186dcd0c8ac597~mv2.png"
 calcInclude: "partials/calc-breakeven.njk"

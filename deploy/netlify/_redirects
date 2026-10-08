@@ -37,3 +37,6 @@ https://www.adicotengineeringinc.com/*        https://www.adicot.com/:splat     
 /work-order-residential          /contact                            301
 /energy-calculation-commercial   /services/energy-code-compliance    301
 /energy-calculation-residential  /services/energy-code-compliance    301
+
+# The Wix blog RSS address, which feed readers still poll.
+/blog-feed.xml  /feed.xml  301

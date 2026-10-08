@@ -1,8 +1,8 @@
 ---
 layout: layouts/page.njk
 title: "Home Price Comparison"
-seoTitle: "Home Price Compare | adicot.com"
-description: "An easy-to-use calculator to compare existing housing costs to the costs associated with a new home purchase"
+seoTitle: "Home Price Compare Calculator | adicot.com"
+description: "Compare your current housing costs with the cost of buying a new home: mortgage payment, closing costs, insurance and property tax."
 permalink: /home-price-compare.html
 ogImage: "/images/0179db_f9459ca039b54f60958bdc60922d628a~mv2.jpg"
 calcInclude: "partials/calc-homeprice.njk"

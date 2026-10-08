@@ -149,7 +149,20 @@ export default function (eleventyConfig) {
   // When a source file last changed, from git (a fresh clone resets file dates,
   // so the file system cannot say). Falls back to the page's own date.
   const gitDates = new Map();
+  // Cloudflare Pages builds from a shallow clone, where every file's last commit
+  // is the newest one, so the sitemap dated every page with the day of the
+  // deploy. Fetch the rest of the history once, before the first lookup.
+  let deepened = false;
+  const deepen = () => {
+    if (deepened) return;
+    deepened = true;
+    try {
+      if (execFileSync('git', ['rev-parse', '--is-shallow-repository'], { encoding: 'utf8' }).trim() === 'true')
+        execFileSync('git', ['fetch', '--unshallow', '--quiet'], { stdio: 'ignore', timeout: 120000 });
+    } catch { /* no git, or no network: dates fall back to the newest commit */ }
+  };
   eleventyConfig.addFilter('lastChanged', (inputPath, fallback) => {
+    deepen();
     if (!gitDates.has(inputPath)) {
       let d = '';
       try { d = execFileSync('git', ['log', '-1', '--format=%cI', '--', inputPath], { encoding: 'utf8' }).trim(); } catch { /* not in git */ }

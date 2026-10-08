@@ -1,7 +1,7 @@
 ---
 layout: layouts/page.njk
 title: "Psychrometric Chart 2-Condition Calculator"
-seoTitle: "Psychrometric Chart 2 Condition | adicot.com"
+seoTitle: "Psychrometric Chart 2 Condition Calculator | adicot.com"
 description: "Enter two air conditions to calculate total, sensible and latent cooling, condensate generated, and the psychrometric properties of each."
 permalink: /psychrometric-chart-2-condition.html
 ogImage: "/images/0179db_86988a0ffbdc46cd911c2528adc865ab~mv2.jpg"

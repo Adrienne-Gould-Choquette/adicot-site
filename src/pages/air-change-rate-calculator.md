@@ -2,7 +2,7 @@
 layout: layouts/page.njk
 title: "Air Change Rate Calculator"
 seoTitle: "Air Change Rate Calculator | adicot.com"
-description: "Convert between airflow and air changes per hour for a room, in US or SI units."
+description: "Convert between airflow (cfm or l/s) and air changes per hour (ACH) for a room, from its floor area and height, in US or SI units."
 permalink: /air-change-rate-calculator.html
 ogImage: "/images/0179db_934f0d39cd144df5bae182da76d8cb97~mv2.png"
 calcInclude: "partials/calc-ach.njk"
