@@ -1296,11 +1296,16 @@ main > :last-child { margin-bottom: 0; }
 /* With scripting, each explanation opens from a "?" at the end of its label's
    line (calc-crackage.js). */
 .cm-help { float: right; margin: 0 0 3px 8px; width: 22px; height: 22px; padding: 0; border: 1px solid var(--accent); border-radius: 50%; background: var(--bg); color: var(--accent); font: inherit; font-size: 13px; font-weight: 700; line-height: 1; cursor: pointer; }
-.cm-help.cm-help-plain { float: none; margin: 0 0 0 10px; vertical-align: middle; }
+.cm-help.cm-help-plain { float: none; flex: none; margin: 0 0 0 10px; }
+.cm-side > p:has(> .cm-help) { display: flex; align-items: center; }
+.cm-side:has(> p > .cm-help) { grid-template-columns: minmax(0, 1fr); }
 .cm-help:hover, .cm-help[aria-expanded="true"] { background: var(--accent); color: var(--accent-fg); }
 .cm-side > .hint, .cm-side > p { margin: 0; }
 .cm-side .field { margin: 0; }
 .cm-stack { display: grid; gap: 10px; }
+/* The window totals: crack length and area side by side, their explanation below. */
+#cm-wtotals { grid-template-columns: minmax(0, 1fr); }
+#cm-wtotals > .cm-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 22px; align-items: end; }
 .cm-stack :is(input, select), .cm-side > .field :is(input, select) { width: 100%; min-width: 0; }
 .cf-stream > .cm-side + .cm-side { margin-top: 6px; }
 @media (max-width: 600px) {

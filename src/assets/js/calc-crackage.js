@@ -17,7 +17,7 @@ const EXAMPLE = { windows: [['4', '3', '5']], doors: [['1', '3', '7']] };
 function helpButtons(form) {
   let n = 0;
   for (const side of form.querySelectorAll('.cm-side')) {
-    const hints = [...side.querySelectorAll('.hint')];
+    const hints = [...side.querySelectorAll('.hint, .ashrae-steps')];
     if (!hints.length) continue;
     const label = side.querySelector('label'), about = side.dataset.help ?? label?.firstChild.textContent.trim() ?? 'this';
     const button = document.createElement('button');
