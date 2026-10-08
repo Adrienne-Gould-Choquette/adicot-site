@@ -3,7 +3,11 @@
 // the results: infiltration, then (optionally) the building pressure the net
 // outdoor air holds and the force it puts on each size of door.
 import { crackage, problem, FITS, MAX_OPENINGS, pressurization, doorProblem, DOOR_LIMITS, SURFACE } from './crackage.js';
-import { live, num, fmt, fillRows, shareable, startingValues } from './calc-kit.js';
+import { live, num, fmt, fillRows, shareable, startingValues, unitSwitch, FT, FT2, FT3, CFM } from './calc-kit.js';
+
+// The maths runs in IP; SI entries are converted to it and the results back.
+// US to SI factors: mph to m/s, in to mm, in² to cm², lbf to N, in. w.c. to Pa.
+const MPH = 0.44704, IN = 25.4, IN2 = 6.4516, LBF = 4.4482216152605, INWC = 249.0889;
 
 // The page's worked example: four 3 × 5 ft windows and one 3 × 7 ft door.
 const EXAMPLE = { windows: [['4', '3', '5']], doors: [['1', '3', '7']] };
@@ -11,6 +15,19 @@ const EXAMPLE = { windows: [['4', '3', '5']], doors: [['1', '3', '7']] };
 function init(form) {
   const el = id => document.getElementById(id);
   const tpl = el('cm-row');
+  const si = () => form.querySelector('input[name="u"]:checked')?.value === 'SI';
+  // A field's value in the IP units the maths uses.
+  const us = (input, f) => { const v = num(input); return si() && v ? v / f : v; };
+  // An IP result in the chosen units.
+  const show = (x, f, dp) => fmt(si() ? x * f : x, dp);
+  // Swap each data-si label, option or placeholder for the chosen units.
+  function relabel(root) {
+    for (const e of root.querySelectorAll('[data-si]')) {
+      const key = e.tagName === 'INPUT' ? 'placeholder' : 'textContent';
+      e.dataset.us ??= e[key];
+      e[key] = si() ? e.dataset.si : e.dataset.us;
+    }
+  }
 
   // A list of opening rows (windows, or doors). Row n's fields are
   // <prefix>q<n>, <prefix>w<n> and <prefix>h<n> (windows have no prefix, doors
@@ -25,10 +42,11 @@ function init(form) {
       const inputs = row.querySelectorAll('input'), labels = row.querySelectorAll('label');
       names.forEach((p, i) => {
         inputs[i].name = `${p}${n}`; inputs[i].id = `cm-${p}${n}`; labels[i].htmlFor = inputs[i].id;
-        inputs[i].setAttribute('aria-label', `${noun} ${n}, ${['quantity', 'width in feet', 'height in feet'][i]}`);
+        inputs[i].setAttribute('aria-label', `${noun} ${n}, ${['quantity', 'width', 'height'][i]}`);
         if (values) inputs[i].value = values[i] ?? '';
       });
       if (prefix) { inputs[0].placeholder = 'e.g. 1'; inputs[2].placeholder = 'e.g. 7'; }
+      relabel(row);
       row.querySelector('.cm-remove').setAttribute('aria-label', `Remove this ${noun.toLowerCase()} size`);
       row.querySelector('.cm-remove').addEventListener('click', () => remove(row));
       box.append(row);
@@ -50,7 +68,7 @@ function init(form) {
       for (let n = 1; n <= MAX_OPENINGS; n++) if (names.some(p => q.has(`${p}${n}`))) need = n;
       if (need) for (let n = 0; n < need; n++) add(); else fill(example);
     }
-    const read = () => rows().map(r => { const [qty, width, height] = [...r.querySelectorAll('input')].map(num); return { qty, width, height }; });
+    const read = () => rows().map(r => { const [qty, width, height] = r.querySelectorAll('input'); return { qty: num(qty), width: us(width, FT), height: us(height, FT) }; });
     addButton.addEventListener('click', () => { add()?.querySelector('input').focus(); });
     return { names, start, fill, read };
   }
@@ -60,14 +78,22 @@ function init(form) {
   const q = startingValues();
   windows.start(q, EXAMPLE.windows);
   doors.start(q, EXAMPLE.doors);
-  const names = ['v', 'k', 'wm', 'tl', 'ta', 'bl', 'bw', 'bh', 'oa', 'wt', 'rt', 'oe', 'q75', 'dk', 'dc', 'dl', 'df'];
+  const names = ['u', 'v', 'k', 'wm', 'tl', 'ta', 'bl', 'bw', 'bh', 'oa', 'wt', 'rt', 'oe', 'q75', 'dk', 'dc', 'dl', 'df'];
   for (let n = 1; n <= MAX_OPENINGS; n++) for (const p of [...windows.names, ...doors.names]) names.push(`${p}${n}`);
   shareable(form, names, el('cm-share'), el('cm-copied'));
+  // The opening rows come and go, so they are listed afresh on each switch.
+  const fixed = [['cm-v', MPH], ['cm-tl', FT], ['cm-ta', FT2], ['cm-bl', FT], ['cm-bw', FT], ['cm-bh', FT], ['cm-oa', CFM],
+    ['cm-oe', IN2], ['cm-q75', CFM], ['cm-dk', IN], ['cm-dc', LBF], ['cm-df', LBF]].map(([id, f]) => [el(id), f]);
+  unitSwitch(form, 'u', { *[Symbol.iterator]() {
+    yield* fixed;
+    for (const r of form.querySelectorAll('.cm-row')) for (const i of [...r.querySelectorAll('input')].slice(1)) yield [i, FT];
+  } });
 
   form.addEventListener('reset', () => setTimeout(() => { windows.fill(EXAMPLE.windows); doors.fill(EXAMPLE.doors); recalc(); }, 0));
   el('cm-dl').addEventListener('change', () => { if (el('cm-dl').value === 'custom') el('cm-df').focus(); });
 
   function recalc() {
+    relabel(form);
     const fit = el('cm-fit').value;
     el('cm-fitdesc').textContent = FITS[fit]?.describe.trim() ?? '';
     // The windows (each size, or totals) and the doors: all of their cracks leak.
@@ -76,9 +102,9 @@ function init(form) {
     el('cm-wtotals').hidden = !totals;
     const doorRows = doors.read();
     const openings = [...(totals ? [] : windows.read()), ...doorRows];
-    const v = { wind: num(el('cm-v')), fit, openings,
-      extraCrack: totals ? num(el('cm-tl')) : null, extraArea: totals ? num(el('cm-ta')) : null,
-      building: { length: num(el('cm-bl')), width: num(el('cm-bw')), height: num(el('cm-bh')) } };
+    const v = { wind: us(el('cm-v'), MPH), fit, openings,
+      extraCrack: totals ? us(el('cm-tl'), FT) : null, extraArea: totals ? us(el('cm-ta'), FT2) : null,
+      building: { length: us(el('cm-bl'), FT), width: us(el('cm-bw'), FT), height: us(el('cm-bh'), FT) } };
     const why = problem(v);
     if (why) {
       el('cm-summary').textContent = why;
@@ -89,20 +115,23 @@ function init(form) {
       return;
     }
     const r = crackage(v);
+    const u = si() ? { ft: 'm', cfm: 'l/s' } : { ft: 'ft', cfm: 'cfm' };
     const out = [
-      ['Linear feet of crack', fmt(r.crack, 1), 'ft'],
-      ['Velocity head factor, VHF', fmt(r.vhf, 4), ''],
-      [`Infiltration rate (k = ${r.k})`, fmt(r.rate, 3), 'cfm/ft'],
-      ['Infiltration, Q', fmt(r.q, 1), 'cfm', 'cf-key'],
+      [si() ? 'Length of crack' : 'Linear feet of crack', show(r.crack, FT, 1), u.ft],
+      ['Velocity head factor, VHF', si() ? fmt(r.vhf * INWC, 2) : fmt(r.vhf, 4), si() ? 'Pa' : ''],
+      [`Infiltration rate (k = ${r.k})`, show(r.rate, CFM / FT, 3), si() ? 'l/s per m' : 'cfm/ft'],
+      ['Infiltration, Q', show(r.q, CFM, 1), u.cfm, 'cf-key'],
     ];
-    if (r.ach !== null) out.push(['Air changes per hour', fmt(r.ach, 3), 'ACH'], ['Building volume', fmt(r.volume, 0), 'ft³']);
+    if (r.ach !== null) out.push(['Air changes per hour', fmt(r.ach, 3), 'ACH'], ['Building volume', show(r.volume, FT3, 0), si() ? 'm³' : 'ft³']);
     fillRows(el('cm-tbody'), out);
     el('cm-table').hidden = false;
-    el('cm-warn').textContent = r.warning.replace(/\*\*Warning\*\* /, 'Warning: ') + (r.warning ? '.' : '');
+    // The workbook's warning names 0 and 36 mph; in SI, give m/s first.
+    const warning = si() ? r.warning.replace(/(-?\d+) mph/, (m, n) => `${fmt(n * MPH, 1)} m/s (${m})`) : r.warning;
+    el('cm-warn').textContent = warning.replace(/\*\*Warning\*\* /, 'Warning: ') + (warning ? '.' : '');
     el('cm-warn').hidden = !r.warning;
     el('cm-summary').textContent = r.crack === 0
       ? 'Enter the quantity and size of the windows and doors.'
-      : `${fmt(r.q, 1)} cfm of infiltration through ${fmt(r.crack, 1)} ft of crack`
+      : `${show(r.q, CFM, 1)} ${u.cfm} of infiltration through ${show(r.crack, FT, 1)} ${u.ft} of crack`
         + (r.ach !== null ? `, ${fmt(r.ach, 3)} air changes per hour.` : '.');
     pressure(v, r, doorRows);
   }
@@ -121,7 +150,11 @@ function init(form) {
   function pressure(v, r, doorRows) {
     const custom = el('cm-dl').value === 'custom';
     el('cm-df-f').hidden = !custom;
-    const netOA = num(el('cm-oa'));
+    const netOA = us(el('cm-oa'), CFM);
+    // Pressure, force and air flow as text in the chosen units.
+    const P = x => (si() ? `${fmt(x * INWC, 1)} Pa` : `${fmt(x, 3)} in. w.c.`);
+    const F = (x, dp = 1) => `${show(x, LBF, dp)} ${si() ? 'N' : 'lbf'}`;
+    const C = x => `${show(x, CFM, 0)} ${si() ? 'l/s' : 'cfm'}`;
     el('cm-press').hidden = netOA === null;
     if (netOA === null) {
       verdict('Pressurization not checked: enter the net outdoor air (outdoor air supplied minus air exhausted) to see whether the building is over-pressurized.');
@@ -132,10 +165,10 @@ function init(form) {
     const wallArea = dims ? Math.max(0, 2 * (b.length + b.width) * b.height - openingArea) : 0;
     const roofArea = dims ? b.length * b.width : 0;
     const rate = id => SURFACE[el(id).value] ?? 0;
-    const oe = num(el('cm-oe'));
-    const env = { wallArea, wallRate: rate('cm-wt'), roofArea, roofRate: rate('cm-rt'), q75: num(el('cm-q75')), orifice: oe === null ? 0 : oe / 144 };
-    const knob = num(el('cm-dk')) === null ? null : num(el('cm-dk')) / 12, closer = num(el('cm-dc'));
-    const limit = custom ? num(el('cm-df')) : DOOR_LIMITS[el('cm-dl').value].lbf;
+    const oe = us(el('cm-oe'), IN2);
+    const env = { wallArea, wallRate: rate('cm-wt'), roofArea, roofRate: rate('cm-rt'), q75: us(el('cm-q75'), CFM), orifice: oe === null ? 0 : oe / 144 };
+    const knob = num(el('cm-dk')) === null ? null : us(el('cm-dk'), IN) / 12, closer = us(el('cm-dc'), LBF);
+    const limit = custom ? us(el('cm-df'), LBF) : DOOR_LIMITS[el('cm-dl').value].lbf;
     const note = el('cm-pnote');
     const fail = why => { el('cm-psummary').textContent = why; el('cm-ptbody').replaceChildren(); note.textContent = ''; verdict(`Pressurization not checked: ${why.charAt(0).toLowerCase()}${why.slice(1)}`); };
 
@@ -153,34 +186,38 @@ function init(form) {
     const maxOA = Math.min(...checks.map(c => c.p.maxOA));
     const allowDp = Math.min(...checks.map(c => c.p.allowDp));
     const measured = env.q75 > 0;
-    const size = d => `${fmt(d.width, d.width % 1 ? 1 : 0)} × ${fmt(d.height, d.height % 1 ? 1 : 0)} ft`;
+    const side = x => (si() ? fmt(x * FT, 2) : fmt(x, x % 1 ? 1 : 0));
+    const size = d => `${side(d.width)} × ${side(d.height)} ${si() ? 'm' : 'ft'}`;
+    const [cfm, ft2, lbf] = si() ? ['l/s', 'm²', 'N'] : ['cfm', 'ft²', 'lbf'];
+    const pressures = [['in. w.c.', fmt(p.dp, 3)], ['Pa', fmt(p.pa, 1)]];
+    if (si()) pressures.reverse();
     const rows = [
-      ['Building pressure from the net outdoor air', fmt(p.dp, 3), 'in. w.c.', 'cf-key'],
-      ['', fmt(p.pa, 1), 'Pa'],
-      ['Leakage through window and door cracks', fmt(p.parts.cracks, 0), 'cfm'],
-      [measured ? 'Leakage through the envelope (measured)' : 'Leakage through walls and roof', fmt(p.parts.surface, 0), 'cfm'],
+      ['Building pressure from the net outdoor air', pressures[0][1], pressures[0][0], 'cf-key'],
+      ['', pressures[1][1], pressures[1][0]],
+      ['Leakage through window and door cracks', show(p.parts.cracks, CFM, 0), cfm],
+      [measured ? 'Leakage through the envelope (measured)' : 'Leakage through walls and roof', show(p.parts.surface, CFM, 0), cfm],
     ];
-    if (!measured && dims) rows.push(['Wall area, less windows and doors', fmt(wallArea, 0), 'ft²'], ['Roof area', fmt(roofArea, 0), 'ft²']);
-    if (p.parts.orifice > 0) rows.push(['Leakage through other openings', fmt(p.parts.orifice, 0), 'cfm']);
-    for (const c of checks) rows.push([`Opening force, ${checks.length > 1 ? `door ${c.d.n} (${size(c.d)})` : `${size(c.d)} door`}`, fmt(c.p.force, 1), 'lbf', c === worst ? 'cf-key' : undefined]);
-    rows.push(['Total opening force limit', fmt(limit, 0), 'lbf'],
-      [checks.length > 1 ? 'Largest pressure the doors allow' : 'Largest pressure the door allows', fmt(allowDp, 3), 'in. w.c.'],
-      ['Largest net outdoor air at that pressure', fmt(maxOA, 0), 'cfm']);
+    if (!measured && dims) rows.push(['Wall area, less windows and doors', show(wallArea, FT2, 0), ft2], ['Roof area', show(roofArea, FT2, 0), ft2]);
+    if (p.parts.orifice > 0) rows.push(['Leakage through other openings', show(p.parts.orifice, CFM, 0), cfm]);
+    for (const c of checks) rows.push([`Opening force, ${checks.length > 1 ? `door ${c.d.n} (${size(c.d)})` : `${size(c.d)} door`}`, show(c.p.force, LBF, 1), lbf, c === worst ? 'cf-key' : undefined]);
+    rows.push(['Total opening force limit', show(limit, LBF, 0), lbf],
+      [checks.length > 1 ? 'Largest pressure the doors allow' : 'Largest pressure the door allows', si() ? fmt(allowDp * INWC, 1) : fmt(allowDp, 3), si() ? 'Pa' : 'in. w.c.'],
+      ['Largest net outdoor air at that pressure', show(maxOA, CFM, 0), cfm]);
     fillRows(el('cm-ptbody'), rows);
 
-    const dep = p.depressurized, amount = fmt(Math.abs(netOA), 0);
-    const what = dep ? `${amount} cfm more exhaust than outdoor air holds the building ${fmt(p.dp, 3)} in. w.c. below outdoors`
-      : `${amount} cfm of net outdoor air holds the building at ${fmt(p.dp, 3)} in. w.c.`;
+    const dep = p.depressurized, amount = C(Math.abs(netOA));
+    const what = dep ? `${amount} more exhaust than outdoor air holds the building ${P(p.dp)} below outdoors`
+      : `${amount} of net outdoor air holds the building at ${P(p.dp)}`;
     const which = checks.length > 1 ? `the ${size(worst.d)} door (door ${worst.d.n})` : 'the door';
     const over = checks.some(c => c.p.over);
     el('cm-psummary').textContent = over
-      ? `${dep ? 'Over-depressurized' : 'Over-pressurized'}: ${what}, and ${which} takes ${fmt(p.force, 1)} lbf to open, over the ${fmt(limit, 0)} lbf limit. Keep the ${dep ? 'excess exhaust' : 'net outdoor air'} under about ${fmt(maxOA, 0)} cfm${dep ? ', or add makeup air' : ', or add relief'}.`
-      : `Within the limit: ${what}, and ${which} takes ${fmt(p.force, 1)} lbf to open, under the ${fmt(limit, 0)} lbf limit. ${checks.length > 1 ? 'The doors allow' : 'The door allows'} up to about ${fmt(maxOA, 0)} cfm${dep ? ' of excess exhaust' : ''}.`;
+      ? `${dep ? 'Over-depressurized' : 'Over-pressurized'}: ${what}, and ${which} takes ${F(p.force)} to open, over the ${F(limit, 0)} limit. Keep the ${dep ? 'excess exhaust' : 'net outdoor air'} under about ${C(maxOA)}${dep ? ', or add makeup air' : ', or add relief'}.`
+      : `Within the limit: ${what}, and ${which} takes ${F(p.force)} to open, under the ${F(limit, 0)} limit. ${checks.length > 1 ? 'The doors allow' : 'The door allows'} up to about ${C(maxOA)}${dep ? ' of excess exhaust' : ''}.`;
     verdict(over
-      ? `${dep ? 'Over-depressurized' : 'Over-pressurized'}: ${fmt(p.dp, 3)} in. w.c.; ${which} takes ${fmt(p.force, 1)} lbf to open, over the ${fmt(limit, 0)} lbf limit.`
-      : `${dep ? 'Not over-depressurized' : 'Not over-pressurized'}: ${fmt(p.dp, 3)} in. w.c.${dep ? ' below outdoors' : ''}; ${which} takes ${fmt(p.force, 1)} lbf to open, within the ${fmt(limit, 0)} lbf limit.`, over);
+      ? `${dep ? 'Over-depressurized' : 'Over-pressurized'}: ${P(p.dp)}; ${which} takes ${F(p.force)} to open, over the ${F(limit, 0)} limit.`
+      : `${dep ? 'Not over-depressurized' : 'Not over-pressurized'}: ${P(p.dp)}${dep ? ' below outdoors' : ''}; ${which} takes ${F(p.force)} to open, within the ${F(limit, 0)} limit.`, over);
     const notes = [`The force is for a door that opens against the pressure (${dep ? 'inward, into the building' : 'outward, away from the building'}); a door that opens the other way is pushed open instead. With no wind: wind raises the pressure across windward doors and lowers it on the leeward side.`];
-    if (p.beyondCrackData) notes.push('The pressure is above 0.6 in. w.c., past the range the window crack curves were fitted for (winds up to 36 mph), so the crack leakage is extrapolated.');
+    if (p.beyondCrackData) notes.push(`The pressure is above ${si() ? '150 Pa' : '0.6 in. w.c.'}, past the range the window crack curves were fitted for (winds up to ${si() ? '16 m/s' : '36 mph'}), so the crack leakage is extrapolated.`);
     if (!measured && !dims) notes.unshift('Enter the building dimensions above to count the walls and roof; without them only the cracks and other openings leak, so the pressure shown is too high.');
     note.textContent = notes.join(' ');
   }

@@ -12,11 +12,12 @@ calcSource: "Crackage Method V1.02"
 
 ## How to use it
 
-1. Enter the winter wind speed in mph. Use the design wind speed for your location if you don't have a site value.
-2. Choose how well the windows fit: tight, average or loose. The description under the choice says which window types fall in each class.
-3. For each window size, enter how many there are and the size of one, in feet. Or choose **Totals** and enter the total crack length (the sum of every window's perimeter) and the total window area. Use **Add another window size** for more sizes (up to 12). Enter the exterior doors under **Doors** the same way, one row per size (**Add another door size**); for a pair of doors, count each leaf and enter one leaf's width.
-4. Optionally, enter the building's length, width and height to see the result as air changes per hour.
-5. To check whether the outdoor air over-pressurizes the building, enter the net outdoor air (outdoor air supplied minus air exhausted), how tight the walls and roof are, any openings that stay open, and the door to check. The first line of the results says whether the building is over-pressurized (or, with more exhaust than outdoor air, over-depressurized); below it are the building pressure, the force needed to open each door, and the most net outdoor air the doors allow. The example starts at 500 cfm.
+1. Choose IP (mph, ft, cfm) or SI (m/s, m, l/s) units. Switching converts the values already entered.
+2. Enter the winter wind speed. Use the design wind speed for your location if you don't have a site value; **How to find this on the ASHRAE site** under the field shows where to read it.
+3. Choose how well the windows fit: tight, average or loose. The description under the choice says which window types fall in each class.
+4. Under **Totals**, enter the total crack length (the sum of every window's perimeter) and the total window area. Or choose **Size of each** and enter how many windows there are of each size and the size of one; use **Add another window size** for more sizes (up to 12). Enter the exterior doors under **Doors** the same way, one row per size (**Add another door size**); for a pair of doors, count each leaf and enter one leaf's width.
+5. Optionally, enter the building's length, width and height to see the result as air changes per hour.
+6. To check whether the outdoor air over-pressurizes the building, enter the net outdoor air (outdoor air supplied minus air exhausted), how tight the walls and roof are, any openings that stay open, and the door to check. The first line of the results says whether the building is over-pressurized (or, with more exhaust than outdoor air, over-depressurized); below it are the building pressure, the force needed to open each door, and the most net outdoor air the doors allow. The example starts at 500 cfm (236 l/s).
 
 The results update as you type. Use **Copy link to these results** to save or share the calculation.
 

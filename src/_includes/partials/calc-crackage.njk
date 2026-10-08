@@ -9,16 +9,24 @@
   </noscript>
 
   <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> IP (mph, ft, cfm)</label>
+      <label><input type="radio" name="u" value="SI"> SI (m/s, m, l/s)</label>
+    </fieldset>
+
     {#- Each input, or group of inputs, sits in a .cm-side with its explanation
         to the right; they stack on a narrow screen. #}
     <div class="cm-side">
-      <div class="field"><label for="cm-v">Winter wind speed <span class="cf-u">mph</span> <span class="req" aria-hidden="true">*</span></label>
-        <input type="number" id="cm-v" name="v" inputmode="decimal" step="any" required autocomplete="off" placeholder="e.g. 15" value="20"></div>
+      <div class="field"><label for="cm-v">Winter wind speed <span class="cf-u" data-si="m/s">mph</span> <span class="req" aria-hidden="true">*</span></label>
+        <input type="number" id="cm-v" name="v" inputmode="decimal" step="any" required autocomplete="off" placeholder="e.g. 15" data-si="e.g. 6.7" value="20"></div>
+      <div>
       <p class="hint">The ordinary winter wind, typically 10 to 20 mph (4.5 to 8.9 m/s). For your location, the
         <a href="https://ashrae-meteo.info/v3.0/" target="_blank" rel="noopener">ASHRAE Climatic Design Conditions</a> give the mean wind speed coincident with the 99.6% heating design temperature.</p>
-      {%- set ashrae_units = "<strong>IP</strong>, so the wind speed is in mph" %}
+      {%- set ashrae_units = "<strong>IP</strong> for mph or <strong>SI</strong> for m/s, to match the units chosen above" %}
       {%- set ashrae_find = "the <strong>Annual Heating</strong> table and read <strong>MCWS</strong> under <strong>MCWS/PCWD to 99.6% DB</strong>. That is the mean wind speed during the coldest hours. Enter it here." %}
       {% include "partials/ashrae-steps.njk" %}
+      </div>
     </div>
 
     <div class="cm-side">
@@ -34,19 +42,19 @@
     <fieldset class="cf-stream">
       <legend>Windows</legend>
       <div class="cf-radios" role="radiogroup" aria-label="Enter the windows by">
-        <label><input type="radio" name="wm" value="sizes" checked> Size of each</label>
-        <label><input type="radio" name="wm" value="totals"> Totals</label>
+        <label><input type="radio" name="wm" value="totals" checked> Totals</label>
+        <label><input type="radio" name="wm" value="sizes"> Size of each</label>
       </div>
-      <div id="cm-wsizes">
+      <div id="cm-wsizes" hidden>
         <div id="cm-rows"></div>
         <p><button type="button" class="btn btn-quiet" id="cm-add">Add another window size</button></p>
       </div>
-      <div id="cm-wtotals" class="cm-side" hidden>
+      <div id="cm-wtotals" class="cm-side">
         <div class="cm-stack">
-          <div class="field"><label for="cm-tl">Total crack length <span class="cf-u">ft</span></label>
-            <input type="number" id="cm-tl" name="tl" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 640"></div>
-          <div class="field"><label for="cm-ta">Total window area <span class="cf-u">ft²</span></label>
-            <input type="number" id="cm-ta" name="ta" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 600"></div>
+          <div class="field"><label for="cm-tl">Total crack length <span class="cf-u" data-si="m">ft</span></label>
+            <input type="number" id="cm-tl" name="tl" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 640" data-si="e.g. 195" value="64"></div>
+          <div class="field"><label for="cm-ta">Total window area <span class="cf-u" data-si="m²">ft²</span></label>
+            <input type="number" id="cm-ta" name="ta" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 600" data-si="e.g. 56" value="60"></div>
         </div>
         <p class="hint">Crack length is the sum of every window's perimeter, 2 × (width + height) each; it sets the leakage, so total area alone is not enough. The area only takes the windows off the wall area in the pressurization check.</p>
       </div>
@@ -64,64 +72,64 @@
     <fieldset class="cf-stream">
       <legend>Building: for air changes per hour, and the wall and roof leakage below (optional)</legend>
       <div class="cm-bldg">
-        <div class="field"><label for="cm-bl">Length <span class="cf-u">ft</span></label>
-          <input type="number" id="cm-bl" name="bl" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 30" value="30"></div>
-        <div class="field"><label for="cm-bw">Width <span class="cf-u">ft</span></label>
-          <input type="number" id="cm-bw" name="bw" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 60" value="60"></div>
-        <div class="field"><label for="cm-bh">Height <span class="cf-u">ft</span></label>
-          <input type="number" id="cm-bh" name="bh" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 16" value="16"></div>
+        <div class="field"><label for="cm-bl">Length <span class="cf-u" data-si="m">ft</span></label>
+          <input type="number" id="cm-bl" name="bl" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 30" data-si="e.g. 9" value="30"></div>
+        <div class="field"><label for="cm-bw">Width <span class="cf-u" data-si="m">ft</span></label>
+          <input type="number" id="cm-bw" name="bw" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 60" data-si="e.g. 18" value="60"></div>
+        <div class="field"><label for="cm-bh">Height <span class="cf-u" data-si="m">ft</span></label>
+          <input type="number" id="cm-bh" name="bh" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 16" data-si="e.g. 5" value="16"></div>
       </div>
     </fieldset>
 
     <fieldset class="cf-stream">
       <legend>Pressurization and door opening force (optional)</legend>
       <div class="cm-side">
-        <div class="field"><label for="cm-oa">Net outdoor air <span class="cf-u">cfm</span></label>
-          <input type="number" id="cm-oa" name="oa" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 500" value="500"></div>
+        <div class="field"><label for="cm-oa">Net outdoor air <span class="cf-u" data-si="l/s">cfm</span></label>
+          <input type="number" id="cm-oa" name="oa" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 500" data-si="e.g. 240" value="500"></div>
         <p class="hint">Is the outdoor air over-pressurizing the building? Enter the outdoor air supplied minus the air exhausted (negative if more is exhausted). The calculator finds the pressure at which that surplus leaks out through the cracks above, and checks it against the force needed to open the doors above.</p>
       </div>
       <div class="cm-side">
         <div class="cm-stack">
           <div class="field"><label for="cm-wt">Walls</label>
             <select id="cm-wt" name="wt">
-              <option value="Tight">Tight: 0.10 cfm/ft²</option>
-              <option value="Average" selected>Average: 0.30 cfm/ft²</option>
-              <option value="Leaky">Leaky: 0.60 cfm/ft²</option>
+              <option value="Tight" data-si="Tight: 0.51 l/s per m²">Tight: 0.10 cfm/ft²</option>
+              <option value="Average" data-si="Average: 1.52 l/s per m²" selected>Average: 0.30 cfm/ft²</option>
+              <option value="Leaky" data-si="Leaky: 3.05 l/s per m²">Leaky: 0.60 cfm/ft²</option>
               <option value="None">Not counted</option>
             </select></div>
           <div class="field"><label for="cm-rt">Roof</label>
             <select id="cm-rt" name="rt">
-              <option value="Tight">Tight: 0.10 cfm/ft²</option>
-              <option value="Average" selected>Average: 0.30 cfm/ft²</option>
-              <option value="Leaky">Leaky: 0.60 cfm/ft²</option>
+              <option value="Tight" data-si="Tight: 0.51 l/s per m²">Tight: 0.10 cfm/ft²</option>
+              <option value="Average" data-si="Average: 1.52 l/s per m²" selected>Average: 0.30 cfm/ft²</option>
+              <option value="Leaky" data-si="Leaky: 3.05 l/s per m²">Leaky: 0.60 cfm/ft²</option>
               <option value="None">Not counted</option>
             </select></div>
-          <div class="field"><label for="cm-oe">Other openings <span class="cf-u">in²</span></label>
+          <div class="field"><label for="cm-oe">Other openings <span class="cf-u" data-si="cm²">in²</span></label>
             <input type="number" id="cm-oe" name="oe" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 0" aria-describedby="cm-oe-hint"></div>
         </div>
-        <p class="hint" id="cm-oe-hint">Air also leaks through the walls, roof and penetrations. The wall and roof areas come from the building dimensions above (the walls less the windows and doors). Rates are cfm per ft² of surface at 0.30 in. w.c. Other openings are penetrations that stay open, such as relief dampers, louvers and unsealed gaps, as free area.</p>
+        <p class="hint" id="cm-oe-hint">Air also leaks through the walls, roof and penetrations. The wall and roof areas come from the building dimensions above (the walls less the windows and doors). Rates are per unit of surface at 0.30 in. w.c. (75 Pa). Other openings are penetrations that stay open, such as relief dampers, louvers and unsealed gaps, as free area.</p>
       </div>
       <div class="cm-side">
-        <div class="field"><label for="cm-q75">Measured envelope leakage <span class="cf-u">cfm at 75 Pa</span></label>
+        <div class="field"><label for="cm-q75">Measured envelope leakage <span class="cf-u" data-si="l/s at 75 Pa">cfm at 75 Pa</span></label>
           <input type="number" id="cm-q75" name="q75" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="optional" aria-describedby="cm-q75-hint"></div>
         <p class="hint" id="cm-q75-hint">From a blower-door test of this building. It replaces the wall and roof estimate.</p>
       </div>
       <div class="cm-side">
         <div class="cm-stack">
-          <div class="field"><label for="cm-dk">Knob to latch edge <span class="cf-u">in</span></label>
-            <input type="number" id="cm-dk" name="dk" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 3" value="3"></div>
-          <div class="field"><label for="cm-dc">Door closer force, part of the total <span class="cf-u">lbf</span></label>
+          <div class="field"><label for="cm-dk">Knob to latch edge <span class="cf-u" data-si="mm">in</span></label>
+            <input type="number" id="cm-dk" name="dk" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 3" data-si="e.g. 75" value="3"></div>
+          <div class="field"><label for="cm-dc">Door closer force, part of the total <span class="cf-u" data-si="N">lbf</span></label>
             <input type="number" id="cm-dc" name="dc" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="0 if none" value="0"></div>
           <div class="field"><label for="cm-dl">Total opening force limit</label>
             <select id="cm-dl" name="dl">
-              <option value="interior">Interior egress door: 5 lbf</option>
-              <option value="motion">Other swinging door: 30 lbf</option>
+              <option value="interior" data-si="Interior egress door: 22 N">Interior egress door: 5 lbf</option>
+              <option value="motion" data-si="Other swinging door: 133 N">Other swinging door: 30 lbf</option>
               <option value="custom">Other limit</option>
             </select></div>
-          <div class="field" id="cm-df-f" hidden><label for="cm-df">Total force limit <span class="cf-u">lbf</span></label>
-            <input type="number" id="cm-df" name="df" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 15"></div>
+          <div class="field" id="cm-df-f" hidden><label for="cm-df">Total force limit <span class="cf-u" data-si="N">lbf</span></label>
+            <input type="number" id="cm-df" name="df" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 15" data-si="e.g. 67"></div>
         </div>
-        <p class="hint">Closer force is the manufacturer's published value; 0 for a door on plain hinges. The 5 lbf limit is IBC 1010.1.3's for interior swinging egress doors other than fire doors; 30 lbf is the force to set other swinging doors in motion (IBC 1010.1.3, NFPA 101 7.2.1.4.5).</p>
+        <p class="hint">Closer force is the manufacturer's published value; 0 for a door on plain hinges. The 5 lbf (22 N) limit is IBC 1010.1.3's for interior swinging egress doors other than fire doors; 30 lbf (133 N) is the force to set other swinging doors in motion (IBC 1010.1.3, NFPA 101 7.2.1.4.5).</p>
       </div>
     </fieldset>
 
@@ -136,10 +144,10 @@
     <div class="cm-row">
       <div class="field"><label>Qty</label>
         <input type="number" inputmode="numeric" step="any" min="0" autocomplete="off" placeholder="e.g. 1"></div>
-      <div class="field"><label>Width <span class="cf-u">ft</span></label>
-        <input type="number" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 3"></div>
-      <div class="field"><label>Height <span class="cf-u">ft</span></label>
-        <input type="number" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 5"></div>
+      <div class="field"><label>Width <span class="cf-u" data-si="m">ft</span></label>
+        <input type="number" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 3" data-si="e.g. 0.9"></div>
+      <div class="field"><label>Height <span class="cf-u" data-si="m">ft</span></label>
+        <input type="number" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 5" data-si="e.g. 1.5"></div>
       <button type="button" class="btn btn-quiet cm-remove" aria-label="Remove this opening">Remove</button>
     </div>
   </template>
