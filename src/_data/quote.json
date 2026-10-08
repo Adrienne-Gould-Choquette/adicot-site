@@ -1,34 +1,14 @@
 {
   "project_types": {
-    "tileMultifamily": {
-      "title": "Multifamily / Townhomes",
-      "subtitle": "5+ units, attached or stacked",
+    "tileCommercial": {
+      "title": "Commercial",
+      "subtitle": "Offices, retail, restaurants, multifamily",
       "track": "instant"
     },
-    "tileOfficeMedical": {
-      "title": "Office / Medical / Dental",
-      "subtitle": "Professional offices, clinics",
+    "tileIndustrial": {
+      "title": "Industrial",
+      "subtitle": "Manufacturing, warehouses, utility buildings",
       "track": "instant"
-    },
-    "tileRetail": {
-      "title": "Retail / Tenant Build-out",
-      "subtitle": "Vanilla box, retail spaces",
-      "track": "instant"
-    },
-    "tileRestaurant": {
-      "title": "Restaurant",
-      "subtitle": "Small fast food to large formal dining",
-      "track": "instant"
-    },
-    "tileSpecialty": {
-      "title": "Specialty / Utility",
-      "subtitle": "Substations, control enclosures",
-      "track": "custom"
-    },
-    "tileOther": {
-      "title": "Other / Not sure",
-      "subtitle": "Tell us about it",
-      "track": "custom"
     }
   },
   "services": {
