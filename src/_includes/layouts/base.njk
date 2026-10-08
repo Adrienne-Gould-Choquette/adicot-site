@@ -6,6 +6,8 @@
 <meta charset="utf-8">
 <meta name="color-scheme" content="light dark">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ site.gaId }}');</script>
 {# Applied before first paint. Without this a visitor who chose dark gets a
    white flash on every navigation. Kept inline and tiny for that reason. #}
 <script>(function(){try{var t=localStorage.getItem('adicot:theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
