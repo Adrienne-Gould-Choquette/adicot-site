@@ -117,7 +117,16 @@ function init(form) {
     for (const r of form.querySelectorAll('.cm-row')) for (const i of [...r.querySelectorAll('input')].slice(1)) yield [i, FT];
   } });
 
-  form.addEventListener('reset', () => setTimeout(() => { windows.fill(EXAMPLE.windows); doors.fill(EXAMPLE.doors); recalc(); }, 0));
+  // Reset clears the form. The browser's own reset puts back the worked example
+  // the page opens with (the inputs' value attributes), so once it has run the
+  // number fields are emptied, the opening rows cut to one blank row each, and
+  // any open explanation closed.
+  form.addEventListener('reset', () => setTimeout(() => {
+    for (const i of form.querySelectorAll('input[type="number"]')) i.value = '';
+    windows.fill([['', '', '']]); doors.fill([['', '', '']]);
+    for (const b of form.querySelectorAll('.cm-help[aria-expanded="true"]')) b.click();
+    recalc();
+  }, 0));
   el('cm-dl').addEventListener('change', () => { if (el('cm-dl').value === 'custom') el('cm-df').focus(); });
 
   function recalc() {

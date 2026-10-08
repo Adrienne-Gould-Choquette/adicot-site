@@ -84,12 +84,21 @@
 
     <fieldset class="cf-stream">
       <legend>Pressurization and door opening force (optional)</legend>
-      <div class="cm-side">
-        <div class="field"><label for="cm-oa">Net outdoor air <span class="cf-u" data-si="l/s">cfm</span></label>
-          <input type="number" id="cm-oa" name="oa" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 500" data-si="e.g. 240" value="500"></div>
-        <p class="hint">Is the outdoor air over-pressurizing the building? Enter the outdoor air supplied minus the air exhausted (negative if more is exhausted). The calculator finds the pressure at which that surplus leaks out through the cracks above, and checks it against the force needed to open the doors above.</p>
+      {#- Fewer rows: the two airflows side by side, then the leakage inputs on
+          one row and the door inputs on another, each explanation underneath. #}
+      <div class="cm-duo">
+        <div class="cm-side">
+          <div class="field"><label for="cm-oa">Net outdoor air <span class="cf-u" data-si="l/s">cfm</span></label>
+            <input type="number" id="cm-oa" name="oa" inputmode="decimal" step="any" autocomplete="off" placeholder="e.g. 500" data-si="e.g. 240" value="500"></div>
+          <p class="hint">Is the outdoor air over-pressurizing the building? Enter the outdoor air supplied minus the air exhausted (negative if more is exhausted). The calculator finds the pressure at which that surplus leaks out through the cracks above, and checks it against the force needed to open the doors above.</p>
+        </div>
+        <div class="cm-side">
+          <div class="field"><label for="cm-q75">Measured envelope leakage <span class="cf-u" data-si="l/s at 75 Pa">cfm at 75 Pa</span></label>
+            <input type="number" id="cm-q75" name="q75" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="optional" aria-describedby="cm-q75-hint"></div>
+          <p class="hint" id="cm-q75-hint">From a blower-door test of this building. It replaces the wall and roof estimate.</p>
+        </div>
       </div>
-      <div class="cm-side" data-help="the wall, roof and other leakage">
+      <div class="cm-side cm-wide" data-help="the wall, roof and other leakage">
         <div class="cm-stack">
           <div class="field"><label for="cm-wt">Walls</label>
             <select id="cm-wt" name="wt">
@@ -110,12 +119,7 @@
         </div>
         <p class="hint" id="cm-oe-hint">Air also leaks through the walls, roof and penetrations. The wall and roof areas come from the building dimensions above (the walls less the windows and doors). Rates are per unit of surface at 0.30 in. w.c. (75 Pa). Other openings are penetrations that stay open, such as relief dampers, louvers and unsealed gaps, as free area.</p>
       </div>
-      <div class="cm-side">
-        <div class="field"><label for="cm-q75">Measured envelope leakage <span class="cf-u" data-si="l/s at 75 Pa">cfm at 75 Pa</span></label>
-          <input type="number" id="cm-q75" name="q75" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="optional" aria-describedby="cm-q75-hint"></div>
-        <p class="hint" id="cm-q75-hint">From a blower-door test of this building. It replaces the wall and roof estimate.</p>
-      </div>
-      <div class="cm-side" data-help="the door opening force inputs">
+      <div class="cm-side cm-wide" data-help="the door opening force inputs">
         <div class="cm-stack">
           <div class="field"><label for="cm-dk">Knob to latch edge <span class="cf-u" data-si="mm">in</span></label>
             <input type="number" id="cm-dk" name="dk" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="e.g. 3" data-si="e.g. 75" value="3"></div>
