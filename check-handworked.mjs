@@ -5,7 +5,7 @@ import { annualCost, problem as costProblem } from './src/assets/js/annualcost.j
 import { COOLING_HOURS } from './src/assets/js/cooling-hours.js';
 import { readHours } from './tools/extract/build-cooling-hours.mjs';
 import { state } from './src/assets/js/psychsheet.js';
-import { coilLoads, airflowFor } from './src/assets/js/airside.js';
+import { coilLoads, airflowFor, leavingForLoads, leavingForTotal, humidityAtDewPoint, sensibleLoad, latentLoad, leavingDryBulbFor, leavingDewPointFor } from './src/assets/js/airside.js';
 import { doorForce, doorPressure, pressurization, leakage, leakPerFoot, doorProblem, crackage } from './src/assets/js/crackage.js';
 import { mix } from './src/assets/js/mixair.js';
 
@@ -62,11 +62,53 @@ export function checkHandworked() {
   const m3 = coilLoads('Metric', S('Metric', 'db-rh', (85 - 32) / 1.8, 50), S('Metric', 'db-rh', 10, 100), 10000 / 2.1188799727597);
   near('coil loads: metric kW = US Btu/h / 3412.142', m3.total, e3.total / 3412.142, 1e-6);
   near('coil loads: airflow for the load returns 10,000 cfm', airflowFor('US', S('US', 'db-rh', 85, 50), S('US', 'db-rh', 50, 100), e3.total), 10000, 1e-6);
+  // The leaving-air solvers invert the loads: the coil page's example (95/78 to
+  // 55/54 at 2,000 cfm) and the same coil at altitude and in metric.
+  for (const [units, e, l, q, alt] of [['US', [95, 78], [55, 54], 2000, 0], ['US', [80, 67], [55, 54], 1000, 5000], ['Metric', [27, 19], [13, 12], 500, 0]]) {
+    const a = S(units, 'db-wb', e[0], e[1], alt), b = S(units, 'db-wb', l[0], l[1], alt), r = coilLoads(units, a, b, q);
+    const back = leavingForLoads(units, a, q, r.sensible, r.total, alt), tag = `leaving air (${units}, ${alt}): `;
+    near(tag + 'dry bulb from sensible and total', back.db, l[0], 1e-6);
+    near(tag + 'wet bulb from sensible and total', S(units, 'db-rh', back.db, back.rh, alt).wb, l[1], 1e-6);
+    near(tag + 'dry bulb from total and RH', leavingForTotal(units, a, 'db-rh', b.rh, q, r.total, alt).db, l[0], 1e-6);
+    near(tag + 'dry bulb from total and dew point', leavingForTotal(units, a, 'db-dp', b.dp, q, r.total, alt).db, l[0], 1e-6);
+  }
+  const coilEx = coilLoads('US', S('US', 'db-wb', 95, 78), S('US', 'db-wb', 55, 54), 2000);
+  near('leaving air: page example total 154,971 Btu/h', coilEx.total, 154971, 0.5);
+  near('leaving air: page example sensible 81,502 Btu/h', coilEx.sensible, 81502, 0.5);
+  same('leaving air: page example RH rounds to 94 %', Math.round(S('US', 'db-wb', 55, 54).rh), 94);
+  near('leaving air: page example dew point 53.3 °F', S('US', 'db-wb', 55, 54).dp, 53.3, 0.05);
+  const a80 = S('US', 'db-wb', 80, 67);
+  same('leaving air: past saturation refused', leavingForLoads('US', a80, 1000, 30000, 20000).problem, 'saturated');
+  same('leaving air: below the dew point refused', leavingForTotal('US', a80, 'db-dp', 60, 1000, 60000).problem, 'dewpoint');
+  // One load from part of the conditions. With everything given, the single-load
+  // formulas are the exact loads; with less, they are the page's stated figures.
+  for (const [units, e, l, q, alt] of [['US', [95, 78], [55, 54], 2000, 0], ['Metric', [27, 19], [13, 12], 500, 300]]) {
+    const a = S(units, 'db-wb', e[0], e[1], alt), b = S(units, 'db-wb', l[0], l[1], alt), r = coilLoads(units, a, b, q);
+    const tol = Math.abs(r.total) * 1e-9, tag = `single load (${units}): `;
+    near(tag + 'sensible with both moistures is exact', sensibleLoad(units, e[0], l[0], q, alt, a.ip.W, b.ip.W), r.sensible, tol);
+    near(tag + 'latent with both dry bulbs is exact', latentLoad(units, a.ip.W, b.ip.W, q, alt, e[0], l[0]), r.latent, tol);
+    near(tag + 'dew point gives the humidity ratio', humidityAtDewPoint(units, a.dp, alt), a.ip.W, 1e-12);
+    const dry = sensibleLoad(units, e[0], l[0], q, alt), W1 = humidityAtDewPoint(units, a.dp, alt), W2 = humidityAtDewPoint(units, b.dp, alt);
+    const wet = latentLoad(units, W1, W2, q, alt);
+    near(tag + 'leaving dry bulb from the dry-air sensible', leavingDryBulbFor(units, e[0], q, dry, alt), l[0], 1e-9);
+    near(tag + 'leaving dew point from the dew-point latent', leavingDewPointFor(units, W1, q, wet, alt).dewPoint, b.dp, 1e-6);
+    same(tag + 'dry-air sensible is within 1.5 % above the exact', dry / r.sensible > 1 && dry / r.sensible < 1.015, true);
+    same(tag + 'dew-point latent is within 4 % above the exact', wet / r.latent > 1 && wet / r.latent < 1.04, true);
+  }
+  // By hand, dry air at sea level: v = 0.370486 × 554.67 / 14.696, qs = m × 0.240 × 40.
+  near('single load: dry-air sensible by hand', sensibleLoad('US', 95, 55, 2000), 2000 * 60 / (0.370486 * 554.67 / 14.696) * 0.240 * 40, 1e-6);
+  near('single load: page example dry-air sensible 82,384 Btu/h', sensibleLoad('US', 95, 55, 2000), 82384, 0.5);
+  {
+    const a = S('US', 'db-wb', 95, 78), b = S('US', 'db-wb', 55, 54);
+    near('single load: page example dew-point latent 76,069 Btu/h', latentLoad('US', a.ip.W, b.ip.W, 2000), 76069, 0.5);
+    near('single load: page example entering dew point 71.8 °F', a.dp, 71.8, 0.05);
+    same('single load: more moisture than the air holds is refused', leavingDewPointFor('US', a.ip.W, 2000, 400000).problem, 'dry');
+  }
   // Dry bulb + dew point gives the same state as dry bulb + the RH it implies.
   const byRh = S('US', 'db-rh', 80, 50), byDp = S('US', 'db-dp', 80, byRh.dp);
   near('db + dp: humidity ratio matches db + rh', byDp.ip.W, byRh.ip.W, 1e-9);
   near('db + dp: wet bulb matches db + rh', byDp.wb, byRh.wb, 1e-6);
-  lines.push('  coil loads: ASHRAE Fundamentals chapter 1 Examples 2 and 3; dry bulb + dew point agrees with dry bulb + RH');
+  lines.push('  coil loads: ASHRAE Fundamentals chapter 1 Examples 2 and 3; the leaving-air solvers return the leaving air the loads came from; one load from the dry bulbs or the dew points alone; dry bulb + dew point agrees with dry bulb + RH');
 
   // Door opening force (crack-method page): the hand calculation for a 3 × 7 ft
   // hinged door, knob 3 in. from the edge, no closer.
