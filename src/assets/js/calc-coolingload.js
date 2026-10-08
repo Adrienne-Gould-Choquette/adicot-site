@@ -2,11 +2,14 @@
 // arithmetic are in coolingload.js; this reads the form and writes the results.
 import { estimate } from './coolingload.js';
 import { live, num, fmt, shareable, unitSwitch, FT2 } from './calc-kit.js';
+import { combobox } from './combobox.js';
 
 function init(form) {
   const el = id => document.getElementById(id);
   shareable(form, ['u', 'a', 't'], el('ce-share'), el('ce-copied'));
   unitSwitch(form, 'u', [[el('ce-area'), FT2]], 'Metric');
+  const types = combobox(el('ce-type'), { placeholder: 'Type a building type, or show all' });
+  form.addEventListener('reset', () => setTimeout(() => types.refresh(), 0));
 
   function recalc() {
     const units = form.querySelector('input[name="u"]:checked')?.value ?? 'English';

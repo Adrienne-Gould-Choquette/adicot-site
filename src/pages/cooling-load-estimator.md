@@ -17,7 +17,7 @@ Review the methodology below to make sure it aligns with your project's requirem
 
 1. Choose US or metric units.
 2. Enter the project's floor area.
-3. Choose the building type. Try neighboring building types too, to see the full range of loads and home in on the right one for your project.
+3. Choose the building type: type part of a name to search, such as "school" or "restaurant", or click the arrow to see the whole list. Try neighboring building types too, to see the full range of loads and home in on the right one for your project.
 4. The low, average and high estimates of occupants, lights and other electrical load, and refrigeration appear in the results.
 
 ## Methodology
