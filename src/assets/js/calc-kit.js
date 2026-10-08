@@ -108,6 +108,8 @@ export function unitSwitch(form, radioName, fields, siValue = 'SI') {
     }
     current = next;
   }, true);   // capture, so values are converted before the recalculation runs
+  // Reset puts the radios back to their defaults after this event; follow them.
+  form.addEventListener('reset', () => setTimeout(() => { current = form.querySelector(`input[name="${radioName}"]:checked`)?.value; }, 0));
 }
 
 // Exact unit factors (US to SI), by definition.
