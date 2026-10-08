@@ -31,16 +31,18 @@ function init(form) {
       ? { t: '°F', q: 'Btu/h', a: 'cfm', h: 'Btu/lb', w: 'gr/lb', d: 'in', g: 'gpm', td: 'in', l: 'ft', area: 'ft²', vel: 'fpm', tv: 'fps' }
       : { t: '°C', q: 'kW', a: 'l/s', h: 'kJ/kg', w: 'g/kg', d: 'mm', g: 'l/s', td: 'cm', l: 'm', area: 'm²', vel: 'm/s', tv: 'm/s' };
     // What tool 1 solves for: the loads, the airflow, or the air at one end of the
-    // coil, either from the loads ('leave', 'enter') or from the total and that
-    // end's moisture ('ldb', 'edb').
+    // coil ('leave', 'enter'), from the loads or from the total and that end's
+    // moisture.
     const find = el('co-af').value;
-    const findFlow = find === 'flow', findLeave = find === 'leave', findDb = find === 'ldb', findEnter = find === 'enter', findEdb = find === 'edb';
-    // A total load at a fixed wet bulb barely moves with the dry bulb, so a dry
-    // bulb is solved against an RH or a dew point only.
-    for (const [id, off] of [['co-am1', findEdb], ['co-am2', findDb]]) {
+    const findFlow = find === 'flow', findLeave = find === 'leave', findEnter = find === 'enter';
+    // The moisture of the end being solved for is only used with a total load, to
+    // find its dry bulb. A total at a fixed wet bulb barely moves with the dry
+    // bulb, so that takes an RH or a dew point.
+    for (const [id, val, off] of [['co-am1', 'co-e2', findEnter], ['co-am2', 'co-x2', findLeave]]) {
       const wbOpt = el(id).querySelector('option[value="db-wb"]');
       wbOpt.hidden = wbOpt.disabled = off;
-      if (off && el(id).value === 'db-wb') el(id).value = 'db-rh';
+      // A wet bulb left from another mode is cleared, not read as an RH.
+      if (off && el(id).value === 'db-wb') { el(id).value = 'db-rh'; el(val).value = ''; }
     }
     const m1 = el('co-am1').value, m2 = el('co-am2').value;
     U.m1 = m1 === 'db-rh' ? '%' : U.t; U.m2 = m2 === 'db-rh' ? '%' : U.t;
@@ -51,11 +53,9 @@ function init(form) {
 
     // Tool 1: the coil's air side, from the entering and leaving air conditions.
     const show = (id, on) => { el('co-' + id).closest('.field').hidden = !on; };
-    const fromLoads = findLeave || findEnter;        // an end of the coil, from the loads
-    const side = findLeave || findDb ? 'lev' : findEnter || findEdb ? 'ent' : null;   // the end being solved for
-    show('aq', !findFlow); show('qt', find !== 'loads'); show('qs', fromLoads || findFlow); show('ql', fromLoads || findFlow);
-    show('e1', side !== 'ent'); show('e2', !findEnter); show('am1', !findEnter);
-    show('x1', side !== 'lev'); show('x2', !findLeave); show('am2', !findLeave);
+    const side = findLeave ? 'lev' : findEnter ? 'ent' : null;   // the end being solved for
+    show('aq', !findFlow); show('qt', find !== 'loads'); show('qs', find !== 'loads'); show('ql', find !== 'loads');
+    show('e1', side !== 'ent'); show('x1', side !== 'lev');
     let airflow = null;        // for the face velocity
     let totalCooling = null;   // for the water tool
     const altitude = num(el('co-alt')) ?? 0;
@@ -94,9 +94,12 @@ function init(form) {
 
     // The air at one end, when it is the unknown: found from the other end, the
     // airflow and the loads, then carried through the same results as a given one.
-    let entMode = m1, levMode = m2, solved = false;
+    let entMode = m1, levMode = m2, solved = false, byTotal = false;
     const says = SAYS(us, side === 'ent');
-    if (fromLoads && airflow !== null && !bad) {
+    const end = side === 'ent' ? 'entering' : 'leaving';
+    // That end's own moisture, if given, and how.
+    const sideMoist = side === 'ent' ? ent.second : side === 'lev' ? lev.second : null, sideMode = side === 'ent' ? m1 : m2;
+    if (side && airflow !== null && !bad) {
       let qs = num(el('co-qs')), ql = num(el('co-ql')), qt = num(el('co-qt'));
       const n = [qs, ql, qt].filter(given).length;
       if (n === 3 && Math.abs(qs + ql - qt) > 0.005 * Math.max(Math.abs(qs), Math.abs(ql), Math.abs(qt))) {
@@ -109,6 +112,15 @@ function init(form) {
         if (r?.problem) notes.push(says[r.problem]);
         else if (r && findLeave) { lev.first = r.db; lev.second = r.rh; levMode = 'db-rh'; solved = true; }
         else if (r) { ent.first = r.db; ent.second = r.rh; entMode = 'db-rh'; solved = true; }
+        if (solved && given(sideMoist)) notes.push(`Two of the loads fix the ${end} air, so the ${end} moisture entered is not used; clear it, or clear a load to use it with the total cooling.`);
+      } else if (given(qt) && given(sideMoist) && (findLeave ? a : b)) {
+        // The total load and that end's RH or dew point give its dry bulb.
+        if (sideMode === 'db-rh' && !(sideMoist > 0 && sideMoist <= 100)) notes.push(`The relative humidity must be more than 0 and at most 100 % (${end} air).`);
+        else {
+          const r = findLeave ? leavingForTotal(psyUnits, a, m2, sideMoist, airflow, qt, altitude) : enteringForTotal(psyUnits, b, m1, sideMoist, airflow, qt, altitude);
+          if (r.problem) notes.push(says[r.problem]);
+          else { (findLeave ? lev : ent).first = r.db; solved = byTotal = true; }
+        }
       } else if (findLeave && given(qs) && given(ent.first)) {
         // The sensible load alone gives the other dry bulb.
         rows.push(['Leaving dry bulb', fmt(leavingDryBulbFor(psyUnits, ent.first, airflow, qs, altitude, W1), 1), U.t, 'cf-key']);
@@ -135,17 +147,8 @@ function init(form) {
           rows.push(['Entering dew point', fmt(r.dewPoint, 1), U.t, 'cf-key'], ['Entering humidity ratio', grains(r.W), U.w], ['Leaving humidity ratio', grains(W2), U.w]);
           notes.push('The latent cooling alone gives the entering dew point, with the entering air taken at that dew point, which puts the latent about 3 to 4 % high for a typical cooling coil; add the sensible or total cooling for the entering dry bulb.');
         }
-      }
-    }
-    if ((findDb || findEdb) && airflow !== null && !bad && (findDb ? a : b)) {
-      const qt = num(el('co-qt')), s = findDb ? lev : ent, mode = findDb ? m2 : m1;
-      if (given(qt) && given(s.second)) {
-        if (mode === 'db-rh' && !(s.second > 0 && s.second <= 100)) notes.push(`The relative humidity must be more than 0 and at most 100 % (${findDb ? 'leaving' : 'entering'} air).`);
-        else {
-          const r = findDb ? leavingForTotal(psyUnits, a, m2, s.second, airflow, qt, altitude) : enteringForTotal(psyUnits, b, m1, s.second, airflow, qt, altitude);
-          if (r.problem) notes.push(says[r.problem]);
-          else { s.first = r.db; solved = true; }
-        }
+      } else if (given(qt) && (findLeave ? a : b)) {
+        notes.push(`The total cooling alone does not fix the ${end} air: add the sensible or latent cooling, or the ${end} RH or dew point.`);
       }
     }
     if (solved && side === 'lev') b = known(levMode, lev, 'leaving');
@@ -156,9 +159,9 @@ function init(form) {
         // The end found, in full; what was given for it is not repeated.
         const [x, name, mode] = side === 'lev' ? [b, 'Leaving', m2] : [a, 'Entering', m1];
         rows.push([name + ' dry bulb', fmt(x.db, 1), U.t, 'cf-key']);
-        if (fromLoads || mode !== 'db-wb') rows.push([name + ' wet bulb', fmt(x.wb, 1), U.t, fromLoads ? 'cf-key' : undefined]);
-        if (fromLoads || mode !== 'db-rh') rows.push([name + ' RH', fmt(x.rh, 0), '%']);
-        if (fromLoads || mode !== 'db-dp') rows.push([name + ' dew point', fmt(x.dp, 1), U.t]);
+        rows.push([name + ' wet bulb', fmt(x.wb, 1), U.t, byTotal ? undefined : 'cf-key']);
+        if (!byTotal || mode !== 'db-rh') rows.push([name + ' RH', fmt(x.rh, 0), '%']);
+        if (!byTotal || mode !== 'db-dp') rows.push([name + ' dew point', fmt(x.dp, 1), U.t]);
       }
       const wa = us ? a.grains : a.W, wb = us ? b.grains : b.W;   // gr/lb or g/kg
       rows.push(['Entering air enthalpy', fmt(a.h, 2), U.h], ['Leaving air enthalpy', fmt(b.h, 2), U.h],

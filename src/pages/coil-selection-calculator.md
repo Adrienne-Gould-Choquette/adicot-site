@@ -22,12 +22,12 @@ Review the methodology below to make sure it aligns with your project's requirem
 - For the latent and total cooling, add the moisture of the entering air and of the leaving air: choose whether you know each as a wet bulb, a relative humidity or a dew point, and enter it. The two can differ, for example an RH entering and a dew point leaving.
 - Enter the airflow (at the entering air), and the altitude if the project is not near sea level.
 - The results give each condition's enthalpy and humidity ratio, the sensible, latent and total cooling, and the sensible heat ratio.
-- To size the airflow instead, set "Solve for" to "Airflow for a cooling load" and enter the total, the sensible or the latent cooling (the total is used if more than one is entered). For a sensible load the two dry bulbs are enough, and for a latent load the two dew points.
+- To size the airflow instead, set "Solve for" to "Airflow" and enter the total, the sensible or the latent cooling (the total is used if more than one is entered). For a sensible load the two dry bulbs are enough, and for a latent load the two dew points.
 - For the sensible cooling alone, enter just the two dry bulbs and the airflow. For the latent cooling alone, set both moisture dropdowns to "Dew point" and enter just the two dew points and the airflow. A wet bulb or an RH needs its dry bulb as well, because neither fixes the moisture in the air by itself.
-- To find the leaving air from the loads, set "Solve for" to "Leaving air for sensible and total cooling" and enter the entering air, the airflow, and any two of the sensible, latent and total cooling. The results give the leaving dry bulb, wet bulb, RH and dew point.
+- To find the leaving air, set "Solve for" to "Leaving air conditions" and enter the entering air, the airflow, and any two of the sensible, latent and total cooling. The results give the leaving dry bulb, wet bulb, RH and dew point.
+- If you know only the total cooling, enter it with the leaving RH or dew point (how moist the air leaves the coil) instead of a second load.
 - With one load only: the sensible cooling and the entering dry bulb give the leaving dry bulb; the latent cooling and the entering dew point (or the full entering air) give the leaving dew point.
-- To find the entering air, use "Entering air for sensible and total cooling" or "Entering dry bulb for a total cooling load" in the same way, with the leaving air as the known end. One load alone gives the entering dry bulb (from the sensible) or the entering dew point (from the latent).
-- To find the leaving dry bulb when you know how moist the leaving air is, set "Solve for" to "Leaving dry bulb for a total cooling load" and enter the entering air, the leaving RH or dew point, the airflow and the total cooling.
+- To find the entering air, use "Entering air conditions" in the same way, with the leaving air as the known end. One load alone gives the entering dry bulb (from the sensible) or the entering dew point (from the latent).
 
 **2. Coil face area and velocity**
 
@@ -93,14 +93,14 @@ The same airflow by the standard-air shortcuts gives 1.08 x 2,000 x 40 = 86,400 
 
 6. Solving for airflow
 
-With "Airflow for a cooling load", the tool inverts the total: CFM = Q_t x v_enter / {60 x [(h_enter - h_leave) - (W_enter - W_leave) x h_w]}. Given a sensible or a latent load instead, it inverts that equation the same way: CFM = Q_s x v_enter / [60 x (0.240 + 0.444 x W_leave) x (T_enter - T_leave)], or CFM = Q_L x v_enter / [60 x (W_enter - W_leave) x (1093 + 0.444 x T_enter - T_leave)].
+With "Airflow", the tool inverts the total: CFM = Q_t x v_enter / {60 x [(h_enter - h_leave) - (W_enter - W_leave) x h_w]}. Given a sensible or a latent load instead, it inverts that equation the same way: CFM = Q_s x v_enter / [60 x (0.240 + 0.444 x W_leave) x (T_enter - T_leave)], or CFM = Q_L x v_enter / [60 x (W_enter - W_leave) x (1093 + 0.444 x T_enter - T_leave)].
 
 7. Solving for the leaving or the entering air
 
-These choices use the same equations as above, solved for the air at one end of the coil instead of the loads, so entering the result back under "Cooling loads" returns the loads you started from.
+"Leaving air conditions" and "Entering air conditions" use the same equations as above, solved for the air at one end of the coil instead of the loads, so entering the result back under "Cooling loads" returns the loads you started from.
 
-- With "Leaving air for sensible and total cooling", the two unknowns are T_leave and W_leave. The sensible equation gives T_leave = T_enter - Q_s / [m x (0.240 + 0.444 x W_leave)], and the total equation, with h_leave = 0.240 x T_leave + W_leave x (1061 + 0.444 x T_leave), gives W_leave = [h_enter - 0.240 x T_leave - W_enter x (T_leave - 32) - Q_t / m] / (1093 - 0.556 x T_leave). The two are repeated until they agree.
-- With "Leaving dry bulb for a total cooling load", the leaving RH or dew point is known, and the tool finds the leaving dry bulb at which the total cooling equals the load. A leaving wet bulb is not offered here, because at a fixed wet bulb the total hardly changes with the dry bulb.
+- With two of the loads given, the two unknowns are T_leave and W_leave. The sensible equation gives T_leave = T_enter - Q_s / [m x (0.240 + 0.444 x W_leave)], and the total equation, with h_leave = 0.240 x T_leave + W_leave x (1061 + 0.444 x T_leave), gives W_leave = [h_enter - 0.240 x T_leave - W_enter x (T_leave - 32) - Q_t / m] / (1093 - 0.556 x T_leave). The two are repeated until they agree.
+- With the total cooling and the leaving RH or dew point given, the tool finds the leaving dry bulb at which the total cooling equals the load. A leaving wet bulb is not offered here, because at a fixed wet bulb the total hardly changes with the dry bulb.
 
 Example: 2,000 CFM entering at 95 °F dry bulb and 78 °F wet bulb, with 81,502 Btu/h sensible and 154,971 Btu/h total, leaves at 55.0 °F dry bulb, 54.0 °F wet bulb (94 % RH, 53.3 °F dew point). The same total with a leaving RH of 94 % gives the same 55.0 °F.
 

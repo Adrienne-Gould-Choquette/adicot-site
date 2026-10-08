@@ -21,7 +21,7 @@
 
     <fieldset class="cf-stream co-tool" data-tool="air">
       <legend>1. Coil air side: sensible, latent and total cooling</legend>
-      {{ solveFor("af", [["loads", "Cooling loads"], ["flow", "Airflow for a cooling load"], ["leave", "Leaving air for sensible and total cooling"], ["ldb", "Leaving dry bulb for a total cooling load"], ["enter", "Entering air for sensible and total cooling"], ["edb", "Entering dry bulb for a total cooling load"]]) }}
+      {{ solveFor("af", [["loads", "Cooling loads"], ["flow", "Airflow"], ["leave", "Leaving air conditions"], ["enter", "Entering air conditions"]]) }}
       {%- set moisture = [["db-wb", "Wet bulb"], ["db-rh", "Rel. hum."], ["db-dp", "Dew point"]] %}
       {#- The moisture of one end: how it is known, and its value, on one line. -#}
       {%- macro moist(sel, id, which, unitClass, eg) %}
@@ -37,8 +37,9 @@
       <p class="hint cf-group">Each air state comes from its dry bulb and wet bulb, RH or dew point, with the
       ASHRAE psychrometric equations at the altitude given (sea level if blank). The dry bulbs alone give
       the sensible cooling, and dew points alone the latent. To find the leaving or the entering
-      air instead, choose it under "Solve for" and give any two of the sensible, latent and total cooling,
-      or one alone for that end's dry bulb or dew point. The airflow is at the
+      air instead, choose it under "Solve for" and give any two of the sensible, latent and total cooling;
+      or the total cooling with that end's RH or dew point; or one load alone for that end's dry bulb or
+      dew point. The airflow is at the
       entering air; the same airflow is used for the coil face velocity below. Entering air is the air at the coil: return or mixed air for a recirculating system, outdoor air for a DOAS.</p>
     </fieldset>
 
