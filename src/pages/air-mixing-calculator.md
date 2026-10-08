@@ -18,7 +18,7 @@ calcSource: "Mixed Air Calculator V1.6"
 Review the methodology below to make sure it aligns with your project's requirements, then:
 
 1. Choose US (cfm, °F) or SI (l/s, °C) units. Switching converts the values already entered.
-2. Enter the outdoor air flow and its dry bulb and wet bulb temperatures. The [ASHRAE climate data](https://ashrae-meteo.info/v3.0/) link gives the design conditions for your exact location.
+2. Enter the outdoor air flow and its dry bulb and wet bulb temperatures. The [ASHRAE climate data](https://ashrae-meteo.info/v3.0/) link gives the design conditions for your exact location. Open "How to find this on the ASHRAE site" under the outdoor air fields for the steps and the values to read.
 3. Enter the return air flow and its dry bulb and wet bulb temperatures.
 4. Optionally, enter a third air stream, such as bypass air, with its flow and temperatures.
 5. The total air flow and the mixed air dry bulb and wet bulb appear in the results and update as you type.

@@ -891,6 +891,9 @@ button.card-star:focus-visible { outline: 2px solid var(--accent); outline-offse
 .contact-form :is(input, textarea, select):user-invalid:focus { outline-color: #b3261e; }
 
 .hint { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+.ashrae-steps { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+.ashrae-steps summary { cursor: pointer; color: var(--fg); }
+.ashrae-steps ol { margin: 6px 0 0; padding-left: 20px; }
 .form-actions { margin: 24px 0 0; }
 .form-actions .btn { cursor: pointer; font: inherit; font-weight: 700; font-size: 15px; border: 0; }
 

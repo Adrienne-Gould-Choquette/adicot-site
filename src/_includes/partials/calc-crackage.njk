@@ -15,7 +15,10 @@
       <div class="field"><label for="cm-v">Winter wind speed <span class="cf-u">mph</span> <span class="req" aria-hidden="true">*</span></label>
         <input type="number" id="cm-v" name="v" inputmode="decimal" step="any" required autocomplete="off" placeholder="e.g. 15" value="20"></div>
       <p class="hint">The ordinary winter wind, typically 10 to 20 mph (4.5 to 8.9 m/s). For your location, the
-        <a href="https://ashrae-meteo.info/v3.0/" rel="noopener">ASHRAE Climatic Design Conditions</a> give the mean wind speed coincident with the 99.6% heating design temperature.</p>
+        <a href="https://ashrae-meteo.info/v3.0/" target="_blank" rel="noopener">ASHRAE Climatic Design Conditions</a> give the mean wind speed coincident with the 99.6% heating design temperature.</p>
+      {%- set ashrae_units = "<strong>IP</strong>, so the wind speed is in mph" %}
+      {%- set ashrae_find = "the <strong>Annual Heating</strong> table and read <strong>MCWS</strong> under <strong>MCWS/PCWD to 99.6% DB</strong>. That is the mean wind speed during the coldest hours. Enter it here." %}
+      {% include "partials/ashrae-steps.njk" %}
     </div>
 
     <div class="cm-side">
