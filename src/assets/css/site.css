@@ -32,6 +32,7 @@
   /* Fill for a required field that is still empty, so what is left to enter
      stands out from what has been entered. Text 15.5:1, border 3.33:1. */
   --need: #fff3d1;
+  --filled: #e3f3e1;   /* a calculator input that holds a value */
   --warn: #8a5200;
   --maxw: 1400px;
   --prose: 92ch;
@@ -253,7 +254,11 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 /* Required and still empty: shaded until it is filled in. background-color, not
    the shorthand, so the select keeps its drawn arrow. */
 .calcform :is(input[type="number"], select):required:invalid { background-color: var(--need); }
-.calcform input::placeholder { color: var(--muted); font-style: italic; }  /* italic, so a hint is not mistaken for a value already entered */
+.calcform input::placeholder { color: var(--muted); font-style: italic; }
+/* Holding a value (typed, or from a shared link or the last visit): light green,
+   so what was entered stands apart from what is still blank. The searchable
+   drop-down's text always shows the choice, so it is left out. */
+.calcform :is(input[type="number"], input[type="text"]:not(.cb-input)):not(:placeholder-shown) { background-color: var(--filled); }  /* italic, so a hint is not mistaken for a value already entered */
 
 .cf-radios {
   margin: 0 0 16px; padding: 0; border: 0;
@@ -831,6 +836,7 @@ button.card-star:focus-visible { outline: 2px solid var(--accent); outline-offse
   --btn-hover: #ff8f1f;
   --btn-fg: #14110e;
   --need: #342d1f;   /* text 11.8:1, --field-line 3.15:1 */
+  --filled: #1f3121;
   --warn: #e2ab5e;
   color-scheme: dark;
 }
