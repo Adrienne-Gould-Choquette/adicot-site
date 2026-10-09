@@ -390,6 +390,15 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 
 /* One air stream, or any group of fields that belong together, under a heading. */
 .cf-stream { margin: 0 0 18px; padding: 0; border: 0; }
+.co-tool[hidden] { display: none; }
+/* Coil calculator tool buttons: radios drawn as a row of segments. */
+.co-pick { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; border: 0; }
+.co-pick legend { padding: 0; margin: 0 0 8px; font-size: 14.5px; font-weight: 600; }
+.co-pick label { position: relative; padding: 8px 14px; border: 1px solid var(--field-line); border-radius: 999px; font-size: 14.5px; cursor: pointer; background: var(--bg); }
+.co-pick input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.co-pick label:hover { border-color: var(--accent); color: var(--accent); }
+.co-pick label:has(input:checked) { background: var(--btn); border-color: var(--btn); color: var(--btn-fg); font-weight: 600; }
+.co-pick label:has(input:focus-visible) { outline: 2px solid var(--fg); outline-offset: 2px; }
 .cf-stream legend { padding: 0; margin: 0 0 8px; font-size: 14.5px; font-weight: 600; }
 .cf-stream .hint { margin: 6px 0 0; }
 

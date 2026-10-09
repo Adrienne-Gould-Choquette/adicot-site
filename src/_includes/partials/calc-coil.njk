@@ -19,6 +19,16 @@
       <label><input type="radio" name="u" value="Metric"> Metric</label>
     </fieldset>
 
+    {#- One tool at a time: the buttons show that tool's inputs and results. The
+        others keep their entries, so the links between tools still work. #}
+    <fieldset class="co-pick">
+      <legend>Tool</legend>
+      <label><input type="radio" name="tool" value="air" checked> 1. Air side</label>
+      <label><input type="radio" name="tool" value="face"> 2. Face velocity</label>
+      <label><input type="radio" name="tool" value="water"> 3. Water flow</label>
+      <label><input type="radio" name="tool" value="tubes"> 4. Tube velocity</label>
+    </fieldset>
+
     <fieldset class="cf-stream co-tool" data-tool="air">
       <legend>1. Coil air side: sensible, latent and total cooling</legend>
       {%- set moisture = [["db-wb", "Wet bulb"], ["db-rh", "Rel. hum."], ["db-dp", "Dew point"]] %}

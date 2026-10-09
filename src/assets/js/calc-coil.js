@@ -39,7 +39,7 @@ function nextStep(has, n) {
 function init(form) {
   const el = id => document.getElementById(id);
   const ids = ['am1', 'am2', 'e1', 'e2', 'x1', 'x2', 'aq', 'qs', 'ql', 'qt', 'alt', 'fh', 'fw', 'wf', 'fl', 'w1', 'w2', 'w3', 'w4', 'vq', 'vd', 'vn'];
-  shareable(form, ['u', 'wc', ...ids], el('co-share'), el('co-copied'));
+  shareable(form, ['u', 'tool', 'wc', ...ids], el('co-share'), el('co-copied'));
 
   function recalc() {
     const units = form.querySelector('input[name="u"]:checked')?.value ?? 'English';
@@ -53,6 +53,11 @@ function init(form) {
       for (const s of form.querySelectorAll('.' + cls)) s.textContent = U[k];
     }
     const rows = [], notes = [];
+    // Only the chosen tool is shown. Each tool's rows and notes start where the
+    // last one's ended, so `cut` records those points to show just its own.
+    const tool = form.querySelector('input[name="tool"]:checked')?.value ?? 'air';
+    for (const fs of form.querySelectorAll('.co-tool')) fs.hidden = fs.dataset.tool !== tool;
+    const cut = {}, mark = k => { cut[k] = [rows.length, notes.length]; };
 
     // Tool 1: the coil's air side. Of the entering air, the leaving air, the
     // airflow and the loads, whichever the entries fix is worked out: the loads
@@ -269,6 +274,7 @@ function init(form) {
       } else notes.unshift(`${list(extra).replace(/^t/, 'T')} ${is} entered but not used in these results.`);
     }
 
+    mark('water');
     // Tool 3: water and glycol; the variable being solved for is not an input. A
     // blank heat load takes the air side's total cooling.
     let waterFlow = null;   // for the tube velocity
@@ -290,6 +296,7 @@ function init(form) {
         if (!(waterFlow > 0)) waterFlow = null;
       }
     }
+    mark('face');
     // Tool 2: face area, and face velocity with the air side's airflow.
     const fh = num(el('co-fh')), fw = num(el('co-fw'));
     if (fh > 0 && fw > 0) {
@@ -297,6 +304,7 @@ function init(form) {
       rows.push(['Coil face area', fmt(r.area, 2), U.area]);
       if (airflow > 0) rows.push(['Coil face velocity', fmt(r.velocity, us ? 0 : 2), U.vel, 'cf-key']);
     }
+    mark('tubes');
     // Tool 4: water velocity in the tubes. A blank flow takes the water tool's flow.
     const vd = num(el('co-vd')), vn = num(el('co-vn'));
     let vq = num(el('co-vq'));
@@ -308,14 +316,18 @@ function init(form) {
       if (flowLinked) notes.push("The tube velocity uses the water tool's flow; enter a flow rate to override it.");
     }
 
-    fillRows(el('co-tbody'), rows);
-    const main = rows.filter(r => !/enthalpy|humidity ratio/.test(r[0]));
-    el('co-summary').classList.toggle('is-over', !!overMsg);
-    el('co-summary').textContent = overMsg || (main.length
+    mark('end');
+    const order = ['air', 'water', 'face', 'tubes', 'end'], k = order.indexOf(tool);
+    const [r0, n0] = k ? cut[tool] : [0, 0], [r1, n1] = cut[order[k + 1]];
+    const shown = rows.slice(r0, r1), said = notes.slice(n0, n1), warn = tool === 'air' ? overMsg : '';
+    fillRows(el('co-tbody'), shown);
+    const main = shown.filter(r => !/enthalpy|humidity ratio/.test(r[0]));
+    el('co-summary').classList.toggle('is-over', !!warn);
+    el('co-summary').textContent = warn || (main.length
       ? main.map(([l, v, u]) => `${l} ${v}${u ? " " + u : ""}`).join('; ') + '.'
-      : prompt || 'Fill in any of the tools; each result appears as soon as its inputs are complete.');
-    el('co-note').textContent = notes.join(' ');
-    el('co-note').hidden = !notes.length;
+      : (tool === 'air' && prompt) || 'Fill in the inputs; results appear as soon as there are enough to work with.');
+    el('co-note').textContent = said.join(' ');
+    el('co-note').hidden = !said.length;
   }
 
   live(form, recalc);
