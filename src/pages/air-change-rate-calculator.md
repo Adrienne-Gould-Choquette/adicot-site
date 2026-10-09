@@ -16,7 +16,7 @@ calcSource: "ACH V1.6"
 Review the methodology below to make sure it aligns with your project's requirements, then:
 
 1. Choose US (ft, cfm) or SI (m, l/s) units. Switching converts the values already entered.
-2. Choose what you know: the air changes per hour, to find the air flow rate, or the air flow rate, to find the air changes per hour.
+2. Choose what you know: **Given the Air Changes per Hour (ACH) - Find the Airflow Rate**, or **Given the Airflow Rate - Find the Air Changes per Hour (ACH)**.
 3. Enter that value and the room height.
 4. Give the floor as length × width, or enter the floor area directly.
 5. The room volume, air flow rate and air changes per hour appear in the results and update as you type.
