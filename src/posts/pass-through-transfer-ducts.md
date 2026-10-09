@@ -7,6 +7,7 @@ date: 2024-11-18T18:50:49.926Z
 permalink: /post/pass-through-transfer-ducts.html
 ogImage: "/images/0179db_cb67eaf7e77c4ea28b707e69d1f2e5f1~mv2.jpg"
 categories: []
+forCalculator: /transfer-pass-thru-calculator
 ---
 
 A properly balanced air distribution system ensures, among other things, a more comfortable indoor environment and better, more efficiently run equipment. When air is supplied to an enclosed room, e.g., a bedroom, but there is no return duct, the room will be under positive pressure. The volume of supply air entering the room will exit by pushing through any cracks and crevices to adjacent rooms and to the outside. The volume of air that escapes to the outside can no longer be returned to the air handler. Since the air exiting the air handler has to equal the air entering the air handler, the air handler has to find "makeup air." To avoid the unpredictable result of pulling the makeup air through the building's exterior cracks and crevices, a “predictable” design solution is to add the same volume of air from the outside which is also referred to as makeup air or ventilation air. This make up air can help improve air quality and will keep the air handler and building under positive pressure. Another “predictable” solution is to use Pass Through Transfer ducts. Here is some Florida Mechanical Code information on Transfer ducts: Florida Mechanical Code, Section 601.6 Balanced return air.

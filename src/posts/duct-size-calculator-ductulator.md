@@ -7,6 +7,7 @@ date: 2021-11-18T18:36:43.296Z
 permalink: /post/duct-size-calculator-ductulator.html
 ogImage: "/images/0179db_24fac65b3a4e4e5f9785e9edf77d1dda~mv2.jpg"
 categories: ["duct-layout", "heating-and-cooling-load-calculation-2", "hvac-engineering"]
+forCalculator: /duct-size-calculator
 ---
 
 This video shows how to use the online [Duct Size Calculator / Ductulator](/duct-size-calculator).

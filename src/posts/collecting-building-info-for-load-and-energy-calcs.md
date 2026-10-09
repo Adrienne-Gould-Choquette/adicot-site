@@ -7,6 +7,7 @@ date: 2017-08-23T19:23:02.715Z
 permalink: /post/collecting-building-info-for-load-and-energy-calcs.html
 ogImage: "/images/0179db_b7faaa0fd206402ebe2a8fce073077d3~mv2_d_1700_2200_s_2.jpg"
 categories: ["duct-layout", "energy-code-compliance", "heating-and-cooling-load-calculation-2", "hvac-engineering"]
+services: ["cooling-load-calculations", "energy-code-compliance"]
 ---
 
 At Adicot, Inc. we collect the building information we need to complete our work using an internal Work Order; however, we are on the perpetual hunt to gather that information; and in the process, we have two main goals, accuracy, and to make the process as easy as possible for our clients. This article focuses on Collecting Building Info for Load and Energy Calcs.

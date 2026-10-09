@@ -7,6 +7,7 @@ date: 2017-04-10T21:20:44.910Z
 permalink: /post/2017/04/05/heat-load-calculations-baseline-vs-high-efficiency.html
 ogImage: "/images/0179db_a1d11c2c1c9c464a975651f1c7719852~mv2.jpg"
 categories: ["heating-and-cooling-load-calculation-2"]
+services: ["cooling-load-calculations"]
 ---
 
 Adicot is working on a project for One Community, a non-profit creating open source plans and designs for sustainable cities and homes. The specific project we are working on is assisting in their HVAC Design of their mixed use City Center.

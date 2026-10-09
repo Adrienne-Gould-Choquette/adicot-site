@@ -8,6 +8,7 @@ calcInclude: "partials/calc-crackage.njk"
 calculatorName: "Infiltration and Building Pressurization Calculator (Crack Method)"
 pageModule: calc-crackage.js
 calcSource: "Crackage Method V1.02"
+service: cooling-load-calculations
 ---
 
 ## How to use it

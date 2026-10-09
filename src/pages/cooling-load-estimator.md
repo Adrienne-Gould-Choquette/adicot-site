@@ -9,6 +9,7 @@ calcInclude: "partials/calc-coolingload.njk"
 calculatorName: "Cooling Load Ballpark Estimator"
 pageModule: calc-coolingload.js
 calcSource: "Cooling Load Ballpark Estimator V1.6"
+service: cooling-load-calculations
 ---
 
 ## How to use it

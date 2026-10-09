@@ -7,6 +7,8 @@ date: 2021-12-02T13:42:33.903Z
 permalink: /post/how-to-use-the-cooling-load-sanity-check-calculator.html
 ogImage: "/images/0179db_699cbcba0c354414baf514cca2bf7047~mv2.jpg"
 categories: ["heating-and-cooling-load-calculation-2", "hvac-engineering"]
+forCalculator: /cooling-load-estimator
+services: ["cooling-load-calculations"]
 ---
 
 ![Cooling load estimator for a 9,600 ft² beauty salon: 40 to 91 tons, with occupant and lighting ranges](/images/0179db_699cbcba0c354414baf514cca2bf7047~mv2.jpg)

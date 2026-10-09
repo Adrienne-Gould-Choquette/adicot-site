@@ -9,6 +9,7 @@ calcInclude: "partials/calc-coil.njk"
 calculatorName: "Coil Selection Calculator"
 pageModule: calc-coil.js
 calcSource: "Coil Selection V2.9"
+service: cooling-load-calculations
 ---
 
 

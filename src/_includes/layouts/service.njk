@@ -52,6 +52,26 @@ layout: layouts/base.njk
     <p><a class="btn" href="{{ site.quoteUrl }}">{{ site.quoteLabel }} &rarr;</a></p>
   </aside>
 
+  {%- set svcCalcs = crossLinks.serviceCalcs[slug] %}
+  {%- if svcCalcs %}
+  <nav class="svc-other" aria-label="Related calculators">
+    <h2>Free calculators for this work</h2>
+    <ul>
+      {%- for c in svcCalcs %}<li><a href="{{ c.path }}">{{ c.label }}</a></li>{% endfor %}
+    </ul>
+  </nav>
+  {%- endif %}
+
+  {%- set svcPosts = crossLinks.servicePosts[slug] %}
+  {%- if svcPosts %}
+  <nav class="svc-other" aria-label="Related blog posts">
+    <h2>From the blog</h2>
+    <ul>
+      {%- for p in svcPosts %}<li><a href="{{ p.url }}">{{ p.title }}</a></li>{% endfor %}
+    </ul>
+  </nav>
+  {%- endif %}
+
   <nav class="svc-other" aria-label="Other services">
     <h2>Other services</h2>
     <ul>

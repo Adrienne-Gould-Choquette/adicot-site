@@ -9,6 +9,7 @@ calcInclude: "partials/calc-ashrae621.njk"
 calculatorName: "Ventilation and Exhaust Rates"
 pageModule: calc-ashrae621.js
 calcSource: "ANSI/ASHRAE Standard 62.1-2025"
+service: cooling-load-calculations
 ---
 
 ## How to use it

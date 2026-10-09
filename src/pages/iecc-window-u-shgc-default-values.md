@@ -9,6 +9,7 @@ calcInclude: "partials/calc-fenestration.njk"
 calculatorName: "Window U-Factor and SHGC Default Values"
 pageModule: calc-fenestration.js
 calcSource: "Window Default Fenestration U_SHGC - 2023 FBC V1.2"
+service: energy-code-compliance
 ---
 
 ## How to use it
