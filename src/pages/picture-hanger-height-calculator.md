@@ -8,7 +8,7 @@ ogImage: "/images/0179db_51121864b6034369832e93969b568864~mv2.png"
 calcInclude: "partials/calc-picture.njk"
 calculatorName: "Picture Hanger Height Calculator"
 pageModule: calc-picture.js
-calcSource: "Picture_Hanger_Calculator V1.1"
+calcSource: "Picture_Hanger_Calculator V1.2"
 ---
 
 As featured on a Martha Stewart Living show in the early 2000s, this innovative method has stood the test of time and remains the go-to solution for achieving perfect picture placement.

@@ -1,7 +1,7 @@
 // Picture hanging: hook height for a picture centred at a chosen height, and the
 // centre line and thirds of its width, to the nearest eighth of an inch.
 //
-// A port of Picture_Hanger_Calculator V1.1.xlsx, formula for formula, including how
+// A port of Picture_Hanger_Calculator V1.2.xlsx, formula for formula, including how
 // it rounds fractions; check-calculators.mjs holds this file to the workbook's own
 // answers. Measurements are whole inches plus an eighth ('0', '1/8' ... '7/8').
 

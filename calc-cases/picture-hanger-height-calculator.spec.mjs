@@ -1,6 +1,7 @@
-// Answer key for the picture hanger (Picture_Hanger_Calculator V1.1): every eighth,
+// Answer key for the picture hanger (Picture_Hanger_Calculator V1.2): every eighth,
 // whole-inch results, and fractions that carry into the next inch, including the
-// centre line of widths such as 35 7/8 in. (V1.0 dropped it to the lower inch).
+// centre line of widths such as 35 7/8 in. (V1.0 dropped it to the lower inch;
+// V1.2 changes only the diagram, which now measures the hook height to the hook).
 import { hang, problem, EIGHTHS } from '../src/assets/js/picture.js';
 
 const cases = [];
@@ -14,7 +15,7 @@ for (const w of [11, 23, 35, 47]) cases.push({ h: 20, hf: '0', d: 2, df: '1/2', 
 const pair = (a, f) => [Number(a), f];
 
 export default {
-  workbook: 'G:\\My Drive\\5-Calculators\\Picture_Hanger_Calculator V1.1.xlsx',
+  workbook: 'G:\\My Drive\\5-Calculators\\Picture_Hanger_Calculator V1.2.xlsx',
   sheet: 'Sheet1',
   inputs: { h: 'B13', hf: 'C13', d: 'B14', df: 'C14', c: 'B15', cf: 'C15', w: 'B19', wf: 'C19' },
   outputs: { hookWhole: 'B16', hookFrac: 'C16', lineWhole: 'B20', lineFrac: 'C20', thirdWhole: 'B21', thirdFrac: 'C21' },
