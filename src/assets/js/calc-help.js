@@ -9,7 +9,18 @@
   const form = document.getElementById('chelp-form');
   const q = document.getElementById('chelp-q');
   const btn = form.querySelector('button');
+  const panel = document.getElementById('chelp-panel');
+  const bubble = document.getElementById('chelp-open');
   const history = [];
+
+  const show = open => {
+    panel.hidden = !open;
+    bubble.setAttribute('aria-expanded', String(open));
+    (open ? q : bubble).focus();
+  };
+  bubble.addEventListener('click', () => show(panel.hidden));
+  document.getElementById('chelp-close').addEventListener('click', () => show(false));
+  panel.addEventListener('keydown', e => { if (e.key === 'Escape') show(false); });
 
   const say = (cls, text) => {
     const p = Object.assign(document.createElement('p'), { className: `chelp-msg ${cls}`, textContent: text });

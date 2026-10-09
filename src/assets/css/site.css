@@ -414,7 +414,7 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 /* An engineer printing a calculator wants the inputs, the answer and the method,
    not the site around them. */
 @media print {
-  .site-header, .site-footer, .nlband, .related, .to-top, .cf-actions, .skip { display: none !important; }
+  .site-header, .site-footer, .nlband, .related, .to-top, .chelp, .cf-actions, .skip { display: none !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
   main { max-width: none; padding: 0; }
   .calc-layout { display: block; }
@@ -1093,26 +1093,52 @@ html, body { overflow-x: clip; }
 
 /* ---------- calculator help chat ---------- */
 
-.chelp { margin: 18px 0 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
-.chelp > summary { cursor: pointer; padding: 12px 16px; font-weight: 600; }
-.chelp > summary:hover { color: var(--accent); }
-.chelp[open] > summary { border-bottom: 1px solid var(--line); }
-.chelp-log { max-height: 26rem; overflow-y: auto; padding: 0 16px; }
-.chelp-log:empty { display: none; }
-.chelp-msg { margin: 12px 0; padding: 9px 12px; border-radius: 8px; white-space: pre-wrap; line-height: 1.55; }
-.chelp-you { margin-left: 15%; background: var(--bg); border: 1px solid var(--line); }
-.chelp-bot { margin-right: 15%; border-left: 3px solid var(--accent); padding-left: 12px; }
+/* A bubble fixed to the bottom right opens the chat window above it. The
+   back-to-top pill moves up on these pages so the two never overlap. */
+.chelp-bubble {
+  position: fixed; right: 20px; bottom: 20px; z-index: 50;
+  width: 56px; height: 56px; border: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  background: var(--btn); color: var(--btn-fg);
+  box-shadow: 0 6px 20px rgba(16, 25, 35, .25);
+}
+.chelp-bubble:hover { background: var(--btn-hover); }
+.chelp-bubble:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+body:has(.chelp:not([hidden])) .to-top { bottom: 88px; }
+
+.chelp-panel {
+  position: fixed; right: 20px; bottom: 88px; z-index: 50;
+  width: min(380px, calc(100vw - 32px)); max-height: min(560px, calc(100vh - 120px));
+  display: flex; flex-direction: column;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg);
+  box-shadow: 0 12px 36px rgba(16, 25, 35, .28);
+}
+.chelp-panel[hidden] { display: none; }
+.chelp-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 10px 10px 16px; border-bottom: 1px solid var(--line); }
+.chelp-head h2 { margin: 0; font-size: 16px; }
+.chelp-close { border: 0; background: none; color: var(--muted); font-size: 24px; line-height: 1; padding: 2px 8px; cursor: pointer; border-radius: 6px; }
+.chelp-close:hover { color: var(--accent); }
+.chelp-log { flex: 1; min-height: 0; overflow-y: auto; padding: 0 14px; }
+.chelp-msg { margin: 12px 0; padding: 9px 12px; border-radius: 8px; white-space: pre-wrap; line-height: 1.5; font-size: 14.5px; }
+.chelp-you { margin-left: 12%; background: var(--surface); border: 1px solid var(--line); }
+.chelp-bot { margin-right: 8%; border-left: 3px solid var(--accent); }
 .chelp-bot.is-wait { color: var(--muted); }
 .chelp-bot.is-error { border-left-color: #b3261e; }
-.chelp-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; padding: 14px 16px 0; }
+.chelp-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: end; padding: 10px 14px 0; border-top: 1px solid var(--line); }
 .chelp-form textarea {
-  width: 100%; font: inherit; font-size: 15px; resize: vertical;
-  padding: 9px 12px; border: 1px solid var(--field-line); border-radius: 8px; background: var(--bg); color: var(--fg);
+  width: 100%; font: inherit; font-size: 15px; resize: none;
+  padding: 8px 10px; border: 1px solid var(--field-line); border-radius: 8px; background: var(--bg); color: var(--fg);
 }
 .chelp-form textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
 .chelp-form .btn { cursor: pointer; font: inherit; font-weight: 600; font-size: 15px; border: 0; }
 .chelp-form .btn:disabled { opacity: .6; cursor: progress; }
-.chelp > .cf-note { margin: 10px 16px 14px; }
+.chelp-note { margin: 8px 14px 12px; font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+
+@media (max-width: 620px) {
+  .chelp-bubble { right: 14px; bottom: 14px; }
+  .chelp-panel { right: 16px; bottom: 80px; }
+  body:has(.chelp:not([hidden])) .to-top { bottom: 80px; }
+}
 
 /* ---------- service promo cards ---------- */
 
