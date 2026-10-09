@@ -22,6 +22,8 @@ Review the methodology below to make sure it aligns with your project's requirem
 
 ## Methodology, equations and examples
 
+<img class="img-right" src="/images/0179db_805d40482976459f862544a7ed15494d~mv2.png" alt="A sphere with its radius R and diameter D marked">
+
 The circle and sphere calculator finds the radius, diameter, circumference and area of a circle, and the volume and surface area of a sphere. Enter any one measurement and it gives all the others, with no manual calculation.
 
 The mathematical constant π (pi), the ratio of a circle's circumference to its diameter, is approximately 3.14159. The radius is the distance between the center of a circle or sphere and any point on its circumference or surface. Knowing the radius or diameter gives the circumference and area, and the reverse. The calculator extends this to spheres: given the volume or surface area of a sphere, it finds the radius and diameter. This is particularly useful for engineers, mathematicians and students who work with three-dimensional shapes.
@@ -47,5 +49,3 @@ Substituting the volume: R = (3 × 5,575 cm³ / 4 / π)<sup>1/3</sup> = 10.9998 
 Surface area of a sphere = 4 × π × R². Substituting the radius from Example 1 (10.9998 cm):
 
 A = 4 × π × (10.9998 cm)² = 1,520.48 cm²
-
-![Circle Sphere](/images/0179db_805d40482976459f862544a7ed15494d~mv2.png)

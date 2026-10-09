@@ -148,6 +148,12 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 .prose ul, .prose ol { margin: 0 0 16px; padding-left: 22px; }
 .prose li { margin: 4px 0; }
 .prose img { max-width: 100%; height: auto; border-radius: var(--radius); }
+/* A diagram beside the text it illustrates, on the right; back in the flow where
+   there is no room for both. */
+.prose img.img-right { float: right; width: 260px; max-width: 40%; margin: 4px 0 16px 28px; }
+@media (max-width: 560px) {
+  .prose img.img-right { float: none; display: block; max-width: 100%; margin: 0 auto 16px; }
+}
 /* YouTube videos in blog posts: 16:9, full width up to a readable size. */
 .video-embed { aspect-ratio: 16 / 9; width: 100%; max-width: 720px; margin: 1.5rem 0; }
 .video-embed iframe { width: 100%; height: 100%; border: 0; border-radius: var(--radius); }
