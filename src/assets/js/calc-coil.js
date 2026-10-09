@@ -19,16 +19,16 @@ const SAYS = (us, entering) => ({
 });
 const VAR = { entering: 1, leaving: 2, load: 3, flow: 4 };
 
-// Tool 1 has no "Solve for": it works out whatever the entries so far fix. Its
-// fields, as they are named in a prompt or a warning.
+// Tool 1 works out whatever the entries so far fix; its optional Solve for only
+// hides the chosen answer's inputs. Its fields, as they are named in a prompt or a warning.
 const AIR = { e1: 'the entering dry bulb', e2: 'the entering moisture', x1: 'the leaving dry bulb', x2: 'the leaving moisture', aq: 'the airflow', qs: 'the sensible cooling', ql: 'the latent cooling', qt: 'the total cooling' };
 // What each answer takes: its fields, and how many of the three loads.
 const TARGETS = [['cooling loads', ['e1', 'e2', 'x1', 'x2', 'aq'], 0], ['leaving air', ['e1', 'e2', 'aq'], 2],
   ['airflow', ['e1', 'e2', 'x1', 'x2'], 1], ['entering air', ['x1', 'x2', 'aq'], 2]];
 const list = a => (a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a.at(-1));
 // The entries still missing for the one or two answers nearest to complete.
-function nextStep(has, n) {
-  const opts = TARGETS.map(([name, ids, loads]) => {
+function nextStep(has, n, only = null) {
+  const opts = TARGETS.filter(([name]) => !only || name === only).map(([name, ids, loads]) => {
     const miss = ids.filter(id => !has(id)).map(id => AIR[id]), short = Math.max(0, loads - n);
     if (short) miss.push(short === 2 ? 'two of the three loads' : n ? 'one more of the loads' : 'one of the three loads');
     return { name, miss, count: miss.length + Math.max(0, short - 1) };
@@ -38,7 +38,7 @@ function nextStep(has, n) {
 
 function init(form) {
   const el = id => document.getElementById(id);
-  const ids = ['am1', 'am2', 'e1', 'e2', 'x1', 'x2', 'aq', 'qs', 'ql', 'qt', 'alt', 'fh', 'fw', 'wf', 'fl', 'w1', 'w2', 'w3', 'w4', 'vq', 'vd', 'vn'];
+  const ids = ['as', 'am1', 'am2', 'e1', 'e2', 'x1', 'x2', 'aq', 'qs', 'ql', 'qt', 'alt', 'fh', 'fw', 'wf', 'fl', 'w1', 'w2', 'w3', 'w4', 'vq', 'vd', 'vn'];
   shareable(form, ['u', 'tool', 'adds', 'wc', ...ids], el('co-share'), el('co-copied'));
   // The add-on ticks live in the hidden "adds" field, which shares and remembers.
   const adds = [...el('co-adds').querySelectorAll('input[type="checkbox"]')];
@@ -51,11 +51,16 @@ function init(form) {
   const guides = [...form.querySelectorAll('.co-guide')], targets = guides.flatMap(g => [...g.querySelectorAll('.co-target')]);
   for (const b of targets) b.addEventListener('click', () => {
     target = target === b ? null : b;
+    // In tool 1 the answer picked is also what to solve for ("whatever" for the
+    // ones the drop-down has no entry for, and when unpicked).
+    if (b.closest('.co-guide').dataset.tool === 'air') { el('co-as').value = target?.dataset.as || 'any'; recalc(); }
     // In the fluid tool the answer picked is also what to solve for.
-    if (target?.dataset.solve) { el('co-wf').value = target.dataset.solve; el('co-wf').dispatchEvent(new Event('change', { bubbles: true })); }
+    else if (target?.dataset.solve) { el('co-wf').value = target.dataset.solve; el('co-wf').dispatchEvent(new Event('change', { bubbles: true })); }
     else recalc();
   });
   form.addEventListener('reset', () => { target = null; });
+  // And the other way: choosing what to solve for picks it in the guide.
+  el('co-as').addEventListener('change', () => { target = targets.find(b => b.dataset.as === el('co-as').value) ?? null; });
 
   function recalc() {
     const units = form.querySelector('input[name="u"]:checked')?.value ?? 'English';
@@ -79,7 +84,10 @@ function init(form) {
     // from both conditions and the airflow, the airflow from both conditions and
     // a load, or the air at one end from the other end, the airflow and the loads.
     const given = x => x !== null && !Number.isNaN(x);
-    const v = Object.fromEntries(Object.keys(AIR).map(id => [id, num(el('co-' + id))]));
+    // Solve for hides that answer's inputs, and what they hold is ignored.
+    const off = { loads: ['qs', 'ql', 'qt'], airflow: ['aq'], leaving: ['x1', 'x2'], entering: ['e1', 'e2'] }[el('co-as').value] ?? [];
+    for (const id of Object.keys(AIR)) el('co-' + id).closest('.field').hidden = off.includes(id);
+    const v = Object.fromEntries(Object.keys(AIR).map(id => [id, off.includes(id) ? null : num(el('co-' + id))]));
     const has = id => given(v[id]);
     // The entries a result drew on. One left over is reported, not silently dropped.
     const used = new Set(), use = (...from) => { for (const id of from) if (has(id)) used.add(id); };
@@ -273,7 +281,7 @@ function init(form) {
     // What to enter next, while nothing is fixed yet; and, once something is,
     // any entry it did not draw on.
     const answered = rows.some(r => r[3] === 'cf-key');
-    const prompt = answered || notes.length || !Object.keys(AIR).some(has) ? '' : nextStep(id => (id === 'aq' ? airflow !== null : has(id)), n);
+    const prompt = answered || notes.length || !Object.keys(AIR).some(has) ? '' : nextStep(id => (id === 'aq' ? airflow !== null : has(id)), n, { loads: 'cooling loads', airflow: 'airflow', leaving: 'leaving air', entering: 'entering air' }[el('co-as').value]);
     el('co-loadhint').textContent = prompt;
     el('co-loadhint').hidden = !prompt;
     const extra = answered ? Object.keys(AIR).filter(id => has(id) && !used.has(id)).map(id => AIR[id]) : [];

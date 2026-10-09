@@ -18,7 +18,7 @@ Review the methodology below to make sure it aligns with your project's requirem
 
 **1. Coil air side (sensible, latent and total cooling)**
 
-- Enter what you know and leave the rest blank. There is nothing to choose first: the tool works out whatever your entries fix, and until they fix something it says what to add next.
+- Enter what you know and leave the rest blank. Solve for is optional: left on "Whatever the entries allow", the tool works out whatever your entries fix, and until they fix something it says what to add next. Choosing an answer instead hides that answer's inputs, so nothing typed there can over-define it.
 - For the cooling loads, enter the entering and leaving dry bulb.
 - For the latent and total cooling, add the moisture of the entering air and of the leaving air: choose whether you know each as a wet bulb, a relative humidity or a dew point, and enter it. The two can differ, for example an RH entering and a dew point leaving.
 - Enter the airflow (at the entering air), and the altitude if the project is not near sea level.

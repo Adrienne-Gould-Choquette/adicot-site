@@ -409,8 +409,12 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 .co-want :is(input, select) { box-shadow: 0 0 0 3px var(--accent); border-color: var(--accent); }
 .co-want label { color: var(--accent); }
 .co-guide p { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+/* Tool 1's Solve for: a row of its own, half width like the inputs. */
+.co-solve > .field { max-width: calc(50% - 6px); margin: 0; }
+@media (max-width: 480px) { .co-solve > .field { max-width: none; } }
 /* The three loads in one row; their boxes line up even where a label wraps. */
 .co-loads { align-items: end; }
+.co-loads:not(:has(> .field:not([hidden]))) { display: none; }
 /* Tool 1's add-ons: the tools it feeds, offered as ticks once they can work. */
 .co-adds { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: -6px 0 18px; }
 .co-adds[hidden], .co-adds label[hidden] { display: none; }
