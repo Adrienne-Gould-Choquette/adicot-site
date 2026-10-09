@@ -15,21 +15,24 @@
       <label><input type="radio" name="s" value="Metric"> Metric (cm, m)</label>
     </fieldset>
 
-    <fieldset class="cf-radios cf-stack">
-      <legend>You know the</legend>
-      {%- for t in ["Radius", "Diameter", "Area of a Circle", "Circumference", "Volume of a Sphere", "Area of a Sphere"] %}
-      <label><input type="radio" name="t" value="{{ t }}"{% if loop.index == 2 %} checked{% endif %}> {{ t | replace("Area of a Circle", "Area of a circle") | replace("Volume of a Sphere", "Volume of a sphere") | replace("Area of a Sphere", "Surface area of a sphere") }}</label>
-      {%- endfor %}
-    </fieldset>
+    {#- The value sits beside the list it belongs to, not under it. -#}
+    <div class="cs-know">
+      <fieldset class="cf-radios cf-stack">
+        <legend>You know the</legend>
+        {%- for t in ["Radius", "Diameter", "Area of a Circle", "Circumference", "Volume of a Sphere", "Area of a Sphere"] %}
+        <label><input type="radio" name="t" value="{{ t }}"{% if loop.index == 2 %} checked{% endif %}> {{ t | replace("Area of a Circle", "Area of a circle") | replace("Volume of a Sphere", "Volume of a sphere") | replace("Area of a Sphere", "Surface area of a sphere") }}</label>
+        {%- endfor %}
+      </fieldset>
 
-    <div class="cf-pair field">
-      <div>
-        <label for="cs-v">Value <span class="req" aria-hidden="true">*</span></label>
-        <input type="number" id="cs-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="18">
-      </div>
-      <div>
-        <label for="cs-u">In</label>
-        <select id="cs-u" name="u"></select>
+      <div class="cf-pair field">
+        <div>
+          <label for="cs-v">Value <span class="req" aria-hidden="true">*</span></label>
+          <input type="number" id="cs-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="18">
+        </div>
+        <div>
+          <label for="cs-u">In</label>
+          <select id="cs-u" name="u"></select>
+        </div>
       </div>
     </div>
 

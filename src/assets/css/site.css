@@ -376,6 +376,13 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 .cf-pair, .cf-trio { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .cf-trio { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 :is(.cf-pair, .cf-trio) label { display: block; margin: 0 0 4px; font-size: 14px; }
+/* Circle and sphere: what is known and its value side by side, so the box is
+   next to the choice it answers; stacked when the column is too narrow. */
+.cs-know { display: grid; gap: 12px 28px; align-items: start; }
+.cs-know > :is(.cf-radios, .field) { margin: 0; }
+@container (min-width: 400px) {
+  .cs-know { grid-template-columns: auto minmax(0, 1fr); }
+}
 /* Two-state psychrometric inputs: entering and leaving air side by side, each
    with its own "Given"; stacked when the column is too narrow for both. */
 .ps-states { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
