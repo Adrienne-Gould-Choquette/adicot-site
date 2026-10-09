@@ -450,7 +450,8 @@ later is a data change, not a template edit:
   "listName": "Calculator Updates",
   "action": "/api/updates/subscribe",
   "emailField": "email",
-  "nameField": "",         // off: the endpoint takes email only
+  "firstNameField": "first_name",  // required; Subscribers column B
+  "lastNameField": "last_name",    // required; Subscribers column C
   "redirectField": "",     // not needed: Flask redirects itself
   "honeypotField": "website"
 }

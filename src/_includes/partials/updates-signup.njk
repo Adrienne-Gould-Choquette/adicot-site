@@ -27,16 +27,20 @@
   {%- endif %}
 
   <div class="nlform-fields">
-    {#- Only rendered once `nameField` holds the provider's real parameter name.
-        A guessed name would be accepted by the POST and then silently dropped,
-        so the field stays off until someone has read it off the embed code. #}
-    {%- if nl.nameField %}
+    {#- Required, and written to the Subscribers tab's first_name and last_name
+        columns. Only rendered when the field names are set, since a guessed name
+        would be accepted by the POST and then silently dropped. #}
+    {%- if nl.firstNameField and nl.lastNameField %}
     <div class="field">
-      <label for="nl-name{{ nlWide | default('') }}">Name <span class="opt">optional</span></label>
-      <input id="nl-name{{ nlWide | default('') }}" name="{{ nl.nameField }}" type="text" autocomplete="name">
+      <label for="nl-first{{ nlWide | default('') }}">First name <span class="req" aria-hidden="true">*</span></label>
+      <input id="nl-first{{ nlWide | default('') }}" name="{{ nl.firstNameField }}" type="text" required autocomplete="given-name">
+    </div>
+    <div class="field">
+      <label for="nl-last{{ nlWide | default('') }}">Last name <span class="req" aria-hidden="true">*</span></label>
+      <input id="nl-last{{ nlWide | default('') }}" name="{{ nl.lastNameField }}" type="text" required autocomplete="family-name">
     </div>
     {%- endif %}
-    <div class="field">
+    <div class="field nlform-email">
       <label for="nl-email{{ nlWide | default('') }}">Email <span class="req" aria-hidden="true">*</span></label>
       <input id="nl-email{{ nlWide | default('') }}" name="{{ nl.emailField }}" type="email" required autocomplete="email">
     </div>

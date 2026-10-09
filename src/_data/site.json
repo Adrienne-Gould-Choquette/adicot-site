@@ -16,7 +16,8 @@
     "listName": "Calculator Updates",
     "action": "/api/updates/subscribe",
     "emailField": "email",
-    "nameField": "",
+    "firstNameField": "first_name",
+    "lastNameField": "last_name",
     "redirectField": "",
     "honeypotField": "website"
   },
