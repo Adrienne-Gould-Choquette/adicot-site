@@ -40,8 +40,8 @@
       {%- endmacro %}
       <div class="cf-pair">{{ num("e1", "Entering dry bulb", "co-t", "°F", "80") }}{{ num("x1", "Leaving dry bulb", "co-t", "°F", "55") }}</div>
       <div class="cf-pair">{{ moist("am1", "e2", "Entering", "co-m1", "67") }}{{ moist("am2", "x2", "Leaving", "co-m2", "54") }}</div>
-      <div class="cf-pair">{{ num("aq", "Airflow", "co-a", "cfm", "1000") }}{{ num("qs", "Sensible cooling", "co-q", "Btu/h", "27000") }}</div>
-      <div class="cf-pair">{{ num("ql", "Latent cooling", "co-q", "Btu/h", "9000") }}{{ num("qt", "Total cooling", "co-q", "Btu/h", "36000") }}</div>
+      {{ num("aq", "Airflow", "co-a", "cfm", "1000") }}
+      <div class="cf-trio co-loads">{{ num("qs", "Sensible cooling", "co-q", "Btu/h", "27000") }}{{ num("ql", "Latent cooling", "co-q", "Btu/h", "9000") }}{{ num("qt", "Total cooling", "co-q", "Btu/h", "36000") }}</div>
       <p class="hint cf-group co-next" id="co-loadhint" role="status" hidden></p>
       {{ num("alt", "Altitude", "co-l", "ft", "0") }}
       <p class="hint cf-group">Fill in any of the inputs; results appear as soon as there are enough to work with.
