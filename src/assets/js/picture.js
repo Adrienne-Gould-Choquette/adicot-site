@@ -1,7 +1,7 @@
 // Picture hanging: hook height for a picture centred at a chosen height, and the
 // centre line and thirds of its width, to the nearest eighth of an inch.
 //
-// A port of Picture_Hanger_Calculator V1.2.xlsx, formula for formula, including how
+// A port of Picture_Hanger_Calculator V1.3.xlsx, formula for formula, including how
 // it rounds fractions; check-calculators.mjs holds this file to the workbook's own
 // answers. Measurements are whole inches plus an eighth ('0', '1/8' ... '7/8').
 
@@ -32,8 +32,8 @@ export function hang({ height, hookDrop, center, width }) {
   return out;
 }
 
-// The same in centimetres: plain decimals, shown to the nearest millimetre. This
-// is the page's own addition; the workbook works only in inches.
+// The same in centimetres: plain decimals, shown to the nearest millimetre, as
+// the workbook's metric block does (B27, B31 and B32: ROUND to one decimal).
 const mm = x => Math.round(x * 10 + 1e-9) / 10;
 export function hangMetric({ height, hookDrop, center, width }) {
   const out = { hook: mm(center + height / 2 - hookDrop) };

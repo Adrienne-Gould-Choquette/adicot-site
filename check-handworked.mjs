@@ -210,8 +210,8 @@ export function checkHandworked() {
   same('air mixing: the page example does not fog', mixed.fog, false);
   lines.push('  air mixing: ASHRAE adiabatic mixing by dry air mass (page example, SI, winter, fog)');
 
-  // Picture hanger in centimetres (the workbook is inches only): the page's
-  // metric example, and the unit switch against the inch answer.
+  // Picture hanger in centimetres: the page's metric example, which workbook
+  // V1.3 gives as 174.0, 45.5 and 30.3, and the unit switch against the inch answer.
   const cmEx = hangMetric({ height: 61, hookDrop: 8.5, center: 152, width: 91 });
   near('picture: metric example hook 174 cm', cmEx.hook, 174, 0);
   near('picture: metric centre line', cmEx.centerLine, 45.5, 0);
