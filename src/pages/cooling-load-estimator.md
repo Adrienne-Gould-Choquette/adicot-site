@@ -40,21 +40,3 @@ In metric units, the same figures are converted to square meters (1 ft² = 0.092
 This is a pre-design ballpark: an estimate of the cooling load before a full analysis has been done, or a sanity check of a load calculation's result. It is not a load calculation. The check figures take no account of the inputs a load calculation uses, such as construction, climate, orientation, glazing or ventilation. As buildings, lighting and equipment become more efficient, the watts and tons trend lower than these historical figures.
 
 For a quick look at a single space, the [coil selection calculator](/coil-selection-calculator) and the [psychrometric calculator](/psychrometric-chart-calculator) work from airflows and air conditions. For a full load calculation, see our [cooling load calculation services](/services/cooling-load-calculations).
-
-## Check figures by building type
-
-The figures the calculator uses, adapted from the ASHRAE Handbook—Fundamentals and other sources.
-
-<div class="table-scroll">
-<table class="ref-table">
-  <thead>
-    <tr><th scope="col" rowspan="2">Building type</th><th scope="colgroup" colspan="3">ft² per person</th><th scope="colgroup" colspan="3">Lights &amp; other electrical, W/ft²</th><th scope="colgroup" colspan="3">ft² per ton</th></tr>
-    <tr><th scope="col">Low</th><th scope="col">Avg</th><th scope="col">High</th><th scope="col">Low</th><th scope="col">Avg</th><th scope="col">High</th><th scope="col">Low</th><th scope="col">Avg</th><th scope="col">High</th></tr>
-  </thead>
-  <tbody>
-  {%- for b in coolingLoad.table %}
-    <tr><th scope="row">{{ b.name }}</th>{% for v in b.occ %}<td>{{ v }}</td>{% endfor %}{% for v in b.lights %}<td>{{ v }}</td>{% endfor %}{% for v in b.ref %}<td>{{ v }}</td>{% endfor %}</tr>
-  {%- endfor %}
-  </tbody>
-</table>
-</div>
