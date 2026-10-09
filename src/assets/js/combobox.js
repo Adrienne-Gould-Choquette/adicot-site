@@ -134,6 +134,9 @@ export function combobox(select, { placeholder = 'Type to search, or show all' }
     }
   });
   input.addEventListener('blur', () => { close(); showCurrent(); });
+  // Keep focus in the input when the list or its scrollbar is pressed: the input
+  // losing focus closes the list, so grabbing the scrollbar would shut it.
+  list.addEventListener('mousedown', e => e.preventDefault());
   toggle.addEventListener('mousedown', e => e.preventDefault());
   toggle.addEventListener('click', () => {
     if (list.hidden) { input.focus(); open(''); } else close();
