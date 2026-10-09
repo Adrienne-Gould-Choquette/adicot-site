@@ -72,7 +72,9 @@ export async function checkCalculators() {
   // earlier, it runs before the declarations below it exist and the page throws
   // on load (a ReferenceError the build cannot otherwise see; it happened twice).
   const JS = 'src/assets/js';
-  const pageScripts = fs.readdirSync(JS).filter(f => /^calc-.+\.js$/.test(f) && f !== 'calc-kit.js');
+  // calc-kit.js and calc-help.js are shared by every calculator page, not page scripts.
+  const SHARED = ['calc-kit.js', 'calc-help.js'];
+  const pageScripts = fs.readdirSync(JS).filter(f => /^calc-.+\.js$/.test(f) && !SHARED.includes(f));
   for (const f of pageScripts) {
     checks++;
     const last = fs.readFileSync(path.join(JS, f), 'utf8').trim().split(/\r?\n/).pop();
