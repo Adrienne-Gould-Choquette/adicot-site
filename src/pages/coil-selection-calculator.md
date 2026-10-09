@@ -2,7 +2,7 @@
 layout: layouts/page.njk
 title: "Coil Selection Calculator"
 seoTitle: "Coil Selection Calculator | adicot.com"
-description: "Calculate total, sensible and latent coil capacity, leaving air temperature, coil face area and velocity, and water or glycol capacity."
+description: "Calculate the sensible, latent and total coil load (the capacity the coil must deliver), the leaving air, coil face area and velocity, and the water or glycol flow."
 permalink: /coil-selection-calculator.html
 ogImage: "/images/0179db_34bba9fdec3d49dc828e1e4be55b6ad3~mv2.png"
 calcInclude: "partials/calc-coil.njk"
@@ -19,17 +19,18 @@ Review the methodology below to make sure it aligns with your project's requirem
 **1. Coil air side (sensible, latent and total cooling)**
 
 - Enter what you know and leave the rest blank. Solve for is optional: left on "Whatever the entries allow", the tool works out whatever your entries fix, and until they fix something it says what to add next. Choosing an answer instead hides that answer's inputs, so nothing typed there can over-define it.
-- For the cooling loads, enter the entering and leaving dry bulb.
+- For the coil loads, enter the entering and leaving dry bulb.
+- Coil loads are not room loads: the load at the coil includes the outdoor air brought in for ventilation and the fan heat, so a room load from a load calculation is usually smaller. Enter coil loads, and take the entering air as the air reaching the coil (mixed air for a recirculating system, outdoor air for a DOAS).
 - For the latent and total cooling, add the moisture of the entering air and of the leaving air: choose whether you know each as a wet bulb, a relative humidity or a dew point, and enter it. The two can differ, for example an RH entering and a dew point leaving.
 - Enter the airflow (at the entering air), and the altitude if the project is not near sea level.
 - The results give each condition's enthalpy and humidity ratio, the sensible, latent and total cooling, and the sensible heat ratio.
-- To size the airflow instead, leave the airflow blank and enter the total, the sensible or the latent cooling. One is enough; if more than one is entered the total is used, then the sensible. For a sensible load the two dry bulbs are enough, and for a latent load the two dew points.
+- To size the airflow instead, leave the airflow blank and enter the total, the sensible or the latent cooling. One is enough; if more than one is entered the total is used, then the sensible. For a sensible coil load the two dry bulbs are enough, and for a latent coil load the two dew points.
 - For the sensible cooling alone, enter just the two dry bulbs and the airflow. For the latent cooling alone, set both moisture dropdowns to "Dew point" and enter just the two dew points and the airflow. A wet bulb or an RH needs its dry bulb as well, because neither fixes the moisture in the air by itself.
 - To find the leaving air, leave it blank and enter the entering air, the airflow, and any two of the sensible, latent and total cooling. The results give the leaving dry bulb, wet bulb, RH and dew point.
-- If you know only the total cooling, enter it with the leaving RH or dew point (how moist the air leaves the coil) instead of a second load.
-- With one load only: the sensible cooling and the entering dry bulb give the leaving dry bulb; the latent cooling and the entering dew point (or the full entering air) give the leaving dew point.
-- To find the entering air, do the same with the leaving air as the known end and the entering air left blank. One load alone gives the entering dry bulb (from the sensible) or the entering dew point (from the latent).
-- If you enter more than is needed, the tool is over-defined: a note under the results names the entry that was not used, so you can clear it, or clear another entry to solve from it instead. Both air conditions and the airflow take precedence over any load entered, and two loads take precedence over a part-entered air condition at the end being found.
+- If you know only the total cooling, enter it with the leaving RH or dew point (how moist the air leaves the coil) instead of a second coil load.
+- With one coil load only: the sensible cooling and the entering dry bulb give the leaving dry bulb; the latent cooling and the entering dew point (or the full entering air) give the leaving dew point.
+- To find the entering air, do the same with the leaving air as the known end and the entering air left blank. One coil load alone gives the entering dry bulb (from the sensible) or the entering dew point (from the latent).
+- If you enter more than is needed, the tool is over-defined: the results panel shows a warning naming the extra entry in place of results, until you clear it, or clear another entry to solve from it instead.
 
 **2. Coil face area and velocity**
 
@@ -37,15 +38,17 @@ Review the methodology below to make sure it aligns with your project's requirem
 
 **3. Fluid flow (water or glycol)**
 
-- Select the quantity to solve for: heat load, flow rate, entering temperature or leaving temperature.
+- Select the quantity to solve for: coil load, flow rate, entering temperature or leaving temperature.
 - Select the coil: Cooling (chilled water or glycol, which warms up through the coil) or Heating (hot water, which cools down). This decides which side of the known temperature a solved temperature falls on.
-- Enter the other inputs. Leave the heat load blank to use the total cooling from tool 1.
+- Enter the other inputs. Leave the coil load blank to use the total cooling from tool 1.
 
 **4. Fluid velocity in coil tubes**
 
 - Enter the tube inside diameter and the number of tubes fed, and the flow rate, or leave it blank to use the flow from tool 3.
 
-## BTUH Capacity & Leaving Air Temperature – Methodology
+## Coil Load & Leaving Air Temperature – Methodology
+
+The coil load is the heat the coil moves between the air and the water or glycol: the sensible, latent and total cooling at the conditions given. It is the same number as the capacity the coil must deliver at those conditions, so the methodology below says "load" throughout.
 
 
 ##### Overview
@@ -133,7 +136,7 @@ The sensible cooling depends mainly on the dry bulbs and the latent cooling main
 
 - Enter the altitude when the project is not near sea level; it sets the atmospheric pressure, and so the air's density and humidity ratio.
 
-- Positive loads are cooling; a negative load denotes heating, and a negative latent load denotes adding moisture.
+- Positive coil loads are cooling; a negative coil load denotes heating, and a negative latent coil load denotes adding moisture.
 
 - For SI conversions:
 
@@ -292,7 +295,7 @@ This calculator is intended for educational and preliminary design use only. Res
 
 ##### Overview
 
-This calculator estimates the required volumetric flow rate (or heat load, or entering/leaving temperatures) for hydronic systems using water or glycol solutions.
+This calculator estimates the required volumetric flow rate (or coil load, or entering/leaving temperatures) for hydronic systems using water or glycol solutions.
 
 It applies fundamental energy balance equations for sensible heat transfer and allows for different heat capacities of glycol mixtures commonly used in HVAC chilled- and hot-water loops.
 
@@ -304,7 +307,7 @@ Q = V̇ × c<sub>p</sub> × ΔT
 
 Where:
 
-- Q = Heat load (Btu/h or kW)
+- Q = Coil load (Btu/h or kW)
 
 - V˙ = Volumetric flow rate (GPM or L/s)
 
@@ -351,7 +354,7 @@ Glycol concentrations are by volume. The glycol factors are density × specific 
 
 Given:
 
-Heat Load = 9,500 Btu/h
+Coil Load = 9,500 Btu/h
 Entering = 80 °F
 Leaving = 54 °F
 Fluid = Propylene Glycol 40 % (by volume) → factor = 457.7
@@ -366,7 +369,7 @@ V˙=9,500 / (457.7×26) =0.80GPM
 
 Given:
 
-Heat Load = 1,500 kW
+Coil Load = 1,500 kW
 Entering = 23 °C
 Leaving = 16 °C
 Fluid = Water → cp=4.2
