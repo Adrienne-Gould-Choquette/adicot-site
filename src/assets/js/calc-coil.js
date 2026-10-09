@@ -39,7 +39,13 @@ function nextStep(has, n) {
 function init(form) {
   const el = id => document.getElementById(id);
   const ids = ['am1', 'am2', 'e1', 'e2', 'x1', 'x2', 'aq', 'qs', 'ql', 'qt', 'alt', 'fh', 'fw', 'wf', 'fl', 'w1', 'w2', 'w3', 'w4', 'vq', 'vd', 'vn'];
-  shareable(form, ['u', 'tool', 'wc', ...ids], el('co-share'), el('co-copied'));
+  shareable(form, ['u', 'tool', 'adds', 'wc', ...ids], el('co-share'), el('co-copied'));
+  // The add-on ticks live in the hidden "adds" field, which shares and remembers.
+  const adds = [...el('co-adds').querySelectorAll('input[type="checkbox"]')];
+  const syncAdds = () => { const on = el('co-adds-v').value.split(','); for (const c of adds) c.checked = on.includes(c.value); };
+  syncAdds();
+  el('co-adds').addEventListener('change', () => { el('co-adds-v').value = adds.filter(c => c.checked).map(c => c.value).join(','); });
+  form.addEventListener('reset', () => setTimeout(syncAdds, 0));
 
   function recalc() {
     const units = form.querySelector('input[name="u"]:checked')?.value ?? 'English';
@@ -56,7 +62,6 @@ function init(form) {
     // Only the chosen tool is shown. Each tool's rows and notes start where the
     // last one's ended, so `cut` records those points to show just its own.
     const tool = form.querySelector('input[name="tool"]:checked')?.value ?? 'air';
-    for (const fs of form.querySelectorAll('.co-tool')) fs.hidden = fs.dataset.tool !== tool;
     const cut = {}, mark = k => { cut[k] = [rows.length, notes.length]; };
 
     // Tool 1: the coil's air side. Of the entering air, the leaving air, the
@@ -317,11 +322,29 @@ function init(form) {
     }
 
     mark('end');
-    const order = ['air', 'water', 'face', 'tubes', 'end'], k = order.indexOf(tool);
-    const [r0, n0] = k ? cut[tool] : [0, 0], [r1, n1] = cut[order[k + 1]];
-    const shown = rows.slice(r0, r1), said = notes.slice(n0, n1), warn = tool === 'air' ? overMsg : '';
+    // Which tools are open: the chosen one, and from tool 1 any add-on ticked. An
+    // add-on is offered once its input exists, and stays while ticked.
+    const ticked = k => adds.find(c => c.value === k).checked;
+    const ready = { face: airflow > 0, water: totalCooling > 0, tubes: ticked('water') && waterFlow > 0 };
+    const isOpen = k => tool === k || (tool === 'air' && ticked(k) && (k !== 'tubes' || ticked('water')));
+    for (const label of el('co-adds').querySelectorAll('label')) {
+      const k = label.dataset.add;
+      label.hidden = tool !== 'air' || !(ready[k] || isOpen(k));
+    }
+    el('co-adds').hidden = ![...el('co-adds').querySelectorAll('label')].some(l => !l.hidden);
+    for (const fs of form.querySelectorAll('.co-tool')) fs.hidden = !isOpen(fs.dataset.tool);
+    // Each open tool's rows and notes, in page order, headed when more than one has any.
+    const NAME = { air: 'Air side', face: 'Face velocity', water: 'Water flow', tubes: 'Tube velocity' };
+    const span = { air: [[0, 0], cut.water], water: [cut.water, cut.face], face: [cut.face, cut.tubes], tubes: [cut.tubes, cut.end] };
+    const groups = ['air', 'face', 'water', 'tubes'].filter(isOpen).map(k => {
+      const [[r0, n0], [r1, n1]] = span[k];
+      return [k, rows.slice(r0, r1), notes.slice(n0, n1)];
+    });
+    const headed = groups.filter(g => g[1].length).length > 1;
+    const shown = groups.flatMap(([k, r]) => (headed && r.length ? [[NAME[k], '', '', 'cf-group-h'], ...r] : r));
+    const said = groups.flatMap(g => g[2]), warn = tool === 'air' ? overMsg : '';
     fillRows(el('co-tbody'), shown);
-    const main = shown.filter(r => !/enthalpy|humidity ratio/.test(r[0]));
+    const main = shown.filter(r => r[3] !== 'cf-group-h' && !/enthalpy|humidity ratio/.test(r[0]));
     el('co-summary').classList.toggle('is-over', !!warn);
     el('co-summary').textContent = warn || (main.length
       ? main.map(([l, v, u]) => `${l} ${v}${u ? " " + u : ""}`).join('; ') + '.'

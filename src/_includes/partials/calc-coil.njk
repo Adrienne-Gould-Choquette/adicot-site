@@ -61,6 +61,17 @@
       </details>
     </fieldset>
 
+    {#- From tool 1, the tools it feeds can be opened under it, each once tool 1
+        has the value it needs. The ticks are saved through the hidden "adds"
+        field, so a shared link opens the same tools. #}
+    <div class="co-adds" id="co-adds" hidden>
+      <span class="co-adds-h">Continue with:</span>
+      <label data-add="face" hidden><input type="checkbox" value="face"> Face velocity</label>
+      <label data-add="water" hidden><input type="checkbox" value="water"> Water flow</label>
+      <label data-add="tubes" hidden><input type="checkbox" value="tubes"> Tube velocity</label>
+      <input type="text" name="adds" id="co-adds-v" value="" hidden>
+    </div>
+
     <fieldset class="cf-stream co-tool" data-tool="face">
       <legend>2. Coil face area and velocity</legend>
       <div class="cf-pair">{{ num("fh", "Face height", "co-d", "in", "24") }}{{ num("fw", "Face width", "co-d", "in", "36") }}</div>
