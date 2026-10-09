@@ -78,6 +78,8 @@
     <fieldset class="cf-stream co-tool" data-tool="face">
       <legend>2. Coil face area and velocity</legend>
       <div class="cf-pair">{{ num("fh", "Face height", "co-d", "in", "24") }}{{ num("fw", "Face width", "co-d", "in", "36") }}</div>
+      {{ num("fq", "Airflow", "co-a", "cfm", "1000") }}
+      <p class="hint">The same airflow as tool 1: typing it in either place fills in both, and a blank box takes the airflow tool 1 finds.</p>
     </fieldset>
 
     <fieldset class="cf-stream co-tool" data-tool="water">
@@ -130,7 +132,7 @@
       <p class="co-guide-h">What do you want to calculate? Pick one to highlight the inputs it needs.</p>
       <ul>
         <li><button type="button" class="co-target" data-need="fh fw" data-done="Coil face area" aria-pressed="false"><strong>To calculate the coil face area:</strong> enter the face height and width.</button></li>
-        <li><button type="button" class="co-target" data-need="fh fw" data-done="Coil face velocity" aria-pressed="false"><strong>To calculate the face velocity:</strong> enter the face height and width. The airflow comes from tool 1 (Air side), so enter or find it there first.</button></li>
+        <li><button type="button" class="co-target" data-need="fh fw fq" data-done="Coil face velocity" aria-pressed="false"><strong>To calculate the face velocity:</strong> enter the face height and width and the airflow (or leave the airflow blank to use the one tool 1 finds).</button></li>
       </ul>
       <p>Face velocity is the airflow divided by the face area.</p>
     </div>

@@ -33,7 +33,7 @@ Review the methodology below to make sure it aligns with your project's requirem
 
 **2. Coil face area and velocity**
 
-- Enter the coil face height and width. The face velocity uses the airflow from tool 1.
+- Enter the coil face height and width, and the airflow. The airflow box is shared with tool 1: typing it in either place fills in both, and left blank it takes the airflow tool 1 finds.
 
 **3. Fluid flow (water or glycol)**
 

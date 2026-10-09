@@ -46,6 +46,10 @@ function init(form) {
   syncAdds();
   el('co-adds').addEventListener('change', () => { el('co-adds-v').value = adds.filter(c => c.checked).map(c => c.value).join(','); });
   form.addEventListener('reset', () => setTimeout(syncAdds, 0));
+  // Tool 2's airflow is tool 1's: typing in either fills in the other.
+  el('co-fq').value = el('co-aq').value;
+  el('co-fq').addEventListener('input', () => { el('co-aq').value = el('co-fq').value; });
+  el('co-aq').addEventListener('input', () => { el('co-fq').value = el('co-aq').value; });
   // The answer picked in the guide, whose inputs are highlighted until it appears.
   let target = null;
   const guides = [...form.querySelectorAll('.co-guide')], targets = guides.flatMap(g => [...g.querySelectorAll('.co-target')]);
@@ -350,12 +354,16 @@ function init(form) {
       }
     }
     mark('face');
-    // Tool 2: face area, and face velocity with the air side's airflow.
-    const fh = num(el('co-fh')), fw = num(el('co-fw'));
+    // Tool 2: face area, and face velocity with its airflow, which is tool 1's
+    // entry (the two boxes mirror each other) or, left blank, what tool 1 found.
+    const fh = num(el('co-fh')), fw = num(el('co-fw')), fqIn = num(el('co-fq'));
+    const fq = fqIn > 0 ? fqIn : airflow;
+    el('co-fq').placeholder = fqIn === null && airflow > 0 ? fmt(airflow, us ? 0 : 1) : (us ? '1000' : '470');
     if (fh > 0 && fw > 0) {
-      const r = face(units, fh, fw, airflow ?? 0);
+      const r = face(units, fh, fw, fq ?? 0);
       rows.push(['Coil face area', fmt(r.area, 2), U.area, 'cf-key']);
-      if (airflow > 0) rows.push(['Coil face velocity', fmt(r.velocity, us ? 0 : 2), U.vel, 'cf-key']);
+      if (fq > 0) rows.push(['Coil face velocity', fmt(r.velocity, us ? 0 : 2), U.vel, 'cf-key']);
+      if (fq > 0 && fqIn === null) notes.push('The face velocity uses the airflow tool 1 found; enter an airflow to override it.');
     }
     mark('tubes');
     // Tool 4: water velocity in the tubes. A blank flow takes the water tool's flow.
