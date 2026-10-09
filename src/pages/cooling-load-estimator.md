@@ -29,11 +29,11 @@ The calculator estimates a building's occupants, lights and other electrical loa
 - **Lights and other electrical** = floor area × watts per square foot
 - **Refrigeration** = floor area ÷ floor area per ton, and 1 ton = 12,000 Btu/h (3.52 kW)
 
-Some building types have a low, average and high figure; others have only an average. Low refrigeration corresponds to the most square feet per ton.
+The results give a low, average and high estimate for building types whose figures span a range, and only an average for the others. Low refrigeration corresponds to the most square feet per ton.
 
 In metric units, the same figures are converted to square meters (1 ft² = 0.092903 m²).
 
-**Example.** A 10,000 ft² general office building: 280 ft² per ton gives 10,000 ÷ 280 = 35.7 tons (428,571 Btu/h) on average, with a range of 27.8 tons (at 360 ft²/ton) to 52.6 tons (at 190 ft²/ton). At 2.5 W/ft², lights and other electrical come to 25,000 W.
+**Example.** For a 10,000 ft² general office building, the calculator gives 35.7 tons (428,571 Btu/h) of refrigeration on average, with a range of 27.8 to 52.6 tons, and 25,000 W of lights and other electrical on average.
 
 ### What it is for
 
