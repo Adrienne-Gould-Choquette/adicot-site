@@ -90,6 +90,14 @@ function init(form) {
     const AT_DEW = 'With no dry bulb, the latent cooling takes the air at its dew point, which runs about 3 to 4 % high for a typical cooling coil; enter the dry bulbs for the exact loads.';
     const NO_W = 'A wet bulb or an RH does not fix the moisture in the air without its dry bulb. For the latent cooling alone, give the moisture at both ends as dew points; otherwise enter the dry bulbs too.';
     const NO_FLOW = 'No airflow carries that load between these conditions: check the sign of the load against the entering and leaving air.';
+    // An end found from one load, given its dry bulb and dew point: its dry and wet
+    // bulb rows, or just the dry bulb and a note when the dew point is above it.
+    const ends = (name, db, dp, note) => {
+      rows.push([name + ' dry bulb', fmt(db, 1), U.t, 'cf-key']);
+      if (stateProblem({ mode: 'db-dp', first: db, second: dp, altitude })) { notes.push(note); return false; }
+      rows.push([name + ' wet bulb', fmt(state({ units: psyUnits, mode: 'db-dp', first: db, second: dp, altitude }).wb, 1), U.t, 'cf-key']);
+      return true;
+    };
     let qs = v.qs, ql = v.ql, qt = v.qt;
     const n = [qs, ql, qt].filter(given).length;
 
@@ -180,15 +188,20 @@ function init(form) {
         // One load and one end: the sensible gives the other dry bulb, and the
         // latent the other dew point.
         if (has('qs') && has('e1') && !has('x1')) {
-          rows.push(['Leaving dry bulb', fmt(leavingDryBulbFor(psyUnits, v.e1, airflow, qs, altitude, W1), 1), U.t, 'cf-key']);
-          notes.push(W1 === null ? DRY : 'The sensible cooling alone gives the leaving dry bulb, with the entering moisture taken as unchanged; add the latent or total cooling for the leaving moisture.');
+          const t = leavingDryBulbFor(psyUnits, v.e1, airflow, qs, altitude, W1);
+          if (W1 === null) { rows.push(['Leaving dry bulb', fmt(t, 1), U.t, 'cf-key']); notes.push(DRY); }
+          else {
+            if (ends('Leaving', t, a.dp, 'That leaves the air below its dew point, so the coil must also remove moisture; add the latent or total cooling for the leaving wet bulb.')) notes.push('The sensible cooling alone gives the leaving air with the entering moisture taken as unchanged; add the latent or total cooling for the actual leaving moisture.');
+          }
           use('e1', 'aq', 'qs'); if (W1 !== null) use('e2');
         } else if (has('qs') && has('x1') && !has('e1')) {
           const t = enteringDryBulbFor(psyUnits, v.x1, airflow, qs, altitude, W2);
           if (t === null) notes.push('No entering dry bulb gives that much sensible cooling at this airflow.');
           else {
-            rows.push(['Entering dry bulb', fmt(t, 1), U.t, 'cf-key']);
-            notes.push(W2 === null ? DRY : 'The sensible cooling alone gives the entering dry bulb, with the leaving moisture taken as unchanged; add the latent or total cooling for the entering moisture.');
+            if (W2 === null) { rows.push(['Entering dry bulb', fmt(t, 1), U.t, 'cf-key']); notes.push(DRY); }
+            else {
+              if (ends('Entering', t, b.dp, 'That puts the entering air below its dew point; add the latent or total cooling for the entering wet bulb.')) notes.push('The sensible cooling alone gives the entering air with the leaving moisture taken as unchanged; add the latent or total cooling for the actual entering moisture.');
+            }
             use('x1', 'aq', 'qs'); if (W2 !== null) use('x2');
           }
         }
@@ -196,16 +209,19 @@ function init(form) {
           const r = leavingDewPointFor(psyUnits, W1, airflow, ql, altitude, v.e1);
           if (r.problem) notes.push(SAYS(us, false).dry);
           else {
+            ends('Leaving', has('x1') ? v.x1 : r.dewPoint, r.dewPoint, 'The leaving dry bulb entered is below the leaving dew point these give: check the latent cooling.');
             rows.push(['Leaving dew point', fmt(r.dewPoint, 1), U.t, 'cf-key'], ['Entering humidity ratio', grains(W1), U.w], ['Leaving humidity ratio', grains(r.W), U.w]);
-            notes.push(has('e1') ? 'The latent cooling alone gives the leaving dew point, with the leaving air taken at that dew point; add the sensible or total cooling for the leaving dry bulb.' : AT_DEW);
+            if (!has('e1')) notes.push(AT_DEW);
+            else if (!has('x1')) notes.push('The latent cooling alone gives the leaving dew point, with the leaving air taken at that dew point; add the sensible or total cooling for the leaving dry bulb.');
             use('e1', 'e2', 'aq', 'ql');
           }
         } else if (has('ql') && W2 !== null && W1 === null) {
           const r = enteringDewPointFor(psyUnits, W2, airflow, ql, altitude, v.x1);
           if (r.problem) notes.push(SAYS(us, true).dry);
           else {
+            ends('Entering', has('e1') ? v.e1 : r.dewPoint, r.dewPoint, 'The entering dry bulb entered is below the entering dew point these give: check the latent cooling.');
             rows.push(['Entering dew point', fmt(r.dewPoint, 1), U.t, 'cf-key'], ['Entering humidity ratio', grains(r.W), U.w], ['Leaving humidity ratio', grains(W2), U.w]);
-            notes.push('The latent cooling alone gives the entering dew point, with the entering air taken at that dew point, which puts the latent about 3 to 4 % high for a typical cooling coil; add the sensible or total cooling for the entering dry bulb.');
+            if (!has('e1')) notes.push('The latent cooling alone gives the entering dew point, with the entering air taken at that dew point, which puts the latent about 3 to 4 % high for a typical cooling coil; add the sensible or total cooling for the entering dry bulb.');
             use('x1', 'x2', 'aq', 'ql');
           }
         }
