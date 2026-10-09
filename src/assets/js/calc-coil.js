@@ -246,7 +246,8 @@ function init(form) {
     if (extra.length) {
       const [is, it] = extra.length > 1 ? ['are', 'them'] : ['is', 'it'];
       if (over) {
-        overMsg = `Over-defined: too many air-side inputs. The other entries already fix ${list(extra)}, so ${it} cannot also be entered. Clear ${it}, or clear another entry to solve from ${it} instead.`;
+        const [they, one] = extra.length > 1 ? ['they', 'different inputs'] : ['it', 'a different input'];
+        overMsg = `Over-defined: the other inputs already determine ${list(extra)}, so ${they} can't also be entered. Clear ${list(extra)}, or clear ${one} to keep ${it}.`;
         rows.length = notes.length = 0;
         totalCooling = null;
       } else notes.unshift(`${list(extra).replace(/^t/, 'T')} ${is} entered but not used in these results.`);
