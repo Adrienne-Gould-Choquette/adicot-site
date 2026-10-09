@@ -7,6 +7,7 @@ date: 2023-08-20T03:07:47.010Z
 permalink: /post/erv-effect-on-ac-run-time.html
 ogImage: "/images/0179db_bfee65eeb17c497d81dfac22d7f649a7~mv2.png"
 categories: ["erv", "psychrometric-chart"]
+forCalculator: /psychrometric-chart-2-condition
 ---
 
 My colleague and I had a recent discussion about his ongoing project. We focused on figuring out how adding an Energy Recovery Ventilator (ERV) to treat ventilation air impacts the run time of air conditioning equipment. To answer this, we used adicot.com's [Psychrometric Chart 2-Condition Calculator](/psychrometric-chart-2-condition) and the methodology shown below to compare equipment run times with untreated ventilation air versus ventilation air treated by an ERV. The results showed an impressive 25% reduction in equipment run time due to the ERV implementation. You'll find the details of our approach in the following section.

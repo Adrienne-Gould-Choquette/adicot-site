@@ -9,6 +9,7 @@ calcInclude: "partials/calc-efficiency.njk"
 calculatorName: "EER, SEER2, COP, HSPF2 and kW/Ton Converter"
 pageModule: calc-efficiency.js
 calcSource: "EER SEER COP Converter V1.4"
+service: energy-code-compliance
 ---
 
 This converter converts between SEER, EER, HSPF, the DOE's SEER2 and HSPF2 ratings, COP and kW/ton. Since January 1, 2023, the Department of Energy's minimum efficiencies for central air conditioners and heat pumps are stated in SEER2 and HSPF2, and differ by region (10 CFR 430.32).

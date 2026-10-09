@@ -9,6 +9,7 @@ calcInclude: "partials/calc-cltd.njk"
 calculatorName: "CLTD Roof and Wall Numbers"
 pageModule: calc-cltd.js
 calcSource: "ASHRAE CLTD Surface Type V1.1"
+service: cooling-load-calculations
 ---
 
 ## How to use it

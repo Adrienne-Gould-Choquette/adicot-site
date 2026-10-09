@@ -10,7 +10,8 @@
     "/coil-selection-calculator",
     "/cooling-load-estimator",
     "/duct-size-calculator",
-    "/temp-loss-through-an-air-duct"
+    "/temp-loss-through-an-air-duct",
+    "/fluid-mixing-calculator"
   ],
   "/annual-cooling-cost-calculator": [
     "/coil-selection-calculator",
@@ -36,7 +37,8 @@
     "/ventilation-ashrae",
     "/condensate-calculator",
     "/cooling-load-estimator",
-    "/condensate-pump-size-calculator"
+    "/condensate-pump-size-calculator",
+    "/fluid-mixing-calculator"
   ],
   "/condensate-calculator": [
     "/air-mixing-calculator",
@@ -100,7 +102,8 @@
     "/annual-cooling-cost-calculator",
     "/present-future-value-calculator",
     "/dehumidifier-size-calculator",
-    "/temp-loss-through-an-air-duct"
+    "/temp-loss-through-an-air-duct",
+    "/picture-hanger-height-calculator"
   ],
   "/iecc-window-u-shgc-default-values": [
     "/duct-size-calculator",
@@ -142,7 +145,8 @@
   ],
   "/sh-window-size-chart": [
     "/temperature-converter",
-    "/duct-size-calculator"
+    "/duct-size-calculator",
+    "/picture-hanger-height-calculator"
   ],
   "/temp-loss-through-an-air-duct": [
     "/coil-selection-calculator",

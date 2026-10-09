@@ -7,6 +7,7 @@ date: 2024-06-24T19:37:31.056Z
 permalink: /post/how-to-use-the-bilinear-interpolation-calculator.html
 ogImage: "/images/0179db_29a525e624cd4dda983b252a4c6d1ae6~mv2.jpg"
 categories: ["equipment-selection", "hvac-engineering"]
+forCalculator: /bilinear-interpolation
 ---
 
 ![Adicot's bilinear interpolation calculator on the earlier version of the site](/images/0179db_29a525e624cd4dda983b252a4c6d1ae6~mv2.jpg)

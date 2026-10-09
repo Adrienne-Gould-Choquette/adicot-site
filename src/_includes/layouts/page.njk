@@ -62,6 +62,24 @@ layout: layouts/base.njk
 
   {% if calcInclude %}{% include "partials/calc-help.njk" %}{% endif %}
 
+  {#- Declared in front matter and gathered by _data/crossLinks.js: the posts
+      that walk through this calculator, and the service that does this work
+      engineer stamped. -#}
+  {%- set pageUrl = page.url | cleanUrl %}
+  {%- set guides = crossLinks.guides[pageUrl] %}
+  {%- set svc = crossLinks.calcService[pageUrl] %}
+  {%- if guides or svc %}
+  <div class="crosslinks">
+    {%- for g in guides or [] %}
+    <p>Step-by-step guide: <a href="{{ g.url }}">{{ g.title }}</a></p>
+    {%- endfor %}
+    {%- if svc %}
+    <p>Need it engineer stamped? {{ site.company }} provides
+      <a href="{{ svc.url }}">{{ svc.name | lower }}</a> for industrial, commercial and multi-family projects.</p>
+    {%- endif %}
+  </div>
+  {%- endif %}
+
   <div class="prose{% if proseWide %} prose-wide{% endif %}">
     {{ content | safe }}
   </div>

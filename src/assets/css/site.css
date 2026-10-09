@@ -644,6 +644,8 @@ button.card-star:focus-visible { outline: 2px solid var(--accent); outline-offse
 }
 .chips a:hover { border-color: var(--accent); color: var(--accent); }
 
+.crosslinks { margin: 22px 0 0; max-width: var(--prose); font-size: 15px; }
+.crosslinks p { margin: 0 0 6px; }
 .post-nav { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); }
 
 .notice {

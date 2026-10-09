@@ -7,6 +7,7 @@ date: 2024-06-10T04:00:00.000Z
 permalink: /post/unlock-the-power-of-precision-with-our-linear-interpolation-calculator.html
 ogImage: "/images/0179db_854b228d75e24c4bb9a9242d690ab530~mv2.jpg"
 categories: ["equipment-selection", "hvac-engineering", "math"]
+forCalculator: /linear-interpolation-calculator
 ---
 
 ![Graph interpolating y at 79 °F between (75 °F, 55.04) and (85 °F, 52.59)](/images/0179db_504f389aa0b748fbbc5e41fc29b884aa~mv2.jpg)

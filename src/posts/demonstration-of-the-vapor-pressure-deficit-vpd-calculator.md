@@ -7,6 +7,7 @@ date: 2021-11-30T15:26:04.317Z
 permalink: /post/demonstration-of-the-vapor-pressure-deficit-vpd-calculator.html
 ogImage: "/images/0179db_31fdb68f437f45d78979fb104e5b3184~mv2.jpg"
 categories: ["psychrometric-chart", "hvac-engineering"]
+forCalculator: /vapor-pressure-deficit-vpd
 ---
 
 This article and the video below provide a demonstration of Adicot's Vapor Pressure Deficit (VPD) Calculator for Indoor Growers and Grow Rooms. This calculator is a useful tool for Indoor Growers setting up Grow Rooms. The user is able to hone in on temperature and humidity values to optimize plant health as well as energy conservation.

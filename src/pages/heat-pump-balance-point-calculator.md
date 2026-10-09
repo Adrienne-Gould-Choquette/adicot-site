@@ -8,6 +8,7 @@ calcInclude: "partials/calc-balancepoint.njk"
 calculatorName: "Heat Pump Balance Point Calculator"
 pageModule: calc-balancepoint.js
 calcSource: "Balance Point V1.1"
+service: cooling-load-calculations
 ---
 
 ## How to use it

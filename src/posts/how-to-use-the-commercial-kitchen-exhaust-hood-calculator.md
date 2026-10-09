@@ -7,6 +7,7 @@ date: 2021-11-29T15:42:33.185Z
 permalink: /post/how-to-use-the-commercial-kitchen-exhaust-hood-calculator.html
 ogImage: "/images/0179db_38ec9d0217f140f88cfda7670393e08e~mv2.jpg"
 categories: ["commercial-kitchen-exhaust-hood", "hvac-engineering"]
+forCalculator: /ckv-commercial-kitchen-ventilation
 ---
 
 This article and video demonstrate the use of the [Commercial Kitchen Exhaust Hood Calculator](/ckv-commercial-kitchen-ventilation).

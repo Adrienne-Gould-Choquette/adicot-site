@@ -18,6 +18,20 @@ layout: layouts/base.njk
     {{ content | safe }}
   </div>
 
+  {%- set postUrl = page.url | cleanUrl %}
+  {%- set calc = crossLinks.postCalculator[postUrl] %}
+  {%- set svcs = crossLinks.postServices[postUrl] %}
+  {%- if calc or svcs %}
+  <div class="crosslinks">
+    {%- if calc %}
+    <p>Calculator for this post: <a href="{{ calc.path }}">{{ calc.label }}</a></p>
+    {%- endif %}
+    {%- for s in svcs or [] %}
+    <p>Engineering service: <a href="{{ s.url }}">{{ s.name }}</a></p>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
   <nav class="post-nav" aria-label="More posts">
     <a href="/blog">&larr; All posts</a>
   </nav>
