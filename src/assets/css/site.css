@@ -1341,9 +1341,8 @@ main > :last-child { margin-bottom: 0; }
 .co-moist { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 8px; }
 .calcform .co-moist select { padding-inline: 8px 24px; background-position: calc(100% - 13px) 50%, calc(100% - 8px) 50%; }
 .calcform .co-moist input { padding-inline: 8px; }
-/* A field not needed with what is already entered: greyed out, in its place. */
-.calcform .co-off { opacity: .45; }
-.calcform .co-off :is(input, select) { cursor: not-allowed; }
+/* What to enter next: an instruction, so it reads stronger than a hint. */
+.calcform .co-next { color: var(--fg); font-weight: 600; }
 /* An input, or a stack of inputs, with its explanation to the right. */
 .cm-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6px 22px; align-items: center; }
 .cm-side[hidden] { display: none; }

@@ -21,7 +21,6 @@
 
     <fieldset class="cf-stream co-tool" data-tool="air">
       <legend>1. Coil air side: sensible, latent and total cooling</legend>
-      {{ solveFor("af", [["loads", "Cooling loads"], ["flow", "Airflow"], ["leave", "Leaving air conditions"], ["enter", "Entering air conditions"]]) }}
       {%- set moisture = [["db-wb", "Wet bulb"], ["db-rh", "Rel. hum."], ["db-dp", "Dew point"]] %}
       {#- The moisture of one end: how it is known, and its value, on one line. -#}
       {%- macro moist(sel, id, which, unitClass, eg) %}
@@ -33,15 +32,18 @@
       <div class="cf-pair">{{ moist("am1", "e2", "Entering", "co-m1", "67") }}{{ moist("am2", "x2", "Leaving", "co-m2", "54") }}</div>
       <div class="cf-pair">{{ num("aq", "Airflow", "co-a", "cfm", "1000") }}{{ num("qs", "Sensible cooling", "co-q", "Btu/h", "27000") }}</div>
       <div class="cf-pair">{{ num("ql", "Latent cooling", "co-q", "Btu/h", "9000") }}{{ num("qt", "Total cooling", "co-q", "Btu/h", "36000") }}</div>
-      <p class="hint" id="co-loadhint" hidden></p>
+      <p class="hint cf-group co-next" id="co-loadhint" role="status" hidden></p>
       {{ num("alt", "Altitude", "co-l", "ft", "0") }}
-      <p class="hint cf-group">Each air state comes from its dry bulb and wet bulb, RH or dew point, with the
-      ASHRAE psychrometric equations at the altitude given (sea level if blank). The dry bulbs alone give
-      the sensible cooling, and dew points alone the latent. To find the leaving or the entering
-      air instead, choose it under "Solve for" and give any two of the sensible, latent and total cooling;
-      or the total cooling with that end's RH or dew point; or one load alone for that end's dry bulb or
-      dew point. The airflow is at the
-      entering air; the same airflow is used for the coil face velocity below. Entering air is the air at the coil: return or mixed air for a recirculating system, outdoor air for a DOAS.</p>
+      <p class="hint cf-group">Enter what you know and leave the rest blank; there is nothing to choose first.
+      Both air conditions and the airflow give the sensible, latent and total cooling. Both air conditions
+      and one load give the airflow. One air condition, the airflow and any two of the three loads give the
+      air at the other end, as do the total cooling and that end's RH or dew point. Less than that still
+      gives part of the answer: the dry bulbs alone give the sensible cooling, and dew points alone the latent.
+      If you enter more than is needed, a note under the results says which entry was not used. Each air state
+      comes from its dry bulb and wet bulb, RH or dew point, with the ASHRAE psychrometric equations at the
+      altitude given (sea level if blank). The airflow is at the entering air; the same airflow is used for
+      the coil face velocity below. Entering air is the air at the coil: return or mixed air for a
+      recirculating system, outdoor air for a DOAS.</p>
     </fieldset>
 
     <fieldset class="cf-stream co-tool" data-tool="face">
