@@ -1725,3 +1725,9 @@ svg .li-grid { stroke: var(--line); stroke-width: 1; }
 @media (prefers-reduced-motion: reduce) {
   .quote-progress__fill, .working__fill { transition: none; animation: none; }
 }
+
+/* Service pages: a rule above each section heading, so What you get, Methodology,
+   Project types and the rest read as separate blocks rather than one run of text. */
+.service .prose > h2,
+.service .projects > h2 { margin-top: 38px; padding-top: 30px; border-top: 1px solid var(--line); }
+.service .svc-faq { margin-top: 38px; }
