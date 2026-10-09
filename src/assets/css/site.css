@@ -254,11 +254,15 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 /* Required and still empty: shaded until it is filled in. background-color, not
    the shorthand, so the select keeps its drawn arrow. */
 .calcform :is(input[type="number"], select):required:invalid { background-color: var(--need); }
-.calcform input::placeholder { color: var(--muted); font-style: italic; }
+.calcform input::placeholder { color: color-mix(in srgb, var(--muted) 55%, var(--bg)); font-style: italic; opacity: 1; }
+/* A value carried from another tool into a blank box (shown as its hint) is in
+   use, so it looks entered: full colour, upright, on the filled green. */
+.calcform input.is-carried { background-color: var(--filled); }
+.calcform input.is-carried::placeholder { color: var(--fg); font-style: normal; }
 /* Holding a value (typed, or from a shared link or the last visit): light green,
    so what was entered stands apart from what is still blank. The searchable
    drop-down's text always shows the choice, so it is left out. */
-.calcform :is(input[type="number"], input[type="text"]:not(.cb-input)):not(:placeholder-shown) { background-color: var(--filled); }  /* italic, so a hint is not mistaken for a value already entered */
+.calcform :is(input[type="number"], input[type="text"]:not(.cb-input)):not(:placeholder-shown) { background-color: var(--filled); }
 
 .cf-radios {
   margin: 0 0 16px; padding: 0; border: 0;

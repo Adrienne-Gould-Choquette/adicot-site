@@ -342,6 +342,7 @@ function init(form) {
       const loadLinked = f !== 'load' && vals.load === null && totalCooling !== null;
       if (loadLinked) vals.load = totalCooling;
       el('co-w3').placeholder = totalCooling !== null ? fmt(totalCooling, us ? 0 : 2) : (us ? '240000' : '70');
+      el('co-w3').classList.toggle('is-carried', totalCooling !== null);
       if (!Object.values(vals).some(x => x === null || Number.isNaN(x))) {
         const coil = form.querySelector('input[name="wc"]:checked')?.value ?? 'Cooling';
         const r = water(units, f, el('co-fluid').value, vals, coil);
@@ -359,6 +360,7 @@ function init(form) {
     const fh = num(el('co-fh')), fw = num(el('co-fw')), fqIn = num(el('co-fq'));
     const fq = fqIn > 0 ? fqIn : airflow;
     el('co-fq').placeholder = fqIn === null && airflow > 0 ? fmt(airflow, us ? 0 : 1) : (us ? '1000' : '470');
+    el('co-fq').classList.toggle('is-carried', fqIn === null && airflow > 0);
     if (fh > 0 && fw > 0) {
       const r = face(units, fh, fw, fq ?? 0);
       rows.push(['Coil face area', fmt(r.area, 2), U.area, 'cf-key']);
@@ -370,6 +372,7 @@ function init(form) {
     const vd = num(el('co-vd')), vn = num(el('co-vn'));
     let vq = num(el('co-vq'));
     el('co-vq').placeholder = waterFlow !== null ? fmt(waterFlow, 2) : (us ? '48' : '3');
+    el('co-vq').classList.toggle('is-carried', waterFlow !== null);
     const flowLinked = vq === null && waterFlow !== null;
     if (flowLinked) vq = waterFlow;
     if (vq > 0 && vd > 0 && vn > 0) {
