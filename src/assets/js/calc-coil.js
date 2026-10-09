@@ -373,6 +373,7 @@ function init(form) {
     const shown = groups.flatMap(([k, r]) => (headed && r.length ? [[NAME[k], '', '', 'cf-group-h'], ...r] : r));
     const said = groups.flatMap(g => g[2]), warn = tool === 'air' ? overMsg : '';
     fillRows(el('co-tbody'), shown);
+    el('co-guide').hidden = !(tool === 'air' && !shown.length && !warn);
     const keyRows = shown.filter(r => r[3] === 'cf-key');
     const main = keyRows.length ? keyRows : shown.filter(r => r[3] !== 'cf-group-h' && !/enthalpy|humidity ratio/.test(r[0]));
     el('co-summary').classList.toggle('is-over', !!warn);

@@ -391,6 +391,11 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 /* One air stream, or any group of fields that belong together, under a heading. */
 .cf-stream { margin: 0 0 18px; padding: 0; border: 0; }
 .co-tool[hidden] { display: none; }
+/* Tool 1's guide in the results panel, until there is a result. */
+.co-guide { margin: 12px 0 0; font-size: 14.5px; line-height: 1.5; }
+.co-guide ul { margin: 0; padding-left: 1.2em; }
+.co-guide li + li { margin-top: 6px; }
+.co-guide p { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
 /* The three loads in one row; their boxes line up even where a label wraps. */
 .co-loads { align-items: end; }
 /* Tool 1's add-ons: the tools it feeds, offered as ticks once they can work. */
