@@ -46,6 +46,19 @@ export function startingValues() {
   try { return new URLSearchParams(JSON.parse(localStorage.getItem(storeKey()) ?? '{}')); } catch { return new URLSearchParams(); }
 }
 
+// "?" buttons: a .cf-q button shows and hides the explanation its aria-controls
+// names (a .cf-qa paragraph after the field), so a form can explain an input
+// without the text being in the way of someone who already knows.
+export function helpButtons(form) {
+  form.addEventListener('click', e => {
+    const button = e.target.closest('.cf-q');
+    if (!button) return;
+    const answer = document.getElementById(button.getAttribute('aria-controls'));
+    answer.hidden = !answer.hidden;
+    button.setAttribute('aria-expanded', String(!answer.hidden));
+  });
+}
+
 // A field's number, null when it is empty, NaN when it is not a number.
 export function num(input) {
   const raw = input.value.trim();

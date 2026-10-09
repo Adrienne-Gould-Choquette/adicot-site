@@ -19,6 +19,15 @@ calcSource: "VPD_Vapor_Pressure_Differential V1.4"
 4. Optionally enter the leaf temperature, for the leaf VPD.
 5. Enter the altitude.
 6. The air and leaf VPD appear in the results with the other properties of the air, and update as you type.
+7. Or work from the chart: click or tap a point on it to enter that room temperature and relative humidity. If a leaf temperature is entered, it moves with the room and stays the same number of degrees from it.
+
+## Reading the chart
+
+The chart plots relative humidity against room temperature and colors it in bands of VPD. The cross-hair marks the room you entered, and the band it sits in is outlined in the key. Each boundary between bands is a line of constant VPD, so moving along one changes the temperature and humidity without changing the VPD: a warmer room at a higher humidity can hold the same VPD as a cooler, drier one, which is often the cheaper condition to maintain in a hot, humid climate.
+
+With no leaf temperature, the bands show the air VPD. With one, they show the leaf VPD for a leaf that many degrees cooler or warmer than the room, and a further band appears where a cooler leaf would be below the room's dew point and water would condense on it.
+
+The bands break at 0.4, 0.8, 1.2 and 1.6 kPa, the ranges growers commonly quote for cuttings and seedlings, vegetative growth, and flowering. They are a guide to reading the chart, not a recommendation: the right VPD depends on the crop and its stage, so take your target from your grower or crop guidance.
 
 ## What vapor pressure deficit is
 
@@ -30,7 +39,7 @@ Vapor pressure deficit (VPD) is the difference between how much water vapor the 
 
 **Leaf VPD** = p<sub>ws</sub>(T<sub>leaf</sub>) − p<sub>w</sub>
 
-where p<sub>ws</sub>(T) is the saturation vapor pressure at temperature T (the Hyland-Wexler equations of the 2021 ASHRAE Handbook—Fundamentals, chapter 1), and p<sub>w</sub> is the partial pressure of the water vapor in the air. With the relative humidity known, p<sub>w</sub> = RH × p<sub>ws</sub>(T<sub>air</sub>). With the wet bulb known, the humidity ratio W comes from ASHRAE's wet-bulb equation (eq. 35, or eq. 37 with ice on the wick below 32 °F) and p<sub>w</sub> = p × W ÷ (0.621945 + W). The dew point is the temperature at which p<sub>ws</sub> equals p<sub>w</sub>, solved exactly. These are the same exact ASHRAE psychrometrics as the [psychrometric calculator](/psychrometric-chart-calculator), and they hold below freezing too. Pressures are converted from psia to kPa by 6.89476. The 2025 Handbook replaces the Hyland-Wexler saturation pressure with the IAPWS formulations (IAPWS-IF97 over water, IAPWS 2008 over ice); from −20 to 150 °F the two agree within 0.03 %, so the results are unchanged at the precision shown.
+where p<sub>ws</sub>(T) is the saturation vapor pressure at temperature T (the Hyland-Wexler equations of the 2021 ASHRAE Handbook—Fundamentals, chapter 1), and p<sub>w</sub> is the partial pressure of the water vapor in the air. With the relative humidity known, p<sub>w</sub> = RH × p<sub>ws</sub>(T<sub>air</sub>). With the wet bulb known, the humidity ratio W comes from ASHRAE's wet-bulb equation (eq. 35, or eq. 37 with ice on the wick below 32 °F) and p<sub>w</sub> = p × W ÷ (0.621945 + W). A band boundary on the chart is the same equation solved for the humidity: RH = (p<sub>ws</sub>(T<sub>leaf</sub>) − VPD) ÷ p<sub>ws</sub>(T<sub>air</sub>), with T<sub>leaf</sub> = T<sub>air</sub> when no leaf temperature is entered. The dew point is the temperature at which p<sub>ws</sub> equals p<sub>w</sub>, solved exactly. These are the same exact ASHRAE psychrometrics as the [psychrometric calculator](/psychrometric-chart-calculator), and they hold below freezing too. Pressures are converted from psia to kPa by 6.89476. The 2025 Handbook replaces the Hyland-Wexler saturation pressure with the IAPWS formulations (IAPWS-IF97 over water, IAPWS 2008 over ice); from −20 to 150 °F the two agree within 0.03 %, so the results are unchanged at the precision shown.
 
 **Example:** a grow room at 77 °F and 55 % RH, with leaves at 75 °F. The saturation vapor pressure at 77 °F is 3.169 kPa. The vapor pressure in the air is 0.55 × 3.169 = 1.743 kPa, so the air VPD is 3.169 − 1.743 = 1.43 kPa. The saturation pressure at the 75 °F leaf is 2.965 kPa, so the leaf VPD is 2.965 − 1.743 = 1.22 kPa. The dew point is 59.6 °F and the wet bulb 65.6 °F.
 

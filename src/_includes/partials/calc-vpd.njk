@@ -1,7 +1,7 @@
 {#- The vapour pressure deficit calculator, written by hand rather than published
     from SpreadsheetConverter. The maths is in /assets/js/vpd.js, which
     check-calculators.mjs holds to the workbook's own answers; this is only the
-    form. It never submits: nothing leaves the browser. -#}
+    form, and calc-vpd.js draws the chart into it. It never submits: nothing leaves the browser. -#}
 <form class="calcform" id="vpcalc" novalidate>
   <noscript>
     <p class="cf-noscript">This calculator runs in your browser and needs JavaScript.
@@ -16,13 +16,16 @@
     </fieldset>
     <div class="field">
       <label for="vp-t">Room temperature <span class="cf-u vp-t">°F</span></label>
+      <button type="button" class="cf-q" aria-expanded="false" aria-controls="vp-t-q" aria-label="About the room temperature">?</button>
       <input type="number" id="vp-t" name="t" inputmode="decimal" step="any" required autocomplete="off" placeholder="77">
     </div>
+    <p class="cf-qa" id="vp-t-q" hidden>The dry bulb temperature of the air at the top of the plants. Shade the sensor from the lights: one in direct light reads high.</p>
     <fieldset class="cf-radios">
-      <legend>Humidity from</legend>
+      <legend>Humidity from <button type="button" class="cf-q" aria-expanded="false" aria-controls="vp-hm-q" aria-label="About the humidity">?</button></legend>
       <label><input type="radio" name="hm" value="rh" checked> Relative humidity</label>
       <label><input type="radio" name="hm" value="wb"> Wet bulb</label>
     </fieldset>
+    <p class="cf-qa" id="vp-hm-q" hidden>Use whichever your instrument reads: a hygrometer or room controller gives relative humidity, a sling psychrometer gives wet bulb. The calculator works out the other.</p>
     <div class="field" id="vp-rh-f">
       <label for="vp-rh">Relative humidity <span class="cf-u">%</span></label>
       <input type="number" id="vp-rh" name="rh" inputmode="decimal" step="any" min="0" max="100" autocomplete="off" placeholder="55">
@@ -33,12 +36,16 @@
     </div>
     <div class="field">
       <label for="vp-leaf">Leaf temperature (optional) <span class="cf-u vp-t">°F</span></label>
+      <button type="button" class="cf-q" aria-expanded="false" aria-controls="vp-leaf-q" aria-label="About the leaf temperature">?</button>
       <input type="number" id="vp-leaf" name="lf" inputmode="decimal" step="any" autocomplete="off" placeholder="75">
     </div>
+    <p class="cf-qa" id="vp-leaf-q" hidden>The surface temperature of a leaf at the top of the plants, best read with an infrared thermometer. If you cannot measure it, a transpiring leaf usually runs 2 to 5 °F (1 to 3 °C) cooler than the air, and 2 °F (1 °C) cooler is a common starting point. Under intense light or in still air a leaf can be as warm as the air, or warmer. Leave it blank for the air VPD alone.</p>
     <div class="field">
       <label for="vp-alt">Altitude <span class="cf-u" id="vp-altu">ft</span></label>
+      <button type="button" class="cf-q" aria-expanded="false" aria-controls="vp-alt-q" aria-label="About the altitude">?</button>
       <input type="number" id="vp-alt" name="z" inputmode="decimal" step="any" required autocomplete="off" value="0" placeholder="0">
     </div>
+    <p class="cf-qa" id="vp-alt-q" hidden>The site's elevation above sea level; leave it at 0 if you do not know it. It sets the atmospheric pressure, which changes the humidity ratio, enthalpy, specific volume and wet bulb. A VPD worked out from the relative humidity is the same at any altitude.</p>
 
     <p class="cf-actions">
       <button type="reset" class="btn btn-quiet">Reset</button>
@@ -54,6 +61,19 @@
       <caption class="visually-hidden">Vapor pressure deficit and air properties</caption>
       <tbody id="vp-tbody"></tbody>
     </table>
+    <figure class="vp-chart">
+      <div id="vp-svg"></div>
+      <p class="vp-read" id="vp-read">Click or tap the chart to enter that room temperature and humidity.</p>
+      <ul class="vp-key" id="vp-key">
+        <li data-band="wet" hidden>Leaf below the dew point: water condenses on it</li>
+        <li data-band="humid">Under 0.4 kPa: too humid, little transpiration</li>
+        <li data-band="low">0.4 to 0.8 kPa: cuttings and seedlings</li>
+        <li data-band="mid">0.8 to 1.2 kPa: vegetative growth</li>
+        <li data-band="high">1.2 to 1.6 kPa: flowering and fruiting</li>
+        <li data-band="dry">Over 1.6 kPa: too dry, the plant is stressed</li>
+      </ul>
+      <figcaption><span id="vp-basis">The bands show the air VPD.</span> The ranges are the ones growers commonly quote, as a guide only: the right VPD depends on the crop.</figcaption>
+    </figure>
     <p class="cf-note">High VPD: the air is relatively dry. Low VPD: the air is relatively saturated.</p>
   </section>
 </form>

@@ -8,6 +8,7 @@ import { state } from './src/assets/js/psychsheet.js';
 import { coilLoads, airflowFor, leavingForLoads, leavingForTotal, humidityAtDewPoint, sensibleLoad, latentLoad, leavingDryBulbFor, leavingDewPointFor, enteringForLoads, enteringForTotal, enteringDryBulbFor, enteringDewPointFor } from './src/assets/js/airside.js';
 import { doorForce, doorPressure, pressurization, leakage, leakPerFoot, doorProblem, crackage } from './src/assets/js/crackage.js';
 import { mix } from './src/assets/js/mixair.js';
+import { vpd, rhAtVpd, band } from './src/assets/js/vpd.js';
 import { hang, hangMetric, toCm, toInches, problem as pictureProblem } from './src/assets/js/picture.js';
 
 export function checkHandworked() {
@@ -225,6 +226,18 @@ export function checkHandworked() {
   near('picture: the inch example, in cm, agrees', hangMetric({ height: 24 * 2.54, hookDrop: 3.375 * 2.54, center: 152.4 }).hook, inEx * 2.54, 0.05);
   same('picture: metric refusal names centimeters', pictureProblem({ height: [-1, '0'], hookDrop: [8, '0'], center: [152, '0'] }, 'centimeters'), 'The picture height must be a positive number of centimeters.');
   lines.push('  picture hanger: metric example, unit switch both ways');
+  // VPD chart: each band boundary, put back through the calculator, gives the
+  // VPD it was drawn for, in the air and at a leaf, in both unit systems.
+  for (const [units, room, leaf] of [['US', 77, null], ['US', 77, 75], ['US', 60, 63], ['Metric', 25, null], ['Metric', 30, 28]]) {
+    for (const kpa of [0.4, 0.8, 1.2, 1.6]) {
+      const r = vpd({ units, room, rh: rhAtVpd({ units, room, leaf, kpa }), altitude: 0, leaf });
+      near(`vpd chart: ${kpa} kPa boundary at ${room} ${units}, leaf ${leaf}`, r.leaf ?? r.air, kpa, 1e-9);
+    }
+  }
+  same('vpd chart: the page example, 1.22 kPa at the leaf, is in the 1.2 to 1.6 band', band(vpd({ units: 'US', room: 77, rh: 0.55, altitude: 0, leaf: 75 }).leaf), 'high');
+  same('vpd chart: a leaf under the dew point', band(vpd({ units: 'US', room: 77, rh: 0.95, altitude: 0, leaf: 74 }).leaf), 'wet');
+  same('vpd chart: exactly 0.4 kPa is in the 0.4 to 0.8 band', band(0.4), 'low');
+  lines.push('  VPD chart: band boundaries return their own VPD');
   return { lines, issues, checks };
 }
 

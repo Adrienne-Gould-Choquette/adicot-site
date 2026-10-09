@@ -57,3 +57,26 @@ export function problem({ room, wb, rh, altitude }) {
   }
   return null;
 }
+
+// ---- the chart's bands ----
+// The VPD ranges growers commonly quote, in kPa, driest last. They are a guide
+// for reading the chart, not part of the workbook: each band runs up to `below`.
+export const BANDS = [
+  { key: 'wet', below: 0 },          // the leaf is under the dew point
+  { key: 'humid', below: 0.4 },
+  { key: 'low', below: 0.8 },
+  { key: 'mid', below: 1.2 },
+  { key: 'high', below: 1.6 },
+  { key: 'dry', below: Infinity },
+];
+export const band = kpa => BANDS.find(b => kpa < b.below).key;
+
+// The relative humidity (a fraction) at which the deficit is `kpa` in a room at
+// `room`, measured at the leaf when a leaf temperature is given and in the air
+// otherwise. It is vpd() solved for RH, so it needs no iteration; the answer is
+// under 0 or over 1 where no humidity gives that deficit.
+export function rhAtVpd({ units, room, leaf, kpa }) {
+  const toF = t => (units === 'US' ? t : t * 9 / 5 + 32);
+  const surface = leaf === null || leaf === undefined ? room : leaf;
+  return (pws(toF(surface)) - kpa * 10 / 68.9476) / pws(toF(room));
+}
