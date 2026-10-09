@@ -30,7 +30,7 @@
     </fieldset>
 
     <fieldset class="cf-stream co-tool" data-tool="air">
-      <legend>1. Coil air side: sensible, latent and total cooling</legend>
+      <legend>1. Coil air side: entering and leaving air, airflow, and sensible, latent and total cooling</legend>
       {%- set moisture = [["db-wb", "Wet bulb"], ["db-rh", "Rel. hum."], ["db-dp", "Dew point"]] %}
       {#- The moisture of one end: how it is known, and its value, on one line. -#}
       {%- macro moist(sel, id, which, unitClass, eg) %}

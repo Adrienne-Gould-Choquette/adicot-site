@@ -163,13 +163,14 @@ function init(form) {
         const [kind, id] = [['total', 'qt'], ['sensible', 'qs'], ['latent', 'ql']].find(([, id]) => has(id));
         const flow = airflowFor(psyUnits, a, b, v[id], kind);
         use(id); over = n > 1;
-        if (flow !== null) { airflow = flow; rows.push([`Airflow for the ${kind} cooling`, fmt(flow, us ? 0 : 1), U.a, 'cf-key']); }
+        if (flow !== null) { airflow = flow; rows.push(['Airflow', fmt(flow, us ? 0 : 1), U.a, 'cf-key']); }
         else { notes.push(kind === 'total' ? 'The leaving air must hold less heat than the entering air to remove that load.' : NO_FLOW); stuck = true; }
       }
       if (airflow !== null) {
         const r = coilLoads(psyUnits, a, b, airflow);
         if (r.total > 0) totalCooling = r.total;
-        rows.push(['Sensible cooling', fmt(r.sensible, dq), U.q], ['Latent cooling', fmt(r.latent, dq), U.q], ['Total cooling', fmt(r.total, dq), U.q, wantLoads ? 'cf-key' : undefined]);
+        const found = id => (has(id) ? undefined : 'cf-key');   // a load entered is not highlighted
+        rows.push(['Sensible cooling', fmt(r.sensible, dq), U.q, found('qs')], ['Latent cooling', fmt(r.latent, dq), U.q, found('ql')], ['Total cooling', fmt(r.total, dq), U.q, found('qt')]);
         if (r.shr !== null && r.total > 0) rows.push(['Sensible heat ratio', fmt(r.shr, 2), '']);
         if (r.sensible < 0 || r.total < 0) notes.push('A negative load denotes heating.');
         if (r.latent < 0) notes.push('A negative latent load denotes adding moisture.');
@@ -252,7 +253,7 @@ function init(form) {
           if (flow > 0 && Number.isFinite(flow) && !has('e1')) notes.push('With no dry bulb, the airflow takes the air at its dew point, which runs about 3 to 4 % low for a typical cooling coil; enter the dry bulbs for the exact airflow.');
         }
         if (flow !== null) {
-          if (flow > 0 && Number.isFinite(flow)) { airflow = flow; rows.push([`Airflow for the ${kind} cooling`, fmt(flow, us ? 0 : 1), U.a, 'cf-key']); }
+          if (flow > 0 && Number.isFinite(flow)) { airflow = flow; rows.push(['Airflow', fmt(flow, us ? 0 : 1), U.a, 'cf-key']); }
           else notes.push(NO_FLOW);
         }
       }
@@ -277,6 +278,34 @@ function init(form) {
         rows.length = notes.length = 0;
         totalCooling = null;
       } else notes.unshift(`${list(extra).replace(/^t/, 'T')} ${is} entered but not used in these results.`);
+    }
+
+    // Once anything is answered, tool 1 lists every one of its quantities that is
+    // known, entered or found, in one order: entering air, leaving air, airflow,
+    // then the three loads. Found values keep their highlight.
+    if (answered && !overMsg) {
+      const have = new Map(rows.map(r => [r[0], r]));
+      const add = (label, value, unit) => { if (!have.has(label)) have.set(label, [label, value, unit]); };
+      const air = (name, x, db, dpId, mode) => {
+        if (x) {
+          add(`${name} dry bulb`, fmt(x.db, 1), U.t); add(`${name} wet bulb`, fmt(x.wb, 1), U.t);
+          add(`${name} RH`, fmt(x.rh, 0), '%'); add(`${name} dew point`, fmt(x.dp, 1), U.t);
+        } else {
+          if (used.has(db)) add(`${name} dry bulb`, fmt(v[db], 1), U.t);
+          if (used.has(dpId) && mode === 'db-dp') add(`${name} dew point`, fmt(v[dpId], 1), U.t);
+        }
+      };
+      air('Entering', a, 'e1', 'e2', m1);
+      air('Leaving', b, 'x1', 'x2', m2);
+      if (airflow !== null) add('Airflow', fmt(airflow, us ? 0 : 1), U.a);
+      for (const [id, label] of [['qs', 'Sensible cooling'], ['ql', 'Latent cooling'], ['qt', 'Total cooling']]) {
+        if (used.has(id)) add(label, fmt(v[id], dq), U.q);
+      }
+      const ORDER = ['Entering dry bulb', 'Entering wet bulb', 'Entering RH', 'Entering dew point',
+        'Leaving dry bulb', 'Leaving wet bulb', 'Leaving RH', 'Leaving dew point', 'Airflow',
+        'Sensible cooling', 'Latent cooling', 'Total cooling', 'Sensible heat ratio'];
+      const at = r => (ORDER.includes(r[0]) ? ORDER.indexOf(r[0]) : ORDER.length);
+      rows.splice(0, rows.length, ...[...have.values()].sort((x, y) => at(x) - at(y)));
     }
 
     mark('water');
@@ -344,7 +373,8 @@ function init(form) {
     const shown = groups.flatMap(([k, r]) => (headed && r.length ? [[NAME[k], '', '', 'cf-group-h'], ...r] : r));
     const said = groups.flatMap(g => g[2]), warn = tool === 'air' ? overMsg : '';
     fillRows(el('co-tbody'), shown);
-    const main = shown.filter(r => r[3] !== 'cf-group-h' && !/enthalpy|humidity ratio/.test(r[0]));
+    const keyRows = shown.filter(r => r[3] === 'cf-key');
+    const main = keyRows.length ? keyRows : shown.filter(r => r[3] !== 'cf-group-h' && !/enthalpy|humidity ratio/.test(r[0]));
     el('co-summary').classList.toggle('is-over', !!warn);
     el('co-summary').textContent = warn || (main.length
       ? main.map(([l, v, u]) => `${l} ${v}${u ? " " + u : ""}`).join('; ') + '.'
