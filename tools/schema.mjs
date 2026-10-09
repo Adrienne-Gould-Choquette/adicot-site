@@ -81,7 +81,7 @@ export function schemaGraph(d) {
       '@type': 'Service', '@id': `${d.url}#service`, name: title, serviceType: title, description: description || undefined,
       provider: { '@id': ORG }, areaServed, url: d.url,
     }, crumbs([['Engineering Services', `${SITE}/services`], [title, d.url]]));
-    // The page's "Common questions", as plain text.
+    // The page's FAQs, as plain text.
     const faqs = serviceFaqs()[path.split('/').pop()];
     if (faqs) graph.push({
       '@type': 'FAQPage', '@id': `${d.url}#faq`,

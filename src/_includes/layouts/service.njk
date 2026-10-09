@@ -49,8 +49,8 @@ layout: layouts/base.njk
   {#- From _data/serviceFaqs.js, which also feeds the FAQPage structured data. -#}
   {%- set faqs = serviceFaqs[slug] %}
   {%- if faqs %}
-  <section class="svc-faq prose" id="common-questions">
-    <h2>Common questions</h2>
+  <section class="svc-faq prose" id="faqs">
+    <h2>FAQs</h2>
     {%- for f in faqs %}
     <h3>{{ f.q }}</h3>
     <p>{{ f.a | safe }}</p>

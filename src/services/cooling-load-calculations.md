@@ -16,7 +16,7 @@ them is wrong. We produce stamped load calculations that hold up in plan review.
 
 ## What you get
 
-- Block and room-by-room cooling and heating loads
+- Room-by-room cooling and heating loads
 - Ventilation rates to the governing code for the jurisdiction
 - Equipment sizing recommendations, with the assumptions written down
 - A stamped, plan-review-ready document

@@ -10,13 +10,12 @@ eyebrow: "Engineer stamped"
 summary: "Energy code compliance for industrial, commercial and multi-family projects, worked to the code and compliance path the project's jurisdiction actually requires."
 ---
 
-Energy code compliance is where projects stall in plan review. The path you take,
-prescriptive or performance, changes what the design has to deliver, and choosing
-it late is expensive. We handle compliance from either direction and stamp the result.
+Energy code compliance is where projects stall in plan review. We model the building,
+demonstrate compliance on performance, and stamp the result.
 
 ## What you get
 
-- The compliance path that suits the project, chosen up front
+- The building modeled, and compliance demonstrated on performance
 - A completed, stamped compliance report in the format the reviewer expects
 - The supporting load calculations, if you need those too
 - A clear list of what the design must hold to in order to stay compliant
@@ -40,12 +39,11 @@ tool that jurisdiction expects: EnergyGauge, COMcheck, or another as required.
 
 ## Approach
 
-Where the prescriptive path is straightforward, we take it: it is faster and cheaper.
-Where the design cannot meet prescriptive requirements (unusual glazing ratios, a
-process load, an envelope the architecture will not give up), we model the building
-and demonstrate compliance on performance.
+We model the building and demonstrate compliance on performance. The design keeps
+what matters to it (unusual glazing ratios, a process load, an envelope the
+architecture will not give up) and still complies.
 
-Either way, the deliverable is a stamped report the reviewer can act on, plus a
+The deliverable is a stamped report the reviewer can act on, plus a
 written list of the assumptions it depends on, so nothing silently drifts out of
 compliance during value engineering.
 

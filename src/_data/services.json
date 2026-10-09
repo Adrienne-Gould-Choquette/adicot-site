@@ -127,7 +127,7 @@
           "facts": [
             [
               "Scope",
-              "Block + room-by-room"
+              "Room-by-room"
             ],
             [
               "Units",
