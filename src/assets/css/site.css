@@ -396,10 +396,18 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
 /* One air stream, or any group of fields that belong together, under a heading. */
 .cf-stream { margin: 0 0 18px; padding: 0; border: 0; }
 .co-tool[hidden] { display: none; }
-/* Tool 1's guide in the results panel, until there is a result. */
+/* Tool 1's guide in the results panel, until there is a result. Each answer is
+   a button: picking one rings the inputs it needs. */
 .co-guide { margin: 12px 0 0; font-size: 14.5px; line-height: 1.5; }
-.co-guide ul { margin: 0; padding-left: 1.2em; }
-.co-guide li + li { margin-top: 6px; }
+.co-guide-h { margin: 0 0 8px !important; font-size: 13.5px !important; }
+.co-guide ul { margin: 0; padding: 0; list-style: none; }
+.co-guide li + li { margin-top: 4px; }
+.co-target { display: block; width: 100%; text-align: left; font: inherit; color: var(--fg); background: none; border: 1px solid transparent; border-left: 3px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+.co-target:hover { border-left-color: var(--accent); background: var(--bg); }
+.co-target[aria-pressed="true"] { border-color: var(--accent); border-left-width: 3px; background: var(--accent-soft); }
+.co-target:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.co-want :is(input, select) { box-shadow: 0 0 0 3px var(--accent); border-color: var(--accent); }
+.co-want label { color: var(--accent); }
 .co-guide p { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
 /* The three loads in one row; their boxes line up even where a label wraps. */
 .co-loads { align-items: end; }

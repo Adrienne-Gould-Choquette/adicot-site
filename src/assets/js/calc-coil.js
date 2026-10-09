@@ -46,6 +46,11 @@ function init(form) {
   syncAdds();
   el('co-adds').addEventListener('change', () => { el('co-adds-v').value = adds.filter(c => c.checked).map(c => c.value).join(','); });
   form.addEventListener('reset', () => setTimeout(syncAdds, 0));
+  // The answer picked in the guide, whose inputs are highlighted until it appears.
+  let target = null;
+  const targets = [...el('co-guide').querySelectorAll('.co-target')];
+  for (const b of targets) b.addEventListener('click', () => { target = target === b ? null : b; recalc(); });
+  form.addEventListener('reset', () => { target = null; });
 
   function recalc() {
     const units = form.querySelector('input[name="u"]:checked')?.value ?? 'English';
@@ -373,8 +378,12 @@ function init(form) {
     const shown = groups.flatMap(([k, r]) => (headed && r.length ? [[NAME[k], '', '', 'cf-group-h'], ...r] : r));
     const said = groups.flatMap(g => g[2]), warn = tool === 'air' ? overMsg : '';
     fillRows(el('co-tbody'), shown);
-    el('co-guide').hidden = !(tool === 'air' && !shown.length && !warn);
-    el('co-results-h').textContent = shown.length || warn ? 'Results' : 'Instructions';
+    if (target && rows.some(r => r[0] === target.dataset.done && r[3] === 'cf-key')) target = null;
+    const need = target ? target.dataset.need.split(' ') : [];
+    for (const b of targets) b.setAttribute('aria-pressed', String(b === target));
+    for (const f of form.querySelectorAll('.co-f')) f.classList.toggle('co-want', need.includes(f.dataset.var));
+    el('co-guide').hidden = !(tool === 'air' && !warn && (!shown.length || target));
+    el('co-results-h').textContent = (shown.length && !target) || warn ? 'Results' : 'Instructions';
     const keyRows = shown.filter(r => r[3] === 'cf-key');
     const main = keyRows.length ? keyRows : shown.filter(r => r[3] !== 'cf-group-h' && !/enthalpy|humidity ratio/.test(r[0]));
     el('co-summary').classList.toggle('is-over', !!warn);

@@ -108,15 +108,17 @@
   <section class="cf-results" aria-labelledby="co-results-h">
     <h2 id="co-results-h">Results</h2>
     <p class="cf-summary" id="co-summary" role="status">Fill in any of the tools; each result appears as soon as its inputs are complete.</p>
-    {#- What tool 1 needs for each answer, shown until it has one. -#}
+    {#- What tool 1 needs for each answer, shown until it has one. Picking an
+        answer highlights the inputs it needs until that answer appears. -#}
     <div class="co-guide" id="co-guide" hidden>
+      <p class="co-guide-h">Pick what you want to calculate to highlight the inputs it needs.</p>
       <ul>
-        <li><strong>To calculate the sensible, latent and total cooling:</strong> enter the entering air, the leaving air and the airflow.</li>
-        <li><strong>To calculate the airflow:</strong> enter the entering air, the leaving air and one of the three loads.</li>
-        <li><strong>To calculate the leaving air:</strong> enter the entering air, the airflow and two of the three loads (or the total cooling and the leaving RH or dew point).</li>
-        <li><strong>To calculate the entering air:</strong> enter the leaving air, the airflow and two of the three loads (or the total cooling and the entering RH or dew point).</li>
-        <li><strong>To calculate the sensible cooling alone:</strong> enter the two dry bulbs and the airflow.</li>
-        <li><strong>To calculate the latent cooling alone:</strong> enter the two dew points and the airflow.</li>
+        <li><button type="button" class="co-target" data-need="e1 e2 x1 x2 aq" data-done="Total cooling" aria-pressed="false"><strong>To calculate the sensible, latent and total cooling:</strong> enter the entering air, the leaving air and the airflow.</button></li>
+        <li><button type="button" class="co-target" data-need="e1 e2 x1 x2 qs ql qt" data-done="Airflow" aria-pressed="false"><strong>To calculate the airflow:</strong> enter the entering air, the leaving air and one of the three loads.</button></li>
+        <li><button type="button" class="co-target" data-need="e1 e2 aq qs ql qt" data-done="Leaving wet bulb" aria-pressed="false"><strong>To calculate the leaving air:</strong> enter the entering air, the airflow and two of the three loads (or the total cooling and the leaving RH or dew point).</button></li>
+        <li><button type="button" class="co-target" data-need="x1 x2 aq qs ql qt" data-done="Entering wet bulb" aria-pressed="false"><strong>To calculate the entering air:</strong> enter the leaving air, the airflow and two of the three loads (or the total cooling and the entering RH or dew point).</button></li>
+        <li><button type="button" class="co-target" data-need="e1 x1 aq" data-done="Sensible cooling" aria-pressed="false"><strong>To calculate the sensible cooling alone:</strong> enter the two dry bulbs and the airflow.</button></li>
+        <li><button type="button" class="co-target" data-need="e2 x2 aq" data-done="Latent cooling" aria-pressed="false"><strong>To calculate the latent cooling alone:</strong> enter the two dew points and the airflow.</button></li>
       </ul>
       <p>The entering or leaving air means its dry bulb plus a wet bulb, RH or dew point.</p>
     </div>
