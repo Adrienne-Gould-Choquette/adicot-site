@@ -1,4 +1,4 @@
-// Common questions for each service page, keyed by the page's slug. Shown on the
+// FAQs for each service page, keyed by the page's slug. Shown on the
 // page by layouts/service.njk and published as FAQPage structured data by
 // tools/schema.mjs, so the two can never disagree.
 //
@@ -49,8 +49,13 @@ export default function () {
       },
       {
         q: 'What is in the deliverable?',
-        a: 'Block and room-by-room cooling and heating loads, ventilation rates to the governing code, and equipment ' +
+        a: 'Room-by-room cooling and heating loads, ventilation rates to the governing code, and equipment ' +
            'sizing recommendations with the assumptions written down, in a stamped document ready for plan review.',
+      },
+      {
+        q: 'Do you run block loads or room-by-room loads?',
+        a: 'Room by room. Each room is calculated with its own orientation, glazing and occupancy instead of being ' +
+           'averaged across the building, which is much more accurate than a block load.',
       },
       {
         q: 'Can I use the free Cooling Load Ballpark Estimator instead?',
@@ -67,10 +72,9 @@ export default function () {
            'adopted code for the jurisdiction before any modeling starts.',
       },
       {
-        q: 'Should my project take the prescriptive path or the performance path?',
-        a: 'Where the prescriptive path is straightforward, we take it, because it is faster and cheaper. Where the ' +
-           'design cannot meet the prescriptive requirements, for example unusual glazing ratios or a process load, ' +
-           'we model the building and demonstrate compliance on performance.',
+        q: 'Do you use the prescriptive path or the performance path?',
+        a: 'Performance. We model the building and demonstrate compliance on performance. The prescriptive path is ' +
+           'less work to document, but it makes the building much more expensive to construct, so we do not use it.',
       },
       {
         q: 'Which compliance software do you use?',

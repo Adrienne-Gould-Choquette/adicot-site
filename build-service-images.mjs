@@ -111,7 +111,7 @@ const CARDS = [
     title1: 'HVAC LOAD',
     title2: 'CALCULATIONS',
     points: [
-      'Block and room-by-room loads',
+      'Room-by-room loads',
       '3,000+ projects stamped since 2014',
       'Returned in 5-10 business days',
     ],
@@ -126,7 +126,7 @@ const CARDS = [
     title1: 'ENERGY CODE',
     title2: 'COMPLIANCE',
     points: [
-      'Prescriptive or performance path',
+      'Performance path modeling',
       '1,080+ multifamily projects',
       'Plan-review ready, stamped',
     ],

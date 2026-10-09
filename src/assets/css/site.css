@@ -1340,7 +1340,8 @@ body:has(.chelp:not([hidden])) .to-top { bottom: 88px; }
 main > :last-child { margin-bottom: 0; }
 
 /* Service page banner. Sits between the page head and the prose. */
-.svc-banner { display: block; margin: 0 0 30px; border-radius: var(--radius); overflow: hidden; }
+/* Held to the text column: at the full page width the photograph filled the screen. */
+.svc-banner { display: block; max-width: var(--prose); margin: 0 0 30px; border-radius: var(--radius); overflow: hidden; }
 .svc-banner img { display: block; width: 100%; height: auto; aspect-ratio: 34 / 10; object-fit: cover; }
 @media (max-width: 620px) { .svc-banner img { aspect-ratio: 16 / 9; } }
 
