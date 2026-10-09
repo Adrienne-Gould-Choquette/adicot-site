@@ -2,7 +2,7 @@
 layout: layouts/page.njk
 title: "Air Mixing Calculator"
 seoTitle: "Air Mixing Calculator | adicot.com"
-description: "Calculate the mixed air temperature of two or three airstreams, in US or metric units."
+description: "Calculate the mixed air temperature of two or three airstreams, such as outside air and return air, from each airflow and temperature, in US or metric units."
 permalink: /air-mixing-calculator.html
 ogImage: "/images/0179db_703073c0a2d649cf925bf9638205e916~mv2.png"
 calcInclude: "partials/calc-mixair.njk"

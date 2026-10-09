@@ -1,6 +1,6 @@
 ---
 layout: layouts/page.njk
-title: "Dehumidifier Selection Calculator"
+title: "Dehumidifier Size and Selection Calculator"
 seoTitle: "Dehumidifier Size Calculator (Pints per Day) | adicot.com"
 description: "Size a dehumidifier from the latent load in pints/day, Btu/h or kW, and list the commercial models that meet it, with airflow, efficiency and price."
 permalink: /dehumidifier-size-calculator.html

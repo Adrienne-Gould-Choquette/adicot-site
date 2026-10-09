@@ -4,7 +4,7 @@
     "items": [
       { "label": "Amana", "url": "https://www.amana-hac.com/products/air-handlers-and-coils" },
       { "label": "Amana/Goodman", "url": "https://rpmobgoo.wrightsoft.com/" },
-      { "label": "American Standard", "url": "https://www.americanstandardair.com/products.html" },
+      { "label": "American Standard", "url": "https://www.americanstandardair.com/products/" },
       { "label": "Carrier", "url": "https://id.hvacproplus.com/" },
       { "label": "Daikin City", "url": "https://www.daikincity.com/v3/#/welcome" },
       { "label": "Daikin Split", "url": "https://splitxpress.daikincity.com/#/login" },
@@ -13,9 +13,9 @@
       { "label": "Lennox CPQ", "url": "https://od1.fpx.com/secure/login.html" },
       { "label": "Lennox Pros", "url": "https://www.lennoxpros.com/" },
       { "label": "Mitsubishi", "url": "https://meus1.mylinkdrive.com/" },
-      { "label": "Rheem", "url": "https://www.rheem.com/products/commercial/commercial_resource_center/" },
+      { "label": "Rheem", "url": "https://www.rheem.com/products/commercial/water-heating/resources/" },
       { "label": "Rheem Rapid Spec", "url": "https://my.rheem.com/en-US/" },
-      { "label": "Tempstar", "url": "https://tempstar.hvacpartners.com/products/detail/N4A3" },
+      { "label": "Tempstar", "url": "https://www.tempstar.com/en/us/" },
       { "label": "Tempstar Perf", "url": "https://www.icpeqp.com/AHRIratings/ratings.aspx?Brand=Tempstar" },
       { "label": "Trane", "url": "https://www.trane.com/commercial/north-america/us/en/products-systems.html" }
     ]
@@ -23,7 +23,7 @@
   {
     "name": "Grilles & diffusers",
     "items": [
-      { "label": "Deflecto", "url": "http://advp-deflecto.com/" },
+      { "label": "Deflecto", "url": "https://www.deflecto.com/" },
       { "label": "Grille Tech", "url": "https://www.grilletechinc.com/products/commercial/commercial.html" },
       { "label": "Price", "url": "https://www.priceindustries.com/" },
       { "label": "Titus", "url": "https://www.titus-hvac.com/Products" },
@@ -33,7 +33,7 @@
   {
     "name": "Ventilation, ERV & dehumidification",
     "items": [
-      { "label": "Greenheck/eCaps", "url": "https://www.greenheck.com/resources/library/literature" },
+      { "label": "Greenheck/eCaps", "url": "https://www.greenheck.com/resources/resource-library" },
       { "label": "Broan-NuTone", "url": "https://broan-nutone.com/en-us" },
       { "label": "RenewAire/Cores", "url": "https://renewaire.com/" },
       { "label": "Thermastor Dehumid", "url": "https://thermastor.com/our-brands/quest/" },

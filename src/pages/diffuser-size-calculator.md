@@ -46,7 +46,7 @@ In metric units, the airflow is converted to cfm (1 l/s = 2.11888 cfm, rounded t
 
 ## Choosing a noise criterion
 
-Background sound from HVAC systems should suit the room: quieter for bedrooms, private offices, conference rooms and performance spaces; louder is acceptable in lobbies, corridors and open-plan offices. The ASHRAE Handbook—HVAC Applications, chapter 49, *Noise and Vibration Control*, Table 1, gives design guidelines for HVAC-related background sound by room type. See the [ASHRAE Handbook online](https://www.ashrae.org/technical-resources/ashrae-handbook/ashrae-handbook-online).
+Background sound from HVAC systems should suit the room: quieter for bedrooms, private offices, conference rooms and performance spaces; louder is acceptable in lobbies, corridors and open-plan offices. The ASHRAE Handbook—HVAC Applications, chapter 49, *Noise and Vibration Control*, Table 1, gives design guidelines for HVAC-related background sound by room type. See the [ASHRAE Handbook online](https://www.ashrae.org/technical-resources/publications-library/ashrae-handbook/ashrae-handbook-online).
 
 Note that a diffuser's catalog NC is for a single unit in a standard room; several diffusers in one space add up, and the room's absorption changes what is heard.
 

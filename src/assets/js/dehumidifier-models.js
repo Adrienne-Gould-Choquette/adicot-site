@@ -9,10 +9,10 @@
 //  approx. retail price $, spec sheet URL]
 export const MODELS = [
   ["Santa Fe UltraMD33",150,5.1,37,1780,"https://rp.widen.net/s/dcp7brqqsh"],
-  ["Aprilaire E050",145,4.23,50,1310,"https://www.crawlspacedepot.com/content/aprilaire-e050-specification-sheet.pdf"],
+  ["Aprilaire E050",145,4.23,50,1310,"https://crawlspacedepot.com/content/aprilaire-e050-specification-sheet.pdf"],
   ["Santa Fe Compact70",150,5.5,70,1365,"https://www.santa-fe-products.com/wp-content/uploads/2019/06/Compact70-A2L-Data-Sheet.pdf"],
   ["Santa Fe Ultra70",150,5.5,70,1695,"https://rp.widen.net/s/w7btlqlctx"],
-  ["Aprilaire E070",200,4.44,70,1400,"https://www.crawlspacedepot.com/content/aprilaire-e070-specification-sheet.pdf"],
+  ["Aprilaire E070",200,4.44,70,1400,"https://crawlspacedepot.com/content/aprilaire-e070-specification-sheet.pdf"],
   ["Aprilaire E080",185,5.92,80,1495,"https://www.abrwholesalers.com/media/assets/product/documents/aprilaire/dehumidifier/eseries/specification-sheet-aprilaire-e080-dehumidifier.pdf"],
   ["AlorAir Sentinel WHD 100",309,5.49,90,1199,"https://www.alorair.com/product-details/alorair-sentinel-whd-100"],
   ["Santa Fe Ultra V100",385,6.4,100,2329,"https://rp.widen.net/s/6kvtgqrpmt"],

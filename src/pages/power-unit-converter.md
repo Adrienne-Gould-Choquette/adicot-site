@@ -2,7 +2,7 @@
 layout: layouts/page.njk
 title: "kW, HP, BTU Unit Converter"
 seoTitle: "kW, HP, BTU, Ton Converter | adicot.com"
-description: "Convert between tons, kilowatts (kW), horsepower (hp), Btu/h, MBH, lb-ft/h and ft-lbf/h."
+description: "Convert power and HVAC capacity between tons of refrigeration, kilowatts (kW), horsepower (hp), Btu/h, MBH, lb-ft/h and ft-lbf/h."
 permalink: /power-unit-converter.html
 ogImage: "/images/0179db_c57972ac429d4673971a751a9632fce4~mv2.png"
 calcInclude: "partials/calc-powerconv.njk"

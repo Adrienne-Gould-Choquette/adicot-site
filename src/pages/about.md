@@ -1,6 +1,6 @@
 ---
 layout: layouts/page.njk
-title: "About"
+title: "About Adicot, Inc."
 seoTitle: "About Adicot, Inc. | adicot.com"
 description: "A boutique mechanical engineering practice with national reach. HVAC load calculations and energy code compliance, engineer-stamped in 11 states."
 permalink: /about.html

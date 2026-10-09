@@ -1,6 +1,7 @@
 ---
 layout: layouts/page.njk
-title: "How can we help?"
+title: "Contact Adicot, Inc."
+subtitle: "How can we help?"
 seoTitle: "Contact | adicot.com"
 description: "Contact Adicot, Inc. Feedback on the engineering calculators, or an inquiry about HVAC load calculations and energy code compliance."
 permalink: /contact.html

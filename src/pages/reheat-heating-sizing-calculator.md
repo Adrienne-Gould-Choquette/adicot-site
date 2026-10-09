@@ -2,7 +2,7 @@
 layout: layouts/page.njk
 title: "Reheat/Heating Sizing Calculator"
 seoTitle: "Reheat/Heating Sizing Calculator | adicot.com"
-description: "Enter the airflow and the entering and leaving coil temperatures to size the reheat coil capacity."
+description: "Size a reheat or heating coil: enter the airflow and the entering and leaving coil air temperatures to get the capacity it needs, in US or metric units."
 permalink: /reheat-heating-sizing-calculator.html
 ogImage: "/images/0179db_bfa34710152540b78d1cfcfce23e0fe7~mv2.png"
 calcInclude: "partials/calc-reheat.njk"

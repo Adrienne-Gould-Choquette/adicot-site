@@ -1,6 +1,6 @@
 ---
 layout: layouts/page.njk
-title: "Cooling Load Ballpark Estimator"
+title: "Cooling Load Ballpark Estimator: Tons per Square Foot"
 seoTitle: "Cooling Load Estimator: Tons per Square Foot | adicot.com"
 description: "Estimate cooling tons, lighting and electrical load, and occupants from floor area for over 50 building types: a quick check on a load calculation."
 permalink: /cooling-load-estimator.html

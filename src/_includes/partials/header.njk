@@ -1,11 +1,11 @@
 <header class="site-header">
   <div class="bar">
-    {#- The logo always goes to the engineering services page. That page is the
-        front of the business; the calculator library is what brings people in,
-        but it is not where the brand mark should land them. #}
-    {%- set brandHref = site.servicesUrl %}
+    {#- The logo goes to the home page, as visitors and search engines expect.
+        It used to go to the services page, which left one link on the whole
+        site pointing at the home page. #}
+    {%- set brandHref = '/' %}
     <a class="brand" href="{{ brandHref }}"
-       aria-label="{{ site.company }}, engineering services">
+       aria-label="{{ site.company }}, home">
       {#- Both logos ship and CSS shows the right one, because the theme is now a
           runtime choice rather than something known at build time. The dark
           artwork is remapped (white letterforms, orange wordmark, transparent

@@ -2,7 +2,7 @@
 layout: layouts/page.njk
 title: "Coil Selection Calculator"
 seoTitle: "Coil Selection Calculator | adicot.com"
-description: "Calculate the sensible, latent and total coil load (the capacity the coil must deliver), the leaving air, coil face area and velocity, and the water or glycol flow."
+description: "Find the sensible, latent and total coil load (the capacity the coil must deliver), the leaving air, coil face area and velocity, and the water or glycol flow."
 permalink: /coil-selection-calculator.html
 ogImage: "/images/0179db_34bba9fdec3d49dc828e1e4be55b6ad3~mv2.png"
 calcInclude: "partials/calc-coil.njk"

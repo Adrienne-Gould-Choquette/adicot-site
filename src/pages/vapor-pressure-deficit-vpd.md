@@ -34,5 +34,3 @@ where p<sub>ws</sub>(T) is the saturation vapor pressure at temperature T (the H
 
 **Example:** a grow room at 77 °F and 55 % RH, with leaves at 75 °F. The saturation vapor pressure at 77 °F is 3.169 kPa. The vapor pressure in the air is 0.55 × 3.169 = 1.743 kPa, so the air VPD is 3.169 − 1.743 = 1.43 kPa. The saturation pressure at the 75 °F leaf is 2.965 kPa, so the leaf VPD is 2.965 − 1.743 = 1.22 kPa. The dew point is 59.6 °F and the wet bulb 65.6 °F.
 
-For target VPD ranges by crop and growth stage, see the [VPD chart from Perfect Grower](https://www.perfectgrower.com/knowledge/knowledge-base/vpd-chart-vapor-pressure-deficit/).
-

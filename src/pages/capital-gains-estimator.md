@@ -1,6 +1,6 @@
 ---
 layout: layouts/page.njk
-title: "Long-term Capital Gains Estimator*"
+title: "Home Sale Long-term Capital Gains Tax Estimator*"
 seoTitle: "Home Sale Capital Gains Tax Estimator (2026) | adicot.com"
 description: "Estimate federal long-term capital gains tax, net proceeds and cash on hand from a property sale, with the home-sale exclusion and the 3.8% NIIT."
 permalink: /capital-gains-estimator.html

@@ -1,8 +1,8 @@
 ---
 layout: layouts/page.njk
-title: "Air Diffuser FPM CFM Calculator"
+title: "Air Diffuser FPM to CFM Calculator"
 seoTitle: "FPM to CFM Converter | adicot.com"
-description: "Calculate the face velocity or the airflow for an air diffuser, in US or metric units."
+description: "Convert between face velocity (fpm) and airflow (cfm) for an air diffuser, from its core size, net free area or area factor, in US or metric units."
 permalink: /fpm-to-cfm-calculator.html
 ogImage: "/images/0179db_3e5b4ce0d6e941988ba2e405c80124f8~mv2.jpg"
 calcInclude: "partials/calc-diffuser.njk"
