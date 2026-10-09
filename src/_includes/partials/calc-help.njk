@@ -1,0 +1,15 @@
+{#- Help chat under a hand-written calculator. calc-help.js posts each question,
+    with the visitor's current inputs and results, to /api/calc-help, where the
+    Flask app reads this page from the live site and asks Claude Haiku. Hidden
+    until the script runs, since without it the box could do nothing. -#}
+<details class="chelp" id="chelp" hidden>
+  <summary>Questions about this calculator? Ask the help assistant</summary>
+  <div class="chelp-log" id="chelp-log" aria-live="polite"></div>
+  <form class="chelp-form" id="chelp-form">
+    <label for="chelp-q" class="visually-hidden">Your question</label>
+    <textarea id="chelp-q" rows="2" maxlength="1000" placeholder="e.g. What head height should I enter?" required></textarea>
+    <button class="btn" type="submit">Ask</button>
+  </form>
+  <p class="cf-note">Answers come from an AI assistant (Claude) that reads this page. It can make mistakes: check important numbers against the method below, and confirm design decisions with a licensed engineer.</p>
+</details>
+<script src="{{ '/assets/js/calc-help.js' | bust }}" defer></script>

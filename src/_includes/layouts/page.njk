@@ -60,6 +60,8 @@ layout: layouts/base.njk
     {% endif %}
   </div>
 
+  {% if calcInclude %}{% include "partials/calc-help.njk" %}{% endif %}
+
   <div class="prose{% if proseWide %} prose-wide{% endif %}">
     {{ content | safe }}
   </div>
