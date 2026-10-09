@@ -15,16 +15,19 @@
       <label><input type="radio" name="u" value="Metric"> Metric (l/s, m/s, cm)</label>
     </fieldset>
 
-    <fieldset class="cf-radios cf-stack">
-      <legend>You know the</legend>
-      <label><input type="radio" name="k" value="V" checked> Air flow rate, to find the velocity</label>
-      <label><input type="radio" name="k" value="Q"> Velocity, to find the air flow rate</label>
-    </fieldset>
+    {#- The value sits beside the choice it answers, not under it. -#}
+    <div class="cf-beside">
+      <fieldset class="cf-radios cf-stack">
+        <legend>You know the</legend>
+        <label><input type="radio" name="k" value="V" checked> Air flow rate, to find the velocity</label>
+        <label><input type="radio" name="k" value="Q"> Velocity, to find the air flow rate</label>
+      </fieldset>
 
-    <div class="field">
-      <label for="df-v"><span id="df-v-label">Air flow rate</span> <span class="cf-u" id="df-v-u">cfm</span>
-        <span class="req" aria-hidden="true">*</span></label>
-      <input type="number" id="df-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="1200">
+      <div class="field">
+        <label for="df-v"><span id="df-v-label">Air flow rate</span> <span class="cf-u" id="df-v-u">cfm</span>
+          <span class="req" aria-hidden="true">*</span></label>
+        <input type="number" id="df-v" name="v" inputmode="decimal" step="any" min="0" required autocomplete="off" placeholder="1200">
+      </div>
     </div>
 
     <fieldset class="cf-radios cf-stack">
