@@ -34,7 +34,7 @@
     </fieldset>
 
     <div class="field" id="tx-h-f"><label for="tx-h">Available duct height <span class="cf-u">in.</span></label>
-      <input type="number" id="tx-h" name="h" inputmode="decimal" step="any" min="0" autocomplete="off" value="8" placeholder="8"></div>
+      <input type="number" id="tx-h" name="h" inputmode="decimal" step="any" min="0" autocomplete="off" placeholder="8"></div>
 
     <p class="cf-actions">
       <button type="reset" class="btn btn-quiet">Reset</button>
@@ -63,7 +63,10 @@
     </div>
     <p class="cf-note" id="tx-warn" hidden></p>
     <figure class="ck-figure">
-      <img id="tx-img" src="/images/transfer-pass-through.jpg" alt="Pass-through transfer grilles in a wall" width="1200" height="492" loading="lazy">
+      <button type="button" class="fig-zoom" id="tx-zoom" aria-label="Enlarge the diagram" aria-haspopup="dialog">
+        <img id="tx-img" src="/images/transfer-pass-through.jpg" alt="Pass-through transfer grilles in a wall" width="1200" height="492" loading="lazy">
+      </button>
+      <figcaption>Click the diagram to enlarge it.</figcaption>
     </figure>
   </section>
 </form>

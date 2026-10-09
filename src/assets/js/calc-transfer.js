@@ -60,6 +60,23 @@ function init(form) {
       + (flex ? `on a flex duct of at least ${fmt(r.minDuctDia, 1)} in. diameter.` : `and a transfer duct of at least ${fmt(r.minDuct * 144, 1)} in².`);
   }
 
+  // The diagram's notes are too small to read at the results column's width, so
+  // a click opens it full size. The dialog takes whichever diagram is showing.
+  const big = Object.assign(document.createElement('dialog'), { className: 'lightbox' });
+  big.setAttribute('aria-label', 'Enlarged diagram');
+  const bigImg = document.createElement('img');
+  const close = Object.assign(document.createElement('button'), { type: 'button', className: 'lightbox-close', textContent: '×' });
+  close.setAttribute('aria-label', 'Close');
+  big.append(close, bigImg);
+  document.body.append(big);
+  el('tx-zoom').addEventListener('click', () => {
+    const { src, width, height, alt } = el('tx-img');
+    Object.assign(bigImg, { src, width, height, alt });
+    big.showModal();
+  });
+  // A click on the picture or the backdrop closes it, as the × and Esc do.
+  big.addEventListener('click', () => big.close());
+
   live(form, recalc);
   recalc();
 }
