@@ -336,6 +336,8 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 32px 16px 64px; }
   letter-spacing: 0.06em; color: var(--muted);
 }
 .cf-summary { margin: 0; font-size: 16px; line-height: 1.5; }
+/* Inputs that contradict each other: said in the results box itself, in place of results. */
+.cf-summary.is-over { padding: 10px 12px; border: 2px solid #b3261e; border-radius: 8px; background: color-mix(in srgb, #b3261e 10%, var(--bg)); font-weight: 600; }
 /* A yes/no answer that leads the results (the infiltration page's pressurization
    check): plain when the answer is fine, in the warning colours when it is not. */
 .cf-verdict {

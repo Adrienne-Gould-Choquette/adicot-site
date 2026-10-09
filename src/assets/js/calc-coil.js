@@ -129,12 +129,10 @@ function init(form) {
 
     if (a && b) {
       if (solved) {
-        // The end found, in full; what was given for it is not repeated.
-        const [x, name, mode] = side === 'lev' ? [b, 'Leaving', m2] : [a, 'Entering', m1];
-        rows.push([name + ' dry bulb', fmt(x.db, 1), U.t, 'cf-key']);
-        rows.push([name + ' wet bulb', fmt(x.wb, 1), U.t, byTotal ? undefined : 'cf-key']);
-        if (!byTotal || mode !== 'db-rh') rows.push([name + ' RH', fmt(x.rh, 0), '%']);
-        if (!byTotal || mode !== 'db-dp') rows.push([name + ' dew point', fmt(x.dp, 1), U.t]);
+        // The end found, in full, including whatever was given for it.
+        const [x, name] = side === 'lev' ? [b, 'Leaving'] : [a, 'Entering'];
+        rows.push([name + ' dry bulb', fmt(x.db, 1), U.t, 'cf-key'], [name + ' wet bulb', fmt(x.wb, 1), U.t, 'cf-key'],
+          [name + ' RH', fmt(x.rh, 0), '%'], [name + ' dew point', fmt(x.dp, 1), U.t]);
       } else use('e1', 'e2', 'x1', 'x2');
       const wa = us ? a.grains : a.W, wb = us ? b.grains : b.W;   // gr/lb or g/kg
       rows.push(['Entering air enthalpy', fmt(a.h, 2), U.h], ['Leaving air enthalpy', fmt(b.h, 2), U.h],
@@ -242,11 +240,16 @@ function init(form) {
     el('co-loadhint').textContent = prompt;
     el('co-loadhint').hidden = !prompt;
     const extra = answered ? Object.keys(AIR).filter(id => has(id) && !used.has(id)).map(id => AIR[id]) : [];
+    // Over-defined entries may disagree, so the air side shows nothing until one
+    // is cleared, and the water tool does not take its total cooling.
+    let overMsg = '';
     if (extra.length) {
       const [is, it] = extra.length > 1 ? ['are', 'them'] : ['is', 'it'];
-      notes.unshift(over
-        ? `Over-defined: the other entries already fix ${list(extra)}, so what was entered for ${it} ${is} not used. Clear ${it}, or clear another entry to solve from ${it} instead.`
-        : `${list(extra).replace(/^t/, 'T')} ${is} entered but not used in these results.`);
+      if (over) {
+        overMsg = `Over-defined: too many air-side inputs. The other entries already fix ${list(extra)}, so ${it} cannot also be entered. Clear ${it}, or clear another entry to solve from ${it} instead.`;
+        rows.length = notes.length = 0;
+        totalCooling = null;
+      } else notes.unshift(`${list(extra).replace(/^t/, 'T')} ${is} entered but not used in these results.`);
     }
 
     // Tool 3: water and glycol; the variable being solved for is not an input. A
@@ -290,9 +293,10 @@ function init(form) {
 
     fillRows(el('co-tbody'), rows);
     const main = rows.filter(r => !/enthalpy|humidity ratio/.test(r[0]));
-    el('co-summary').textContent = main.length
+    el('co-summary').classList.toggle('is-over', !!overMsg);
+    el('co-summary').textContent = overMsg || (main.length
       ? main.map(([l, v, u]) => `${l} ${v}${u ? " " + u : ""}`).join('; ') + '.'
-      : prompt ||'Fill in any of the tools; each result appears as soon as its inputs are complete.';
+      : prompt || 'Fill in any of the tools; each result appears as soon as its inputs are complete.');
     el('co-note').textContent = notes.join(' ');
     el('co-note').hidden = !notes.length;
   }
