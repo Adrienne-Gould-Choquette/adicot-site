@@ -894,6 +894,11 @@ button.card-star:focus-visible { outline: 2px solid var(--accent); outline-offse
 .ashrae-steps { margin: 8px 0 0; padding: 8px 12px; font-size: 13px; color: var(--fg); background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; }
 .ashrae-steps summary { cursor: pointer; font-weight: 600; color: var(--accent); }
 .ashrae-steps ol { margin: 6px 0 2px; padding-left: 20px; }
+/* A long explanation inside a calculator, closed by default so it does not
+   break up the inputs. */
+.cf-howto { grid-column: 1 / -1; margin: 10px 0 0; font-size: 13px; }
+.cf-howto summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+.cf-howto > .hint { margin: 6px 0 0; line-height: 1.55; }
 .form-actions { margin: 24px 0 0; }
 .form-actions .btn { cursor: pointer; font: inherit; font-weight: 700; font-size: 15px; border: 0; }
 

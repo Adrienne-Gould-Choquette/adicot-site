@@ -34,7 +34,9 @@
       <div class="cf-pair">{{ num("ql", "Latent cooling", "co-q", "Btu/h", "9000") }}{{ num("qt", "Total cooling", "co-q", "Btu/h", "36000") }}</div>
       <p class="hint cf-group co-next" id="co-loadhint" role="status" hidden></p>
       {{ num("alt", "Altitude", "co-l", "ft", "0") }}
-      <p class="hint cf-group">Enter what you know and leave the rest blank; there is nothing to choose first.
+      <details class="cf-howto">
+      <summary>How to fill this in</summary>
+      <p class="hint">Enter what you know and leave the rest blank; there is nothing to choose first.
       Both air conditions and the airflow give the sensible, latent and total cooling. Both air conditions
       and one load give the airflow. One air condition, the airflow and any two of the three loads give the
       air at the other end, as do the total cooling and that end's RH or dew point. Less than that still
@@ -44,6 +46,7 @@
       altitude given (sea level if blank). The airflow is at the entering air; the same airflow is used for
       the coil face velocity below. Entering air is the air at the coil: return or mixed air for a
       recirculating system, outdoor air for a DOAS.</p>
+      </details>
     </fieldset>
 
     <fieldset class="cf-stream co-tool" data-tool="face">
