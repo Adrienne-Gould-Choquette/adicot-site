@@ -108,9 +108,10 @@
   <section class="cf-results" aria-labelledby="co-results-h">
     <h2 id="co-results-h">Results</h2>
     <p class="cf-summary" id="co-summary" role="status">Fill in any of the tools; each result appears as soon as its inputs are complete.</p>
-    {#- What tool 1 needs for each answer, shown until it has one. Picking an
-        answer highlights the inputs it needs until that answer appears. -#}
-    <div class="co-guide" id="co-guide" hidden>
+    {#- For each tool, what it needs for each answer, shown until it has one.
+        Picking an answer rings the inputs it needs until that answer appears;
+        in the fluid tool it also sets Solve for. -#}
+    <div class="co-guide" data-tool="air" hidden>
       <p class="co-guide-h">What do you want to calculate? Pick one to highlight the inputs it needs.</p>
       <ul>
         <li><button type="button" class="co-target" data-need="e1 e2 x1 x2 aq" data-done="Total cooling" aria-pressed="false"><strong>To calculate the sensible, latent and total cooling:</strong> enter the entering air, the leaving air and the airflow.</button></li>
@@ -121,6 +122,31 @@
         <li><button type="button" class="co-target" data-need="e2 x2 aq" data-done="Latent cooling" aria-pressed="false"><strong>To calculate the latent cooling alone:</strong> enter the two dew points and the airflow.</button></li>
       </ul>
       <p>The entering or leaving air means its dry bulb plus a wet bulb, RH or dew point.</p>
+    </div>
+    <div class="co-guide" data-tool="face" hidden>
+      <p class="co-guide-h">What do you want to calculate? Pick one to highlight the inputs it needs.</p>
+      <ul>
+        <li><button type="button" class="co-target" data-need="fh fw" data-done="Coil face area" aria-pressed="false"><strong>To calculate the coil face area:</strong> enter the face height and width.</button></li>
+        <li><button type="button" class="co-target" data-need="fh fw" data-done="Coil face velocity" aria-pressed="false"><strong>To calculate the face velocity:</strong> enter the face height and width. The airflow comes from tool 1 (Air side), so enter or find it there first.</button></li>
+      </ul>
+      <p>Face velocity is the airflow divided by the face area.</p>
+    </div>
+    <div class="co-guide" data-tool="water" hidden>
+      <p class="co-guide-h">What do you want to calculate? Pick one to highlight the inputs it needs.</p>
+      <ul>
+        <li><button type="button" class="co-target" data-need="w1 w2 w3" data-done="Fluid flow rate" data-solve="flow" aria-pressed="false"><strong>To calculate the fluid flow rate:</strong> enter the entering and leaving fluid temperatures and the heat load (or leave the heat load blank to use the total cooling from tool 1).</button></li>
+        <li><button type="button" class="co-target" data-need="w1 w2 w4" data-done="Heat load" data-solve="load" aria-pressed="false"><strong>To calculate the heat load:</strong> enter the entering and leaving fluid temperatures and the flow rate.</button></li>
+        <li><button type="button" class="co-target" data-need="w2 w3 w4" data-done="Entering fluid" data-solve="entering" aria-pressed="false"><strong>To calculate the entering fluid temperature:</strong> enter the leaving fluid temperature, the heat load and the flow rate.</button></li>
+        <li><button type="button" class="co-target" data-need="w1 w3 w4" data-done="Leaving fluid" data-solve="leaving" aria-pressed="false"><strong>To calculate the leaving fluid temperature:</strong> enter the entering fluid temperature, the heat load and the flow rate.</button></li>
+      </ul>
+      <p>Picking one also sets Solve for. Choose the fluid and whether the coil is cooling or heating first.</p>
+    </div>
+    <div class="co-guide" data-tool="tubes" hidden>
+      <p class="co-guide-h">What do you want to calculate? Pick one to highlight the inputs it needs.</p>
+      <ul>
+        <li><button type="button" class="co-target" data-need="vq vd vn" data-done="Fluid velocity in tubes" aria-pressed="false"><strong>To calculate the fluid velocity in the tubes:</strong> enter the flow rate (or leave it blank to use the flow from tool 3), the tube inside diameter and the number of tubes fed.</button></li>
+      </ul>
+      <p>Tube velocity is the flow divided by the total inside area of the tubes fed.</p>
     </div>
     <table class="cf-table"><caption class="visually-hidden">Results of each tool</caption><tbody id="co-tbody"></tbody></table>
     <p class="cf-note" id="co-note" hidden></p>

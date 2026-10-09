@@ -48,8 +48,13 @@ function init(form) {
   form.addEventListener('reset', () => setTimeout(syncAdds, 0));
   // The answer picked in the guide, whose inputs are highlighted until it appears.
   let target = null;
-  const targets = [...el('co-guide').querySelectorAll('.co-target')];
-  for (const b of targets) b.addEventListener('click', () => { target = target === b ? null : b; recalc(); });
+  const guides = [...form.querySelectorAll('.co-guide')], targets = guides.flatMap(g => [...g.querySelectorAll('.co-target')]);
+  for (const b of targets) b.addEventListener('click', () => {
+    target = target === b ? null : b;
+    // In the fluid tool the answer picked is also what to solve for.
+    if (target?.dataset.solve) { el('co-wf').value = target.dataset.solve; el('co-wf').dispatchEvent(new Event('change', { bubbles: true })); }
+    else recalc();
+  });
   form.addEventListener('reset', () => { target = null; });
 
   function recalc() {
@@ -340,7 +345,7 @@ function init(form) {
     const fh = num(el('co-fh')), fw = num(el('co-fw'));
     if (fh > 0 && fw > 0) {
       const r = face(units, fh, fw, airflow ?? 0);
-      rows.push(['Coil face area', fmt(r.area, 2), U.area]);
+      rows.push(['Coil face area', fmt(r.area, 2), U.area, 'cf-key']);
       if (airflow > 0) rows.push(['Coil face velocity', fmt(r.velocity, us ? 0 : 2), U.vel, 'cf-key']);
     }
     mark('tubes');
@@ -378,11 +383,11 @@ function init(form) {
     const shown = groups.flatMap(([k, r]) => (headed && r.length ? [[NAME[k], '', '', 'cf-group-h'], ...r] : r));
     const said = groups.flatMap(g => g[2]), warn = tool === 'air' ? overMsg : '';
     fillRows(el('co-tbody'), shown);
-    if (target && rows.some(r => r[0] === target.dataset.done && r[3] === 'cf-key')) target = null;
+    if (target && (target.closest('.co-guide').dataset.tool !== tool || rows.some(r => r[0] === target.dataset.done && r[3] === 'cf-key'))) target = null;
     const need = target ? target.dataset.need.split(' ') : [];
     for (const b of targets) b.setAttribute('aria-pressed', String(b === target));
     for (const f of form.querySelectorAll('.co-f')) f.classList.toggle('co-want', need.includes(f.dataset.var));
-    el('co-guide').hidden = !(tool === 'air' && !warn && (!shown.length || target));
+    for (const g of guides) g.hidden = !(g.dataset.tool === tool && !warn && (!shown.length || g.contains(target)));
     el('co-results-h').textContent = (shown.length && !target) || warn ? 'Results' : 'Instructions';
     const keyRows = shown.filter(r => r[3] === 'cf-key');
     const main = keyRows.length ? keyRows : shown.filter(r => r[3] !== 'cf-group-h' && !/enthalpy|humidity ratio/.test(r[0]));
