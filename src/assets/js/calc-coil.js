@@ -53,6 +53,19 @@ function init(form) {
 
     // Tool 1: the coil's air side, from the entering and leaving air conditions.
     const show = (id, on) => { el('co-' + id).closest('.field').hidden = !on; };
+    // A field whose entry would go unused, given what else is filled in, is
+    // greyed out rather than left to be filled in and ignored. It keeps its
+    // place, so nothing moves under the user's hands, and its value, which
+    // counts again once the field is needed.
+    const need = (id, on) => {
+      const field = el('co-' + id).closest('.field'), input = el('co-' + id);
+      field.classList.toggle('co-off', !on);
+      for (const c of field.querySelectorAll('input, select')) c.disabled = !on;
+      input.dataset.eg ??= input.placeholder;
+      input.placeholder = on ? input.dataset.eg : '';
+    };
+    const val = id => (el('co-' + id).disabled ? null : num(el('co-' + id)));
+    const filled = id => el('co-' + id).value.trim() !== '';
     const side = findLeave ? 'lev' : findEnter ? 'ent' : null;   // the end being solved for
     show('aq', !findFlow); show('qt', find !== 'loads'); show('qs', find !== 'loads'); show('ql', find !== 'loads');
     show('e1', side !== 'ent'); show('x1', side !== 'lev');
@@ -60,12 +73,21 @@ function init(form) {
     const end = side === 'ent' ? 'entering' : 'leaving';
     el('co-loadhint').hidden = find === 'loads';
     el('co-loadhint').textContent = findFlow
-      ? 'Enter one of the three loads. If more than one is entered, the total is used, then the sensible.'
-      : `Enter any two of the three loads, or the total cooling with the ${end} RH or dew point above. One load alone gives the ${end} dry bulb (sensible) or dew point (latent).`;
+      ? 'Enter one of the three loads. The other two are greyed out once one is entered.'
+      : `Enter any two of the three loads, or the total cooling with the ${end} RH or dew point above. One load alone gives the ${end} dry bulb (sensible) or dew point (latent). A field that is not needed with what you have entered is greyed out.`;
+    {
+      const loads = ['qt', 'qs', 'ql'], have = loads.filter(filled);
+      // An airflow takes one load: the total if given, else the sensible, else
+      // the latent. An end of the coil takes two, and its own moisture only
+      // with the total alone.
+      for (const id of loads) need(id, findFlow ? !have.length || id === have[0] : !side || have.length !== 2 || have.includes(id));
+      const alone = !(filled('qs') || filled('ql'));
+      need('e2', side !== 'ent' || alone); need('x2', side !== 'lev' || alone);
+    }
     let airflow = null;        // for the face velocity
     let totalCooling = null;   // for the water tool
     const altitude = num(el('co-alt')) ?? 0;
-    const ent = { first: num(el('co-e1')), second: num(el('co-e2')) }, lev = { first: num(el('co-x1')), second: num(el('co-x2')) };
+    const ent = { first: num(el('co-e1')), second: val('e2') }, lev = { first: num(el('co-x1')), second: val('x2') };
     const given = v => v !== null && !Number.isNaN(v);
     const psyUnits = us ? 'US' : 'Metric';
     const dq = us ? 0 : 2;     // decimals of a load
@@ -96,7 +118,7 @@ function init(form) {
     const NO_FLOW = 'No airflow carries that load between these conditions: check the sign of the load against the entering and leaving air.';
     // The load an airflow is wanted for: the total if given, else the sensible,
     // else the latent.
-    const flowLoad = !findFlow ? null : [['total', 'qt'], ['sensible', 'qs'], ['latent', 'ql']].map(([k, id]) => [k, num(el('co-' + id))]).find(([, v]) => given(v)) ?? null;
+    const flowLoad = !findFlow ? null : [['total', 'qt'], ['sensible', 'qs'], ['latent', 'ql']].map(([k, id]) => [k, val(id)]).find(([, v]) => given(v)) ?? null;
 
     // The air at one end, when it is the unknown: found from the other end, the
     // airflow and the loads, then carried through the same results as a given one.
@@ -105,7 +127,7 @@ function init(form) {
     // That end's own moisture, if given, and how.
     const sideMoist = side === 'ent' ? ent.second : side === 'lev' ? lev.second : null, sideMode = side === 'ent' ? m1 : m2;
     if (side && airflow !== null && !bad) {
-      let qs = num(el('co-qs')), ql = num(el('co-ql')), qt = num(el('co-qt'));
+      let qs = val('qs'), ql = val('ql'), qt = val('qt');
       const n = [qs, ql, qt].filter(given).length;
       if (n === 3 && Math.abs(qs + ql - qt) > 0.005 * Math.max(Math.abs(qs), Math.abs(ql), Math.abs(qt))) {
         notes.push('The sensible and latent cooling do not add up to the total: clear one of the three.');
@@ -117,7 +139,6 @@ function init(form) {
         if (r?.problem) notes.push(says[r.problem]);
         else if (r && findLeave) { lev.first = r.db; lev.second = r.rh; levMode = 'db-rh'; solved = true; }
         else if (r) { ent.first = r.db; ent.second = r.rh; entMode = 'db-rh'; solved = true; }
-        if (solved && given(sideMoist)) notes.push(`Two of the loads fix the ${end} air, so the ${end} moisture entered is not used; clear it, or clear a load to use it with the total cooling.`);
       } else if (given(qt) && given(sideMoist) && (findLeave ? a : b)) {
         // The total load and that end's RH or dew point give its dry bulb.
         if (sideMode === 'db-rh' && !(sideMoist > 0 && sideMoist <= 100)) notes.push(`The relative humidity must be more than 0 and at most 100 % (${end} air).`);
