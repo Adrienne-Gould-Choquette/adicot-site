@@ -19,8 +19,8 @@ const SAYS = (us, entering) => ({
 });
 const VAR = { entering: 1, leaving: 2, load: 3, flow: 4 };
 
-// Tool 1 works out whatever the entries so far fix; its optional Solve for only
-// hides the chosen answer's inputs. Its fields, as they are named in a prompt or a warning.
+// Tool 1 works out whatever the entries so far fix; its Solve for hides the
+// chosen answer's inputs. Its fields, as they are named in a prompt or a warning.
 const AIR = { e1: 'the entering dry bulb', e2: 'the entering moisture', x1: 'the leaving dry bulb', x2: 'the leaving moisture', aq: 'the airflow', qs: 'the sensible cooling', ql: 'the latent cooling', qt: 'the total cooling' };
 // What each answer takes: its fields, and how many of the three loads.
 const TARGETS = [['coil loads', ['e1', 'e2', 'x1', 'x2', 'aq'], 0], ['leaving air', ['e1', 'e2', 'aq'], 2],
@@ -55,14 +55,15 @@ function init(form) {
   const guides = [...form.querySelectorAll('.co-guide')], targets = guides.flatMap(g => [...g.querySelectorAll('.co-target')]);
   for (const b of targets) b.addEventListener('click', () => {
     target = target === b ? null : b;
-    // In tool 1 the answer picked is also what to solve for ("whatever" for the
-    // ones the drop-down has no entry for, and when unpicked).
-    if (b.closest('.co-guide').dataset.tool === 'air') { el('co-as').value = target?.dataset.as || 'any'; recalc(); }
+    // In tool 1 the answer picked is also what to solve for; unpicking leaves it.
+    if (b.closest('.co-guide').dataset.tool === 'air') { if (target) el('co-as').value = target.dataset.as; recalc(); }
     // In the fluid tool the answer picked is also what to solve for.
     else if (target?.dataset.solve) { el('co-wf').value = target.dataset.solve; el('co-wf').dispatchEvent(new Event('change', { bubbles: true })); }
     else recalc();
   });
   form.addEventListener('reset', () => { target = null; });
+  // A link or a saved visit from before Solve for lost its "whatever" option.
+  if (!el('co-as').value) el('co-as').value = 'loads';
   // And the other way: choosing what to solve for picks it in the guide.
   el('co-as').addEventListener('change', () => { target = targets.find(b => b.dataset.as === el('co-as').value) ?? null; });
 

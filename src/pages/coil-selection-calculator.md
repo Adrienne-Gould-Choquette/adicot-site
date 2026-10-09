@@ -18,7 +18,7 @@ Review the methodology below to make sure it aligns with your project's requirem
 
 **1. Coil air side (sensible, latent and total cooling)**
 
-- Enter what you know and leave the rest blank. Solve for is optional: left on "Whatever the entries allow", the tool works out whatever your entries fix, and until they fix something it says what to add next. Choosing an answer instead hides that answer's inputs, so nothing typed there can over-define it.
+- Choose what to solve for: the coil loads, the airflow, the leaving air or the entering air. That answer's own inputs are hidden, so nothing typed there can over-define it. Then enter what you know and leave the rest blank; until the entries fix the answer, the tool says what to add next.
 - For the coil loads, enter the entering and leaving dry bulb.
 - Coil loads are not room loads: the load at the coil includes the outdoor air brought in for ventilation and the fan heat, so a room load from a load calculation is usually smaller. Enter coil loads, and take the entering air as the air reaching the coil (mixed air for a recirculating system, outdoor air for a DOAS).
 - For the latent and total cooling, add the moisture of the entering air and of the leaving air: choose whether you know each as a wet bulb, a relative humidity or a dew point, and enter it. The two can differ, for example an RH entering and a dew point leaving.
