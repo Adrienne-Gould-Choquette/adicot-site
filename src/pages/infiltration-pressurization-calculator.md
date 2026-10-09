@@ -13,7 +13,7 @@ calcSource: "Crackage Method V1.02"
 ## How to use it
 
 1. Choose IP (mph, ft, cfm) or SI (m/s, m, l/s) units. Switching converts the values already entered.
-2. Enter the winter wind speed. Use the design wind speed for your location if you don't have a site value; **How to find this on the ASHRAE site** under the field shows where to read it.
+2. Enter the winter wind speed. Use the design wind speed for your location if you don't have a site value; **Find Winter wind speed on ASHRAE's site** under the field shows where to read it.
 3. Choose how well the windows fit: tight, average or loose. The description under the choice says which window types fall in each class.
 4. Under **Totals**, enter the total crack length (the sum of every window's perimeter) and the total window area. Or choose **Size of each** and enter how many windows there are of each size and the size of one; use **Add another window size** for more sizes (up to 12). Enter the exterior doors under **Doors** the same way, one row per size (**Add another door size**); for a pair of doors, count each leaf and enter one leaf's width.
 5. Optionally, enter the building's length, width and height to see the result as air changes per hour.

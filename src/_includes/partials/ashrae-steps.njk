@@ -1,7 +1,8 @@
 {#- How to read a value off ashrae-meteo.info. Set ashrae_find (HTML: which
-    table and column to read) and ashrae_units before including this. -#}
+    table and column to read) and ashrae_units before including this;
+    ashrae_summary (optional) replaces the heading. -#}
 <details class="ashrae-steps">
-  <summary>How to find this on the ASHRAE site</summary>
+  <summary>{{ ashrae_summary | default("How to find this on the ASHRAE site") }}</summary>
   <ol>
     <li>Open <a href="https://ashrae-meteo.info/v3.0/" target="_blank" rel="noopener">ASHRAE Climatic Design Conditions</a>.</li>
     <li>Select the edition year you want, usually the newest, or the one your energy code calls for.</li>
