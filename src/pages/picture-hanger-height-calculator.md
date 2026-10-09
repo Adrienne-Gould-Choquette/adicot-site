@@ -19,7 +19,7 @@ Artwork hung too high or too low can disrupt the space's design aesthetic. Marth
 
 Instructions:
 
-Note that all measurements are in inches
+Measurements are in inches and eighths of an inch. To work in metric, set Units to Centimeters: each measurement is then one number in centimeters (decimals allowed), anything already entered is converted, and the results are given to the nearest millimeter.
 
 - Enter the height of the art piece as inches and fraction of inches.
 
@@ -34,3 +34,5 @@ There is a secondary calculator where you can enter the artwork's width, and the
 **Formula:** hook height = center height + picture height ÷ 2 − distance from the top of the picture to the hook.
 
 **Example:** a picture 24 in high, with the wire pulling to 3⅜ in below the top, centered at 60 in: 60 + 24 ÷ 2 − 3⅜ = 68⅝ in.
+
+**Metric example:** a picture 61 cm high, with the wire pulling to 8.5 cm below the top, centered at 152 cm (60 in): 152 + 61 ÷ 2 − 8.5 = 174 cm.

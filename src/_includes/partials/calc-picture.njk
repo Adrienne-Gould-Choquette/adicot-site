@@ -5,9 +5,9 @@
 {%- set eighths = ["0", "1/8", "1/4", "3/8", "1/2", "5/8", "3/4", "7/8"] %}
 {%- macro measure(id, label, eg, req, dflt) %}
 <div class="field">
-  <label for="ph-{{ id }}">{{ label }} <span class="cf-u">in</span>{% if req %} <span class="req" aria-hidden="true">*</span>{% endif %}</label>
+  <label for="ph-{{ id }}">{{ label }} <span class="cf-u" data-ph-u>in</span>{% if req %} <span class="req" aria-hidden="true">*</span>{% endif %}</label>
   <div class="cf-pair">
-    <input type="number" id="ph-{{ id }}" name="{{ id }}" inputmode="numeric" step="1" min="0"{% if req %} required{% endif %} autocomplete="off" placeholder="{{ eg }}"{% if dflt %} value="{{ dflt }}"{% endif %} aria-label="{{ label }}, whole inches">
+    <input type="number" id="ph-{{ id }}" data-eg="{{ eg }}" name="{{ id }}" inputmode="numeric" step="1" min="0"{% if req %} required{% endif %} autocomplete="off" placeholder="{{ eg }}"{% if dflt %} value="{{ dflt }}"{% endif %} aria-label="{{ label }}, whole inches">
     <select id="ph-{{ id }}f" name="{{ id }}f" aria-label="{{ label }}, fraction of an inch">
       {%- for e in eighths %}<option value="{{ e }}">{{ e if e != "0" else "+ 0" }}{% if e != "0" %} in{% endif %}</option>{% endfor %}
     </select>
@@ -21,10 +21,16 @@
   </noscript>
 
   <div class="cf-inputs">
+    <fieldset class="cf-radios">
+      <legend>Units</legend>
+      <label><input type="radio" name="u" value="US" checked> Inches</label>
+      <label><input type="radio" name="u" value="SI"> Centimeters</label>
+    </fieldset>
+
     {{ measure("h", "Picture height", "24", true) }}
     {{ measure("d", "Top of picture to the hook", "3", true) }}
     {{ measure("c", "Height of the picture's center", "60", true, "60") }}
-    <p class="hint">60 in is the recommended eye level for the center of a picture.</p>
+    <p class="hint" id="ph-eye">60 in is the recommended eye level for the center of a picture.</p>
     {{ measure("w", "Picture width (optional)", "36", false) }}
 
     <p class="cf-actions">
@@ -41,8 +47,8 @@
       <caption class="visually-hidden">Hook height, and the picture's center line and thirds</caption>
       <tbody id="ph-tbody"></tbody>
     </table>
-    <p class="cf-note">Rounded up to the next ⅛ in; the exact value is in brackets.</p>
-    <img class="cf-figure" src="/images/picture-hanger-diagram.png" width="839" height="651"
+    <p class="cf-note" id="ph-round">Rounded up to the next ⅛ in; the exact value is in brackets.</p>
+    <img class="cf-figure" src="/images/picture-hanger-hook-height.png" width="839" height="651"
          alt="Diagram of a hung picture: the hook height is measured from the floor, and equals the height of the picture's center plus half the picture height, less the distance between the top of the picture and the hook" loading="lazy">
   </section>
 </form>

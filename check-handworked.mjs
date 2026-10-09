@@ -8,6 +8,7 @@ import { state } from './src/assets/js/psychsheet.js';
 import { coilLoads, airflowFor, leavingForLoads, leavingForTotal, humidityAtDewPoint, sensibleLoad, latentLoad, leavingDryBulbFor, leavingDewPointFor, enteringForLoads, enteringForTotal, enteringDryBulbFor, enteringDewPointFor } from './src/assets/js/airside.js';
 import { doorForce, doorPressure, pressurization, leakage, leakPerFoot, doorProblem, crackage } from './src/assets/js/crackage.js';
 import { mix } from './src/assets/js/mixair.js';
+import { hang, hangMetric, toCm, toInches, problem as pictureProblem } from './src/assets/js/picture.js';
 
 export function checkHandworked() {
   const lines = [], issues = [];
@@ -207,6 +208,23 @@ export function checkHandworked() {
   near('air mixing: fog keeps the enthalpy', P(fog.db, fog.db).h, massMix(fogEx).h, 1e-4);
   same('air mixing: the page example does not fog', mixed.fog, false);
   lines.push('  air mixing: ASHRAE adiabatic mixing by dry air mass (page example, SI, winter, fog)');
+
+  // Picture hanger in centimetres (the workbook is inches only): the page's
+  // metric example, and the unit switch against the inch answer.
+  const cmEx = hangMetric({ height: 61, hookDrop: 8.5, center: 152, width: 91 });
+  near('picture: metric example hook 174 cm', cmEx.hook, 174, 0);
+  near('picture: metric centre line', cmEx.centerLine, 45.5, 0);
+  near('picture: metric thirds, to the millimetre', cmEx.third, 30.3, 0);
+  same('picture: no width, no centre line', hangMetric({ height: 61, hookDrop: 8.5, center: 152 }).centerLine, undefined);
+  near('picture: 60 in is 152.4 cm', toCm([60, '0']), 152.4, 0);
+  near('picture: 3 3/8 in is 8.5725 cm', toCm([3, '3/8']), 8.5725, 0);
+  same('picture: 152.4 cm back to 60 in', toInches(152.4).join(' '), '60 0');
+  same('picture: 8.5725 cm back to 3 3/8 in', toInches(8.5725).join(' '), '3 3/8');
+  same('picture: 2.5 cm rounds up to 1 in', toInches(2.5).join(' '), '1 0');
+  const inEx = hang({ height: [24, '0'], hookDrop: [3, '3/8'], center: [60, '0'] }).hook.exact;
+  near('picture: the inch example, in cm, agrees', hangMetric({ height: 24 * 2.54, hookDrop: 3.375 * 2.54, center: 152.4 }).hook, inEx * 2.54, 0.05);
+  same('picture: metric refusal names centimeters', pictureProblem({ height: [-1, '0'], hookDrop: [8, '0'], center: [152, '0'] }, 'centimeters'), 'The picture height must be a positive number of centimeters.');
+  lines.push('  picture hanger: metric example, unit switch both ways');
   return { lines, issues, checks };
 }
 

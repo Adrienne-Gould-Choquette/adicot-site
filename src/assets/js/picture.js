@@ -32,11 +32,31 @@ export function hang({ height, hookDrop, center, width }) {
   return out;
 }
 
-export function problem({ height, hookDrop, center, width }) {
+// The same in centimetres: plain decimals, shown to the nearest millimetre. This
+// is the page's own addition; the workbook works only in inches.
+const mm = x => Math.round(x * 10 + 1e-9) / 10;
+export function hangMetric({ height, hookDrop, center, width }) {
+  const out = { hook: mm(center + height / 2 - hookDrop) };
+  if (width != null) {
+    out.centerLine = mm(width / 2);
+    out.third = mm(width / 3);
+  }
+  return out;
+}
+
+// Inches and an eighth <-> centimetres, for switching units with values entered.
+export const IN = 2.54;                   // cm per inch, by definition
+export const toCm = ([whole, eighth]) => Number(((whole + frac(eighth)) * IN).toPrecision(6));
+export function toInches(cm) {
+  const e = Math.round(cm / IN * 8);
+  return [Math.floor(e / 8), EIGHTHS[e % 8]];
+}
+
+export function problem({ height, hookDrop, center, width }, unit = 'inches') {
   for (const [v, what] of [[height, 'picture height'], [hookDrop, 'distance from the top of the picture to the hook'], [center, 'height of the picture centre']]) {
     if (v[0] === null) return `Enter the ${what}.`;
-    if (Number.isNaN(v[0]) || v[0] < 0) return `The ${what} must be a positive number of inches.`;
+    if (Number.isNaN(v[0]) || v[0] < 0) return `The ${what} must be a positive number of ${unit}.`;
   }
-  if (width && (Number.isNaN(width[0]) || width[0] < 0)) return 'The picture width must be a positive number of inches.';
+  if (width && (Number.isNaN(width[0]) || width[0] < 0)) return `The picture width must be a positive number of ${unit}.`;
   return null;
 }
