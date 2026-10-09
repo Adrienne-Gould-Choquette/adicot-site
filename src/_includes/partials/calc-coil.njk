@@ -25,7 +25,7 @@
       <legend>Tool</legend>
       <label><input type="radio" name="tool" value="air" checked> 1. Air side</label>
       <label><input type="radio" name="tool" value="face"> 2. Face velocity</label>
-      <label><input type="radio" name="tool" value="water"> 3. Water flow</label>
+      <label><input type="radio" name="tool" value="water"> 3. Fluid flow</label>
       <label><input type="radio" name="tool" value="tubes"> 4. Tube velocity</label>
     </fieldset>
 
@@ -67,7 +67,7 @@
     <div class="co-adds" id="co-adds" hidden>
       <span class="co-adds-h">Continue with:</span>
       <label data-add="face" hidden><input type="checkbox" value="face"> Face velocity</label>
-      <label data-add="water" hidden><input type="checkbox" value="water"> Water flow</label>
+      <label data-add="water" hidden><input type="checkbox" value="water"> Fluid flow</label>
       <label data-add="tubes" hidden><input type="checkbox" value="tubes"> Tube velocity</label>
       <input type="text" name="adds" id="co-adds-v" value="" hidden>
     </div>
@@ -78,22 +78,22 @@
     </fieldset>
 
     <fieldset class="cf-stream co-tool" data-tool="water">
-      <legend>3. Water and glycol flow</legend>
+      <legend>3. Fluid flow (water or glycol)</legend>
       {{ solveFor("wf", [["load", "Heat load"], ["flow", "Flow rate"], ["entering", "Entering temperature"], ["leaving", "Leaving temperature"]]) }}
       <div class="field"><label for="co-fluid">Fluid</label>
         <select id="co-fluid" name="fl">{% for f in ["Water", "Ethylene Glycol 10%", "Ethylene Glycol 20%", "Ethylene Glycol 30%", "Ethylene Glycol 40%", "Ethylene Glycol 50%", "Propylene Glycol 10%", "Propylene Glycol 20%", "Propylene Glycol 30%", "Propylene Glycol 40%", "Propylene Glycol 50%"] %}<option value="{{ f }}">{{ f }}{% if "Glycol" in f %} (by volume){% endif %}</option>{% endfor %}</select></div>
       <fieldset class="cf-radios">
         <legend>Coil</legend>
-        <label><input type="radio" name="wc" value="Cooling" checked> Cooling (water warms up)</label>
-        <label><input type="radio" name="wc" value="Heating"> Heating (water cools down)</label>
+        <label><input type="radio" name="wc" value="Cooling" checked> Cooling (fluid warms up)</label>
+        <label><input type="radio" name="wc" value="Heating"> Heating (fluid cools down)</label>
       </fieldset>
-      <div class="cf-pair">{{ num("w1", "Entering water", "co-t", "°F", "45") }}{{ num("w2", "Leaving water", "co-t", "°F", "55") }}</div>
+      <div class="cf-pair">{{ num("w1", "Entering fluid", "co-t", "°F", "45") }}{{ num("w2", "Leaving fluid", "co-t", "°F", "55") }}</div>
       <div class="cf-pair">{{ num("w3", "Heat load", "co-q", "Btu/h", "240000") }}{{ num("w4", "Flow rate", "co-g", "gpm", "48") }}</div>
       <p class="hint">Leave the heat load blank to use the total cooling from tool 1.</p>
     </fieldset>
 
     <fieldset class="cf-stream co-tool" data-tool="tubes">
-      <legend>4. Water velocity in coil tubes</legend>
+      <legend>4. Fluid velocity in coil tubes</legend>
       <div class="cf-trio">{{ num("vq", "Flow rate", "co-g", "gpm", "48") }}{{ num("vd", "Tube inside dia.", "co-td", "in", "0.5") }}{{ num("vn", "Tubes fed", "", "", "12") }}</div>
       <p class="hint">Leave the flow rate blank to use the flow from tool 3.</p>
     </fieldset>

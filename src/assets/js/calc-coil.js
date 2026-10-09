@@ -7,7 +7,7 @@ import { state, problem as stateProblem } from './psychsheet.js';
 import { coilLoads, airflowFor, leavingForLoads, leavingForTotal, humidityAtDewPoint, sensibleLoad, latentLoad, leavingDryBulbFor, leavingDewPointFor, enteringForLoads, enteringForTotal, enteringDryBulbFor, enteringDewPointFor } from './airside.js';
 import { live, num, fmt, fillRows, shareable } from './calc-kit.js';
 
-const NAMES = { water: { load: 'Heat load', flow: 'Water flow rate', entering: 'Entering water', leaving: 'Leaving water' } };
+const NAMES = { water: { load: 'Heat load', flow: 'Fluid flow rate', entering: 'Entering fluid', leaving: 'Leaving fluid' } };
 // Why no leaving (or entering) air answers the loads given.
 const SAYS = (us, entering) => ({
   saturated: `Those loads would ${entering ? 'need entering air' : 'take the leaving air'} past saturation: no ${entering ? 'entering' : 'leaving'} condition gives that sensible and total cooling at this airflow.`,
@@ -295,7 +295,7 @@ function init(form) {
         const r = water(units, f, el('co-fluid').value, vals, coil);
         if (Number.isFinite(r)) {
           rows.push([NAMES.water[f], fmt(r, f === 'load' ? (us ? 0 : 2) : 2), f === 'load' ? U.q : f === 'flow' ? U.g : U.t, 'cf-key']);
-          if (loadLinked) notes.push("The water tool uses the air side's total cooling as its heat load; enter a heat load to override it.");
+          if (loadLinked) notes.push("The fluid flow uses the air side's total cooling as its heat load; enter a heat load to override it.");
         }
         waterFlow = f === 'flow' ? r : vals.flow;
         if (!(waterFlow > 0)) waterFlow = null;
@@ -317,8 +317,8 @@ function init(form) {
     const flowLinked = vq === null && waterFlow !== null;
     if (flowLinked) vq = waterFlow;
     if (vq > 0 && vd > 0 && vn > 0) {
-      rows.push(['Water velocity in tubes', fmt(tubeVelocity(units, vq, vd, vn), 2), U.tv, 'cf-key']);
-      if (flowLinked) notes.push("The tube velocity uses the water tool's flow; enter a flow rate to override it.");
+      rows.push(['Fluid velocity in tubes', fmt(tubeVelocity(units, vq, vd, vn), 2), U.tv, 'cf-key']);
+      if (flowLinked) notes.push("The tube velocity uses the flow from tool 3; enter a flow rate to override it.");
     }
 
     mark('end');
@@ -334,7 +334,7 @@ function init(form) {
     el('co-adds').hidden = ![...el('co-adds').querySelectorAll('label')].some(l => !l.hidden);
     for (const fs of form.querySelectorAll('.co-tool')) fs.hidden = !isOpen(fs.dataset.tool);
     // Each open tool's rows and notes, in page order, headed when more than one has any.
-    const NAME = { air: 'Air side', face: 'Face velocity', water: 'Water flow', tubes: 'Tube velocity' };
+    const NAME = { air: 'Air side', face: 'Face velocity', water: 'Fluid flow', tubes: 'Tube velocity' };
     const span = { air: [[0, 0], cut.water], water: [cut.water, cut.face], face: [cut.face, cut.tubes], tubes: [cut.tubes, cut.end] };
     const groups = ['air', 'face', 'water', 'tubes'].filter(isOpen).map(k => {
       const [[r0, n0], [r1, n1]] = span[k];

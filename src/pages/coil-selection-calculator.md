@@ -35,13 +35,13 @@ Review the methodology below to make sure it aligns with your project's requirem
 
 - Enter the coil face height and width. The face velocity uses the airflow from tool 1.
 
-**3. Water and glycol flow**
+**3. Fluid flow (water or glycol)**
 
 - Select the quantity to solve for: heat load, flow rate, entering temperature or leaving temperature.
 - Select the coil: Cooling (chilled water or glycol, which warms up through the coil) or Heating (hot water, which cools down). This decides which side of the known temperature a solved temperature falls on.
 - Enter the other inputs. Leave the heat load blank to use the total cooling from tool 1.
 
-**4. Water velocity in coil tubes**
+**4. Fluid velocity in coil tubes**
 
 - Enter the tube inside diameter and the number of tubes fed, and the flow rate, or leave it blank to use the flow from tool 3.
 
