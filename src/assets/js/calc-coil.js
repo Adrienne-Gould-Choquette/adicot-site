@@ -325,6 +325,7 @@ function init(form) {
     {
       const f = el('co-wf').value;
       for (const [v, n] of Object.entries(VAR)) el(`co-w${n}`).closest('.field').hidden = v === f;
+      el('co-w3-hint').hidden = f === 'load';   // no heat load box to leave blank
       const vals = Object.fromEntries(Object.entries(VAR).filter(([v]) => v !== f).map(([v, n]) => [v, num(el(`co-w${n}`))]));
       const loadLinked = f !== 'load' && vals.load === null && totalCooling !== null;
       if (loadLinked) vals.load = totalCooling;
