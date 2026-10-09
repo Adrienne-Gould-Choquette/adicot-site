@@ -4,6 +4,7 @@
 // the `schemaGraph` filter in eleventy.config.mjs from the page's own data, so a
 // new page gets the right markup without template edits.
 import fs from 'node:fs';
+import serviceFaqs from '../src/_data/serviceFaqs.js';
 
 const SITE = 'https://www.adicot.com';
 let calcList;
@@ -80,6 +81,15 @@ export function schemaGraph(d) {
       '@type': 'Service', '@id': `${d.url}#service`, name: title, serviceType: title, description: description || undefined,
       provider: { '@id': ORG }, areaServed, url: d.url,
     }, crumbs([['Engineering Services', `${SITE}/services`], [title, d.url]]));
+    // The page's "Common questions", as plain text.
+    const faqs = serviceFaqs()[path.split('/').pop()];
+    if (faqs) graph.push({
+      '@type': 'FAQPage', '@id': `${d.url}#faq`,
+      mainEntity: faqs.map(f => ({
+        '@type': 'Question', name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: clean(f.a.replace(/<[^>]+>/g, '')) },
+      })),
+    });
   } else if (path === '/calculators') {
     graph.push(webpage('CollectionPage', { mainEntity: { '@id': `${d.url}#list` } }), {
       '@type': 'ItemList', '@id': `${d.url}#list`, name: 'Engineering calculators', numberOfItems: calculators().length,

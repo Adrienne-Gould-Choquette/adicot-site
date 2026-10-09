@@ -46,6 +46,18 @@ layout: layouts/base.njk
   </section>
   {%- endif %}
 
+  {#- From _data/serviceFaqs.js, which also feeds the FAQPage structured data. -#}
+  {%- set faqs = serviceFaqs[slug] %}
+  {%- if faqs %}
+  <section class="svc-faq prose" id="common-questions">
+    <h2>Common questions</h2>
+    {%- for f in faqs %}
+    <h3>{{ f.q }}</h3>
+    <p>{{ f.a | safe }}</p>
+    {%- endfor %}
+  </section>
+  {%- endif %}
+
   <aside class="svc-cta">
     <h2>Priced instantly</h2>
     <p>Tell us the project type, square footage and turnaround, and the fee appears on screen.</p>
